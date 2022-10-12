@@ -7,5 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Goblin | AddToughness$ 2 | CheckSVar$ X 
 SVar:X:Count$Valid Land.AttachedBy+Basic+Mountain
 SVar:PlayMain1:TRUE
 SVar:NeedToPlay:Mountain.Basic+YouCtrl
-AI:RemoveDeck:Random
+DeckNeeds:Type$Goblin
 Oracle:Enchant land\nAs long as enchanted land is a basic Mountain, Goblin creatures get +0/+2.
