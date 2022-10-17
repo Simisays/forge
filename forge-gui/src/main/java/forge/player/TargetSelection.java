@@ -103,22 +103,22 @@ public class TargetSelection {
             return true;
         }
 
-        final boolean hasCandidates = tgt.hasCandidates(this.ability);
-        if (!hasCandidates && !hasEnoughTargets) {
+        List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
+        final boolean hasEnoughCandidates = candidates.size() >= minTargets || tgt.getZone().contains(ZoneType.Stack);
+        if (!hasEnoughCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
             return false;
         }
-        if (isMandatory() && !hasCandidates && hasEnoughTargets) {
+        if (isMandatory() && candidates.size() == 0 && hasEnoughTargets) {
             // Mandatory target selection, that has no candidates but enough targets (Min == 0, but no choices)
             return true;
         }
 
         final List<ZoneType> zones = tgt.getZone();
-        final boolean mandatory = isMandatory() && hasCandidates && !optional;
+        final boolean mandatory = isMandatory() && hasEnoughCandidates && !optional;
 
         final boolean choiceResult;
         if (tgt.isRandomTarget() && numTargets == null) {
-            List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
             List<GameEntity> choices = new ArrayList<>();
             // currently, only cards that target randomly use a random number of targets
             int top = Math.min(candidates.size(), maxTargets); // prevents choosing more targets than possible
@@ -136,7 +136,7 @@ public class TargetSelection {
         else if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
-            return this.chooseCardFromStack(mandatory);
+            return chooseCardFromStack(mandatory);
         }
         else {
             List<Card> validTargets = CardUtil.getValidCardsToTarget(tgt, ability);
@@ -151,7 +151,7 @@ public class TargetSelection {
             // single zone
             if (isSingleZone) {
                 final List<Card> removeCandidates = new ArrayList<>();
-                final Card firstTgt = ability.getTargets().getFirstTargetedCard();
+                final Card firstTgt = ability.getTargetCard();
                 if (firstTgt != null) {
                     for (Card t : validTargets) {
                         if (!t.getController().equals(firstTgt.getController())) {
@@ -173,11 +173,14 @@ public class TargetSelection {
                 if (nonCardTargets.size() == 1 && minTargets != 0) {
                     return ability.getTargets().add(nonCardTargets.get(0));
                 }
+                if (nonCardTargets.isEmpty()) {
+                    return false;
+                }
             }
             else if (validTargets.size() == 1 && minTargets != 0 && ability.isTrigger() && !tgt.canTgtPlayer()) {
                 //if only one valid target card for triggered ability, auto-target that card
                 //only do this for triggered abilities to prevent auto-targeting when user chooses
-                //to play a spell or activat an ability
+                //to play a spell or activate an ability
                 if (ability.isDividedAsYouChoose()) {
                     ability.addDividedAllocation(validTargets.get(0), ability.getStillToDivide());
                 }
@@ -189,7 +192,7 @@ public class TargetSelection {
             }
 
             PlayerView playerView = controller.getLocalPlayerView();
-            PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets);
+            PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets, true);
             if (!zones.contains(ZoneType.Stack)) {
                 InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter, mustTargetFiltered);
                 inp.showAndWait();
