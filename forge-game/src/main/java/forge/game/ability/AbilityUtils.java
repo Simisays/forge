@@ -1066,8 +1066,11 @@ public class AbilityUtils {
                     o = ((Card) c).getController();
                 } else if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer();
-                } else if (c instanceof CardCollection) { // For merged permanent
-                    o = ((CardCollection) c).get(0).getController();
+                } else if (c instanceof Iterable<?>) { // For merged permanent
+                    if (orCont) {
+                        addPlayer(ImmutableList.copyOf(Iterables.filter((Iterable<Object>)c, Player.class)), "", players);
+                    }
+                    addPlayer(ImmutableList.copyOf(Iterables.filter((Iterable<Object>)c, Card.class)), "Controller", players);
                 }
             }
             else if (defParsed.endsWith("Opponent")) {
@@ -1314,20 +1317,6 @@ public class AbilityUtils {
             final Object o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
-                // if there is no target information in SA but targets are listed in SpellAbilityTargeting cards, copy that
-                // information so it's not lost if the calling code is interested in targets of the triggered SA.
-                if (triggeringType.equals("SpellAbility")) {
-                    final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject(AbilityKey.SpellAbilityTargetingCards);
-                    if (s.getTargets() != null && s.getTargets().size() == 0) {
-                        if (tgtList != null && tgtList.size() > 0) {
-                            TargetChoices tc = new TargetChoices();
-                            for (Card c : tgtList) {
-                                tc.add(c);
-                            }
-                            s.setTargets(tc);
-                        }
-                    }
-                }
             } else if (o instanceof SpellAbilityStackInstance) {
                 s = ((SpellAbilityStackInstance) o).getSpellAbility(true);
             }
@@ -2042,13 +2031,7 @@ public class AbilityUtils {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
         if (sq[0].contains("CardNumTypes")) {
-            Card ce;
-            if (sq[0].contains("Remembered")) {
-                ce = (Card) c.getFirstRemembered();
-            } else {
-                ce = c;
-            }
-            return doXMath(ce == null ? 0 : getNumberOfTypes(ce), expr, c, ctb);
+            return doXMath(getNumberOfTypes(c), expr, c, ctb);
         }
 
         if (sq[0].contains("CardNumNotedTypes")) {
@@ -2102,6 +2085,23 @@ public class AbilityUtils {
         if (sq[0].contains("Converge")) {
             SpellAbility castSA = c.getCastSA();
             return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), expr, c, ctb);
+        }
+
+        if (sq[0].startsWith("EachSpentToCast")) {
+            SpellAbility castSA = c.getCastSA();
+            if (castSA == null) {
+                return 0;
+            }
+            final List<Mana> paidMana = castSA.getPayingMana();
+            final String type = sq[1];
+            int count = 0;
+            for (Mana m : paidMana) {
+                if (m.toString().equals(type)) {
+                    count++;
+
+                }
+            }
+            return doXMath(count, expr, c, ctb);
         }
 
         // Count$wasCastFrom<Zone>.<true>.<false>
@@ -2616,12 +2616,11 @@ public class AbilityUtils {
 
         // Count$Chroma.<color name>
         if (sq[0].startsWith("Chroma")) {
-            ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
             final CardCollectionView cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
                 cards = new CardCollection(c);
-            }
-            else {
+            } else {
+                ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
                 cards = player.getCardsIn(sourceZone);
             }
 

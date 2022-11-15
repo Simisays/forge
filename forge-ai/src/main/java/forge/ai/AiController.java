@@ -767,8 +767,8 @@ public class AiController {
 
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
-        // one is warded and can't be paid for.
-        if (sa.usesTargeting() && CardFactoryUtil.isCounterable(host)) {
+        // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
+        if (sa.usesTargeting() && (!sa.isSpell() || CardFactoryUtil.isCounterable(host))) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 // TODO some older cards don't use the keyword, so check for trigger instead
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
@@ -1086,7 +1086,7 @@ public class AiController {
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
                 }
-                if (ComputerUtilCard.isCardRemAIDeck(source)) {
+                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
                 // don't play equipments before having any creatures
@@ -1955,6 +1955,22 @@ public class AiController {
         return max;
     }
 
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
+        switch(sa.getApi())
+        {
+            case SetLife: // Reverse the Sands
+                if (relatedPlayer.equals(sa.getHostCard().getController())) {
+                    return Collections.max(options);
+                } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
+                    return Collections.min(options);
+                } else {
+                    return options.get(0);
+                }
+            default:
+                return options.get(0);
+        }
+    }
+
     public boolean confirmPayment(CostPart costPart) {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
     }
@@ -2119,22 +2135,6 @@ public class AiController {
 
         return library;
     } // smoothComputerManaCurve()
-
-    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
-        switch(sa.getApi())
-        {
-            case SetLife: // Reverse the Sands
-                if (relatedPlayer.equals(sa.getHostCard().getController())) {
-                    return Collections.max(options);
-                } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
-                    return Collections.min(options);
-                } else {
-                    return options.get(0);
-                }
-            default:
-                return 0;
-        }
-    }
 
     public boolean chooseDirection(SpellAbility sa) {
         if (sa == null || sa.getApi() == null) {

@@ -162,7 +162,6 @@ public class Game {
     public Player getStartingPlayer() {
         return startingPlayer;
     }
-
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
     }
@@ -170,7 +169,6 @@ public class Game {
     public Player getMonarch() {
         return monarch;
     }
-
     public void setMonarch(final Player p) {
         monarch = p;
     }
@@ -178,7 +176,6 @@ public class Game {
     public Player getMonarchBeginTurn() {
         return monarchBeginTurn;
     }
-
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
     }
@@ -789,6 +786,7 @@ public class Game {
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
         boolean isMultiplayer = getPlayers().size() > 2;
+        CardZoneTable triggerList = new CardZoneTable();
 
         // 702.142f & 707.9
         // If a player leaves the game, all face-down cards that player owns must be revealed to all players.
@@ -823,6 +821,7 @@ public class Game {
                         cc.removeRemembered(c);
                         cc.removeAttachedTo(c);
                     }
+                    triggerList.put(c.getZone().getZoneType(), null, c);
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
                     getTriggerHandler().clearDelayedTrigger(c);
@@ -840,12 +839,15 @@ public class Game {
                     }
                     if (c.getController().equals(p)) {
                         getAction().exile(c, null);
+                        triggerList.put(ZoneType.Battlefield, c.getZone().getZoneType(), c);
                     }
                 }
             } else {
                 c.forceTurnFaceUp();
             }
         }
+
+        triggerList.triggerChangesZoneAll(this, null);
 
         // 901.6: If the current planar controller would leave the game, instead the next player
         // in turn order that wouldn’t leave the game becomes the planar controller, then the old

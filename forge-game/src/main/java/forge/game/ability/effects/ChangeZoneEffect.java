@@ -517,8 +517,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         // CR 401.4
-        if (destination.equals(ZoneType.Library) && !shuffle) {
-            if (sa.hasParam("Chooser")) {
+        if (destination.equals(ZoneType.Library) && !shuffle && Iterables.size(tgtCards) > 1) {
+            if (sa.hasParam("RandomOrder")) {
+                final CardCollection random = new CardCollection(tgtCards);
+                CardLists.shuffle(random);
+                tgtCards = random;
+            } else if (sa.hasParam("Chooser")) {
                 tgtCards = chooser.getController().orderMoveToZoneList(new CardCollection(tgtCards), destination, sa);
             } else {
                 tgtCards = GameActionUtil.orderCardsByTheirOwners(game, new CardCollection(tgtCards), destination, sa);
@@ -585,6 +589,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             gameCard.changeCardState("Transform", null, sa);
                         } else {
                             // If it can't Transform, don't change zones.
+                            continue;
+                        }
+                    }
+                    if (sa.hasParam("Converted")) {
+                        if (gameCard.isConvertable()) {
+                            gameCard.changeCardState("Convert", null, sa);
+                        } else {
+                            // If it can't convert, don't change zones.
                             continue;
                         }
                     }
@@ -1066,8 +1078,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         //some kind of reset here?
                     }
                 }
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, decider);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, Lists.newArrayList(player));
                 decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
             }

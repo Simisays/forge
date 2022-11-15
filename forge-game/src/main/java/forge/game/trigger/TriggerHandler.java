@@ -509,10 +509,16 @@ public class TriggerHandler {
                 abMana.setUndoable(false);
             }
         }
-        if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
+        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.CastSA);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
+            }
+        }
+        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
+            final Card c = (Card) runParams.get(AbilityKey.Card);
+            for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                sa.setUndoable(false);
             }
         }
 
@@ -555,7 +561,7 @@ public class TriggerHandler {
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
 
         if (regtrig.hasParam("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), regtrig.getParam("TriggerController"), sa).get(0);
+            Player p = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
         }
 

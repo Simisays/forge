@@ -119,7 +119,7 @@ public class CardFactoryUtil {
                 CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
                 CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
-                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                 moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 
@@ -1615,7 +1615,7 @@ public class CardFactoryUtil {
             final String n = k[1];
 
             final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
-                    " | ValidBlocker$ Creature | MinBlockers$ 1 | Secondary$ True " +
+                    " | ValidBlocker$ Creature | Secondary$ True " +
                     " | TriggerDescription$ Rampage " + n + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Pump | Defined$ TriggeredAttackerLKICopy" +
@@ -1626,7 +1626,7 @@ public class CardFactoryUtil {
             SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("Rampage" + n, "SVar$RampageCount/Times." + n);
 
-            sa.setSVar("RampageCount", "TriggerCount$NumBlockers/Minus.1");
+            sa.setSVar("RampageCount", "Count$Valid Creature.blockingTriggeredAttacker/Minus.1");
             sa.setIntrinsic(intrinsic);
             trigger.setOverridingAbility(sa);
             inst.addTrigger(trigger);
@@ -2886,7 +2886,7 @@ public class CardFactoryUtil {
                 abilityStr.append(" ").append(vstr);
             }
             Cost cost = new Cost(equipCost, true);
-            if (!cost.isOnlyManaCost() || altCost) { //Something other than a mana cost
+            if (!cost.isOnlyManaCost() || (altCost && extra.contains("<"))) { //Something other than a mana cost
                 abilityStr.append("—");
             } else {
                 abilityStr.append(" ");
@@ -3058,9 +3058,9 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             StringBuilder sb = new StringBuilder();
-            sb.append("AB$ PutCounter | Cost$ ").append(manacost);
-            sb.append(" | PrecostDesc$ Level Up | CostDesc$ ").append(ManaCostParser.parse(manacost));
-            sb.append(" | SorcerySpeed$ True | LevelUp$ True | CounterNum$ 1 | CounterType$ LEVEL");
+            sb.append("AB$ PutCounter | Cost$ ").append(manacost).append(" | PrecostDesc$ Level up | CostDesc$ ");
+            sb.append(ManaCostParser.parse(manacost)).append(" | SorcerySpeed$ True | LevelUp$ True | Secondary$ True");
+            sb.append("| CounterType$ LEVEL | StackDescription$ {p:You} levels up {c:Self}.");
             if (card.hasSVar("maxLevel")) {
                 final String strMaxLevel = card.getSVar("maxLevel");
                 sb.append("| MaxLevel$ ").append(strMaxLevel);
@@ -3189,6 +3189,29 @@ public class CardFactoryUtil {
             sa.setIntrinsic(intrinsic);
             sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Prototype")) {
+            final String[] k = keyword.split(":");
+            if (k.length < 4) {
+                System.err.println("Malformed Prototype entry! - Card: " + card.toString());
+                return;
+            }
+
+            final Cost protoCost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(protoCost);
+            newSA.putParam("SetManaCost", k[1]);
+            newSA.putParam("SetColorByManaCost", "True");
+            newSA.putParam("SetPower", k[2]);
+            newSA.putParam("SetToughness", k[3]);
+            newSA.putParam("Prototype", "True");
+
+            // need to store them for additional copies
+            newSA.getOriginalMapParams().putAll(newSA.getMapParams());
+
+            // only makes description for prompt
+            newSA.setDescription(k[0] + " " + ManaCostParser.parse(k[1]) + " [" + k[2] + "/" + k[3] + "]");
+
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Prowl")) {
             final String[] k = keyword.split(":");
             final Cost prowlCost = new Cost(k[1], false);
@@ -3691,6 +3714,9 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Intimidate")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
                     " | Description$ Intimidate ( " + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Living metal")) {
+            String effect = "Mode$ Continuous | Affected$ Card.Self | AddType$ Creature | Condition$ PlayerTurn | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Nightbound")) {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can't be transformed except by its nightbound ability.";

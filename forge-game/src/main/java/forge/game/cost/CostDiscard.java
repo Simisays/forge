@@ -174,7 +174,7 @@ public class CostDiscard extends CostPartWithList {
             }
             if (sameName) {
                 for (Card c : handList) {
-                    if (CardLists.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
+                    if (CardLists.count(handList, CardPredicates.nameEquals(c.getName())) > 1) {
                         return true;
                     }
                 }
@@ -236,8 +236,7 @@ public class CostDiscard extends CostPartWithList {
         super.handleChangeZoneTrigger(payer, ability, targetCards);
 
         if (!targetCards.isEmpty()) {
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Player, payer);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(payer);
             runParams.put(AbilityKey.Cards, new CardCollection(targetCards));
             runParams.put(AbilityKey.Cause, ability);
             runParams.put(AbilityKey.FirstTime, firstTime);

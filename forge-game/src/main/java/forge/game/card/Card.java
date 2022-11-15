@@ -220,7 +220,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
+    private long convertedTimestamp = 0;
     private long mutatedTimestamp = -1;
+    private long prototypeTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
     private boolean embalmed = false;
@@ -392,6 +394,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public long getTransformedTimestamp() { return transformedTimestamp; }
     public void incrementTransformedTimestamp() { this.transformedTimestamp++; }
 
+    public long getConvertedTimestamp() { return convertedTimestamp; }
+    public void incrementConvertedTimestamp() { this.convertedTimestamp++; }
+
     public CardState getCurrentState() {
         return currentState;
     }
@@ -504,7 +509,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             view.updateState(this);
             view.updateNeedsTransformAnimation(needsTransformAnimation);
 
-            final Game game = getGame();
             if (game != null) {
                 // update Type, color and keywords again if they have changed
                 if (!changedCardTypes.isEmpty()) {
@@ -623,6 +627,29 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
             incrementTransformedTimestamp();
 
+            return retResult;
+
+        } else if (mode.equals("Convert") && (isConvertable() || hasMergedCard())) {
+            // Need to remove mutated states, otherwise the changeToState() will fail
+            if (hasMergedCard()) {
+                removeMutatedStates();
+            }
+            CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
+            boolean retResult = false;
+            for (final Card c : cards) {
+                if (!c.isConvertable()) {
+                    continue;
+                }
+                c.backside = !c.backside;
+
+                boolean result = c.changeToState(c.backside ? CardStateName.Converted : CardStateName.Original);
+                retResult = retResult || result;
+            }
+            if (hasMergedCard()) {
+                rebuildMutatedStates(cause);
+                game.getTriggerHandler().clearActiveTriggers(this, null);
+                game.getTriggerHandler().registerActiveTrigger(this, false);
+            }
             return retResult;
 
         } else if (mode.equals("Flip")) {
@@ -930,12 +957,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Meld;
     }
 
+    public final boolean isConvertable() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Convert;
+    }
+
     public final boolean isModal() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Modal;
     }
 
     public final boolean hasBackSide() {
-        return isDoubleFaced() || isMeldable() || isModal();
+        return isDoubleFaced() || isMeldable() || isModal() || isConvertable();
     }
 
     public final boolean isFlipCard() {
@@ -958,7 +989,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isCloned() {
-        return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp;
+        return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp
+                && clonedStates.lastEntry().getKey() != prototypeTimestamp;
     }
 
     public final CardCollectionView getDevouredCards() {
@@ -2035,7 +2067,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
-                        || keyword.startsWith("Miracle")) {
+                        || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
+                        || keyword.startsWith("Level up")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2148,7 +2181,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
-                        || keyword.equals("Double team")
+                        || keyword.equals("Double team") || keyword.equals("Living metal")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
@@ -2177,6 +2210,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters the battlefield, you may ");
                     sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters the ");
                     sbLong.append("battlefield with that many +1/+1 counters on it.)");
+                } else if (keyword.startsWith("Prototype")) {
+                    final String[] k = keyword.split(":");
+                    final Cost cost = new Cost(k[1], false);
+                    sbLong.append(k[0]).append(" ").append(cost.toSimpleString()).append(" ").append("[").append(k[2]);
+                    sbLong.append("/").append(k[3]).append("] ").append("(").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                         || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
@@ -2223,15 +2261,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Ward")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
+                    final boolean onlyMana = cost.isOnlyManaCost();
+                    final boolean complex = k[1].contains("X") || k[1].contains("Sac<");
+                    final String extra = k.length > 2 ? ", " + k[2] + "." : "";
 
-                    StringBuilder sbCost = new StringBuilder(k[0]);
-                    if (!cost.isOnlyManaCost()) {
-                        sbCost.append("—");
-                    } else {
-                        sbCost.append(" ");
-                    }
-                    sbCost.append(cost.toSimpleString());
-                    sbLong.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append(k[0]).append(onlyMana ? " " : "—").append(cost.toSimpleString());
+                    sbLong.append(onlyMana? "" : ".").append(extra);
+                    sbLong.append(!complex ? " (" + (inst.getReminderText()) + ")" : "");
                     sbLong.append("\r\n");
                 } else if (keyword.endsWith(" offering")) {
                     String offeringType = keyword.split(" ")[0];
@@ -2246,16 +2282,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Bestow") || keyword.startsWith("Dash") || keyword.startsWith("Surge")
                         || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                         || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
-                        || keyword.startsWith("Embalm") || keyword.startsWith("Level up") || keyword.equals("Prowess")
+                        || keyword.startsWith("Embalm") || keyword.equals("Prowess")
                         || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")
                         || keyword.startsWith("Champion") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
-                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Saga") || keyword.startsWith("Read ahead")
+                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Saga")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")) {
                     // keyword parsing takes care of adding a proper description
+                } else if(keyword.startsWith("Read ahead")) {
+                    sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
+                    sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
+                    sb.append(")").append("\r\n\r\n");
                 } else if (keyword.startsWith("IfReach")) {
                     String[] k = keyword.split(":");
                     sbLong.append(getName()).append(" can block ")
@@ -2359,10 +2399,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
         }
 
-        if (type.hasSubtype("Saga")) {
-            sb.append("(As this Saga enters and after your draw step, add a lore counter.");
+        // Check if the saga card does not have the keyword Read ahead
+        if (type.hasSubtype("Saga") && !this.hasStartOfKeyword("Read ahead")) {
+            sb.append("(").append(Localizer.getInstance().getMessage("lblSagaHeader"));
             if (!state.getCard().isDoubleFaced()) {
-                sb.append(" Sacrifice after ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
+                sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
             }
             sb.append(")").append(linebreak);
         }
@@ -4993,11 +5034,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-        if (phasedOut && hasKeyword("CARDNAME can't phase in.")) {
+        if (phasedOut && StaticAbilityCantPhaseIn.cantPhaseIn(this)) {
             return false;
         }
 
-        if (!phasedOut && hasKeyword("CARDNAME can't phase out.")) {
+        if (!phasedOut && StaticAbilityCantPhaseOut.cantPhaseOut(this)) {
             return false;
         }
 
@@ -6457,6 +6498,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (sa.isBestow()) {
             animateBestow();
+        }
+        if (sa.hasParam("Prototype")) {
+            Long next = game.getNextTimestamp();
+            addCloneState(CardFactory.getCloneStates(this, this, sa), next);
+            prototypeTimestamp = next;
         }
         CardStateName stateName = sa.getCardStateName();
         if (stateName != null && hasState(stateName) && this.getCurrentStateName() != stateName) {

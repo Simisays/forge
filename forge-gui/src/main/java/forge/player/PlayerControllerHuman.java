@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.TreeSet;
 
 import forge.util.ImageUtil;
@@ -49,6 +50,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -941,10 +943,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         if (toTop.size() < cards.size()) { // the top isn't everything
             for (int i = result.size()-1; i>=0 && manipulable.contains(result.get(i)); i-- ) {
-            toBottom.add(result.get(i));
+                toBottom.add(result.get(i));
             }
         }
-        return ImmutablePair.of(toTop,toBottom);
+        return ImmutablePair.of(toTop, toBottom);
     }
 
     @Override
@@ -1712,8 +1714,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<String> chooseColors(final String message, final SpellAbility sa, final int min, final int max,
-            final List<String> options) {
-        return getGui().getChoices(message, min, max, options);
+             List<String> options) {
+        options = options.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
+        List<String> choices = getGui().getChoices(message, min, max, options);
+        return choices.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
     }
 
     @Override
@@ -2766,7 +2770,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     if (!forgeCard.getName().equals(f.getName())) {
                         forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
                         if (forgeCard.getCurrentStateName().equals(CardStateName.Transformed) ||
-                                forgeCard.getCurrentStateName().equals(CardStateName.Modal)) {
+                                forgeCard.getCurrentStateName().equals(CardStateName.Modal) ||
+                                forgeCard.getCurrentStateName().equals(CardStateName.Converted)) {
                             forgeCard.setBackSide(true);
                         }
                     }
