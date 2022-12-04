@@ -220,7 +220,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
-    private long convertedTimestamp = 0;
     private long mutatedTimestamp = -1;
     private long prototypeTimestamp = -1;
     private int timesMutated = 0;
@@ -234,7 +233,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // set for transform and meld, needed for clone effects
     private boolean backside = false;
 
-    private boolean phasedOut = false;
+    private Player phasedOut;
     private boolean directlyPhasedOut = true;
     private boolean wontPhaseInNormal = false;
 
@@ -291,6 +290,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Direction chosenDirection = null;
     private String chosenMode = "";
     private String currentRoom = null;
+    private String sector = null;
+    private String chosenSector = null;
 
     private Card exiledWith;
     private Player exiledBy;
@@ -298,7 +299,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Long, Player> goad = Maps.newTreeMap();
 
     private final List<GameCommand> leavePlayCommandList = Lists.newArrayList();
-    private final List<GameCommand> etbCommandList = Lists.newArrayList();
     private final List<GameCommand> untapCommandList = Lists.newArrayList();
     private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
     private final List<GameCommand> unattachCommandList = Lists.newArrayList();
@@ -393,9 +393,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public long getTransformedTimestamp() { return transformedTimestamp; }
     public void incrementTransformedTimestamp() { this.transformedTimestamp++; }
-
-    public long getConvertedTimestamp() { return convertedTimestamp; }
-    public void incrementConvertedTimestamp() { this.convertedTimestamp++; }
 
     public CardState getCurrentState() {
         return currentState;
@@ -582,6 +579,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean changeCardState(final String mode, final String customState, final SpellAbility cause) {
+        if (isPhasedOut()) {
+            return false;
+        }
         if (mode == null)
             return changeToState(CardStateName.smartValueOf(customState));
 
@@ -717,8 +717,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!turnFaceDown(true) && !isFaceDown()) {
             return null;
         }
-        // Move to p's battlefield
-        Game game = p.getGame();
 
         // Just in case you aren't the controller, now you are!
         setController(p, game.getNextTimestamp());
@@ -726,6 +724,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Mark this card as "manifested"
         setManifested(true);
 
+        // Move to p's battlefield
         Card c = game.getAction().moveToPlay(this, p, sa, params);
         if (c.isInPlay()) {
             c.setManifested(true);
@@ -1437,6 +1436,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final boolean canReceiveCounters(final CounterType type) {
+        if (isPhasedOut()) {
+            return false;
+        }
         if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
             return false;
         }
@@ -1902,6 +1904,35 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return false;
     }
 
+    public String getSector() {
+        return sector;
+    }
+    public void assignSector(String s) {
+        sector = s;
+        view.updateSector(this);
+    }
+    public boolean hasSector() {
+        return sector != null;
+    }
+    public String getChosenSector() {
+        return chosenSector;
+    }
+    public final void setChosenSector(final String s) {
+        chosenSector = s;
+    }
+
+    // used for cards like Meddling Mage...
+    public final String getNamedCard() {
+        return getChosenName();
+    }
+    public final void setNamedCard(final String s) {
+        setChosenName(s);
+    }
+    public final String getNamedCard2() { return getChosenName2(); }
+    public final void setNamedCard2(final String s) {
+        setChosenName2(s);
+    }
+
     public boolean hasChosenName() {
         return chosenName != null;
     }
@@ -1933,18 +1964,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (chosenEvenOdd == chosenEvenOdd0) { return; }
         chosenEvenOdd = chosenEvenOdd0;
         view.updateChosenEvenOdd(this);
-    }
-
-    // used for cards like Meddling Mage...
-    public final String getNamedCard() {
-        return getChosenName();
-    }
-    public final void setNamedCard(final String s) {
-        setChosenName(s);
-    }
-    public final String getNamedCard2() { return getChosenName2(); }
-    public final void setNamedCard2(final String s) {
-        setChosenName2(s);
     }
 
     public final boolean getDrawnThisTurn() {
@@ -2187,7 +2206,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
                         || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
-                        || keyword.equals("Friends forever") || keyword.equals("Choose a Background")) {
+                        || keyword.equals("Friends forever") || keyword.equals("Choose a Background")
+                        || keyword.equals("Space sculptor")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
@@ -3249,19 +3269,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return canCounter;
     }
 
-    public final void addComesIntoPlayCommand(final GameCommand c) {
-        etbCommandList.add(c);
-    }
-
-    public final void runComesIntoPlayCommands() {
-        for (final GameCommand c : etbCommandList) {
-            c.run();
-        }
-        etbCommandList.clear();
-    }
-
     public final void addLeavesPlayCommand(final GameCommand c) {
         leavePlayCommandList.add(c);
+    }
+    public final void addUntapCommand(final GameCommand c) {
+        untapCommandList.add(c);
+    }
+    public final void addUnattachCommand(final GameCommand c) {
+        unattachCommandList.add(c);
+    }
+    public final void addFaceupCommand(final GameCommand c) {
+        faceupCommandList.add(c);
+    }
+    public final void addFacedownCommand(final GameCommand c) {
+        facedownCommandList.add(c);
+    }
+    public final void addChangeControllerCommand(final GameCommand c) {
+        changeControllerCommandList.add(c);
     }
 
     public final void runLeavesPlayCommands() {
@@ -3269,22 +3293,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         leavePlayCommandList.clear();
-    }
-
-    public final void addUntapCommand(final GameCommand c) {
-        untapCommandList.add(c);
-    }
-
-    public final void addUnattachCommand(final GameCommand c) {
-        unattachCommandList.add(c);
-    }
-
-    public final void addFaceupCommand(final GameCommand c) {
-        faceupCommandList.add(c);
-    }
-
-    public final void addFacedownCommand(final GameCommand c) {
-        facedownCommandList.add(c);
     }
     public final void runUntapCommands() {
         for (final GameCommand c : untapCommandList) {
@@ -3298,25 +3306,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         unattachCommandList.clear();
     }
-
     public final void runFaceupCommands() {
         for (final GameCommand c : faceupCommandList) {
             c.run();
         }
         faceupCommandList.clear();
     }
-
     public final void runFacedownCommands() {
         for (final GameCommand c : facedownCommandList) {
             c.run();
         }
         facedownCommandList.clear();
     }
-
-    public final void addChangeControllerCommand(final GameCommand c) {
-        changeControllerCommandList.add(c);
-    }
-
     public final void runChangeControllerCommands() {
         for (final GameCommand c : changeControllerCommandList) {
             c.run();
@@ -3330,16 +3331,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateSickness(this);
     }
 
-    public final boolean isFirstTurnControlled() {
-        return sickness;
-    }
-
     public final boolean hasSickness() {
         return sickness && !hasKeyword(Keyword.HASTE);
     }
 
     public final boolean isSick() {
-        return sickness && isCreature() && !hasKeyword(Keyword.HASTE);
+        return hasSickness() && isCreature();
+    }
+
+    public final boolean isFirstTurnControlled() {
+        return sickness;
     }
 
     public boolean hasBecomeTargetThisTurn() {
@@ -3548,14 +3549,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return hasCardAttachment(c);
     }
 
+    public final boolean isFortifying() {
+        return this.isAttachedToEntity();
+    }
+
     public final Card getEquipping() {
         return this.getAttachedTo();
     }
     public final boolean isEquipping() {
-        return this.isAttachedToEntity();
-    }
-
-    public final boolean isFortifying() {
         return this.isAttachedToEntity();
     }
 
@@ -3654,7 +3655,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (hasKeyword(Keyword.RECONFIGURE)) {
             // need extra time stamp so it doesn't collide with existing ones
             long ts = getGame().getNextTimestamp();
-            // TODO make it use a Static Layer Effect instead
+            // 702.151b Attaching an Equipment with reconfigure to another creature causes the Equipment to stop being a creature until it becomes unattached from that creature.
+            // it is not a Static Ability
             addChangedCardTypes(null, CardType.parse("Creature", true), false, false, false, false, false, false, false, false, ts, 0, true, false);
 
             GameCommand unattach = new GameCommand() {
@@ -3671,6 +3673,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void unattachFromEntity(final GameEntity entity) {
         if (entityAttachedTo == null || !entityAttachedTo.equals(entity)) {
+            return;
+        }
+
+        if (isPhasedOut()) {
             return;
         }
 
@@ -4992,9 +4998,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isPhasedOut() {
+        return phasedOut != null;
+    }
+    public final boolean isPhasedOut(Player turn) {
+        return turn.equals(phasedOut);
+    }
+    public final Player getPhasedOut() {
         return phasedOut;
     }
-    public final void setPhasedOut(final boolean phasedOut0) {
+    public final void setPhasedOut(final Player phasedOut0) {
         if (phasedOut == phasedOut0) { return; }
         phasedOut = phasedOut0;
         view.updatePhasedOut(this);
@@ -5015,7 +5027,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDirectlyPhasedOut(direct);
         }
 
-        // CR 702.25g
+        // CR 702.26g
         if (!getAllAttachedCards().isEmpty()) {
             for (final Card eq : getAllAttachedCards()) {
                 if (eq.isPhasedOut() == phasingIn) {
@@ -5034,15 +5046,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-        if (phasedOut && StaticAbilityCantPhaseIn.cantPhaseIn(this)) {
+        if (isPhasedOut() && StaticAbilityCantPhaseIn.cantPhaseIn(this)) {
             return false;
         }
 
-        if (!phasedOut && StaticAbilityCantPhaseOut.cantPhaseOut(this)) {
+        if (!isPhasedOut() && StaticAbilityCantPhaseOut.cantPhaseOut(this)) {
             return false;
         }
 
-        if (phasedOut && fromUntapStep && wontPhaseInNormal) {
+        if (isPhasedOut() && fromUntapStep && wontPhaseInNormal) {
             return false;
         }
 
@@ -5051,20 +5063,41 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!isPhasedOut()) {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
-            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
+            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, true);
             // when it doesn't exist the game will no longer see it as tapped
             runUntapCommands();
-            // TODO need to run UntilHostLeavesPlay commands but only when worded "for as long as"
+            // TODO CR 702.26f need to run LeavesPlay + changeController commands but only when worded "for as long as"
+
+            // these links also break
+            clearEncodedCards();
+            if (isPaired()) {
+                getPairedWith().setPairedWith(null);
+                setPairedWith(null);
+            }
         }
 
-        setPhasedOut(!phasedOut);
+        setPhasedOut(isPhasedOut() ? null : getController());
         final Combat combat = getGame().getCombat();
-        if (combat != null && phasedOut) {
+        if (combat != null && isPhasedOut()) {
             combat.saveLKI(this);
             combat.removeFromCombat(this);
         }
 
-        if (!phasedOut) {
+        if (!isPhasedOut()) {
+            // CR 702.26g phases in unattached if that object is still in the same zone or that player is still in the game
+            if (isAttachedToEntity()) {
+                final GameEntity ge = getEntityAttachedTo();
+                boolean unattach = false;
+                if (ge instanceof Player) {
+                    unattach = !((Player) ge).isInGame();
+                } else {
+                    unattach = !((Card) ge).isInPlay();
+                }
+                if (unattach) {
+                    unattachFromEntity(ge);
+                }
+            }
+
             // Just phased in, time to run the phased in trigger
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
@@ -5620,7 +5653,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
         if (damageIn <= 0) {
-            return 0; // Rule 119.8
+            return 0; // 120.8
         }
 
         // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker.
@@ -6088,7 +6121,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
-        if (getOwner().hasLost()) {
+        if (!getOwner().isInGame()) {
             return false;
         }
 

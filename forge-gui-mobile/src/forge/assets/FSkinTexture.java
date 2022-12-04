@@ -19,6 +19,22 @@ public enum FSkinTexture implements FImage {
     BG_MATCH_NIGHT(ForgeConstants.MATCH_BG_NIGHT_FILE, false, false),
     BG_SPACE(ForgeConstants.SPACE_BG_FILE, false, false),
     BG_CHAOS_WHEEL(ForgeConstants.CHAOS_WHEEL_IMG_FILE, false, false),
+    //Adventure textures
+    ADV_BG_TEXTURE(ForgeConstants.ADV_TEXTURE_BG_FILE, true, false),
+    ADV_BG_MATCH(ForgeConstants.ADV_MATCH_BG_FILE, false, false),
+    ADV_BG_MATCH_DAY(ForgeConstants.ADV_MATCH_BG_DAY_FILE, false, false),
+    ADV_BG_MATCH_NIGHT(ForgeConstants.ADV_MATCH_BG_NIGHT_FILE, false, false),
+    ADV_BG_SWAMP(ForgeConstants.ADV_BG_SWAMP_FILE, false, false),
+    ADV_BG_FOREST(ForgeConstants.ADV_BG_FOREST_FILE, false, false),
+    ADV_BG_MOUNTAIN(ForgeConstants.ADV_BG_MOUNTAIN_FILE, false, false),
+    ADV_BG_ISLAND(ForgeConstants.ADV_BG_ISLAND_FILE, false, false),
+    ADV_BG_PLAINS(ForgeConstants.ADV_BG_PLAINS_FILE, false, false),
+    ADV_BG_WASTE(ForgeConstants.ADV_BG_WASTE_FILE, false, false),
+    ADV_BG_COMMON(ForgeConstants.ADV_BG_COMMON_FILE, false, false),
+    ADV_BG_CAVE(ForgeConstants.ADV_BG_CAVE_FILE, false, false),
+    ADV_BG_DUNGEON(ForgeConstants.ADV_BG_DUNGEON_FILE, false, false),
+    ADV_BG_CASTLE(ForgeConstants.ADV_BG_CASTLE_FILE, false, false),
+    //Planechase
     Academy_at_Tolaria_West(ForgeConstants.BG_1, false, true),
     Agyrem(ForgeConstants.BG_2, false, true),
     Akoum(ForgeConstants.BG_3, false, true),
@@ -96,18 +112,28 @@ public enum FSkinTexture implements FImage {
     Celestine_Reef(ForgeConstants.BG_75, false, true),
     Horizon_Boughs(ForgeConstants.BG_76, false, true),
     Mirrored_Depths(ForgeConstants.BG_77, false, true),
-    Talon_Gates(ForgeConstants.BG_78, false, true);
+    Talon_Gates(ForgeConstants.BG_78, false, true),
+    Planewide_Disaster(ForgeConstants.BG_79, false, true),
+    Reality_Shaping(ForgeConstants.BG_80, false, true),
+    Spatial_Merging(ForgeConstants.BG_81, false, true),
+    Chaotic_Aether(ForgeConstants.BG_82, false, true),
+    Interplanar_Tunnel(ForgeConstants.BG_83, false, true),
+    Morphic_Tide(ForgeConstants.BG_84, false, true),
+    Mutual_Epiphany(ForgeConstants.BG_85, false, true),
+    Time_Distortion(ForgeConstants.BG_86, false, true);
 
     private final String filename;
     private final boolean repeat;
     private Texture texture;
-    private final boolean isPlane;
+    private final boolean isPlanechaseBG;
     private static List<String> PlanesValue;
+    private boolean isloaded = false;
+    private boolean hasError = false;
 
-    FSkinTexture(String filename0, boolean repeat0, boolean isPlane0) {
+    FSkinTexture(String filename0, boolean repeat0, boolean isPlanechaseBG0) {
         filename = filename0;
         repeat = repeat0;
-        isPlane = isPlane0;
+        isPlanechaseBG = isPlanechaseBG0;
     }
 
     static {
@@ -125,7 +151,9 @@ public enum FSkinTexture implements FImage {
     }
 
     public void load() {
-        FileHandle preferredFile = isPlane ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
+        if (hasError)
+            return;
+        FileHandle preferredFile = isPlanechaseBG ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
                 if (preferredFile.path().contains("fallback_skin")) {
@@ -135,16 +163,19 @@ public enum FSkinTexture implements FImage {
                     Forge.getAssets().manager().finishLoadingAsset(preferredFile.path());
                     texture = Forge.getAssets().manager().get(preferredFile.path(), Texture.class);
                 }
+                isloaded = true;
             }
             catch (final Exception e) {
                 System.err.println("Failed to load skin file: " + preferredFile);
                 e.printStackTrace();
+                isloaded = false;
+                hasError = true;
             }
         }
         if (texture == null) {
             //use default file if can't use preferred file
             FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
-            if(isPlane) {
+            if(isPlanechaseBG) {
                 defaultFile = FSkin.getSkinFile(ForgeConstants.MATCH_BG_FILE);
                 if(!defaultFile.exists())
                     defaultFile = FSkin.getDefaultSkinFile(ForgeConstants.MATCH_BG_FILE);
@@ -159,15 +190,20 @@ public enum FSkinTexture implements FImage {
                         Forge.getAssets().manager().finishLoadingAsset(defaultFile.path());
                         texture = Forge.getAssets().manager().get(defaultFile.path(), Texture.class);
                     }
+                    isloaded = true;
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);
                     e.printStackTrace();
+                    isloaded = false;
+                    hasError = true;
                     return;
                 }
             }
             else {
                 System.err.println("Failed to load skin file: " + defaultFile);
+                isloaded = false;
+                hasError = true;
                 return;
             }
         }
@@ -178,29 +214,48 @@ public enum FSkinTexture implements FImage {
 
     @Override
     public float getWidth() {
+        if (!isloaded)
+            load();
+        if (hasError)
+            return 0f;
         return texture.getWidth();
     }
 
     @Override
     public float getHeight() {
+        if (!isloaded)
+            load();
+        if (hasError)
+            return 0f;
         return texture.getHeight();
     }
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
+        if (!isloaded)
+            load();
+        if (hasError)
+            return;
         if (repeat) {
             g.drawRepeatingImage(texture, x, y, w, h);
-        }
-        else {
+        } else {
             g.drawImage(texture, x, y, w, h);
         }
     }
 
     public void drawRotated(Graphics g, float x, float y, float w, float h, float rotation) {
+        if (!isloaded)
+            load();
+        if (hasError)
+            return;
         g.drawRotatedImage(texture, x, y, w, h, x + w / 2, y + h / 2, rotation);
     }
 
     public void drawFlipped(Graphics g, float x, float y, float w, float h) {
+        if (!isloaded)
+            load();
+        if (hasError)
+            return;
         g.drawFlippedImage(texture, x, y, w, h);
     }
 }

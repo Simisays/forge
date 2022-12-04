@@ -31,7 +31,6 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
@@ -151,7 +150,7 @@ public final class GameActionUtil {
                 final StringBuilder sb = new StringBuilder(sa.getDescription());
                 if (!source.equals(host)) {
                     sb.append(" by ");
-                    if ((host.isImmutable()) && host.getEffectSource() != null) {
+                    if (host.isImmutable() && host.getEffectSource() != null) {
                         sb.append(host.getEffectSource());
                     } else {
                         sb.append(host);
@@ -834,12 +833,13 @@ public final class GameActionUtil {
     }
 
     public static String generatedMana(final SpellAbility sa) {
-        int amount = sa.amountOfManaGenerated(false);
         AbilityManaPart abMana = sa.getManaPart();
         if (abMana == null) {
             return "";
         }
+
         String baseMana;
+        int amount = sa.amountOfManaGenerated(false);
 
         if (abMana.isComboMana()) {
             baseMana = abMana.getExpressChoice();
@@ -863,7 +863,7 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else if (sa.getParam("Amount") != null && amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa)) {
+        } else if (sa.hasParam("Amount") && !StringUtils.isNumeric(sa.getParam("Amount"))) {
             sa.setUndoable(false);
         }
 
@@ -932,7 +932,9 @@ public final class GameActionUtil {
             // add back to where it came from, hopefully old state
             // skip GameAction
             oldCard.getZone().remove(oldCard);
-            fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
+            Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
+            fromZone.add(oldCard, newPosition);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);
             ability.setSpendPhyrexianMana(false);
