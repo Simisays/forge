@@ -1,5 +1,50 @@
 [ 
   {
+    "name": "Piper's Charm",
+    "equipmentSlot": "Neck",
+    "iconName": "PipersCharm",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Piper's Charm"
+      ]
+    }
+  },{
+    "name": "Sleep Wand",
+    "equipmentSlot": "Left",
+    "iconName": "SleepWand",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Sleep Wand"
+      ]
+    }
+  },{
+    "name": "Hill Giant Club",
+    "equipmentSlot": "Right",
+    "iconName": "HillGiantClub",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Hill Giant Club"
+      ]
+    }
+  },{
+    "name": "Cursed Treasure",
+    "equipmentSlot": "Right",
+    "iconName": "CursedTreasure",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Cursed Treasure"
+      ]
+    }
+  },{
+    "name": "Farmer's Tools",
+    "equipmentSlot": "Left",
+    "iconName": "FarmersTools",
+    "effect": {
+      "startBattleWithCardInCommandZone": [
+        "Farmer's Tools"
+      ]
+    }
+  },{
     "name": "Sol Ring",
     "equipmentSlot": "Left",
     "iconName": "SolRing",
@@ -765,7 +810,7 @@
 	"commandOnUse": "teleport to poi Spawn",
 	"iconName": "ColorlessRune",
 	"questItem": true,
-	"manaNeeded": 1,
+	"shardsNeeded": 1,
 	"cost": 100
 },
 {
@@ -778,7 +823,7 @@
 	"commandOnUse": "teleport to poi \"Plains Capital\"",
 	"iconName": "WhiteRune",
 	"questItem": true,
-	"manaNeeded": 1,
+	"shardsNeeded": 1,
 	"cost": 100
 },
 {
@@ -791,7 +836,7 @@
 	"commandOnUse": "teleport to poi \"Swamp Capital\"",
 	"iconName": "BlackRune",
 	"questItem": true,
-	"manaNeeded": 1,
+	"shardsNeeded": 1,
 	"cost": 100
 },
 {
@@ -804,7 +849,7 @@
 	"commandOnUse": "teleport to poi \"Island Capital\"",
 	"iconName": "BlueRune",
 	"questItem": true,
-	"manaNeeded": 1,
+	"shardsNeeded": 1,
 	"cost": 100
 },
 {
@@ -817,7 +862,7 @@
 	"commandOnUse": "teleport to poi \"Mountain Capital\"",
 	"iconName": "RedRune",
 	"questItem": true,
-	"manaNeeded": 1,
+	"shardsNeeded": 1,
 	"cost": 100
 },
 {
@@ -830,7 +875,7 @@
 	"commandOnUse": "teleport to poi \"Forest Capital\"",
 	"iconName": "GreenRune",
 	"questItem": true,
-	"manaNeeded": 1,
+	"shardsNeeded": 1,
 	"cost": 100
 },
 {
@@ -844,7 +889,7 @@
 	"commandOnUse": "heal percent 0.5",
 	"iconName": "WhiteStaff",
 	"questItem": true,
-	"manaNeeded": 5,
+	"shardsNeeded": 5,
 	"cost": 1000
 },
 {
@@ -858,7 +903,7 @@
 	"commandOnUse": "hide 10",
 	"iconName": "BlackStaff",
 	"questItem": true,
-	"manaNeeded": 5,
+	"shardsNeeded": 5,
 	"cost": 1000
 },
 {
@@ -871,7 +916,7 @@
 	"commandOnUse": "fly 10",
     "iconName": "BlueStaff",
 	"questItem": true,
-	"manaNeeded": 5,
+	"shardsNeeded": 5,
 	"cost": 1000
 },
 {
@@ -884,7 +929,7 @@
 	"commandOnUse": "remove enemy nearest",
 	"iconName": "RedStaff",
 	"questItem": true,
-	"manaNeeded": 5,
+	"shardsNeeded": 5,
 	"cost": 1000
 },
 {
@@ -898,7 +943,89 @@
 	"commandOnUse": "sprint 10",
 	"iconName": "GreenStaff",
 	"questItem": true,
-	"manaNeeded": 5,
+	"shardsNeeded": 5,
 	"cost": 1000
+},
+{
+    "name": "Slimefoot's Slimy Staff",
+    "equipmentSlot": "Left",
+    "iconName": "GreenStaff",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCardInCommandZone":[
+        "Slimefoot's Slimy Staff"
+      ]
+}
+},
+{
+    "name": "Kiora's Bident",
+    "equipmentSlot": "Left",
+    "iconName": "SleepWand",
+    "effect": {
+      "lifeModifier": -1,
+      "startBattleWithCard": [
+        "Kraken Hatchling"
+      ],
+      "startBattleWithCardInCommandZone":[
+        "Kiora's Bident"
+      ]
+}
+},
+{
+    "name": "Slime-Covered Boots",
+    "equipmentSlot": "Boots",
+    "iconName": "SteelBoots",
+    "effect": {
+      "lifeModifier": -1,
+      "startBattleWithCard": [
+        "Ooze Flux"
+      ]
+}
+},
+{
+    "name": "Jace's Signature Hoodie",
+    "equipmentSlot": "Body",
+    "iconName": "BlueRobes",
+    "effect": {
+      "lifeModifier": -1,
+      "cardRewardBonus": 1,
+      "startBattleWithCardInCommandZone": [
+        "Jace's Signature Hoodie"
+      ]
+}
+},
+{
+    "name": "Teferi's Staff",
+    "equipmentSlot": "Left",
+    "iconName": "MadStaff",
+    "effect": {
+      "lifeModifier": 1,
+      "cardRewardBonus": 1,
+      "startBattleWithCardInCommandZone": [
+        "Teferi's Staff"
+      ]
+}
+},
+{
+    "name": "Garruk's Mighty Axe",
+    "equipmentSlot": "Left",
+    "iconName": "GarrukAxe",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Garruk's Mighty Axe"
+      ]
+}
+},
+{
+    "name": "Nahiri's Armory",
+    "equipmentSlot": "Right",
+    "iconName": "Armory",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Nahiri's Armory"
+      ]
+}
 }
 ]

@@ -62,12 +62,17 @@
 	"Viper",
 	"Werewolf",
 	"Wild-Magic Sorcerer",
-	"Wurm"
+	"Wurm",
+	"Ooze",
+	"Squirrel",
+	"Fox"
 ],
 "pointsOfInterest": [
 	"Green Castle",
 	"Forest Capital",
-	"Forest Town",
+	"Forest Town Generic",
+	"Forest Town Identity",
+	"Forest Town Tribal",
 	"ElfTown",
 	"WurmPond",
 	"Kavu Lair",
@@ -92,7 +97,9 @@
 	"CaveG6",
 	"CaveG8",
 	"CaveG9",
-	"CaveGB"
+	"CaveGB",
+	"Slime Cave",
+	"Garruk Forest"
 ],
 "structures": [
 	{

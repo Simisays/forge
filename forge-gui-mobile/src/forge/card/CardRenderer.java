@@ -203,6 +203,9 @@ public class CardRenderer {
     }
 
     public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
+        if (pc.getRules() == null) {
+            return getCardArt(pc.getImageKey(backFace), false, false, false, false, false, false, false, false, true);
+        }
         CardType type = pc.getRules().getType();
         return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split,
                 type.isPlane() || type.isPhenomenon(), pc.getRules().getOracleText().contains("Aftermath"),
@@ -594,7 +597,7 @@ public class CardRenderer {
             }
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, Forge.enableUIMask.equals("Art"), true);
+            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true, true);
         }
     }
 
@@ -662,7 +665,7 @@ public class CardRenderer {
             drawFoilEffect(g, card, x, y, w, h, false);
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, Forge.enableUIMask.equals("Art"), false, isChoiceList, !showCardIdOverlay(card));
+            CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !showCardIdOverlay(card));
         }
         g.setAlphaComposite(oldAlpha);
     }
@@ -774,9 +777,7 @@ public class CardRenderer {
         }
         //Darken unselectable cards
         if (unselectable) {
-            g.setAlphaComposite(0.6f);
-            g.fillRect(Color.BLACK, cx, cy, cw, ch);
-            g.setAlphaComposite(oldAlpha);
+            g.fillRect(FSkinColor.getStandardColor(Color.BLACK).alphaColor(0.6f), cx, cy, cw, ch);
         }
         //Magenta outline when card is chosen
         if (MatchController.instance.isUsedToPay(card)) {
@@ -830,7 +831,10 @@ public class CardRenderer {
                             else
                                 drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                         } else {
-                            drawManaCost(g, card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                            ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
+                            ManaCost rightManaCost = card.getRightSplitState().getManaCost();
+                            drawManaCost(g, leftManaCost, x - padding, y-(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
+                            drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                         }
                     }
                 } else {
@@ -879,6 +883,15 @@ public class CardRenderer {
                 abiX = cx + ((cw * 2) / 1.92f);
             }
             CardFaceSymbols.drawSymbol("deathtouch", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
+        if (card.getCurrentState().hasToxic()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("toxic", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }

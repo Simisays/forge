@@ -247,6 +247,8 @@ public enum CounterEnumType {
 
     NET("NET", 0, 221, 251),
 
+    OIL("OIL", 99, 102, 106),
+
     OMEN("OMEN", 255, 178, 120),
 
     ORE("ORE", 200, 201, 163),
@@ -334,6 +336,8 @@ public enum CounterEnumType {
     STASH("STASH", 248, 191, 0),
 
     STORAGE("STORG", 255, 177, 121),
+    
+    STORY("STORY", 180, 72, 195),
 
     STRIFE("STRFE", 255, 89, 223),
 
@@ -388,6 +392,7 @@ public enum CounterEnumType {
     POISON("POISN"),
 
     TICKET("TICKET"),
+    MANASHARDS("MANASHARDS"), //Adventure-specific mechanic
 
     // Keyword Counters
 /*

@@ -14,11 +14,13 @@ public class EffectData implements Serializable {
     public int lifeModifier = 0;         //Amount to add to starting Life.
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
+    public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
     public float moveSpeed = 1.0f;       //Change of movement speed. Map only.
     public float goldModifier = -1.0f;   //Modifier for shop discounts.
     public int cardRewardBonus = 0;    //Bonus "DeckCard" drops. Max 3.
+    public int extraManaShards = 0; //Mana Shard tokens available to spend in battle
 
     //Opponent field.
     public EffectData opponent;          //Effects to be applied to the opponent's side.
@@ -31,6 +33,7 @@ public class EffectData implements Serializable {
         startBattleWithCard=effect.startBattleWithCard;
         colorView=effect.colorView;
         opponent = (effect.opponent == null) ? null : new EffectData(effect.opponent);
+        extraManaShards = effect.extraManaShards;
     }
 
     public Array<IPaperCard> startBattleWithCards() {
@@ -48,6 +51,23 @@ public class EffectData implements Serializable {
             }
         }
         return startCards;
+    }
+
+    public Array<IPaperCard> startBattleWithCardsInCommandZone(){
+        Array<IPaperCard> startCardsInCommandZone=new Array<>();
+        if(startBattleWithCardInCommandZone != null) {
+            for (String name:startBattleWithCardInCommandZone) {
+                PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
+                if(C != null)
+                    startCardsInCommandZone.add(C);
+                else {
+                    PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
+                    if (T != null) startCardsInCommandZone.add(T);
+                    else System.err.print("Can not find card \"" + name + "\"\n");
+                }
+            }
+        }
+        return startCardsInCommandZone;
     }
 
     public String cardNames() {
@@ -71,7 +91,7 @@ public class EffectData implements Serializable {
         if(changeStartCards != 0)
             description+="Starting hand: " + changeStartCards + "\n";
         if(moveSpeed!=0 && moveSpeed != 1)
-            description+="Movement speed: " + ((lifeModifier > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
+            description+="[+MovementSpeed] " + ((moveSpeed > 0) ? "+" : "") + Math.round((moveSpeed-1.f)*100) + "%\n";
         if(goldModifier > 0.0f)
             description+="Shop discount: x" + (goldModifier) + "\n";
         if(cardRewardBonus > 0)

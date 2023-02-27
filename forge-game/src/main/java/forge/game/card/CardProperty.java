@@ -17,7 +17,6 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -358,6 +357,29 @@ public class CardProperty {
             if (!card.getExiledBy().equals(sourceController)) {
                 return false;
             }
+        } else if (property.startsWith("ExiledWithSourceLKI")) {
+            List<Card> exiled = card.getZone().getCardsAddedThisTurn(null);
+            int idx = exiled.lastIndexOf(card);
+            if (idx == -1) {
+                return false;
+            }
+            Card lkiExiled = exiled.get(idx);
+
+            if (lkiExiled.getExiledWith() == null) {
+                return false;
+            }
+
+            Card host = source;
+            //Static Abilites doesn't have spellAbility or OriginalHost
+            if (spellAbility != null) {
+                host = spellAbility.getOriginalHost();
+                if (host == null) {
+                    host = spellAbility.getHostCard();
+                }
+            }
+            if (!lkiExiled.getExiledWith().equalsWithTimestamp(host)) {
+                return false;
+            }
         } else if (property.startsWith("ExiledWithSource")) {
             if (card.getExiledWith() == null) {
                 return false;
@@ -371,15 +393,14 @@ public class CardProperty {
                     host = spellAbility.getHostCard();
                 }
             }
-
-            if (!card.getExiledWith().equals(host)) {
+            if (!source.hasExiledCard(card) || !card.getExiledWith().equalsWithTimestamp(host)) {
                 return false;
             }
         } else if (property.equals("ExiledWithEffectSource")) {
             if (card.getExiledWith() == null) {
                 return false;
             }
-            if (!card.getExiledWith().equals(source.getEffectSource())) {
+            if (!card.getExiledWith().equalsWithTimestamp(source.getEffectSource())) {
                 return false;
             }
         } else if (property.equals("EncodedWithSource")) {
@@ -741,6 +762,12 @@ public class CardProperty {
                     case "Commander":
                         final List<Card> cmdrs = sourceController.getCommanders();
                         for (Card cmdr : cmdrs) {
+                            cmdr = game.getCardState(cmdr);
+                            // if your commander is in a hidden zone or phased out
+                            // it's considered to have no creature types
+                            if (cmdr.getZone().getZoneType().isHidden() || cmdr.isPhasedOut()) {
+                                continue;
+                            }
                             if (card.sharesCreatureTypeWith(cmdr)) {
                                 return true;
                             }
@@ -861,7 +888,7 @@ public class CardProperty {
                     if (!(spellAbility instanceof SpellAbility)) {
                         System.out.println("Looking at TriggeredCard but no SA?");
                     } else {
-                        Card triggeredCard = ((Card) ((SpellAbility) spellAbility).getTriggeringObject(AbilityKey.Card));
+                        Card triggeredCard = ((Card) ((SpellAbility) spellAbility).getRootAbility().getTriggeringObject(AbilityKey.Card));
                         if (triggeredCard != null && card.sharesNameWith(triggeredCard)) {
                             return true;
                         }
@@ -984,8 +1011,7 @@ public class CardProperty {
                 return false;
             }
 
-            List<Card> cards = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Hand, "Card", source, spellAbility);
-            if (!cards.contains(card) && !card.getMadnessWithoutCast()) {
+            if (!card.wasDiscarded()) {
                 return false;
             }
         } else if (property.startsWith("ControlledByPlayerInTheDirection")) {
@@ -1013,11 +1039,6 @@ public class CardProperty {
         } else if (property.startsWith("hasKeyword")) {
             // "withFlash" would find Flashback cards, add this to fix Mystical Teachings
             if (!card.hasKeyword(property.substring(10))) {
-                return false;
-            }
-        } else if (property.startsWith("withFlashback")) {
-            boolean fb = card.hasKeyword(Keyword.FLASHBACK);
-            if (!fb) {
                 return false;
             }
         } else if (property.startsWith("with")) {
@@ -1709,6 +1730,10 @@ public class CardProperty {
             if (!game.getPhaseHandler().isPlayerTurn(controller)) return false;
             return CombatUtil.couldAttackButNotAttacking(combat, card);
         } else if (property.startsWith("kicked")) {
+            // CR 607.2i check cost is linked
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
             if (property.equals("kicked")) {
                 if (card.getKickerMagnitude() == 0) {
                     return false;
@@ -1717,10 +1742,6 @@ public class CardProperty {
                 String s = property.split("kicked ")[1];
                 if ("1".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
                 if ("2".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
-            }
-        } else if (property.startsWith("notkicked")) {
-            if (card.getKickerMagnitude() > 0) {
-                return false;
             }
         } else if (property.startsWith("pseudokicked")) {
             if (property.equals("pseudokicked")) {
@@ -1896,9 +1917,12 @@ public class CardProperty {
             }
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
+            if (card.getName().isEmpty()) {
+                return false;
+            }
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                                                                                     CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
-            if (!setCard.getEdition().equals(setCode)) {
+                    CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+            if (setCard != null && !setCard.getEdition().equals(setCode)) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {

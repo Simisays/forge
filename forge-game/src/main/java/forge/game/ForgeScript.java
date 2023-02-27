@@ -188,7 +188,7 @@ public class ForgeScript {
         } else if (property.startsWith("XCost")) {
             String comparator = property.substring(5, 7);
             int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
-            return Expressions.compare(sa.getXManaCostPaid(), comparator, y);
+            return Expressions.compare(sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid(), comparator, y);
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
@@ -235,7 +235,7 @@ public class ForgeScript {
         } else if (property.equals("Nightbound")) {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
-            return sa.getSpendPhyrexianMana();
+            return sa.getSpendPhyrexianMana() > 0;
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {
@@ -262,6 +262,18 @@ public class ForgeScript {
                 return false;
             }
             return source.equals(m.getHostCard());
+        } else if (property.startsWith("singleTarget")) {
+            // this doesn't allow a second target, even if same object
+            int num = 0;
+            for (TargetChoices tc : sa.getAllTargetChoices()) {
+                num += tc.size();
+                if (num > 1) {
+                    return false;
+                }
+            }
+            if (num != 1) {
+                return false;
+            }
         } else if (property.startsWith("numTargets")) {
             Set<GameObject> targets = new HashSet<>();
             for (TargetChoices tc : sa.getAllTargetChoices()) {

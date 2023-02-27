@@ -68,10 +68,9 @@ public class HumanPlay {
         FThreads.assertExecutedByEdt(false);
 
         Card source = sa.getHostCard();
-        boolean isforetold = source.isForetold();
+        sa.setActivatingPlayer(p);
 
         if (sa instanceof LandAbility) {
-            sa.setActivatingPlayer(p);
             if (sa.canPlay()) {
                 sa.resolve();
                 p.getGame().updateLastStateForCard(source);
@@ -79,9 +78,8 @@ public class HumanPlay {
             return false;
         }
 
+        boolean isforetold = source.isForetold();
         boolean castFaceDown = sa.isCastFaceDown();
-
-        sa.setActivatingPlayer(p);
         boolean flippedToCast = sa.isSpell() && source.isFaceDown();
 
         sa = chooseOptionalAdditionalCosts(p, sa);
@@ -114,9 +112,11 @@ public class HumanPlay {
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
-            if (flippedToCast && !castFaceDown) {
+            Card rollback = p.getGame().getCardState(sa.getHostCard());
+            if (castFaceDown) {
+                rollback.setFaceDown(false);
+            } else if (flippedToCast) {
                 // need to get the changed card if able
-                Card rollback = p.getGame().getCardState(sa.getHostCard());
                 rollback.turnFaceDown(true);
                 //need to set correct imagekey when forcing facedown
                 rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
@@ -281,6 +281,7 @@ public class HumanPlay {
                     || part instanceof CostFlipCoin
                     || part instanceof CostRollDice
                     || part instanceof CostDamage
+                    || part instanceof CostEnlist
                     || part instanceof CostPutCounter
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
@@ -320,7 +321,7 @@ public class HumanPlay {
                 } else {
                     from = costExile.getFrom();
                     CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
-                    final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
+                    final int nNeeded = getAmountFromPart(part, source, sourceAbility);
                     if (list.size() < nNeeded) {
                         return false;
                     }
@@ -450,7 +451,6 @@ public class HumanPlay {
                         return false;
                     }
                 }
-                return true;
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
@@ -512,6 +512,20 @@ public class HumanPlay {
                 }
 
                 p.payEnergy(amount, source);
+            }
+            else if (part instanceof CostExert) {
+                part.payAsDecided(p, PaymentDecision.card(source), sourceAbility, hcd.isEffect());
+            }
+
+            else if (part instanceof CostPayShards) {
+                CounterType counterType = CounterType.get(CounterEnumType.MANASHARDS);
+                int amount = getAmountFromPartX(part, source, sourceAbility);
+
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                    return false;
+                }
+
+                p.payShards(amount, source);
             }
 
             else {
@@ -618,7 +632,7 @@ public class HumanPlay {
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestriction());
 
         String xInCard = source.getSVar("X");
-        String xColor = ability.getParam("XColor");
+        String xColor = ability.getXColor();
         if (source.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
             xColor = "WUBRGX";
         }

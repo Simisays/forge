@@ -44,6 +44,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -662,13 +663,8 @@ public class AttachAi extends SpellAbilityAi {
                 cardPriority += 40;
             }
             //check if card is generally unblockable
-            for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-                for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                    if (stAb.applyAbility("CantBlockBy", card, null)) {
-                        cardPriority += 50;
-                        break;
-                    }
-                }
+            if (StaticAbilityCantAttackBlock.cantBlockBy(card, null)) {
+                cardPriority += 50;
             }
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
@@ -1313,7 +1309,14 @@ public class AttachAi extends SpellAbilityAi {
         // at some point can support attaching a different card
         Card attachSource = sa.getHostCard();
         if (sa.hasParam("Object")) {
-            attachSource = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Object"), sa).get(0);
+            CardCollection objs = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Object"), sa);
+            if (objs.isEmpty()) {
+                if (!mandatory) {
+                    return null;
+                }
+            } else {
+                attachSource = objs.get(0);
+            }
         }
 
         // Don't equip if DontEquip SVar is set
@@ -1321,12 +1324,16 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
+        // is no attachment so no using attach
+        if (!mandatory && !attachSource.isAttachment()) {
+            return null;
+        }
+
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
-            list = CardLists.filter(list, Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
                     return ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo());
@@ -1335,7 +1342,7 @@ public class AttachAi extends SpellAbilityAi {
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
-            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(tgt, sa));
+            List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
             CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card card) {
@@ -1345,31 +1352,26 @@ public class AttachAi extends SpellAbilityAi {
             return preferred.isEmpty() ? Aggregates.random(list) : Aggregates.random(preferred);
         }
 
-        // is no attachment so no using attach
-        if (!attachSource.isAttachment()) {
-            return null;
-        }
-
         // Don't fortify if already fortifying
         if (attachSource.isFortification() && attachSource.getAttachedTo() != null
                 && attachSource.getAttachedTo().getController() == aiPlayer) {
             return null;
         }
 
-        CardCollection list = null;
+        List<Card> list = null;
         if (tgt == null) {
             list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         } else {
-            list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.canBeAttached(attachSource, sa));
+            list = CardUtil.getValidCardsToTarget(tgt, sa);
         }
 
         if (list.isEmpty()) {
             return null;
         }
-        CardCollection prefList = list;
+        CardCollection prefList = CardLists.filter(list, CardPredicates.canBeAttached(attachSource, sa));
 
         // Filter AI-specific targets if provided
-        prefList = ComputerUtil.filterAITgts(sa, aiPlayer, list, true);
+        prefList = ComputerUtil.filterAITgts(sa, aiPlayer, prefList, true);
 
         Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
 
@@ -1425,8 +1427,9 @@ public class AttachAi extends SpellAbilityAi {
 
         if (c == null && mandatory) {
             CardLists.shuffle(list);
-            c = list.getFirst();
+            c = list.get(0);
         }
+
         return c;
     }
 
@@ -1580,7 +1583,7 @@ public class AttachAi extends SpellAbilityAi {
                     && canBeBlocked
                     && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.equals("Haste")) {
-            return card.hasSickness() && ph.isPlayerTurn(sa.getActivatingPlayer()) && !card.isTapped()
+            return card.hasSickness() && ph.isPlayerTurn(ai) && !card.isTapped()
                     && card.getNetCombatDamage() + powerBonus > 0
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && ComputerUtilCombat.canAttackNextTurn(card);

@@ -61,11 +61,14 @@
 	"Vampire Lord",
 	"Viashino",
 	"Wild-Magic Sorcerer",
-	"Yeti"
+	"Yeti",
+	"Kobold"
 ],
 "pointsOfInterest": [
 	"Red Castle",
-	"Mountain Town",
+	"Mountain Town Generic",
+	"Mountain Town Identity",
+	"Mountain Town Tribal",
 	"Mountain Capital",
 	"YuleTown",
 	"BarbarianCamp",
@@ -104,7 +107,8 @@
 	"CaveRE",
 	"CaveRG",
 	"CaveRH",
-	"CaveRJ"
+	"CaveRJ",
+	"Kobold Mine"
 ],
 "structures": [
 	{

@@ -28,6 +28,7 @@ import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
@@ -108,7 +109,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Card playEffectCard;
     private Pair<Long, Player> controlledByPlayer;
     private ManaCostBeingPaid manaCostBeingPaid;
-    private boolean spentPhyrexian = false;
+    private int spentPhyrexian = 0;
     private int paidLifeAmount = 0;
 
     private SpellAbility grantorOriginal;
@@ -127,7 +128,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean aftermath = false;
 
-    private boolean cumulativeupkeep = false;
     private boolean blessing = false;
     private Integer chapter = null;
     private boolean lastChapter = false;
@@ -516,6 +516,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return this.hasParam("Ninjutsu");
     }
 
+    public boolean isCumulativeupkeep() {
+        return hasParam("CumulativeUpkeep");
+    }
+
     public boolean isEpic() {
         AbilitySub sub = this.getSubAbility();
         while (sub != null && !sub.hasParam("Epic")) {
@@ -614,11 +618,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payingMana.clear();
     }
 
-    public final boolean getSpendPhyrexianMana() {
+    //getSpendPhyrexianMana
+    public final int getSpendPhyrexianMana() {
         return this.spentPhyrexian;
     }
-    public final void setSpendPhyrexianMana(boolean value) {
-        this.spentPhyrexian = value;
+    public final void setSpendPhyrexianMana(boolean bool) {
+        this.spentPhyrexian = bool ? this.spentPhyrexian + 2 : 0;
     }
 
     public final int getAmountLifePaid() {
@@ -1118,7 +1123,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
-                clone.manaPart = new AbilityManaPart(this, mapParams);
+                clone.manaPart = new AbilityManaPart(clone, mapParams);
             }
 
             // need to copy the damage tables
@@ -1141,7 +1146,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.payingMana.addAll(payingMana);
             }
             clone.paidAbilities = Lists.newArrayList();
-            clone.setPaidHash(Maps.newHashMap(getPaidHash()));
+            clone.setPaidHash(getPaidHash());
 
             // copy last chapter flag for Trigger
             clone.lastChapter = this.lastChapter;
@@ -1253,10 +1258,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        final TargetRestrictions tr = getTargetRestrictions();
+        final SpellAbility rootAbility = this.getRootAbility();
+        // 115.5. A spell or ability on the stack is an illegal target for itself.
+        // (This covers the spell case.)
+        if (rootAbility.isSpell() && rootAbility.getHostCard() == entity) {
+            return false;
+        }
 
         // Restriction related to this ability
         if (usesTargeting()) {
+            final TargetRestrictions tr = getTargetRestrictions();
             if (tr.isUniqueTargets() && getUniqueTargets().contains(entity))
                 return false;
 
@@ -1346,17 +1357,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            if (tr.isSameController()) {
-                Player newController;
-                if (entity instanceof Card) {
-                    newController = ((Card) entity).getController();
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && !c.getController().equals(newController))
-                            return false;
-                    }
-                }
-            }
-
             if (hasParam("MaxTotalTargetPower") && entity instanceof Card) {
                 int soFar = Aggregates.sum(getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
                 // only add if it isn't already targeting
@@ -1367,6 +1367,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
                 if (soFar > tr.getMaxTotalPower(getHostCard(),this)) {
                     return false;
+                }
+            }
+
+            if (tr.isSameController()) {
+                Player newController;
+                if (entity instanceof Card) {
+                    newController = ((Card) entity).getController();
+                    for (final Card c : targetChosen.getTargetCards()) {
+                        if (entity != c && !c.getController().equals(newController))
+                            return false;
+                    }
                 }
             }
 
@@ -1937,8 +1948,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         final String splitTargetRestrictions = tgt.getSAValidTargeting();
         if (splitTargetRestrictions != null) {
-            // TODO Ensure that spells with subabilities are processed correctly
-
             boolean result = false;
             SpellAbility subAb = topSA;
             while (subAb != null && !result) {
@@ -1948,6 +1957,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         continue;
                     }
                     for (final GameObject o : matchTgt) {
+                        // CR 115.9b need to check current target state but nothing else that could make it illegal
                         if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
                             result = true;
                             break;
@@ -2073,6 +2083,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 return testFailed;
             }
         }
+        else if (incR[0].equals("Ability")) {
+            if (!root.isAbility()) {
+                return testFailed;
+            }
+        }
         else if (incR[0].equals("Instant")) {
             if (!root.getCardState().getType().isInstant()) {
                 return testFailed;
@@ -2126,13 +2141,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
         return ForgeScript.spellAbilityHasProperty(this, property, sourceController, source, spellAbility);
-    }
-
-    public boolean isCumulativeupkeep() {
-        return cumulativeupkeep;
-    }
-    public void setCumulativeupkeep(boolean cumulativeupkeep0) {
-        cumulativeupkeep = cumulativeupkeep0;
     }
 
     // Return whether this spell tracks what color mana is spent to cast it for the sake of the effect
@@ -2410,6 +2418,23 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         xManaCostPaid = n;
     }
 
+    public String getXColor() {
+        if (!hasParam("XColor")) {
+            return null;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        String parts[] = getParam("XColor").split(",");
+        for (String col : parts) {
+            // color word used
+            if (col.length() > 2) {
+                col = MagicColor.toShortString(col);
+            }
+            sb.append(col);
+        }
+        return sb.toString();
+    }
+
     public boolean canCastTiming(Player activator) {
         return canCastTiming(getHostCard(), activator);
     }
@@ -2482,7 +2507,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (!matchesValidParam("ValidAfterStack", this)) {
             return false;
         }
-        // TODO add checks for Lurrus
         return true;
     }
 }

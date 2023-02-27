@@ -70,7 +70,7 @@ public class Untap extends Phase {
      */
     @Override
     public void executeAt() {
-        this.execute(this.at);
+        super.executeAt();
 
         doPhasing(game.getPhaseHandler().getPlayerTurn());
         doDayTime(game.getPhaseHandler().getPreviousPlayerTurn());
@@ -105,7 +105,7 @@ public class Untap extends Phase {
     public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
         @Override
         public boolean apply(Card c) {
-            return Untap.canUntap(c);
+            return canUntap(c);
         }
     };
 

@@ -23,12 +23,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
-import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -38,14 +38,19 @@ import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.assets.FImageComplex;
+import forge.assets.FSkinImage;
+import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
 import java.util.Map;
+import java.util.Random;
 
 
 /**
@@ -193,6 +198,7 @@ public class MapStage extends GameStage {
     private void effectDialog(EffectData effectData) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
+        dialog.clearListeners();
         TextraButton ok = Controls.newTextButton("OK", this::hideDialog);
         ok.setVisible(false);
         TypingLabel L = Controls.newTypingLabel("{GRADIENT=CYAN;WHITE;1;1}Strange magical energies flow within this place...{ENDGRADIENT}\nAll opponents get:\n" + effectData.getDescription());
@@ -203,7 +209,14 @@ public class MapStage extends GameStage {
                 ok.setVisible(true);
             }
         });
-        dialog.getButtonTable().add(ok).width(250f);
+        dialog.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                L.skipToTheEnd();
+                super.clicked(event, x, y);
+            }
+        });
+        dialog.getButtonTable().add(ok).width(240f);
         dialog.getContentTable().add(L).width(250f);
         dialog.setKeepWithinStage(true);
         showDialog();
@@ -212,6 +225,7 @@ public class MapStage extends GameStage {
     public void showImageDialog(String message, Texture texture) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
+        dialog.clearListeners();
         if (texture != null) {
             TextureRegion tr = new TextureRegion(texture);
             tr.flip(true, true);
@@ -220,10 +234,11 @@ public class MapStage extends GameStage {
             dialog.getContentTable().add(image).height(100);
             dialog.getContentTable().add().row();
         }
-        TextraLabel L = Controls.newTextraLabel(message);
+        TypingLabel L = Controls.newTypingLabel(message);
         L.setWrap(true);
+        L.skipToTheEnd();
         dialog.getContentTable().add(L).width(250f);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -232,15 +247,41 @@ public class MapStage extends GameStage {
     public void showDeckAwardDialog(String message, Deck deck) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
-
-        dialog.getContentTable().add(Controls.newTypingLabel(Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)))).align(Align.center);
-        dialog.getContentTable().add().row();
+        dialog.clearListeners();
+        DeckProxy dp = new DeckProxy(deck, "Constructed", GameType.Constructed, null);
+        FImageComplex cardArt = CardRenderer.getCardArt(dp.getHighestCMCCard());
+        if (cardArt != null) {
+            Image art = new Image(cardArt.getTextureRegion());
+            art.setWidth(50);
+            art.setHeight(40);
+            art.setPosition(8, 40);
+            Image image = new Image(FSkinImage.ADV_DECKBOX.getTextureRegion());
+            image.setWidth(59);
+            image.setHeight(80);
+            image.setPosition(4, 7);
+            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
+            label.skipToTheEnd();
+            label.setAlignment(Align.center);
+            label.setPosition(34, 20);
+            Group group = new Group();
+            group.addActor(art);
+            group.addActor(image);
+            group.addActor(label);
+            dialog.getContentTable().add(group).height(100).width(65).center();
+            dialog.getContentTable().add().row();
+        } else {
+            TypingLabel label = Controls.newTypingLabel("[%125]"+Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase()+"\n[%]"+deck.getName());
+            label.skipToTheEnd();
+            label.setAlignment(Align.center);
+            dialog.getContentTable().add(label).align(Align.center);
+            dialog.getContentTable().add().row();
+        }
 
         TypingLabel L = Controls.newTypingLabel(message);
         L.setWrap(true);
         L.skipToTheEnd();
 
-        dialog.getContentTable().add(L).width(240);
+        dialog.getContentTable().add(L).width(250);
         dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
@@ -380,9 +421,9 @@ public class MapStage extends GameStage {
         if (difficultyData.spawnRank == 0 && !spawnEasy) return false;
         return true;
     }
-
     private void loadObjects(MapLayer layer, String sourceMap) {
         player.setMoveModifier(2);
+        Array<String> shopsAlreadyPresent = new Array<>();
         for (MapObject obj : layer.getObjects()) {
             MapProperties prop = obj.getProperties();
             String type = prop.get("type", String.class);
@@ -391,6 +432,8 @@ public class MapStage extends GameStage {
                 if (changes.isObjectDeleted(id))
                     continue;
                 boolean hidden = !obj.isVisible(); //Check if the object is invisible.
+
+                String rotatingShop = "";
 
                 switch (type) {
                     case "entry":
@@ -475,6 +518,21 @@ public class MapStage extends GameStage {
                     case "spellsmith":
                         addMapActor(obj, new OnCollide(() -> Forge.switchScene(SpellSmithScene.instance())));
                         break;
+                    case "shardtrader":
+                        MapActor shardTraderActor = new OnCollide(() -> Forge.switchScene(ShardTraderScene.instance()));
+                        addMapActor(obj, shardTraderActor);
+                        if (prop.containsKey("hasSign") && Boolean.parseBoolean(prop.get("hasSign").toString()) && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
+                            try {
+                                TextureSprite sprite = new TextureSprite(Config.instance().getAtlas(ShardTraderScene.spriteAtlas).createSprite(ShardTraderScene.sprite));
+                                sprite.setX(shardTraderActor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
+                                sprite.setY(shardTraderActor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
+                                addMapActor(sprite);
+
+                            } catch (Exception e) {
+                                System.err.print("Can not create Texture for Shard Trader");
+                            }
+                        }
+                        break;
                     case "arena":
                         addMapActor(obj, new OnCollide(() -> {
                             ArenaData arenaData = JSONStringLoader.parse(ArenaData.class, prop.get("arena").toString(), "");
@@ -496,17 +554,111 @@ public class MapStage extends GameStage {
                             addMapActor(obj, dialog);
                         }
                         break;
+                    case "quest":
+                        DialogActor dialog;
+                        if (prop.containsKey("questtype")){
+                            TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
+
+                            String questOrigin = prop.containsKey("questtype") ? prop.get("questtype").toString() : "";
+
+                            String placeholderText = "[" +
+                                    "  {" +
+                                    "    \"name\":\"Quest Offer\"," +
+                                    "    \"text\":\"Please, help us!\\n((QUEST DESCRIPTION))\"," +
+                                    "    \"condition\":[]," +
+                                    "    \"options\":[" +
+                                    "        { \"name\":\"No, I'm not ready yet.\nMaybe next snapshot.\" }," +
+                                    "    ]" +
+                                    "  }" +
+                                    "]";
+
+                            {
+                                dialog = new DialogActor(this, id, placeholderText,tiledObj.getTextureRegion());
+                            }
+                            dialog.setVisible(false);
+                            addMapActor(obj, dialog);
+                        }
+                        break;
+
+                    case "Rotating":
+                        String rotation = "";
+                        if (prop.containsKey("rotation")) {
+                            rotation = prop.get("rotation").toString();
+                        }
+
+                        Array<String> possibleShops = new Array<>(rotation.split(","));
+
+                        if (possibleShops.size > 0){
+                            long rotatingRandomSeed = WorldSave.getCurrentSave().getWorld().getRandom().nextLong() + java.time.LocalDate.now().toEpochDay();
+                            Random rotatingShopRandom = new Random(rotatingRandomSeed);
+                            rotatingShop = possibleShops.get(rotatingShopRandom.nextInt(possibleShops.size));
+                            changes.setRotatingShopSeed(id, rotatingRandomSeed);
+                        }
+
+                    //Intentionally not breaking here.
+                    //Flow continues into "shop" case with above data overriding base logic.
+
                     case "shop":
-                        String shopList = prop.get("shopList").toString();
-                        shopList = shopList.replaceAll("\\s", "");
-                        Array<String> possibleShops = new Array<>(shopList.split(","));
+
+                        int restockPrice = 0;
+                        String shopList = "";
+
+                        boolean isRotatingShop = !rotatingShop.isEmpty();
+
+                        if (isRotatingShop){
+                            shopList = rotatingShop;
+                            restockPrice = 7;
+                        }
+                        else{
+                            int rarity = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(100);
+                            if (rarity > 95 & prop.containsKey("mythicShopList")) {
+                                shopList = prop.get("mythicShopList").toString();
+                                restockPrice = 5;
+                            }
+                            if (shopList.isEmpty() && (rarity > 85 & prop.containsKey("rareShopList"))) {
+                                shopList = prop.get("rareShopList").toString();
+                                restockPrice = 4;
+                            }
+                            if (shopList.isEmpty() && (rarity > 55 & prop.containsKey("uncommonShopList"))) {
+                                shopList = prop.get("uncommonShopList").toString();
+                                restockPrice = 3;
+                            }
+                            if (shopList.isEmpty() && prop.containsKey("commonShopList")) {
+                                shopList = prop.get("commonShopList").toString();
+                                restockPrice = 2;
+                            }
+                            if (shopList.trim().isEmpty() && prop.containsKey("shopList")) {
+                                shopList = prop.get("shopList").toString(); //removed but included to not break existing custom planes
+                                restockPrice = 0; //Tied to restock button
+                            }
+                            shopList = shopList.replaceAll("\\s", "");
+
+                        }
+
+                        if (prop.containsKey("noRestock") && (boolean)prop.get("noRestock")){
+                            restockPrice = 0;
+                        }
+
+                        possibleShops = new Array<String>(shopList.split(","));
+                        Array<String> filteredPossibleShops = new Array<>();
+                        if (!isRotatingShop){
+                            for (String candidate : possibleShops)
+                            {
+                                if (!shopsAlreadyPresent.contains(candidate, false))
+                                    filteredPossibleShops.add(candidate);
+                            }
+                        }
+                        if (filteredPossibleShops.isEmpty()){
+                            filteredPossibleShops = possibleShops;
+                        }
                         Array<ShopData> shops;
-                        if (possibleShops.size == 0 || shopList.equals(""))
+                        if (filteredPossibleShops.size == 0 || shopList.equals(""))
                             shops = WorldData.getShopList();
                         else {
                             shops = new Array<>();
                             for (ShopData data : new Array.ArrayIterator<>(WorldData.getShopList())) {
-                                if (possibleShops.contains(data.name, false)) {
+                                if (filteredPossibleShops.contains(data.name, false)) {
+                                    data.restockPrice = restockPrice;
                                     shops.add(data);
                                 }
                             }
@@ -514,18 +666,27 @@ public class MapStage extends GameStage {
                         if (shops.size == 0) continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
+                        shopsAlreadyPresent.add(data.name);
                         Array<Reward> ret = new Array<>();
+                        WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false));
                         }
-                        ShopActor actor = new ShopActor(this, id, ret, data.unlimited);
+                        ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);
-                        if (prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
+                        if (prop.containsKey("hasSign") && (boolean)prop.get("hasSign") && prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
                                 TextureSprite sprite = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.sprite));
                                 sprite.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                 sprite.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);
+
+                                if (!(data.overlaySprite == null | data.overlaySprite.isEmpty())){
+                                    TextureSprite overlay = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.overlaySprite));
+                                    overlay.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
+                                    overlay.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
+                                    addMapActor(overlay);
+                                }
                             } catch (Exception e) {
                                 System.err.print("Can not create Texture for " + data.sprite + " Obj:" + data);
                             }

@@ -20,6 +20,7 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -179,7 +180,7 @@ public class AiAttackController {
 
             List<Player> opps = Lists.newArrayList(ai.getOpponents());
             if (forCombatDmg) {
-                for (Player p : opps) {
+                for (Player p : ai.getOpponents()) {
                     if (p.isMonarch() && ai.canBecomeMonarch()) {
                         // just increase the odds for now instead of being fully predictable
                         // as it could lead to other too complex factors giving this reasoning negative impact
@@ -815,6 +816,7 @@ public class AiAttackController {
                     if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
                     // check defenders in order of maximum requirements
                     for (Pair<GameEntity, Integer> e : combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements()) {
+                        // TODO check if desired defender would also have the same amount
                         if (e.getRight() == 0) continue;
                         GameEntity mustAttackDefMaybe = e.getLeft();
                         // Gideon Jura returns LKI
@@ -1432,13 +1434,27 @@ public class AiAttackController {
             // if card has a Exert Trigger which would target,
             // but there are no creatures it can target, no need to exert with it
             boolean missTarget = false;
-            for (Trigger t : c.getTriggers()) {
-                if (!TriggerType.Exerted.equals(t.getMode())) {
+            for (StaticAbility st : c.getStaticAbilities()) {
+                if (!"OptionalAttackCost".equals(st.getParam("Mode"))) {
                     continue;
                 }
-                SpellAbility sa = t.ensureAbility();
+                SpellAbility sa = st.getPayingTrigSA();
                 if (sa == null) {
-                    continue;
+                    // not the delayed variant
+                    for (Trigger t : c.getTriggers()) {
+                        if (!TriggerType.Exerted.equals(t.getMode())) {
+                            continue;
+                        }
+                        sa = t.ensureAbility();
+                        if (c.getController().isAI()) {
+                            PlayerControllerAi aic = ((PlayerControllerAi) c.getController().getController());
+                            if (!aic.getAi().doTrigger(sa, false)) {
+                                missTarget = true;
+                                break;
+                            }
+                        }
+                    }
+                    break;
                 }
                 if (sa.usesTargeting()) {
                     sa.setActivatingPlayer(c.getController(), true);

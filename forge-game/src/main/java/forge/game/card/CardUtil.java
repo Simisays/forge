@@ -63,7 +63,7 @@ public final class CardUtil {
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
             "Transmute", "Replicate", "Recover", "Squad", "Suspend", "Aura swap",
-            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
+            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
             "etbCounter", "Reflect", "Ward").build();
@@ -238,29 +238,46 @@ public final class CardUtil {
 
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
+        newCopy.setTributed(in.isTributed());
+        newCopy.setMonstrous(in.isMonstrous());
+        newCopy.setRenowned(in.isRenowned());
+
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.getPhasedOut());
 
+        newCopy.setTapped(in.isTapped());
+
         newCopy.setDamageHistory(in.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
-        for (Card c : in.getBlockedThisTurn()) {
-            newCopy.addBlockedThisTurn(c);
-        }
-        for (Card c : in.getBlockedByThisTurn()) {
-            newCopy.addBlockedByThisTurn(c);
-        }
+
+        // these are LKI already
+        newCopy.getBlockedThisTurn().addAll(in.getBlockedThisTurn());
+        newCopy.getBlockedByThisTurn().addAll(in.getBlockedByThisTurn());
 
         newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
         newCopy.setEntityAttachedTo(getLKICopy(in.getEntityAttachedTo(), cachedMap));
 
-        newCopy.setHaunting(in.getHaunting());
         newCopy.setCopiedPermanent(in.getCopiedPermanent());
+
+        newCopy.setHaunting(in.getHaunting());
         for (final Card haunter : in.getHauntedBy()) {
             newCopy.addHauntedBy(haunter, false);
         }
+
+        newCopy.setIntensity(in.getIntensity(false));
+
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
-        newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
+        newCopy.setChosenCards(in.getChosenCards());
+
+        newCopy.setChosenType(in.getChosenType());
+        newCopy.setChosenType2(in.getChosenType2());
+        newCopy.setChosenName(in.getChosenName());
+        newCopy.setChosenName2(in.getChosenName2());
+        newCopy.setChosenColors(Lists.newArrayList(in.getChosenColors()));
+        if (in.hasChosenNumber()) {
+            newCopy.setChosenNumber(in.getChosenNumber());
+        }
 
         for (Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
             newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
@@ -276,7 +293,11 @@ public final class CardUtil {
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
+        newCopy.setStoredKeywords(in.getStoredKeywords(), true);
+
         newCopy.copyChangedTextFrom(in);
+
+        newCopy.setTimestamp(in.getTimestamp());
 
         newCopy.setBestowTimestamp(in.getBestowTimestamp());
 
@@ -285,8 +306,6 @@ public final class CardUtil {
         newCopy.setForetoldByEffect(in.isForetoldByEffect());
 
         newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
-
-        newCopy.setTimestamp(in.getTimestamp());
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
@@ -309,6 +328,7 @@ public final class CardUtil {
 
         newCopy.setExiledBy(in.getExiledBy());
         newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
+        newCopy.addExiledCards(in.getExiledCards());
 
         if (in.getGame().getCombat() != null && in.isPermanent()) {
             newCopy.setCombatLKI(in.getGame().getCombat().saveLKI(newCopy)); 
@@ -354,9 +374,9 @@ public final class CardUtil {
         return res;
     }
 
-    public static ColorSet getColorsYouCtrl(final Player p) {
+    public static ColorSet getColorsFromCards(Iterable<Card> list) {
         byte b = 0;
-        for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : list) {
             b |= c.getColor().getColor();
         }
         return ColorSet.fromMask(b);

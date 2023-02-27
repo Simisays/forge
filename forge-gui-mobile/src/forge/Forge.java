@@ -35,6 +35,7 @@ import forge.screens.ClosingScreen;
 import forge.screens.FScreen;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
+import forge.screens.home.AdventureScreen;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.NewGameMenu;
 import forge.screens.match.MatchController;
@@ -153,11 +154,8 @@ public class Forge implements ApplicationListener {
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
-        if (!GuiBase.isAndroid() || (androidVersion > 28 && totalDeviceRAM > 7000)) {
+        if (!GuiBase.isAndroid() || (androidVersion > 25 && totalDeviceRAM > 3400)) {
             allowCardBG = true;
-        } else {
-            // don't allow to read and process
-            ForgeConstants.SPRITE_CARDBG_FILE = "";
         }
         assets = new Assets();
         graphics = new Graphics();
@@ -339,6 +337,7 @@ public class Forge implements ApplicationListener {
     private static void loadAdventureResources(boolean startScene) {
         try {
             Config.instance().loadResources();
+            SpellSmithScene.instance().loadEditions();
             if (startScene)
                 switchScene(StartScene.instance());
         } catch (Exception e) {
@@ -357,6 +356,7 @@ public class Forge implements ApplicationListener {
                 Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
             if (titleBGFile.exists())
                 Forge.getAssets().fallback_skins().put(0, new Texture(titleBGFile));
+            AdventureScreen.preload();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -644,7 +644,6 @@ public class Forge implements ApplicationListener {
 
         final List<String> options = new ArrayList<>();
         options.add(getLocalizer().getMessage("lblExit"));
-        options.add(getLocalizer().getMessage("lblAdventure"));
         options.add(getLocalizer().getMessage("lblCancel"));
 
         Callback<Integer> callback = new Callback<Integer>() {
@@ -653,8 +652,6 @@ public class Forge implements ApplicationListener {
                 if (result == 0) {
                     exited = true;
                     exitAnimation(false);
-                } else if (result == 1) {
-                    switchToAdventure();
                 }
             }
         };
@@ -1001,13 +998,14 @@ public class Forge implements ApplicationListener {
             currentScreen = null;
         }
         FOverlay.hideAll();
-        assets.dispose();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
         try {
             ExceptionHandler.unregisterErrorHandling();
             lastPreview.dispose();
+            assets.dispose();
+            AdventureScreen.dispose();
         } catch (Exception e) {
         }
     }
@@ -1132,7 +1130,8 @@ public class Forge implements ApplicationListener {
             return false;
         }
     }
-
+    public static float mouseMovedX = 0;
+    public static float mouseMovedY = 0;
     private static class MainInputProcessor extends FGestureAdapter {
         private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
         private static char lastKeyTyped;
@@ -1216,7 +1215,7 @@ public class Forge implements ApplicationListener {
             return false;
         }
 
-        private void updatePotentialListeners(int x, int y) {
+        private void updatePotentialListeners(float x, float y) {
             potentialListeners.clear();
 
             //base potential listeners on object containing touch down point
@@ -1391,8 +1390,6 @@ public class Forge implements ApplicationListener {
         }
 
         //mouseMoved and scrolled events for desktop version
-        private int mouseMovedX, mouseMovedY;
-
         @Override
         public boolean mouseMoved(int screenX, int screenY) {
             magnify = true;

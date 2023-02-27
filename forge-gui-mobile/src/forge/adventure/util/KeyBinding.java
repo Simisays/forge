@@ -17,6 +17,7 @@ public enum KeyBinding {
     Deck("Deck", Input.Keys.E,Input.Keys.BUTTON_A),
     Map("Map", Input.Keys.M,Input.Keys.BUTTON_SELECT),
     Equip("Equip", Input.Keys.E,Input.Keys.BUTTON_X),
+    ExitToWorldMap("ExitToWorldMap", Input.Keys.F4,Input.Keys.BUTTON_L2),
     Use("Use", Input.Keys.ENTER,Input.Keys.BUTTON_A),
     Back("Back", Input.Keys.ESCAPE,Input.Keys.BUTTON_B),
     ScrollUp("ScrollUp", Input.Keys.PAGE_UP,Input.Keys.BUTTON_L1),
@@ -43,13 +44,13 @@ public enum KeyBinding {
     public String getLabelText(boolean pressed) {
         if(Controllers.getCurrent()!=null)
         {
-            return "{Scale=125%}[+"+controllerPrefix+Input.Keys.toString(bindingController).replace(" Button","")+(pressed?"_pressed]":"]");
+            return "[%125][+"+controllerPrefix+Input.Keys.toString(bindingController).replace(" Button","")+(pressed?"_pressed]":"]");
         }
         else
         {
             if(GuiBase.isAndroid())
                 return "";
-            return "{Scale=125%}[+"+Input.Keys.toString(binding)+(pressed?"_pressed]":"]");
+            return "[%125][+"+Input.Keys.toString(binding)+(pressed?"_pressed]":"]");
         }
 
     }

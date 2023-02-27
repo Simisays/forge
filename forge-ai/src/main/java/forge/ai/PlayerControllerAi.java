@@ -43,8 +43,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
-import forge.game.cost.CostAdjustment;
-import forge.game.cost.CostExile;
+import forge.game.cost.CostEnlist;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
@@ -338,6 +337,16 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<Card> exertAttackers(List<Card> attackers) {
         return AiAttackController.exertAttackers(attackers, brains.getAttackAggression());
+    }
+ 
+    @Override
+    public List<Card> enlistAttackers(List<Card> attackers) {
+        CardCollection cards = CostEnlist.getCardsForEnlisting(brains.getPlayer());
+        ComputerUtilCard.sortByEvaluateCreature(new CardCollection(attackers));
+        // do not enlist more than available payment choices (currently ignores multiple instances of Enlist, but can that even happen?)
+        attackers = attackers.subList(0, cards.size());
+        // TODO check if not needed as defender
+        return attackers;
     }
 
     @Override
@@ -698,26 +707,7 @@ public class PlayerControllerAi extends PlayerController {
         ability.setActivatingPlayer(c.getController(), true);
         ability.setCardState(sa.getCardState());
 
-        // FIXME: This is a hack to check if the AI can play the "exile from library" pay costs (Cumulative Upkeep,
-        // e.g. Thought Lash). We have to do it and bail early if the AI can't pay, because otherwise the AI will
-        // pay the cost partially, which should not be possible
-        int nExileLib = 0;
-        List<CostPart> parts = CostAdjustment.adjust(cost, sa).getCostParts();
-        for (final CostPart part : parts) {
-            if (part instanceof CostExile) {
-                CostExile exile = (CostExile) part;
-                if (exile.from == ZoneType.Library) {
-                    nExileLib += exile.convertAmount();
-                }
-            }
-        }
-        if (nExileLib > c.getController().getCardsIn(ZoneType.Library).size()) {
-            return false;
-        }
-        // - End of hack for Exile a card from library Cumulative Upkeep -
-
-        if (ComputerUtilCost.canPayCost(ability, c.getController(), true)) {
-            ComputerUtil.playNoStack(c.getController(), ability, getGame(), true);
+        if (ComputerUtil.playNoStack(c.getController(), ability, getGame(), true)) {
             // transfer this info for Balduvian Fallen
             sa.setPayingMana(ability.getPayingMana());
             return true;
@@ -1091,9 +1081,13 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
-        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player, true)) {
-            ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
-            return true;
+        if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
+            boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
+            if (!emptyAbility.getPaidHash().isEmpty()) {
+                // report info to original sa (Argentum Masticore)
+                sa.setPaidHash(emptyAbility.getPaidHash());
+            }
+            return result;
         }
         return false;
     }
@@ -1101,7 +1095,7 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
         for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
-            if (sa.isTrigger()) {
+            if (sa.isTrigger() && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());
                 }

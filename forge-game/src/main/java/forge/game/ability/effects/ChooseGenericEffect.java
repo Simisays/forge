@@ -13,6 +13,7 @@ import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -20,9 +21,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
         sb.append("chooses from a list.");
 
         return sb.toString();
@@ -48,7 +47,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             // determine if any of the choices are not valid
             List<SpellAbility> saToRemove = Lists.newArrayList();
-            
+
             for (SpellAbility saChoice : abilities) {
                 if (saChoice.getRestrictions() != null && !saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer())) {
                     saToRemove.add(saChoice);
@@ -104,7 +103,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 if (fallback != null) {
                     p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(),
                             sa.hasParam("ShowChoice"), random));
-                    AbilityUtils.resolve(fallback);                
+                    AbilityUtils.resolve(fallback);
                 } else if (!random) {
                     System.err.println("Warning: all Unless costs were unpayable for " + host.getName() +", but it had no FallbackAbility defined. Doing nothing (this is most likely incorrect behavior).");
                 }

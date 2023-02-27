@@ -61,17 +61,17 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 442,
+      "x": 425,
       "y": 56
     },
     {
       "type": "Label",
-      "name": "mana",
+      "name": "shards",
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 442,
-      "y": 73
+      "x": 425,
+      "y": 70
     },
     {
       "type": "Label",
@@ -79,14 +79,14 @@
       "font": "default",
       "width": 64,
       "height": 16,
-      "x": 442,
-      "y": 90
+      "x": 425,
+      "y": 84
     },
     {
       "type": "TextButton",
       "name": "deck",
 	  "style":"menu",
-      "text": "{Scale=200%}[+Deck]",
+      "text": "[%125][+Deck]",
       "binding": "Deck",
       "width": 64,
       "height": 36,
@@ -97,7 +97,7 @@
       "type": "TextButton",
       "name": "inventory",
 	  "style":"menu",
-      "text": "{Scale=200%}[+Item]",
+      "text": "[%125][+Item]",
       "binding": "Inventory",
       "width": 64,
       "height": 36,
@@ -109,7 +109,7 @@
       "type": "TextButton",
       "name": "statistic",
 	  "style":"menu",
-      "text": "{Scale=200%}[+Status]",
+      "text": "[%125][+Status]",
       "binding": "Status",
       "width": 64,
       "height": 36,
@@ -120,7 +120,7 @@
       "type": "TextButton",
       "name": "menu",
 	  "style":"menu",
-      "text": "{Scale=200%}[+Menu]",
+      "text": "[%125][+Menu]",
       "binding": "Menu",
       "width": 64,
       "height": 36,
@@ -130,12 +130,23 @@
     {
       "type": "TextButton",
       "name": "openmap",
-      "text": "{Scale=80%}tr(lblZoom)",
+      "text": "[%80]tr(lblZoom)",
       "binding": "Map",
       "width": 80,
       "height": 18,
       "x": 0,
       "y": 80
+    },
+	{
+      "type": "TextButton",
+      "name": "exittoworldmap", 
+	  "style":"menu",
+      "text": "[%125][+ExitToWorldMap]",
+	  "binding": "ExitToWorldMap",
+      "width": 64,
+      "height": 32,
+      "x": 416,
+      "y": 66
     }
   ]
 }

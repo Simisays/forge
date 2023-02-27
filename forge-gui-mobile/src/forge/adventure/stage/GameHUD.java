@@ -6,28 +6,29 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.*;
-import forge.adventure.util.Config;
-import forge.adventure.util.Controls;
-import forge.adventure.util.Current;
-import forge.adventure.util.UIActor;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.FThreads;
@@ -44,7 +45,7 @@ public class GameHUD extends Stage {
     private final Image miniMapPlayer;
     private final TextraLabel lifePoints;
     private final TextraLabel money;
-    private final TextraLabel mana;
+    private final TextraLabel shards;
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown;
     private final InputEvent eventTouchUp;
@@ -53,13 +54,20 @@ public class GameHUD extends Stage {
     private final TextraButton menuActor;
     private final TextraButton statsActor;
     private final TextraButton inventoryActor;
+    private final TextraButton exitToWorldMapActor;
     public final UIActor ui;
     private final Touchpad touchpad;
     private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     boolean isHiding = false, isShowing = false;
     float opacity = 1f;
-    private boolean debugMap;
+    private boolean debugMap, updatelife;
+
+    private final Dialog dialog;
+    private boolean dialogOnlyInput;
+    private final Array<TextraButton> dialogButtonMap = new Array<>();
+    private String lifepointsTextColor = "";
+    TextraButton selectedKey;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -69,6 +77,7 @@ public class GameHUD extends Stage {
         ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid()
                 ? Forge.isLandscapeMode() ? "ui/hud_landscape.json" : "ui/hud_portrait.json"
                 : Forge.isLandscapeMode() ? "ui/hud.json" : "ui/hud_portrait.json"));
+
 
         blank = ui.findActor("blank");
         miniMap = ui.findActor("map");
@@ -83,6 +92,8 @@ public class GameHUD extends Stage {
         statsActor = ui.findActor("statistic");
         inventoryActor = ui.findActor("inventory");
         gamehud = ui.findActor("gamehud");
+        exitToWorldMapActor = ui.findActor("exittoworldmap");
+        dialog = Controls.newDialog("");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad
@@ -108,15 +119,17 @@ public class GameHUD extends Stage {
         ui.onButtonPress("inventory", () -> openInventory());
         ui.onButtonPress("statistic", () -> statistic());
         ui.onButtonPress("deck", () -> openDeck());
+        ui.onButtonPress("exittoworldmap", () -> exitToWorldMap());
         lifePoints = ui.findActor("lifePoints");
-        mana = ui.findActor("mana");
+        shards = ui.findActor("shards");
         money = ui.findActor("money");
-        mana.setText("{Scale=80%}0/0");
-        lifePoints.setText("{Scale=80%}20/20");
-        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("{Scale=80%}"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        AdventurePlayer.current().onManaChange(() -> mana.setText("{Scale=80%}"+AdventurePlayer.current().getMana() + "/" + AdventurePlayer.current().getMaxMana()));
+        shards.setText("[%95][+Shards] 0");
+        money.setText("[%95][+Gold] ");
+        lifePoints.setText("[%95][+Life] 20/20");
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] " + AdventurePlayer.current().getShards()));
 
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("{Scale=80%}"+String.valueOf(AdventurePlayer.current().getGold())));
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] " + String.valueOf(AdventurePlayer.current().getGold())));
         addActor(ui);
         addActor(miniMapPlayer);
         console = new Console();
@@ -208,6 +221,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
                     && !(Controls.actorContainsVector(statsActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
+                    && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
                     && (Controls.actorContainsVector(ui, touch)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
                 touchpad.setBounds(touch.x - TOUCHPAD_SCALE / 2, touch.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
@@ -223,6 +237,7 @@ public class GameHUD extends Stage {
 
     @Override
     public void draw() {
+        updatelife = false;
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
@@ -235,12 +250,25 @@ public class GameHUD extends Stage {
         //colored lifepoints
         if (Current.player().getLife() >= Current.player().getMaxLife()) {
             //color green if max life
-            lifePoints.setColor(Color.GREEN);
+            if (!lifepointsTextColor.equals("[GREEN]")) {
+                lifepointsTextColor = "[GREEN]";
+                updatelife = true;
+            }
         } else if (Current.player().getLife() <= 5) {
             //color red if critical
-            lifePoints.setColor(Color.RED);
+            if (!lifepointsTextColor.equals("[RED]")) {
+                lifepointsTextColor = "[RED]";
+                updatelife = true;
+            }
         } else {
-            lifePoints.setColor(Color.WHITE);
+            if (!lifepointsTextColor.equals("")) {
+                lifepointsTextColor = "";
+                updatelife = true;
+            }
+        }
+        if (updatelife) {
+            updatelife = false;
+            lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
     }
 
@@ -278,16 +306,43 @@ public class GameHUD extends Stage {
         Forge.switchScene(InventoryScene.instance());
     }
 
+    private void exitToWorldMap() {
+        if (!GameScene.instance().isNotInWorldMap()) //prevent showing this dialog to WorldMap
+            return;
+        dialog.getButtonTable().clear();
+        dialog.getContentTable().clear();
+        dialog.clearListeners();
+        TextraButton YES = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), this::exitDungeonCallback);
+        TextraButton NO = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), this::hideDialog);
+        TypingLabel L = Controls.newTypingLabel(Forge.getLocalizer().getMessageorUseDefault("lblExitToWoldMap", "Exit to the World Map?"));
+        L.setWrap(true);
+        L.skipToTheEnd();
+        dialog.getButtonTable().add(YES).width(60f);
+        dialog.getButtonTable().add(NO).width(60f);
+        dialog.getContentTable().add(L).width(120f);
+        dialog.setKeepWithinStage(true);
+        showDialog();
+
+    }
+
+    private void exitDungeonCallback() {
+        hideDialog(true);
+    }
+
+    private void hideDialog() {
+        hideDialog(false);
+    }
+
     private void menu() {
         gameStage.openMenu();
     }
 
-    public void setVisibility(Actor actor, boolean visible) {
+    private void setVisibility(Actor actor, boolean visible) {
         if (actor != null)
             actor.setVisible(visible);
     }
 
-    public void setAlpha(Actor actor, boolean visible) {
+    private void setAlpha(Actor actor, boolean visible) {
         if (actor != null) {
             if (visible)
                 actor.getColor().a = 1f;
@@ -303,15 +358,17 @@ public class GameHUD extends Stage {
         setVisibility(miniMapPlayer, visible);
         setVisibility(gamehud, visible);
         setVisibility(lifePoints, visible);
-        setVisibility(mana, visible);
+        setVisibility(shards, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
+        setVisibility(exitToWorldMapActor, GameScene.instance().isNotInWorldMap());
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
         setAlpha(menuActor, visible);
         setAlpha(statsActor, visible);
         setAlpha(inventoryActor, visible);
+        setAlpha(exitToWorldMapActor, visible);
         opacity = visible ? 1f : 0.4f;
     }
 
@@ -323,6 +380,9 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean keyDown(int keycode) {
+        if (dialogOnlyInput) {
+            return dialogInput(keycode);
+        }
         ui.pressDown(keycode);
         if (keycode == Input.Keys.F9 || keycode == Input.Keys.F10) {
             console.toggle();
@@ -347,7 +407,22 @@ public class GameHUD extends Stage {
         return super.keyDown(keycode);
     }
 
-    public void performTouch(Actor actor) {
+    private boolean dialogInput(int keycode) {
+        if (dialogOnlyInput) {
+            if (KeyBinding.Up.isPressed(keycode)) {
+                selectPreviousDialogButton();
+            }
+            if (KeyBinding.Down.isPressed(keycode)) {
+                selectNextDialogButton();
+            }
+            if (KeyBinding.Use.isPressed(keycode)) {
+                performTouch(this.getKeyboardFocus());
+            }
+        }
+        return true;
+    }
+
+    private void performTouch(Actor actor) {
         if (actor == null)
             return;
         actor.fire(eventTouchDown);
@@ -359,7 +434,7 @@ public class GameHUD extends Stage {
         }, 0.10f);
     }
 
-    public void hideButtons() {
+    private void hideButtons() {
         if (isShowing)
             return;
         if (isHiding)
@@ -369,10 +444,12 @@ public class GameHUD extends Stage {
         inventoryActor.addAction(Actions.sequence(Actions.fadeOut(0.15f), Actions.hide(), Actions.moveTo(inventoryActor.getX() + inventoryActor.getWidth(), inventoryActor.getY())));
         statsActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(statsActor.getX() + statsActor.getWidth(), statsActor.getY())));
         menuActor.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.hide(), Actions.moveTo(menuActor.getX() + menuActor.getWidth(), menuActor.getY())));
+        if (GameScene.instance().isNotInWorldMap())
+            exitToWorldMapActor.addAction(Actions.sequence(Actions.fadeOut(0.2f), Actions.hide(), Actions.moveTo(exitToWorldMapActor.getX() + exitToWorldMapActor.getWidth(), exitToWorldMapActor.getY())));
         FThreads.delayInEDT(300, () -> isHiding = false);
     }
 
-    public void showButtons() {
+    private void showButtons() {
         if (console.isVisible())
             return;
         if (isHiding)
@@ -384,11 +461,80 @@ public class GameHUD extends Stage {
         statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
         inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
         deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
+        if (GameScene.instance().isNotInWorldMap())
+            exitToWorldMapActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, exitToWorldMapActor.getY(), 0.25f))));
         FThreads.delayInEDT(300, () -> isShowing = false);
     }
 
     public void setDebug(boolean b) {
         debugMap = b;
+    }
+
+    private void showDialog() {
+
+        dialogButtonMap.clear();
+        for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
+            dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
+        }
+        dialog.show(this, Actions.show());
+        dialog.setPosition((this.getWidth() - dialog.getWidth()) / 2, (this.getHeight() - dialog.getHeight()) / 2);
+        dialogOnlyInput = true;
+        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+            this.setKeyboardFocus(dialogButtonMap.first());
+    }
+
+    private void hideDialog(boolean exitDungeon) {
+        //move exit dungeon code here to ensure the hide animation is finished before exiting to worldmap
+        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide(), new Action() {
+            @Override
+            public boolean act(float v) {
+                if (exitDungeon) {
+                    Forge.switchScene(GameScene.instance());
+                    WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+                    MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+                    gameStage.getPlayerSprite().stop();
+                    exitToWorldMapActor.setVisible(false);
+                }
+                return true;
+            }
+        }));
+        dialogOnlyInput = false;
+        selectedKey = null;
+    }
+
+    private void selectNextDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(this.getKeyboardFocus() instanceof Button)) {
+            this.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (this.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i += 1;
+                i %= dialogButtonMap.size;
+                this.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
+    }
+
+    private void selectPreviousDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(this.getKeyboardFocus() instanceof Button)) {
+            this.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (this.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i -= 1;
+                if (i < 0)
+                    i = dialogButtonMap.size - 1;
+                this.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
     }
 
     class ConsoleToggleListener extends ActorGestureListener {
@@ -410,5 +556,7 @@ public class GameHUD extends Stage {
             if (count > 1)
                 showButtons();
         }
+
+
     }
 }

@@ -230,6 +230,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostExile cost) {
+        if (cost.payCostFromSource()) {
+            return source.getZone() == player.getZone(cost.from) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
+        }
+
         final Game game = player.getGame();
 
         String type = cost.getType();
@@ -240,21 +244,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         CardCollection list;
-        if (cost.getFrom().equals(ZoneType.Stack)) {
-            list = new CardCollection();
-            for (final SpellAbilityStackInstance si : game.getStack()) {
-                list.add(si.getSourceCard());
-            }
-        }
-        else if (cost.sameZone) {
+        if (cost.sameZone) {
             list = new CardCollection(game.getCardsIn(cost.from));
-        }
-        else {
+        } else {
             list = new CardCollection(player.getCardsIn(cost.from));
-        }
-
-        if (cost.payCostFromSource()) {
-            return source.getZone() == player.getZone(cost.from) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
         }
 
         if (type.equals("All")) {
@@ -289,7 +282,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         for (final Player p : players) {
             final CardCollection enoughType = CardLists.filter(list, CardPredicates.isOwner(p));
             if (enoughType.size() < c) {
-                list.removeAll((CardCollectionView)enoughType);
+                list.removeAll(enoughType);
             } else {
                 payableZone.add(p);
             }
@@ -474,6 +467,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostEnlist cost) {
+        CardCollectionView list = CostEnlist.getCardsForEnlisting(player);
+        if (list.isEmpty()) {
+            return null;
+        }
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, list, ability);
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectACostToEnlist", cost.getDescriptiveType(), "%d"));
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+        if (inp.hasCancelled()) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
+    }
+
+    @Override
     public PaymentDecision visit(final CostFlipCoin cost) {
         Integer c = cost.getAbilityAmount(ability);
 
@@ -500,7 +509,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         int c = cost.getAbilityAmount(ability);
 
         final CardCollectionView list = player.getCardsIn(ZoneType.Battlefield);
-        final CardCollectionView validCards = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
+        CardCollectionView validCards = CardLists.getValidCards(list, cost.getType().split(";"), player, source, ability);
+        validCards = CardLists.filter(validCards, crd -> crd.canBeControlledBy(player));
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, validCards, ability);
         final String desc = cost.getTypeDescription() == null ? cost.getType() : cost.getTypeDescription();
@@ -582,6 +592,17 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (player.canPayEnergy(c) &&
                 confirmAction(cost, Localizer.getInstance().getMessage("lblPayEnergyConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.ENERGY)), "{E}"))) {
+            return PaymentDecision.number(c);
+        }
+        return null;
+    }
+
+    @Override
+    public PaymentDecision visit(final CostPayShards cost) {
+        Integer c = cost.getAbilityAmount(ability);
+
+        if (player.canPayShards(c) &&
+                confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.MANASHARDS)), "{M} (Mana Shards)"))) {
             return PaymentDecision.number(c);
         }
         return null;
@@ -1010,11 +1031,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String amount = cost.getAmount();
         final String type = cost.getType();
 
-        CardCollectionView list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.canBeSacrificedBy(ability, isEffect()));
-        list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
-
         if (cost.payCostFromSource()) {
-            if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
+            if (source.getController() == ability.getActivatingPlayer() && source.canBeSacrificedBy(ability, isEffect())) {
                 return mandatory || confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
             }
             return null;
@@ -1022,11 +1040,14 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (type.equals("OriginalHost")) {
             Card host = ability.getOriginalHost();
-            if (host.getController() == ability.getActivatingPlayer() && host.isInPlay()) {
+            if (host.getController() == ability.getActivatingPlayer() && host.canBeSacrificedBy(ability, isEffect())) {
                 return confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName()))) ? PaymentDecision.card(host) : null;
             }
             return null;
         }
+
+        CardCollectionView list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
 
         if (amount.equals("All")) {
             return PaymentDecision.card(list);
@@ -1039,6 +1060,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (list.size() < c) {
             return null;
         }
+
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, list, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", cost.getDescriptiveType(), "%d"));
         inp.setCancelAllowed(!mandatory);
@@ -1194,12 +1216,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             try {
                 //for cards like Sword-Point Diplomacy and others that uses imprinted as container for their ability
                 if (cardView != null && cardView.getImprintedCards() != null && cardView.getImprintedCards().size() == 1)
-                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getImprintedCards().get(0).getCurrentState().getImageKey()));
+                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getImprintedCards().get(0).getCurrentState().getTrackableImageKey()));
                 else if (ability.getTargets() != null && ability.getTargets().isTargetingAnyCard() && ability.getTargets().size() == 1)
                     cardView = CardView.get(ability.getTargetCard());
                 else if (cardView.getZone() == null || cardView.getZone().isHidden()) {
                     if (!cardView.hasAlternateState()) //don't override if it has alternatestate since it maybe showing alternate view
-                        cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
+                        cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getTrackableImageKey()));
                 }
             } catch (Exception e) {
                 //prevent NPE when overriding the cardView, the getPaperCardFromImageKey can return null making the GUI freeze, reset the view if error happens

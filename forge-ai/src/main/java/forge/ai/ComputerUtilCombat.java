@@ -128,7 +128,7 @@ public class ComputerUtilCombat {
         //        || (attacker.hasKeyword(Keyword.FADING) && attacker.getCounters(CounterEnumType.FADE) == 0)
         //        || attacker.hasSVar("EndOfTurnLeavePlay"));
         // The creature won't untap next turn
-        return !attacker.isTapped() || Untap.canUntap(attacker);
+        return !attacker.isTapped() || (attacker.getCounters(CounterEnumType.STUN) == 0 && Untap.canUntap(attacker));
     }
 
     /**
@@ -200,8 +200,8 @@ public class ComputerUtilCombat {
             return 0;
         }
 
-        damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
         if (!attacker.hasKeyword(Keyword.INFECT)) {
+            damage += predictPowerBonusOfAttacker(attacker, null, combat, withoutAbilities);
             sum = predictDamageTo(attacked, damage, attacker, true);
             if (attacker.hasDoubleStrike()) {
                 sum *= 2;
@@ -328,10 +328,10 @@ public class ComputerUtilCombat {
                 if (blockers.size() == 0
                         || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                     unblocked.add(attacker);
-                } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                        && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
-                    if (!attacker.hasKeyword(Keyword.INFECT)) {
-                        damage += getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                } else if (attacker.hasKeyword(Keyword.TRAMPLE) && !attacker.hasKeyword(Keyword.INFECT)) {
+                    int dmgAfterShielding = getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                    if (dmgAfterShielding > 0) {
+                        damage += dmgAfterShielding;
                     }
                 }
             }
@@ -369,13 +369,14 @@ public class ComputerUtilCombat {
             if (blockers.size() == 0
                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 unblocked.add(attacker);
-            } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                    && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
+            } else if (attacker.hasKeyword(Keyword.TRAMPLE)) {
                 int trampleDamage = getAttack(attacker) - totalShieldDamage(attacker, blockers);
-                if (attacker.hasKeyword(Keyword.INFECT)) {
-                    poison += trampleDamage;
+                if (trampleDamage > 0) {
+                    if (attacker.hasKeyword(Keyword.INFECT)) {
+                        poison += trampleDamage;
+                    }
+                    poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
                 }
-                poison += predictPoisonFromTriggers(attacker, ai, trampleDamage);
             }
         }
 
@@ -686,7 +687,7 @@ public class ComputerUtilCombat {
         final int defenderDefense = blocker.getLethalDamage() - flankingMagnitude + defBushidoMagnitude;
 
         return defenderDefense;
-    } // shieldDamage
+    }
 
     // For AI safety measures like Regeneration
     /**
@@ -918,7 +919,7 @@ public class ComputerUtilCombat {
         final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                if (!stAb.getParam("Mode").equals("Continuous")) {
+                if (!stAb.checkMode("Continuous")) {
                     continue;
                 }
                 if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("blocking")) {
@@ -1207,12 +1208,14 @@ public class ComputerUtilCombat {
             theTriggers.addAll(blocker.getTriggers());
         }
 
+        // TODO consider Exert + Enlist
+
         // look out for continuous static abilities that only care for attacking creatures
         if (!withoutCombatStaticAbilities) {
             final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
             for (final Card card : cardList) {
                 for (final StaticAbility stAb : card.getStaticAbilities()) {
-                    if (!stAb.getParam("Mode").equals("Continuous")) {
+                    if (!stAb.checkMode("Continuous")) {
                         continue;
                     }
                     if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("attacking")) {
@@ -1625,14 +1628,18 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public static boolean combatantCantBeDestroyed(Player ai, final Card combatant) {
-        // either indestructible or may regenerate
-        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
+    public static boolean combatantCantBeDestroyed(final Player ai, final Card combatant) {
+        if (combatant.getCounters(CounterEnumType.SHIELD) > 0) {
             return true;
         }
 
         // will regenerate
         if (combatant.getShieldCount() > 0 && combatant.canBeShielded()) {
+            return true;
+        }
+
+        // either indestructible or may regenerate
+        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(ai, combatant)) {
             return true;
         }
 
@@ -2053,7 +2060,6 @@ public class ComputerUtilCombat {
         if (block.size() == 1) {
             final Card blocker = block.getFirst();
 
-            // trample
             if (hasTrample) {
                 int dmgToKill = getEnoughDamageToKill(blocker, dmgCanDeal, attacker, true);
 
@@ -2109,7 +2115,7 @@ public class ComputerUtilCombat {
             }
         }
         return damageMap;
-    } // setAssignedDamage()
+    }
 
     // how much damage is enough to kill the creature (for AI)
     /**
@@ -2148,7 +2154,7 @@ public class ComputerUtilCombat {
             final boolean noPrevention) {
         final int killDamage = getDamageToKill(c, false);
 
-        if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getShieldCount() > 0) {
+        if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || (c.getShieldCount() > 0 && c.canBeShielded())) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
                 return maxDamage + 1;
             }
@@ -2475,11 +2481,13 @@ public class ComputerUtilCombat {
                     }
                 }
                 poison += pd;
-                if (pd > 0 && attacker.hasDoubleStrike()) {
-                    poison += pd;
-                }
                 // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
             }
+            // intern toxic effect
+            poison += attacker.getKeywordMagnitude(Keyword.TOXIC);
+        }
+        if (attacker.hasDoubleStrike()) {
+            poison *= 2;
         }
         return poison;
     }

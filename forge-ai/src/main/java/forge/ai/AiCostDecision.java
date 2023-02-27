@@ -239,6 +239,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostEnlist cost) {
+        CardCollection choices = CostEnlist.getCardsForEnlisting(player);
+        CardLists.sortByPowerDesc(choices);
+        return choices.isEmpty() ? null : PaymentDecision.card(choices.getFirst());
+    }
+
+    @Override
     public PaymentDecision visit(CostFlipCoin cost) {
         int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
@@ -258,7 +265,8 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         int c = cost.getAbilityAmount(ability);
 
-        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        typeList = CardLists.filter(typeList, crd -> crd.canBeControlledBy(player));
 
         if (typeList.size() < c) {
             return null;
@@ -332,9 +340,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
         CardCollectionView list;
 
         if (cost.isSameZone()) {
-            list = new CardCollection(game.getCardsIn(cost.getFrom()));
+            list = game.getCardsIn(cost.getFrom());
         } else {
-            list = new CardCollection(player.getCardsIn(cost.getFrom()));
+            list = player.getCardsIn(cost.getFrom());
         }
 
         int c = cost.getAbilityAmount(ability);
@@ -448,7 +456,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
         CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, isEffect(), c, null);
-        return PaymentDecision.card(list);
+        return list == null ? null : PaymentDecision.card(list);
     }
 
     @Override
@@ -782,6 +790,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostUntap cost) {
+        return PaymentDecision.number(0);
+    }
+
+    @Override
+    public PaymentDecision visit(CostPayShards cost) {
         return PaymentDecision.number(0);
     }
 

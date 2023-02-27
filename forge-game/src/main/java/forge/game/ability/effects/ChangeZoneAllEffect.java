@@ -68,7 +68,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().canSearchLibraryWith(sa, p)) {
                     cards.removeAll(p.getCardsIn(ZoneType.Library));
                 }
-
             }
             if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
                 // Search library using changezoneall effect need a param "Search"
@@ -95,8 +94,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!libCards.isEmpty()) {
                 sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, libCards.get(0).getOwner());
             }
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Player, sa.getActivatingPlayer());
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sa.getActivatingPlayer());
             runParams.put(AbilityKey.Target, tgtPlayers);
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
@@ -138,7 +136,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         if (!random && !((destination == ZoneType.Library || destination == ZoneType.PlanarDeck) && sa.hasParam("Shuffle"))) {
             if ((destination == ZoneType.Library || destination == ZoneType.PlanarDeck) && cards.size() >= 2) {
-                Player p = AbilityUtils.getDefinedPlayers(source, sa.getParamOrDefault("DefinedPlayer", "You"), sa).get(0);
+                Player p = AbilityUtils.getDefinedPlayers(source, sa.getParam("DefinedPlayer"), sa).get(0);
                 cards = (CardCollection) p.getController().orderMoveToZoneList(cards, destination, sa);
                 //the last card in this list will be the closest to the top, but we want the first card to be closest.
                 //so reverse it here before moving them to the library.
@@ -172,9 +170,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     // need LKI before Animate does apply
                     moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
 
+                    final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                     source.addRemembered(c);
-                    AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                    AbilityUtils.resolve(animate);
                     source.removeRemembered(c);
+                    animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                 }
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
@@ -187,13 +187,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             } else {
                 movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
                 if (destination == ZoneType.Exile && !c.isToken()) {
-                    Card host = sa.getOriginalHost();
-                    if (host == null) {
-                        host = sa.getHostCard();
-                    }
-                    host.addExiledCard(movedCard);
-                    movedCard.setExiledWith(host);
-                    movedCard.setExiledBy(host.getController());
+                    handleExiledWith(movedCard, sa);
                 }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);

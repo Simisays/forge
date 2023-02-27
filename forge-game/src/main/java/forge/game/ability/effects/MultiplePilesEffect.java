@@ -18,6 +18,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class MultiplePilesEffect extends SpellAbilityEffect {
@@ -29,15 +30,13 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
         String piles = sa.getParam("Piles");
         final String valid = sa.getParamOrDefault("ValidCards", "");
 
         sb.append("Separate all ").append(valid).append(" cards ");
 
-        for (final Player p : tgtPlayers) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+
         sb.append("controls into ").append(piles).append(" piles.");
         return sb.toString();
     }
@@ -67,7 +66,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
             if (!p.isInGame()) {
                 continue;
             }
- 
+
             CardCollection pool;
             if (sa.hasParam("DefinedCards")) {
                 pool = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);

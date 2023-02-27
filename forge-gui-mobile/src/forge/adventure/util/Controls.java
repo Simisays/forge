@@ -2,12 +2,17 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -15,11 +20,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
+import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.player.AdventurePlayer;
 import forge.card.ColorSet;
 
 import java.util.function.Function;
@@ -142,6 +149,15 @@ public class Controls {
                 } else {
                     return  (this.isOver() || hasKeyboardFocus()) && this.getStyle().backgroundOver != null ? this.getStyle().backgroundOver : this.getStyle().background;
                 }
+            }
+
+            @Override
+            protected GlyphLayout drawItem(Batch batch, BitmapFont font, T item, float x, float y, float width) {
+                if (getUserObject() != null && getUserObject() instanceof String) { //currently this is used on spellsmith...
+                    if (((String) getUserObject()).isEmpty())
+                        return super.drawItem(batch, font, (T) Forge.getLocalizer().getMessage("lblSelectingFilter"), x, y, width);
+                }
+                return super.drawItem(batch, font, item, x, y, width);
             }
         };
     }
@@ -346,20 +362,21 @@ public class Controls {
 
     public static String colorIdToTypingString(ColorSet color)
     {
-        String coloerId="";
+        //NOTE converting to uppercase will use pixelmana.atlas, higher quality pixel mana symbol.
+        String colorId="";
         if(color.hasWhite())
-            coloerId+="[+w]";
+            colorId+="[+w]";
         if(color.hasBlue())
-            coloerId+="[+u]";
+            colorId+="[+u]";
         if(color.hasBlack())
-            coloerId+="[+b]";
+            colorId+="[+b]";
         if(color.hasRed())
-            coloerId+="[+r]";
+            colorId+="[+r]";
         if(color.hasGreen())
-            coloerId+="[+g]";
+            colorId+="[+g]";
         if(color.isColorless())
-            coloerId+="[+c]";
-        return coloerId;
+            colorId+="[+c]";
+        return colorId;
     }
     public static TypingLabel newTypingLabel(String name) {
         TypingLabel ret = new TypingLabel(name==null?"":name, getSkin(),getTextraFont());
@@ -390,9 +407,9 @@ public class Controls {
     {
         if(textraFont==null)
         {
-            textraFont=new Font(getSkin().getFont("default"));
+            textraFont=new Font(getSkin().getFont("default"), 0f, 1.5f, 0f, 0f);
             textraFont.addAtlas(Config.instance().getAtlas(Paths.ITEMS_ATLAS));
-            textraFont.adjustLineHeight(0.8f);//not sure why this is needed maybe the font is bad
+            textraFont.addAtlas(Config.instance().getAtlas(Paths.PIXELMANA_ATLAS));
         }
         return textraFont;
     }
@@ -404,4 +421,121 @@ public class Controls {
     }
 
 
+
+    static public class AccountingLabel extends TextraLabel {
+        private TextraLabel label;
+        private final TextraLabel placeholder;
+        private String currencyIcon;
+        private boolean isShards;
+        private int currencyAmount;
+        private float animationDelay = 2f; //seconds to wait before replacing intermediate label
+        private final String NEGDECOR = "[RED]-";
+        private final String POSDECOR = "[GREEN]+";
+        private final Timer t = new Timer();
+
+        public AccountingLabel(TextraLabel target, boolean isShards) {
+            target.setVisible(false);
+            placeholder = target;
+            label = Controls.newTextraLabel(target.getName()+"Replacement");
+            currencyAmount = isShards?Current.player().getShards():Current.player().getGold();
+            this.isShards = isShards;
+
+            if (isShards){
+                currencyAmount = Current.player().getShards();
+                currencyIcon = "[+Shards]";
+                Current.player().onShardsChange(() -> update(AdventurePlayer.current().getShards(),true));
+            }
+            else {
+                currencyAmount = Current.player().getGold();
+                currencyIcon = "[+Gold] "; //fix space since gold sprite is wider than a single glyph
+                Current.player().onGoldChange(() -> update(AdventurePlayer.current().getGold(),true));
+            }
+            label.setText(getLabelText(currencyAmount));
+            setName(label.getName());
+            replaceLabel(label);
+        }
+
+        public void setAnimationDelay(float animationDelay) {
+            this.animationDelay = animationDelay;
+        }
+        public float getAnimationDelay() {
+            return animationDelay;
+        }
+        public void update(int newAmount){
+            update(newAmount, false);
+        }
+        public void update(int newAmount, boolean animate){
+
+            if (animate) {
+                TextraLabel temporaryLabel = getUpdateLabel(newAmount);
+                currencyAmount = newAmount;
+                replaceLabel(temporaryLabel);
+
+                t.schedule(new AccountingLabelUpdater(temporaryLabel), animationDelay);
+            }
+            else{
+                currencyAmount = newAmount;
+                drawFinalLabel(false);
+            }
+        }
+
+        private void drawFinalLabel(boolean fadeIn){
+
+            TextraLabel finalLabel = getDefaultLabel();
+            if (fadeIn) {
+                SequenceAction sequence = new SequenceAction();
+                sequence.addAction(Actions.alpha(0.5f));
+                sequence.addAction(Actions.alpha(1f, 2f, Interpolation.pow2Out));
+                finalLabel.addAction(sequence);
+            }
+            replaceLabel(finalLabel);
+        }
+
+        private TextraLabel getDefaultLabel(){
+            return Controls.newTextraLabel(getLabelText(currencyAmount));
+        }
+        private TextraLabel getUpdateLabel(int newAmount){
+            int delta = newAmount - currencyAmount;
+            String updateText = delta==0?"":(delta<0?NEGDECOR + delta *-1:POSDECOR + delta);
+            return Controls.newTextraLabel(getLabelText(currencyAmount, updateText));
+        }
+
+        private String getLabelText(int amount){
+            return getLabelText(amount, "");
+        }
+        private String getLabelText(int amount, String updateText){
+            return amount + " " + currencyIcon + updateText;
+        }
+        private void replaceLabel(TextraLabel newLabel) {
+            newLabel.setName(label.getName());
+            newLabel.style = placeholder.style;
+            newLabel.setBounds(placeholder.getX(), placeholder.getY(), label.getWidth(), placeholder.getHeight());
+            newLabel.setFont(label.getFont());
+            newLabel.style = placeholder.style;
+            newLabel.layout.setBaseColor(label.layout.getBaseColor());
+            newLabel.layout();
+
+            label.remove();
+            label = newLabel;
+            placeholder.getStage().addActor(label);
+        }
+
+        private class AccountingLabelUpdater extends Timer.Task{
+            @Override
+            public void run() {
+                if (label.equals(target)){
+                    drawFinalLabel(true);
+                }
+            }
+            TextraLabel target;
+            AccountingLabelUpdater(TextraLabel replacement){
+                this.target = replacement;
+            }
+        }
+    }
+
+    public static TextraLabel newAccountingLabel(TextraLabel target, Boolean isShards) {
+        AccountingLabel label = new AccountingLabel(target, isShards);
+        return label;
+    }
 }

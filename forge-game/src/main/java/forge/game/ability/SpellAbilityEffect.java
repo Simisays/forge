@@ -80,14 +80,37 @@ public abstract class SpellAbilityEffect {
         // Own description
         String stackDesc = params.get("StackDescription");
         if (stackDesc != null) {
+            String[] reps = null;
+            if (stackDesc.startsWith("REP")) {
+                reps = stackDesc.substring(4).split(" & ");
+                stackDesc = "SpellDescription";
+            }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-            	if (params.get("SpellDescription") != null) {
-            		sb.append(CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"), sa.getHostCard().getName()));
-            	}
-            	if (sa.getTargets() != null && !sa.getTargets().isEmpty()) {
-            		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
-            	}
+                if (params.containsKey("SpellDescription")) {
+                    String spellDesc = CardTranslation.translateSingleDescriptionText(params.get("SpellDescription"),
+                            sa.getHostCard().getName());
+
+                    int idx = spellDesc.indexOf("(");
+                    if (idx > 0) { //trim reminder text from StackDesc
+                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                    }
+
+                    if (reps != null) {
+                        for (String s : reps) {
+                            String[] rep = s.split("_",2);
+                            if (spellDesc.contains(rep[0])) {
+                                spellDesc = spellDesc.replaceFirst(rep[0], rep[1]);
+                            }
+                        }
+                        tokenizeString(sa, sb, spellDesc);
+                    } else {
+                        sb.append(spellDesc);
+                    }
+                }
+                if (sa.getTargets() != null && !sa.getTargets().isEmpty() && reps == null) {
+                    sb.append(" (Targeting: ").append(Lang.joinHomogenous(sa.getTargets())).append(")");
+                }
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
                 tokenizeString(sa, sb, stackDesc);
             }
@@ -118,12 +141,10 @@ public abstract class SpellAbilityEffect {
             int amount = AbilityUtils.calculateAmount(sa.getHostCard(), svar, sa);
             sb.append(" ");
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace(svar,"=",String.valueOf(amount))));
-        } else {
-            if (sa.costHasManaX()) {
-                int amount = sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid();
-                sb.append(" ");
-                sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace("X","=",String.valueOf(amount))));
-            }
+        } else if (sa.costHasManaX()) {
+            int amount = sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid();
+            sb.append(" ");
+            sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace("X","=",String.valueOf(amount))));
         }
 
         String currentName = CardTranslation.getTranslatedName(sa.getHostCard().getName());
@@ -188,6 +209,12 @@ public abstract class SpellAbilityEffect {
 
     private static CardCollection getCards(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
+        if (sa.hasParam("ThisDefinedAndTgts")) {
+            CardCollection cards =
+                    AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ThisDefinedAndTgts"), sa);
+            cards.addAll(sa.getTargets().getTargetCards());
+            return cards;
+        }
         return useTargets ? new CardCollection(sa.getTargets().getTargetCards())
                 : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
@@ -375,7 +402,7 @@ public abstract class SpellAbilityEffect {
         return saForget;
     }
 
-    protected static void addForgetOnMovedTrigger(final Card card, final String zone) {
+    public static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
@@ -434,7 +461,7 @@ public abstract class SpellAbilityEffect {
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
         final Card host = sa.getHostCard();
         final Game game = card.getGame();
-        final Card eff = createEffect(sa, sa.getActivatingPlayer(), host.getName() + "'s Effect", host.getImageKey());
+        final Card eff = createEffect(sa, sa.getActivatingPlayer(), host + "'s Effect", host.getImageKey());
 
         addLeaveBattlefieldReplacement(eff, zone);
 
@@ -475,8 +502,31 @@ public abstract class SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
+        String finalname = name.replaceAll("\\([^()]*\\)", "");
+        if (finalname.contains(" 's Effect")) {
+            finalname = finalname.replace( " 's Effect", "");
+            finalname = CardTranslation.getTranslatedName(finalname) + " " + Localizer.getInstance().getMessage("lblEffect");
+        } else if (finalname.contains("'s Effect")) {
+            finalname = finalname.replace( "'s Effect", "");
+            finalname = CardTranslation.getTranslatedName(finalname) +" " + Localizer.getInstance().getMessage("lblEffect");
+        } else if (finalname.contains(" 's Boon")) {
+            finalname = finalname.replace( " 's Boon", "");
+            finalname = CardTranslation.getTranslatedName(finalname) + " " + Localizer.getInstance().getMessage("lblBoon");
+        } else if (finalname.contains("'s Boon")) {
+            finalname = finalname.replace( "'s Boon", "");
+            finalname = CardTranslation.getTranslatedName(finalname) +" " + Localizer.getInstance().getMessage("lblBoon");
+        } else if (finalname.startsWith("Emblem")) {
+            String []s = finalname.split(" - ");
+            try {
+                String translatedName = s[1].endsWith(" ") ? s[1].substring(0, s[1].lastIndexOf(" ")) : s[1];
+                translatedName = CardTranslation.getTranslatedName(s[1]);
+                finalname = translatedName + " " + Localizer.getInstance().getMessage("lblEmblem");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         eff.setTimestamp(game.getNextTimestamp());
-        eff.setName(name);
+        eff.setName(finalname);
         eff.setColor(hostCard.getColor().getColor());
         // if name includes emblem then it should be one
         if (name.startsWith("Emblem")) {
@@ -852,6 +902,24 @@ public abstract class SpellAbilityEffect {
         } else {
             options = activator.getAllOtherPlayers();
         }
-        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer") , null);
+        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
+    }
+
+    public void handleExiledWith(final Card movedCard, final SpellAbility cause) {
+        Card exilingSource = cause.getHostCard();
+        // during replacement LKI might be used
+        if (cause.isReplacementAbility() && exilingSource.isLKI()) {
+            exilingSource = exilingSource.getGame().getCardState(exilingSource);
+        }
+        // only want this on permanents
+        if (exilingSource.isImmutable() || exilingSource.isInPlay()) {
+            exilingSource.addExiledCard(movedCard);
+        }
+        // if ability was granted use that source so they can be kept apart later
+        if (cause.isCopiedTrait()) {
+            exilingSource = cause.getOriginalHost();
+        }
+        movedCard.setExiledWith(exilingSource);
+        movedCard.setExiledBy(cause.getActivatingPlayer());
     }
 }

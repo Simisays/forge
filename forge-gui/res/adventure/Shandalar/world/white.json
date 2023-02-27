@@ -49,11 +49,16 @@
 	"White Dwarf",
 	"White Wiz1",
 	"White Wiz2",
-	"White Wiz3"
+	"White Wiz3",
+	"Armored Knight",
+	"Kor Warrior",
+	"Fox"
 ],
 "pointsOfInterest": [
 	"White Castle",
-	"Plains Town",
+	"Plains Town Generic",
+	"Plains Town Identity",
+	"Plains Town Tribal",
 	"Plains Capital",
 	"Monastery",
 	"Monastery1",
@@ -76,7 +81,8 @@
 	"CaveW3",
 	"CaveW4",
 	"CaveW5",
-	"CaveW6"
+	"CaveW6",
+	"Nahiri Encampment"
 ],
 "structures": [
 	{

@@ -22,6 +22,7 @@ import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameRules;
 import forge.game.GameType;
+import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
@@ -87,6 +88,13 @@ public class DuelScene extends ForgeScene {
         boolean winner = false;
         try {
             winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
+
+            //Persists expended (or potentially gained) shards back to Adventure
+            //TODO: Progress towards applicable Adventure quests also needs to be reported here.
+            List<PlayerControllerHuman> humans = hostedMatch.getHumanControllers();
+            if (humans.size() == 1) {
+                Current.player().setShards(humans.get(0).getPlayer().getCounters(CounterEnumType.MANASHARDS));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -119,16 +127,16 @@ public class DuelScene extends ForgeScene {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
-                        afterGameEnd(enemyName, finalWinner, true);
+                        afterGameEnd(enemyName, finalWinner, true, true);
                     }
                 }
             }));
         } else {
-            afterGameEnd(enemyName, winner, false);
+            afterGameEnd(enemyName, winner, false, false);
         }
     }
 
-    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay) {
+    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
         Runnable runnable = () -> Gdx.app.postRunnable(()-> {
             SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
             dungeonEffect = null;
@@ -144,7 +152,7 @@ public class DuelScene extends ForgeScene {
         });
         if (showOverlay) {
             FThreads.invokeInEdtNowOrLater(() -> {
-                matchOverlay = new LoadingOverlay(runnable, true);
+                matchOverlay = new LoadingOverlay(runnable, true, alternate);
                 matchOverlay.show();
             });
         } else {
@@ -157,16 +165,25 @@ public class DuelScene extends ForgeScene {
         //Apply various combat effects.
         int lifeMod = 0;
         int changeStartCards = 0;
+        int extraManaShards = 0;
         Array<IPaperCard> startCards = new Array<>();
+        Array<IPaperCard> startCardsInCommandZone = new Array<>();
 
         for (EffectData data : effects) {
             lifeMod += data.lifeModifier;
             changeStartCards += data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
+            startCardsInCommandZone.addAll(data.startBattleWithCardsInCommandZone());
+
+            extraManaShards += data.extraManaShards;
         }
         player.addExtraCardsOnBattlefield(startCards);
+        player.addExtraCardsInCommandZone(startCardsInCommandZone);
+
         player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
+        player.setManaShards((player.getManaShards() + extraManaShards));
+        player.setEnableETBCountersEffect(true); //enable etbcounters on starting cards like Ring of Three Wishes, etc...
     }
 
     public void setDungeonEffect(EffectData E) {
@@ -197,6 +214,7 @@ public class DuelScene extends ForgeScene {
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setTeamNumber(0);
         humanPlayer.setStartingLife(advPlayer.getLife());
+        humanPlayer.setManaShards((advPlayer.getShards()));
 
         Array<EffectData> playerEffects = new Array<>();
         Array<EffectData> oppEffects = new Array<>();
@@ -335,7 +353,7 @@ public class DuelScene extends ForgeScene {
                                     if (FSkin.getAvatars().get(90001) != null)
                                         g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
                                 }
-                            }))), false);
+                            }))), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }

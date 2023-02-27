@@ -27,7 +27,7 @@ import forge.game.zone.ZoneType;
 /**
  * The Class CostExert.
  */
-public class CostExert extends CostPartWithList {
+public class CostExert extends CostPartWithTrigger {
 
     private static final long serialVersionUID = 1L;
 
@@ -87,7 +87,6 @@ public class CostExert extends CostPartWithList {
             CardCollectionView typeList = payer.getCardsIn(ZoneType.Battlefield);
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), payer, source, ability);
             final int amount = this.getAbilityAmount(ability);
-
 
             return needsAnnoucement || (typeList.size() >= amount);
         }

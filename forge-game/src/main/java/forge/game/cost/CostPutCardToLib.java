@@ -82,7 +82,6 @@ public class CostPutCardToLib extends CostPartWithList {
             sb.append(Cost.convertAmountTypeToWords(i, getAmount(), desc));
         }
 
-
         if (sameZone) {
             sb.append(" from the same ").append(from);
         } else if (!this.payCostFromSource()) {
@@ -137,7 +136,7 @@ public class CostPutCardToLib extends CostPartWithList {
         }
 
         typeList = CardLists.getValidCards(typeList, getType().split(";"), payer, source, ability);
-        
+
         if (typeList.size() < i) {
             return false;
         }
@@ -158,7 +157,7 @@ public class CostPutCardToLib extends CostPartWithList {
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
-        return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()),null);
+        return targetCard.getGame().getAction().moveToLibrary(targetCard, Integer.parseInt(getLibPos()), null);
     }
 
     public <T> T accept(ICostVisitor<T> visitor) {

@@ -93,6 +93,7 @@ public class ComputerUtilMana {
             ability.setActivatingPlayer(card.getController(), true);
             if (ability.isManaAbility()) {
                 score += ability.calculateScoreForManaAbility();
+                // TODO check TriggersWhenSpent
             }
             else if (!ability.isTrigger() && ability.isPossible()) {
                 score += 13; //add 13 for any non-mana activated abilities
@@ -315,10 +316,6 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma, ma.isTrigger())) {
-                continue;
-            }
-
             if (sa.getApi() == ApiType.Animate) {
                 // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
                 if (saHost.isAura() && "Enchanted".equals(sa.getParam("Defined"))
@@ -380,9 +377,15 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts, cost.getXManaCostPaidByColor())) {
-                return paymentChoice;
+            if (!canPayShardWithSpellAbility(toPay, ai, paymentChoice, sa, checkCosts, cost.getXManaCostPaidByColor())) {
+                continue;
             }
+
+            if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma, ma.isTrigger())) {
+                continue;
+            }
+
+            return paymentChoice;
         }
         return null;
     }
@@ -393,9 +396,9 @@ public class ComputerUtilMana {
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
         //String originalProduced = manaProduced;
 
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromPlayer(ai);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(hostCard);
         repParams.put(AbilityKey.Mana, manaProduced);
-        repParams.put(AbilityKey.Affected, hostCard);
+        repParams.put(AbilityKey.Activator, ai);
         repParams.put(AbilityKey.AbilityMana, saPayment); // RootAbility
 
         // TODO Damping Sphere might replace later?
@@ -685,10 +688,6 @@ public class ComputerUtilMana {
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
                 checkPlayable, manaSpentToPay, hasConverge, ignoreColor, ignoreType);
 
-        if (sourcesForShards == null && !purePhyrexian) {
-            return false;    // no mana abilities to use for paying
-        }
-
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
         final ManaPool manapool = ai.getManaPool();
         ManaCostShard toPay = null;
@@ -709,7 +708,7 @@ public class ComputerUtilMana {
                 manapool.applyCardMatrix(pay);
 
                 for (byte color : ManaAtom.MANATYPES) {
-                    if (manapool.tryPayCostWithColor(color, sa, cost)) {
+                    if (manapool.tryPayCostWithColor(color, sa, cost, manaSpentToPay)) {
                         found = true;
                         break;
                     }
@@ -721,6 +720,11 @@ public class ComputerUtilMana {
             if (cost.isPaid()) {
                 break;
             }
+
+            if (sourcesForShards == null && !purePhyrexian) {
+                return false;    // no mana abilities to use for paying
+            }
+
             toPay = getNextShardToPay(cost);
 
             boolean lifeInsteadOfBlack = toPay.isBlack() && ai.hasKeyword("PayLifeInsteadOf:B");
@@ -1320,9 +1324,9 @@ public class ComputerUtilMana {
     public static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
         Card card = sa.getHostCard();
         Zone castFromBackup = null;
-        if (test && sa.isSpell()) {
+        if (test && sa.isSpell() && !card.isInZone(ZoneType.Stack)) {
             castFromBackup = card.getCastFrom();
-            sa.getHostCard().setCastFrom(card.getZone() != null ? card.getZone() : null);
+            card.setCastFrom(card.getZone() != null ? card.getZone() : null);
         }
 
         Cost payCosts = CostAdjustment.adjust(sa.getPayCosts(), sa);
@@ -1351,7 +1355,10 @@ public class ComputerUtilMana {
                 manaToAdd = 1;
             }
 
-            String xColor = sa.getParamOrDefault("XColor", "1");
+            String xColor = sa.getXColor();
+            if (xColor == null) {
+                xColor = "1";
+            }
             if (card.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
                 xColor = "WUBRGX";
             }
@@ -1614,9 +1621,9 @@ public class ComputerUtilMana {
 
                         // setup produce mana replacement effects
                         String origin = mp.getOrigProduced();
-                        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromPlayer(ai);
+                        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(sourceCard);
                         repParams.put(AbilityKey.Mana, origin);
-                        repParams.put(AbilityKey.Affected, sourceCard);
+                        repParams.put(AbilityKey.Activator, ai);
                         repParams.put(AbilityKey.AbilityMana, m); // RootAbility
 
                         List<ReplacementEffect> reList = game.getReplacementHandler().getReplacementList(ReplacementType.ProduceMana, repParams, ReplacementLayer.Other);

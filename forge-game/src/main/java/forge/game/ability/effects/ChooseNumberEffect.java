@@ -12,6 +12,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 
@@ -24,9 +25,8 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+
         sb.append("chooses a number.");
 
         return sb.toString();
@@ -41,11 +41,11 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         final boolean secretlyChoose = sa.hasParam("SecretlyChoose");
 
         final String sMin = sa.getParamOrDefault("Min", "0");
-        final int min = AbilityUtils.calculateAmount(card, sMin, sa); 
+        final int min = AbilityUtils.calculateAmount(card, sMin, sa);
         final String sMax = sa.getParamOrDefault("Max", "99");
-        final int max = AbilityUtils.calculateAmount(card, sMax, sa); 
+        final int max = AbilityUtils.calculateAmount(card, sMax, sa);
 
-        final Map<Player, Integer> chooseMap = Maps.newHashMap(); 
+        final Map<Player, Integer> chooseMap = Maps.newHashMap();
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!p.isInGame()) {
@@ -104,7 +104,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             card.getGame().getAction().notifyOfValue(sa, card, sb.toString(), null);
             if (sa.hasParam("ChooseNumberSubAbility")) {
                 SpellAbility sub = sa.getAdditionalAbility("ChooseNumberSubAbility");
-                
+
                 for (Player p : chooseMap.keySet()) {
                     card.addRemembered(p);
                     card.setChosenNumber(chooseMap.get(p));
@@ -112,7 +112,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
                     card.clearRemembered();
                 }
             }
-            
+
             if (sa.hasParam("Lowest")) {
                 SpellAbility sub = sa.getAdditionalAbility("Lowest");
 

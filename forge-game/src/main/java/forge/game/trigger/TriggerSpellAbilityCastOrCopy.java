@@ -86,10 +86,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             return false;
         }
 
-        if (!matchesValidParam("ValidControllingPlayer", cast.getController())) {
-            return false;
-        }
-
         if (hasParam("ValidActivatingPlayer")) {
             Player activator;
             if (spellAbility.isManaAbility()) {
@@ -130,15 +126,8 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
 
             boolean validTgtFound = false;
             while (sa != null && !validTgtFound) {
-                for (final Card tgt : sa.getTargets().getTargetCards()) {
-                    if (matchesValid(tgt, getParam("TargetsValid").split(","))) {
-                        validTgtFound = true;
-                        break;
-                    }
-                }
-
-                for (final Player p : sa.getTargets().getTargetPlayers()) {
-                    if (matchesValid(p, getParam("TargetsValid").split(","))) {
+                for (final GameEntity ge : sa.getTargets().getTargetEntities()) {
+                    if (matchesValid(ge, getParam("TargetsValid").split(","))) {
                         validTgtFound = true;
                         break;
                     }
@@ -287,6 +276,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
             sa.setTriggeringObject(AbilityKey.SpellAbilityTargets, saTargets);
         }
+        sa.setTriggeringObject(AbilityKey.LifeAmount, castSA.getAmountLifePaid());
         sa.setTriggeringObjectsFrom(
                 runParams,
             AbilityKey.Player,

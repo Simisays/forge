@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="37" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="117">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <layer id="13" name="subsublaag" width="37" height="23">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4Ay4MY50C7ABF4D7KYPWMSQ3URqmD1jpcg5YPCBAbu7SHUHOqaGuyh1kyPUHY5UdBc6YOOFYGLcA7OfQwBBU9tdv3ggmFjALYDKh7kNOS4PsFPPfchgGlp6d6RB/AxVMJDlJ668NxjL9MHqJlq6C5RnYZhUN9HDXaS4iZaAVPeAAK3dFEaG+bR2EznmD8Z8NxgBAK1JHpE=
+  </data>
+ </layer>
+ <layer id="10" name="sublaag" width="37" height="23">
+  <data encoding="base64" compression="zlib">
+   eJy1lj1uwzAMhbXYgfNTdO7egxQFuvcWvUKm9hQdfZYepVPmHKEgFAIP7CMp2c4DHmxTNvWZVOSMp1LGwD87bnvP68N2bmW5DNUeE15jftQ9mdi9NhYx4TUT4/k4/mdSRUzsnZkOj9wRE9bJ9qzFmXB+FmMsyoH+HEv5GtsY1zJZLjunnIs0jucen6fvqTrrHauJzf8yVEfPXIaSKmKSuJc/6sXvbd7zYXsmHRdla1v0dKzH510148rE6oKM8ltXI4+M7W/O8ivXe45Dmawt07VUZ88pix73Zm2uYRK/TdUek8eI0pp64y0c6Hmq+6xw9dbJymPr4cG9v5cJ1xv2cCkT+xYpk82p82uPbd89Jta7iE847LXkZ+8ZMWmczcnyWNv/DoypOHVSHpz/Wni817r3sLpp7oxJe2xjWzPNUx8T87yCq4UJ11ULzz24bO96OKyjtc3WsQj3AByT74vkxO/NEnssS/wHYQ/U7g==
+  </data>
+ </layer>
+ <layer id="9" name="slim" width="37" height="23">
+  <data encoding="base64" compression="zlib">
+   eJydlm1ugzAMhqnWbYS20i6xK+wGlIqT7AY7Ev06xK6x7s+kfnGGaj+GRd7xYhxKa8lKlID92EmcRFFX5q7RzNVjKfVz6ossXK1anma23iPCso6jaBvXvouqLb1f9IcyiZ2NtyV2mekWZuRnX+nRtwffTz3vcSAT5xlMrIgd7AfXtSEq/54qPXtdVd9+Ptea0twyrlswWTFzntfe5+TFVrEnqpmwj5hbcgKmnGxD99SXmDn/wl+q2ENM4u8y7eYbueS1EBYI8oSYViqu3FhDLRZPSnnQsqB99B/rY/sbyQfnsIibtdQ50TL366yZSoqV1+CgWMDzlUTRjvQ76XJujfg0C1Qz5a49/zBrq14LkY9J3f54jp3BlA7IT4gppTnrPz5vZ+Ob1+eGS0TYoH3C5+JoML1Pa/9or2lIsJbCY/GzZMa83oNzatk39i/2sLSJj0fEOjPX2ENM8IOzhj5qNmyKf9ZQLYGgjxqFWLg2b+Lu2dHxlWptrBg0W6J4mEvzgfFtZH+Hb1FDNA/OAaSIm3oIxf0SypXF1DeG8dEsvIdPrqkBe9e+x5k7d+19yLEwK+LncStm5Ee/HaxciaTKf3aFyfJv5Sk1ciJ2LoZP2C9UDJjHXcpjY+OtA4YksI7MhJqF/c9MImDSdR7+rXrFXGDBuvE7h4Xtwyf+zZV93H+lGu8T2B7PuvsR+yNz7fcD5nU9LwzfQ2t3iOvXePdwTvC2Q+1exu13Ydnj+xYe/ofPrgjHrffjvXfZrUz6jW6dr6H6B2+d87s=
+  </data>
+ </layer>
+ <layer id="12" name="clutter" width="37" height="23">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNlkFOwzAQRQ0SYBeCuuQusE1b9QTchVNwANhSKDdimbb0GHhwvjKZ2rGNg9ovjZI2jv38ZzKJUn/TzHTnten/PpZSmWami9i1kn3JNcZgGhoX0u7ChW+uEFNozQ+t1FrEpy5jktpm8FAsbFxPlXqx415tvFmefaJPNPZdx5lyeDjT/ZlSDzYak+4TjZUeNAneDvH87s8ev43bL7Hl+BTS18Qd4SM4YyySed76lSvki+5F3N04LuljChOdb9pcERM8yhH32MeFOltGaggiFqon7Ae1dFl1IYWa5oLHCPhGXLTPlU5jgicL039+SCEm5Pi8cj0Eov08VW4e6VsdYeFMTZs3mm/ZrsX9kz2dP6e1GI/1aU7qb1vT/2/DaiSlH8Mv7r8U76/IMR0n08PAHOSbrDG537k5ZCGf92ytkLhHIVG+MCfCV/s8l9IH+LyO8IApxh2SrHte6+jX3NP/Emplpfu9GP2Te+HLb44er/LZkG/UoG/dEqYSDa1H155vh6+n8I71LbuLzHMM/0p0Ct/4UMp7IeW9MaZ+AIaemRA=
+  </data>
+ </layer>
+ <objectgroup id="11" name="obj">
+  <object id="75" gid="303" x="506.5" y="325" width="16" height="16"/>
+  <object id="76" gid="303" x="316" y="366" width="16" height="16"/>
+  <object id="89" template="../obj/enemy.tx" x="132" y="219">
+   <properties>
+    <property name="enemy" value="Ooze"/>
+   </properties>
+  </object>
+  <object id="91" template="../obj/enemy.tx" x="424.992" y="215.718">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="95" template="../obj/enemy.tx" x="53.5" y="245">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+   </properties>
+  </object>
+  <object id="96" template="../obj/enemy.tx" x="299.5" y="312.5">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="97" template="../obj/enemy.tx" x="275.333" y="233.5">
+   <properties>
+    <property name="enemy" value="Ooze"/>
+   </properties>
+  </object>
+  <object id="98" template="../obj/enemy.tx" x="505.833" y="115.167">
+   <properties>
+    <property name="enemy" value="Horror"/>
+   </properties>
+  </object>
+  <object id="100" template="../obj/enemy.tx" x="178.088" y="149.029">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Slime Boss Effect&quot;]
+}</property>
+    <property name="enemy" value="Ooze Boss"/>
+   </properties>
+  </object>
+  <object id="101" template="../obj/enemy.tx" x="461" y="329">
+   <properties>
+    <property name="enemy" value="Horror"/>
+   </properties>
+  </object>
+  <object id="104" template="../obj/gold.tx" x="532" y="73"/>
+  <object id="106" template="../obj/gold.tx" x="522.333" y="202.833"/>
+  <object id="107" template="../obj/gold.tx" x="169.5" y="276"/>
+  <object id="108" template="../obj/treasure.tx" x="88" y="275.5"/>
+  <object id="109" template="../obj/treasure.tx" x="476.75" y="76"/>
+  <object id="110" template="../obj/treasure.tx" x="545.5" y="289"/>
+  <object id="111" template="../obj/entry_up.tx" x="325.5" y="362">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="114" gid="10615" x="430.5" y="170.5" width="16" height="16"/>
+  <object id="115" gid="10615" x="47" y="310.5" width="16" height="16"/>
+  <object id="116" gid="10615" x="538.5" y="266.5" width="16" height="16"/>
+ </objectgroup>
+</map>

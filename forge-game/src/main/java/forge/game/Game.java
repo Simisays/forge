@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -45,16 +46,6 @@ import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
 import forge.game.ability.AbilityKey;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageHistory;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardView;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
@@ -124,6 +115,7 @@ public class Game {
     private CardZoneTable untilHostLeavesPlayTriggerList = new CardZoneTable();
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
+    private Multimap<CounterType, Pair<Card, Integer>> countersRemovedThisTurn = ArrayListMultimap.create();
 
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
     private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
@@ -139,7 +131,6 @@ public class Game {
     private Direction turnOrder = Direction.getDefaultDirection();
 
     private Boolean daytime = null;
-    private Boolean previous = null;
 
     private long timestamp = 0;
     public final GameAction action;
@@ -184,7 +175,7 @@ public class Game {
     public Player getHasInitiative() {
         return initiative;
     }
-    public void setHasInitiative(final Player p ) {
+    public void setHasInitiative(final Player p) {
         initiative = p;
     }
 
@@ -252,11 +243,11 @@ public class Game {
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
     private final HashMap<Integer, Card> changeZoneLKIInfo = new HashMap<>();
-    public final void addChangeZoneLKIInfo(Card c) {
-        if (c == null) {
+    public final void addChangeZoneLKIInfo(Card lki) {
+        if (lki == null) {
             return;
         }
-        changeZoneLKIInfo.put(c.getId(), CardUtil.getLKICopy(c));
+        changeZoneLKIInfo.put(lki.getId(), lki);
     }
     public final Card getChangeZoneLKIInfo(Card c) {
         if (c == null) {
@@ -305,6 +296,9 @@ public class Game {
             pl.setMaxHandSize(psc.getStartingHand());
             pl.setStartingHandSize(psc.getStartingHand());
 
+            if (psc.getManaShards() > 0) {
+                pl.setCounters(CounterEnumType.MANASHARDS, psc.getManaShards(), true);
+            }
             int teamNum = psc.getTeamNumber();
             if (teamNum == -1) {
                 // RegisteredPlayer doesn't have an assigned team, set it to 1 higher than the highest found team number
@@ -1103,6 +1097,7 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
+        clearCounterRemovedThisTurn();
         clearGlobalDamageHistory();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
@@ -1141,6 +1136,24 @@ public class Game {
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
+    }
+
+    public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
+        countersRemovedThisTurn.put(cType, Pair.of(CardUtil.getLKICopy(card), value));
+    }
+
+    public int getCounterRemovedThisTurn(CounterType cType, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
+        int result = 0;
+        for (Pair<Card, Integer> p : countersRemovedThisTurn.get(cType)) {
+            if (p.getKey().isValid(validCard.split(","), sourceController, source, ctb)) {
+                result += p.getValue();
+            }
+        }
+        return result;
+    }
+
+    public void clearCounterRemovedThisTurn() {
+        countersRemovedThisTurn.clear();
     }
 
     /**
@@ -1228,21 +1241,12 @@ public class Game {
     public boolean isNeitherDayNorNight() {
         return this.daytime == null;
     }
-    public boolean previousTimeIsDay() {
-        return this.previous != null && this.previous == false;
-    }
-    public boolean previousTimeIsNight() {
-        return this.previous != null && this.previous == true;
-    }
-    public boolean previousTimeisNeitherDayNorNight() {
-        return this.previous == null;
-    }
 
     public Boolean getDayTime() {
         return this.daytime;
     }
     public void setDayTime(Boolean value) {
-        previous = this.daytime;
+        Boolean previous = this.daytime;
         this.daytime = value;
 
         if (previous != null && value != null && previous != value) {

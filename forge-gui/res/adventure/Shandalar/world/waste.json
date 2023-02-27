@@ -52,14 +52,19 @@
 	"White Wiz1",
 	"White Wiz2",
 	"White Wiz3",
-	"Doppelganger"
+	"Doppelganger",
+	"Pirate",
+	"Ooze",
+	"Fox"
 ],
 "pointsOfInterest": [
 	"Spawn",
 	"Final Castle",
 	"Colorless Castle",
 	"Skep",
-	"Waste Town",
+	"Waste Town Generic",
+	"Waste Town Identity",
+	"Waste Town Tribal",
 	"Fort",
 	"Fort1",
 	"Fort2",
@@ -92,7 +97,9 @@
 	"CaveCD",
 	"Crawlspace",
 	"Dream Halls",
-	"Lich's Mirror"
+	"Lich's Mirror",
+	"Kobold Mine",
+	"Slime Cave"
 ],
 "structures": [
 	{

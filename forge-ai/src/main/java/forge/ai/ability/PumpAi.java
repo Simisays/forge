@@ -423,7 +423,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
-            if (ComputerUtilAbility.isFullyTargetable(sa)) { // Volcanic Offering: only prompt if second part can happen too
+            if (!ComputerUtilAbility.isFullyTargetable(sa)) { // Volcanic Offering: only prompt if second part can happen too
                 return false;
             }
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -437,6 +437,10 @@ public class PumpAi extends PumpAiBase {
                 list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
+
+                if (list.contains(source) && source.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && sa.getPayCosts().hasTapCost()) {
+                    list.remove(source); // don't tap a card that will be tapped as a part of the cost and won't untap normally.
+                }
 
                 // Try not to kill own creatures with this pump
                 CardCollection canDieToPump = new CardCollection();
@@ -518,7 +522,7 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source, sa);
+        list = CardLists.getTargetableCards(list, sa);
         if (game.getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare attack/block
             if (sa.getPayCosts().hasTapCost()) {
