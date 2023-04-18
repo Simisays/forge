@@ -130,12 +130,15 @@
     <property name="arena">{
 
     &quot;enemyPool&quot;:[
+	&quot;Aether Channeler&quot;,
 	&quot;Bird&quot;,
 	&quot;Challenger 20&quot;,
 	&quot;Challenger 21&quot;,
 	&quot;Challenger 22&quot;,
 	&quot;Djinn&quot;,
+	&quot;Doppelganger&quot;,
 	&quot;Elemental&quot;,
+	&quot;Illusionist&quot;,
 	&quot;Merfolk&quot;,
 	&quot;Merfolk Avatar&quot;,
 	&quot;Merfolk Fighter&quot;,
@@ -146,10 +149,12 @@
 	&quot;Blue Wiz2&quot;,
 	&quot;Blue Wiz3&quot;,
 	&quot;Geist&quot;,
+	&quot;Pirate&quot;,
 	&quot;Rogue&quot;,
+	&quot;Sand Golem&quot;,
 	&quot;Sea Monster&quot;,
 	&quot;Tarkir Djinn&quot;,
-	&quot;Doppelganger&quot;
+	&quot;Water Elemental&quot;
 	],
     &quot;rounds&quot;:3,
     &quot;entryFee&quot;:100,

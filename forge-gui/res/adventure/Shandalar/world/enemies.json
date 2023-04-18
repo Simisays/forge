@@ -180,6 +180,71 @@
 	]
 },
 {
+	"name": "Angel Warrior",
+	"sprite": "sprites/dungeon/angelwarrior.atlas",
+	"deck": [
+		"decks/angelwarrior.dck"
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.9,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "UB",
+	"questTags": [
+		"Animal",
+		"Prey",
+		"Swimming",
+		"Wild",
+		"Water",
+		"Tiny",
+		"IdentityBlue",
+		"IdentityBlack",
+		"IdentityDimir",
+		"BiomeBlue"
+	]
+},
+{
 	"name": "Amonkhet Minotaur",
 	"sprite": "sprites/warden.atlas",
 	"deck": [
@@ -495,6 +560,71 @@
 	]
 },
 {
+	"name": "Artifact Warrior",
+	"sprite": "sprites/dungeon/artifactsoldier.atlas",
+	"deck": [
+		"decks/angelwarrior.dck"
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.9,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "UB",
+	"questTags": [
+		"Animal",
+		"Prey",
+		"Swimming",
+		"Wild",
+		"Water",
+		"Tiny",
+		"IdentityBlue",
+		"IdentityBlack",
+		"IdentityDimir",
+		"BiomeBlue"
+	]
+},
+{
 	"name": "Ashmouth Devil",
 	"sprite": "sprites/devil.atlas",
 	"deck": [
@@ -759,7 +889,7 @@
 },
 {
 	"name": "Bat",
-	"sprite": "sprites/dungeon/bat.atlas",
+	"sprite": "sprites/bat.atlas",
 	"deck": [
 		"decks/bat.dck"
 	],
@@ -1546,7 +1676,7 @@
 		"decks/boar.json"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.4,
 	"speed": 31,
 	"scale": 0.55,
@@ -5120,6 +5250,53 @@
 	]
 },
 {
+	"name": "Elephant",
+	"sprite": "sprites/dungeon/elephant.atlas",
+	"deck": [
+		"decks/elephant.json"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"scale": 1.3,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Golem",
+		"Elemental",
+		"Humanoid",
+		"IdentityWhite",
+		"IdentityRed",
+		"BiomeWhite",
+		"BiomeRed"
+	]
+},
+{
 	"name": "Elemental",
 	"sprite": "sprites/crystalelemental.atlas",
 	"deck": [
@@ -5368,6 +5545,71 @@
 		"Prey",
 		"IdentityGreen",
 		"BiomeGreen"
+	]
+},
+{
+	"name": "Elite Archer",
+	"sprite": "sprites/dungeon/bowmandefender.atlas",
+	"deck": [
+		"decks/elitearcher.dck"
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"scale": 0.9,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "UB",
+	"questTags": [
+		"Animal",
+		"Prey",
+		"Swimming",
+		"Wild",
+		"Water",
+		"Tiny",
+		"IdentityBlue",
+		"IdentityBlack",
+		"IdentityDimir",
+		"BiomeBlue"
 	]
 },
 {
@@ -6198,7 +6440,7 @@
 	],
 	"ai": "",
 	"flying": true,
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 16,
@@ -8268,6 +8510,172 @@
 	]
 },
 {
+	"name": "Hidden Bush",
+	"sprite": "sprites/dungeon/hiddenbush.atlas",
+	"deck": [
+		"decks/plant.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GU",
+	"questTags": [
+		"Animal",
+		"Wild",
+		"Nature",
+		"Territorial",
+		"Predator",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic"
+	]
+},
+{
+	"name": "Hidden Snake",
+	"sprite": "sprites/dungeon/cobradungeon.atlas",
+	"deck": [
+		"decks/snake.json"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GU",
+	"questTags": [
+		"Animal",
+		"Wild",
+		"Nature",
+		"Territorial",
+		"Predator",
+		"IdentityGreen",
+		"IdentityBlue",
+		"IdentitySimic"
+	]
+},
+{
 	"name": "High Elf",
 	"sprite": "sprites/druid_2.atlas",
 	"deck": [
@@ -8398,6 +8806,53 @@
 		"Nocturnal",
 		"IdentityBlack",
 		"BiomeBlack"
+	]
+},
+{
+	"name": "Hippo",
+	"sprite": "sprites/dungeon/hippo.atlas",
+	"deck": [
+		"decks/hippo.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"scale": 0.5,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Golem",
+		"Elemental",
+		"Humanoid",
+		"IdentityWhite",
+		"IdentityRed",
+		"BiomeWhite",
+		"BiomeRed"
 	]
 },
 {
@@ -12256,7 +12711,7 @@
 },
 {
 	"name": "Scarecrow Captain",
-	"sprite": "sprites/dungeon/scarecrowcaptain.atlas",
+	"sprite": "sprites/dungeon/scarecrow.atlas",
 	"deck": [
 		"decks/scarecrowcaptain.dck"
 	],
@@ -12273,8 +12728,7 @@
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
-				"common",
-				"uncommon"
+				"common"
 			]
 		},
 		{
@@ -12309,8 +12763,8 @@
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 1000,
-			"addMaxCount": 5000
+			"count": 500,
+			"addMaxCount": 2000
 		},
 		{
 			"type": "item",
@@ -12708,7 +13162,7 @@
 	"deck": [
 		"decks/sliver.json"
 	],
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 15,
@@ -13031,6 +13485,52 @@
 	]
 },
 {
+	"name": "Storm Titan",
+	"sprite": "sprites/dungeon/stormtitan.atlas",
+	"deck": [
+		"decks/stormtitan.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 100,
+			"addMaxCount": 900
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Golem",
+		"Elemental",
+		"Humanoid",
+		"IdentityWhite",
+		"IdentityRed",
+		"BiomeWhite",
+		"BiomeRed"
+	]
+},
+{
 	"name": "Stray Cat",
 	"sprite": "sprites/cat.atlas",
 	"deck": [
@@ -13090,12 +13590,66 @@
 	]
 },
 {
+	"name": "Sun Giant",
+	"sprite": "sprites/dungeon/ascendedtitan.atlas",
+	"deck": [
+		"decks/suntitan.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 200
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Sun",
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"IdentityWhite"
+	]
+},
+{
 	"name": "Squirrel",
 	"sprite": "sprites/squirrel.atlas",
 	"deck": [
 		"decks/squirrel.dck"
 	],
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 23,
 	"scale": 0.7,
@@ -13237,7 +13791,7 @@
 	"deck": [
 		"decks/symbiote.dck"
 	],
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 27,
 	"life": 11,
@@ -14887,7 +15441,7 @@
 },
 {
 	"name": "Water Elemental",
-	"sprite": "sprites/waterelemental.atlas",
+	"sprite": "sprites/waterelemental_2.atlas",
 	"deck": [
 		"decks/water_elemental.dck"
 	],
@@ -15194,6 +15748,79 @@
 		"IdentityBlue",
 		"IdentityTemur",
 		"BiomeRed"
+	]
+},
+{
+	"name": "Zedruu",
+	"sprite": "sprites/boss/zedru.atlas",
+	"deck": [
+		"decks/miniboss/zedruu.dck"
+	],
+	"boss": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 40,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Jace, the Mind Sculptor"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Jace, the Perfected Mind"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Jace's Defeat"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Treasure Cruise"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Castaway's Despair"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Counterspell"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 5000
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Jace's Signature Hoodie"
+		}
+	],
+	"colors": "UW",
+	"questTags": [
+		"Boss",
+		"Jace",
+		"Planeswalker",
+		"Illusionist",
+		"IdentityBlue",
+		"IdentityWhite",
+		"IdentityAzorius"
 	]
 },
 {

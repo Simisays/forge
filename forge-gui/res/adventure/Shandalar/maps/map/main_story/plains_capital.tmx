@@ -130,6 +130,7 @@
     &quot;enemyPool&quot;:[
 	&quot;Adventurer&quot;,
 	&quot;Archer&quot;,
+	&quot;Armored Knight&quot;
 	&quot;Cat&quot;,
 	&quot;Cathar&quot;,
 	&quot;Challenger 20&quot;,
@@ -137,6 +138,7 @@
 	&quot;Challenger 22&quot;,
 	&quot;Cleric&quot;,
 	&quot;Dawnhart Witch&quot;,
+	&quot;Disciple of Teferi&quot;,
 	&quot;Eldraine Knight&quot;,
 	&quot;Griffin&quot;,
 	&quot;Horseman&quot;,
@@ -144,6 +146,7 @@
 	&quot;Human elite&quot;,
 	&quot;Human guard&quot;,
 	&quot;Knight&quot;,
+	&quot;Kor Warrior&quot;,
 	&quot;Monk&quot;,
 	&quot;White Dwarf&quot;,
 	&quot;White Wiz1&quot;,
