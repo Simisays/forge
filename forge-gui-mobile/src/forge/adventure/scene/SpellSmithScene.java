@@ -19,6 +19,8 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -140,6 +142,11 @@ public class SpellSmithScene extends UIScene {
                 return false;
             if (input.getType() == CardEdition.Type.REPRINT || input.getType() == CardEdition.Type.PROMO || input.getType() == CardEdition.Type.COLLECTOR_EDITION)
                 return false;
+            if (input.getDate() != null) {
+                Instant now = Instant.now(); //this should filter upcoming sets from release date + 1 day..
+                if (input.getDate().after(Date.from(now.minus(1, ChronoUnit.DAYS))))
+                    return false;
+            }
             List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
                     .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
             if (it.size() == 0)
@@ -361,8 +368,8 @@ public class SpellSmithScene extends UIScene {
         poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
-        pullUsingGold.setText("Pull: " + currentPrice + "[+gold]");
-        pullUsingShards.setText("Pull: " + currentShardPrice + "[+shards]");
+        pullUsingGold.setText("[+Pull][+gold]"+ currentPrice);
+        pullUsingShards.setText("[+Pull][+shards]" + currentShardPrice);
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
         pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
         editionList.setUserObject(edition);
@@ -380,7 +387,7 @@ public class SpellSmithScene extends UIScene {
         if (Current.player().getGold() < currentPrice) pullUsingGold.setDisabled(true);
         if (Current.player().getShards() < currentShardPrice) pullUsingShards.setDisabled(true);
         if (rewardActor != null) rewardActor.remove();
-        rewardActor = new RewardActor(R, true);
+        rewardActor = new RewardActor(R, true, null);
         rewardActor.flip(); //Make it flip so it draws visual attention, why not.
         rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
         stage.addActor(rewardActor);

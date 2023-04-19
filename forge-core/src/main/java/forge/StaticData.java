@@ -225,7 +225,7 @@ public class StaticData {
         return foil ? card.getFoiled() : card;
     }
 
-    public void attemptToLoadCard(String cardName){
+    public void attemptToLoadCard(String cardName) {
         this.attemptToLoadCard(cardName, null);
     }
     public void attemptToLoadCard(String cardName, String setCode) {
@@ -900,4 +900,17 @@ public class StaticData {
         this.enableSmartCardArtSelection = isEnabled;
     }
 
+    public boolean isRebalanced(String name)
+    {
+        if (!name.startsWith("A-")) {
+            return false;
+        }
+        for(PaperCard pc : this.getCommonCards().getAllCards(name)) {
+            CardEdition e = this.editions.get(pc.getEdition());
+            if (e != null && e.isRebalanced(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

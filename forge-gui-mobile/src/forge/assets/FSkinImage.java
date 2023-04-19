@@ -1,6 +1,5 @@
 package forge.assets;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -327,6 +326,7 @@ public enum FSkinImage implements FImage {
     PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.MANAICONS),
     PACK            (FSkinProp.IMG_PACK, SourceFile.ICONS),
     SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.MANAICONS),
+    BATTLE          (FSkinProp.IMG_BATTLE, SourceFile.MANAICONS),
     COMMANDER       (FSkinProp.IMG_COMMANDER, SourceFile.ICONS),
 
     //Buttons
@@ -521,20 +521,19 @@ public enum FSkinImage implements FImage {
         FSkin.getImages().put(skinProp, this);
     }
 
-    public void load(AssetManager manager, Pixmap preferredIcons) {
+    public void load(Pixmap preferredIcons) {
         String filename = sourceFile.getFilename();
-        FileHandle preferredFile = FSkin.getSkinFile(filename);
-        Texture texture = manager.get(preferredFile.path(), Texture.class, false);
+        boolean is2D = sourceFile == SourceFile.ADVENTURE;
+        FileHandle preferredFile = sourceFile == SourceFile.MANAICONS ? FSkin.getDefaultSkinFile(filename) : FSkin.getSkinFile(filename);
+        Texture texture = Forge.getAssets().getTexture(preferredFile, is2D, false);
         if (texture == null) {
             if (preferredFile.exists()) {
                 try {
-                    manager.load(preferredFile.path(), Texture.class, Forge.getAssets().getTextureFilter());
-                    manager.finishLoadingAsset(preferredFile.path());
-                    texture = manager.get(preferredFile.path(), Texture.class);
+                    texture = Forge.getAssets().getTexture(preferredFile, is2D, false);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + preferredFile);
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }
@@ -597,17 +596,15 @@ public enum FSkinImage implements FImage {
 
         //use default file if can't use preferred file
         FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
-        texture = manager.get(defaultFile.path(), Texture.class, false);
+        texture = Forge.getAssets().getTexture(defaultFile, is2D, false);
         if (texture == null) {
             if (defaultFile.exists()) {
                 try {
-                    manager.load(defaultFile.path(), Texture.class, Forge.getAssets().getTextureFilter());
-                    manager.finishLoadingAsset(defaultFile.path());
-                    texture = manager.get(defaultFile.path(), Texture.class);
+                    texture = Forge.getAssets().getTexture(defaultFile, is2D, false);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }

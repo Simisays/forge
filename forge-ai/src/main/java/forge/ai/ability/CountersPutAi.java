@@ -994,7 +994,7 @@ public class CountersPutAi extends CountersAi {
             types.add((CounterType)params.get("CounterType"));
         } else {
             for (String s : sa.getParam("CounterType").split(",")) {
-                CounterType.getType(s);
+                types.add(CounterType.getType(s));
             }
         }
 
@@ -1219,6 +1219,14 @@ public class CountersPutAi extends CountersAi {
             }
         }
         return false;
+    }
+
+    @Override
+    public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
+        if (sa.hasParam("ReadAhead")) {
+            return 1;
+        }
+        return max;
     }
 
 }

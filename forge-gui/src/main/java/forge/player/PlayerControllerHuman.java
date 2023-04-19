@@ -743,14 +743,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             Card show = null;
             Object o = null;
             switch (sa.getParam("ShowCardInPrompt")) {
-                case "FirstRemembered":
+                case "RememberedFirst":
                     o = sa.getHostCard().getFirstRemembered();
                     if (o instanceof Card) {
                         show = (Card) o;
                     }
                     break;
-                case "LastRemembered":
-                    o = sa.getHostCard().getFirstRemembered();
+                case "RememberedLast":
+                    o = Iterables.getLast(sa.getHostCard().getRemembered(), null);
                     if (o instanceof Card) {
                         show = (Card) o;
                     }
@@ -1850,8 +1850,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(final String prompt,
-                                                           final List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(final String prompt, final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;
@@ -2013,17 +2012,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         boolean result = select.chooseTargets(null, null, null, false, canFilterMustTarget);
 
-        final List<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+        final Iterable<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+        final int size = Iterables.size(targets);
         int amount = currentAbility.getStillToDivide();
 
         // assign divided as you choose values
-        if (result && targets.size() > 0 && amount > 0) {
+        if (result && size > 0 && amount > 0) {
             if (currentAbility.hasParam("DividedUpTo")) {
-                amount = chooseNumber(currentAbility, localizer.getMessage("lblHowMany"), targets.size(), amount);
+                amount = chooseNumber(currentAbility, localizer.getMessage("lblHowMany"), size, amount);
             }
-            if (targets.size() == 1) {
-                currentAbility.addDividedAllocation(targets.get(0), amount);
-            } else if (targets.size() == amount) {
+            if (size == 1) {
+                currentAbility.addDividedAllocation(Iterables.get(targets, 0), amount);
+            } else if (size == amount) {
                 for (GameEntity e : targets) {
                     currentAbility.addDividedAllocation(e, 1);
                 }
@@ -2031,7 +2031,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (GameEntity e : targets) {
                     currentAbility.addDividedAllocation(e, 0);
                 }
-            } else if (targets.size() > amount) {
+            } else if (size > amount) {
                 return false;
             } else {
                 String label = "lblDamage";
@@ -2042,7 +2042,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
                 label = localizer.getMessage(label).toLowerCase();
                 final CardView vSource = CardView.get(currentAbility.getHostCard());
-                final Map<Object, Integer> vTargets = new HashMap<>(targets.size());
+                final Map<Object, Integer> vTargets = new HashMap<>(size);
                 for (GameEntity e : targets) {
                     vTargets.put(GameEntityView.get(e), amount);
                 }

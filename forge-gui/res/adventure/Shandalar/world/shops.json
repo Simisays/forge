@@ -72,12 +72,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "deathtouch|fear|intimidate|menace|ninjitsu|regenerate\b",
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjutsu|regenerate\b",
 	  "colors": ["black"]
     },
 	{
       "count":2,
-	  "cardText": "deathtouch|fear|intimidate|menace|ninjitsu|regenerate\b"
+	  "cardText": "deathtouch|fear|intimidate|menace|ninjutsu|regenerate\b"
     }]
 },{                                      
 "name":"Black6",                  
@@ -136,12 +136,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjitsu|phas(ing|(es (in|out)))",
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjutsu|phas(ing|(es (in|out)))",
 	  "colors": ["blue"]
     },
 	{
       "count":2,
-	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjitsu|phas(ing|(es (in|out)))"
+	  "cardText": "flying|prowess|unblockable|hexproof|shroud|morph|ninjutsu|phas(ing|(es (in|out)))"
     }]
 },{
 "name":"Blue4",                  
@@ -222,11 +222,11 @@
 	  "cardUnion": [
 		{
 		  "count":1,
-		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from",
+		  "cardText": "counter.*on |counter.*distribute|distribute.*counter|proliferate|creature(s)? from"
 		},
 		{
 		  "count":1,
-		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "cardText": "([+-])\\d?/([+-])\\d?"
 		}
 	  ]
     }]
@@ -306,12 +306,12 @@
   "rewards": [
     {
       "count":6,
-	  "cardText": "tap.*mana|:.*add.*({[gburw]}|to your mana)|untap",
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap",
 	  "colors": ["green"]
     },
 	{
       "count":2,
-	  "cardText": "tap.*mana|:.*add.*({[gburw]}|to your mana)|untap"
+	  "cardText": "tap.*mana|:.*add.*(\\{[gburw]\\}|to your mana)|untap"
     }]
 },{
 "name":"Red1",                  
@@ -525,11 +525,11 @@
 	  "cardUnion": [
 		{
 		  "count":1,
-		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)",
+		  "cardText": "(Vigilance|Lifelink|Protection|First Strike|Double Strike|Flying)"
 		},
 		{
 		  "count":1,
-		  "cardText": "([+-])\\d?/([+-])\\d?",
+		  "cardText": "([+-])\\d?/([+-])\\d?"
 		}
 	  ]
     }]
@@ -969,7 +969,7 @@
     }]
 },{                                    
 "name":"Creature2Eldrazi",
-"description": "Eldritch Emissaries"
+"description": "Eldritch Emissaries",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"CreatureShop",
 "overlaySprite":"Overlay2Colorless",
@@ -1589,7 +1589,7 @@
 	{
       "count":4,
       "colors": ["red","white","black"],
-      "colorType": "MultiColor",
+      "colorType": "MultiColor"
     }]
 },{
   "name":"RWU",
@@ -1606,7 +1606,7 @@
 	{
       "count":4,
       "colors": ["blue","red","white"],
-      "colorType": "MultiColor",
+      "colorType": "MultiColor"
     }]
 },{
   "name":"RWG",
@@ -4854,7 +4854,7 @@
 		},
 		{
 		  "count":1,
-		  "subTypes": ["Soldier"],
+		  "subTypes": ["Soldier"]
 		},
 		{
 		  "count":1,

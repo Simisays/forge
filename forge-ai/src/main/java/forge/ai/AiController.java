@@ -355,6 +355,31 @@ public class AiController {
                 return false;
             }
         }
+
+        for (final Trigger tr : card.getTriggers()) {
+            if (!card.hasStartOfKeyword("Saga") && !card.hasStartOfKeyword("Read ahead")) {
+                break;
+            }
+
+            if (tr.getMode() != TriggerType.CounterAdded) {
+                continue;
+            }
+
+            SpellAbility exSA = tr.ensureAbility().copy(activator);
+
+            if (api != null && exSA.getApi() == api) {
+                rightapi = true;
+            }
+
+            if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
+                // AI would not run this chapter if given the chance
+                // TODO eventually we'll want to consider playing it anyway, especially if Read ahead would still allow an immediate benefit
+                return false;
+            }
+
+            break;
+        }
+
         if (api != null && !rightapi) {
             return false;
         }
@@ -713,12 +738,30 @@ public class AiController {
         return false;
     }
 
-    // This is for playing spells regularly (no Cascade/Ripple etc.)
     private AiPlayDecision canPlayAndPayFor(final SpellAbility sa) {
         if (!sa.canPlay()) {
             return AiPlayDecision.CantPlaySa;
         }
 
+        final Card host = sa.getHostCard();
+
+        // state needs to be switched here so API checks evaluate the right face
+        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
+        if (currentState != null) {
+            host.setState(sa.getCardStateName(), false);
+        }
+
+        AiPlayDecision decision = canPlayAndPayForFace(sa);
+
+        if (currentState != null) {
+            host.setState(currentState, false);
+        }
+
+        return decision;
+    }
+    
+    // This is for playing spells regularly (no Cascade/Ripple etc.)
+    private AiPlayDecision canPlayAndPayForFace(final SpellAbility sa) {
         final Card host = sa.getHostCard();
 
         // Check a predefined condition
@@ -758,17 +801,7 @@ public class AiController {
             }
         }
 
-        // state needs to be switched here so API checks evaluate the right face
-        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
-        if (currentState != null) {
-            host.setState(sa.getCardStateName(), false);
-        }
-
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
-
-        if (currentState != null) {
-            host.setState(currentState, false);
-        }
 
         if (canPlay != AiPlayDecision.WillPlay) {
             return canPlay;
@@ -936,21 +969,16 @@ public class AiController {
     }
 
     private boolean canPlaySpellWithoutBuyback(Card card, SpellAbility sa) {
-        boolean wasteBuybackAllowed = false;
-
-        // About to lose game : allow
-        if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
-            wasteBuybackAllowed = true;
-        }
-
         int copies = CardLists.count(player.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(card.getName()));
         // Have two copies : allow
         if (copies >= 2) {
-            wasteBuybackAllowed = true;
+            return true;
         }
 
-        int neededMana = 0;
-        boolean dangerousRecurringCost = false;
+        // About to lose game : allow
+        if (ComputerUtil.aiLifeInDanger(player, true, 0)) {
+            return true;
+        }
 
         Cost costWithBuyback = sa.getPayCosts().copy();
         for (OptionalCostValue opt : GameActionUtil.getOptionalCostValues(sa)) {
@@ -958,22 +986,19 @@ public class AiController {
                 costWithBuyback.add(opt.getCost());
             }
         }
-        CostAdjustment.adjust(costWithBuyback, sa);
-        if (costWithBuyback.getCostMana() != null) {
-            neededMana = costWithBuyback.getCostMana().getMana().getCMC();
-        }
+        costWithBuyback = CostAdjustment.adjust(costWithBuyback, sa);
         if (costWithBuyback.hasSpecificCostType(CostPayLife.class)
                 || costWithBuyback.hasSpecificCostType(CostDiscard.class)
                 || costWithBuyback.hasSpecificCostType(CostSacrifice.class)) {
-            dangerousRecurringCost = true;
+            // won't be able to afford buyback any time soon
+            // if Buyback cost includes sacrifice, life, discard
+            return true;
         }
 
-        // won't be able to afford buyback any time soon
-        // if Buyback cost includes sacrifice, life, discard
-        if (dangerousRecurringCost) {
-            wasteBuybackAllowed = true;
+        int neededMana = 0;
+        if (costWithBuyback.getCostMana() != null) {
+            neededMana = costWithBuyback.getCostMana().getMana().getCMC();
         }
-
         // Memory Crystal-like effects need special handling
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             for (StaticAbility s : c.getStaticAbilities()) {
@@ -989,10 +1014,10 @@ public class AiController {
 
         int hasMana = ComputerUtilMana.getAvailableManaEstimate(player, false);
         if (hasMana < neededMana - 1) {
-            wasteBuybackAllowed = true;
+            return true;
         }
 
-        return wasteBuybackAllowed;
+        return false;
     }
 
     // not sure "playing biggest spell" matters?

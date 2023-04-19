@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="73">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="34" height="27" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="97">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
- <layer id="10" name="Kopie van Background" width="34" height="27">
+ <layer id="10" name="Lowest Background" width="34" height="27">
   <data encoding="base64" compression="zlib">
    eJz7ysbA8JWOeBsrA8N2VvraiW4/CIcA2focA+uOiewDZ/9gcgfIDQuYGBhuMQ+sGwYyPcDcMJB5YzC5AxkMhvAAYZsBTJ+jbiHsjoFOs8hu+TxI3DHQYTLqjlF3jLpj6LkD2S123IPDHaAwSeOE4IF0CyxuBos7BjpusLkDAFXcau0=
   </data>
  </layer>
- <layer id="8" name="Background" width="34" height="27">
+ <layer id="8" name="Lower Background" width="34" height="27">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2DgwTZWCB4FowAEbrMh8GABgymNgtzxcKAdAQWDKUyoAdq4B4c7KAWDxR2jYBSMgqELJrAPtAsgYNQdQwcAAJf3DG4=
   </data>
  </layer>
  <layer id="7" name="Background" width="34" height="27">
   <data encoding="base64" compression="zlib">
-   eJzFljtOw0AQhkcgY1uxBA1H4FXRUSFOwRkoKFxSU2EeDdyAU8ABQkDpKGigCxwB0bOj7MiT8exLdiDSr2TXm51v/5mx3YwALo2ujK6NGjtuxPyN0c9afz1kAI9Zd36rAtg22jHardqxnN+r+sdHHZvf+0X3+tjs/2Q0MXqudB9w/mUAjrs8fj35UJdzcR9wnOV+uXxI5RhbhgljIQbUmRWPzccuhvsVgI/VNA8ppsbB4xcb7fdn4WbQ6mEIDjw/xuY6Lxf3OCn13pjC4vgNdIZp3uXg4nkgBhxLDl+PdmI6WDTOzPLx2NwPmRf+CcUKxfblivRVzOXqVdShrc/3BJaQwJFfZNLOIVmGEPUsieqR+xXjC1dfj+jsyMFZfJ7E1Gyf3BCLyw/O8q1ck57QWXz1iroYuTnqctEjznEAXU9mkTFlfG395nq3RnAd5+mTm9OI+zF5A6D7gGNcE8shc66pLtu4MjfcJ8ni4wjd33BfmQP5zHFJctzmfj9mPXs3Vq8wfO829t019X/L4khhSanTvxCxHA307h/jWSg3Wo+TUu5pIQ7XXjw3Lo5l+yE5/rtGNI5ff6f+Yg==
+   eJzFlj1OxDAQhUegkEQbCRqOwF9FR4U4BWfYgiIlNRVhoYEbcAo4wLKg7Si2gW7hCIgej/Aok8k4tpUsRHrateN4Pr8ZO6lGAFdGE6Nro8q2K9F/Y/S90V8PCcBj0u7fKQB2jfaMyrxu8/59o4Oif3zUqfl/mLXvT838T0Yzo+dC9wH7XwbguEvDx5MP6A2K+zA27STtFo3Fi/sQyzG1DDPGgv34ixznVjw2b/OLM9yvAbyvx3lI8TUOzYNsq/ZCY9DqYQgOXD/FduUEx2p7Yw7N9gJ0hnna5iBxDunFRV7XhG+PtmI6WDTOxPLx2FwfWbM++eWL5YvdlSsSMnw68k/1cWzr8y2CxSfpPbEjk7YOyTKExnlT1Mf9CvGFq69HtHbO5PMkpGb75IZYXH5wli/lnvSE1tJVr6jLkZujFHnjHEfQ9mQZGFPG18Zvb/6+B3mNLKDJ0yc3ZwHnMXkDoPuAbRwTyiFzrqnM67gyN9wnydLF4TvfcF6ZA/nOcUly3Kbdfix77t1QvcLwe7ey366xz62KI4Ylpk7/QsRyMtC3f4hnvtxoe5wUc6b5OFxz8dy4OFbth+T47xrROH4ArBXxtg==
   </data>
  </layer>
  <layer id="9" name="Tree" width="34" height="27">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydV8tOwlAQvUqkEFp/ohEwimsTv8adceHKuNUViCb0a/AHAJPuWbryF/oDdtJOejqd+6g3OSnFcufMOTPTaxobk5ZYTirkUXVNYz8uAp4hbM+M+arBi2K8K3Ho++uSw+MonIcPU+Ahly0GauHjsSux78FnK3RwxQjlMYubPU8HxvzG7TzlnvcnXT9cnEN50HpNuhrLGMzB5cfMwuOhrI0bT51yTM79p7yeRd0YkgP6oYF+8wn3vn6hxbERm6Ex2bDJQ6sJ6oNsqEPL1ceDvWEO2PesaRZ1eaDvDFtd5VE7lsblZVw9i3owd+YyHTfgnGkmuDzGXDXOad2nh1jP50r5zWKk13KI/pp2Lk8xz6cy76Np5qTGRerr8oU05f0XUaOlzSMEcSFMYT+skz56oIZ5FD4z2VfSZA/7SU18eqxF/b4lFY95/fdLJe5c3BOHXdzUE3tr08TlCy6bHt8WPY6iJsnL//JA9PWF5uER4tl6R85Oya0w7f6gJbUPqRFtb9RE5i2/w/MHL80Dmy+MVQ8e2nc4O1DbPnoweAu63g3C68M2/5FHqEfcW+s6jq9O5XmBefD5gj4/J34fbJ4xD9sMsemBszSD9zhzkn2983Cic05huppos4LvPyZNL90m7fe4jVth3DwOcRNbnpWxv/Be834GnLG3c0tuWp6sZSiPEOB7h/isPOclen5zXn2mGsHzsqu+5VXqxF6zHq7/o3Atlb6RcfoCeWCdyp7i+iqAi61WCX9fbgUK
+   eJy1lk1OwzAQhQ1VSau0XCJqWiTKGonTsEMsWCG2sCKUSvQ0cIHyo+67ZMUVcgE8wk95mTquU8DSqG1qez6/ebGdD4zJbRzZeLWxSowZuWd/EWMbz11jXlygNeWQ/seW4bL3Pxy6hThitIBuTTFRfd8UR5Ea82Dj/Zcc0g9tv2PM18C/TjCc78XVQ3Ms1Zp8DLfDeu77tPpcOl3AEFsPznFhvXES0GSs9JD2aaObVBwIzYDn4NSBHHPbZ5aGawMG5BZfLw7qIeuQfOwJMPj6I3x5mHni+R+1Eeauy1u4dUDTRbLJIf3h0wfXH429DY9wLq2NjL3p/8wrOaHBiDSV53m/CqwZe0Lmgtel18rMs0A9ERiDfh+Oddrze9nHIf+BA+N5TvF8qKa8ziu77rWrKXTRLNA3pAe/M5h/6vZX4ZU5uLY6JK+wSKBGMh/7JEaPXD3XNQrtgTx2bSpPyTOtyTJSD7S74eY7nG3hWJvNvUx+N2kSwwE9Ys88cLCeUsu2HBnx8/seywFvrilf0eDXkRojLaP1lKb+fvCYWE1YD4ydKU2gB85C1oPvH5inLcdc7ZPsEx9H0z62Sqqa7MLBc2EK+TzrxPtDc8D3oXtArC7bfMr7B3PgfiHfr4e7scAX0nw+DenBeymf41zr0D3QV5/SbGrCHPCAT8vTYf0cb2IrA/7hd0GaviuPGvTQPI9p9R18wi65V2pt2xj0vSiGI6QxnzvCUzScOey/p8PKI/q+zOtsw4FaQ49t90fWw+eRtr5HvWZpHAd7rSSWEMc3K98YfA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -38,53 +38,62 @@
   <object id="54" template="../obj/enemy.tx" x="104.779" y="294.529">
    <properties>
     <property name="enemy" value="Viper"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="55" template="../obj/enemy.tx" x="253.388" y="115.167">
+  <object id="55" template="../obj/enemy.tx" x="274.384" y="103.802">
    <properties>
     <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Garruk's Boss Effect Phase One&quot;,&quot;Garruk's Boss Effect Phase Two&quot;]
 }</property>
     <property name="enemy" value="Garruk"/>
    </properties>
   </object>
-  <object id="56" template="../obj/enemy.tx" x="310.809" y="193.554">
-   <properties>
-    <property name="enemy" value="Beastmaster"/>
-   </properties>
-  </object>
-  <object id="62" template="../obj/enemy.tx" x="140.389" y="364.701">
-   <properties>
-    <property name="enemy" value="Squirrel"/>
-   </properties>
-  </object>
-  <object id="63" template="../obj/enemy.tx" x="519.21" y="217.808">
-   <properties>
-    <property name="enemy" value="Treefolk"/>
-   </properties>
-  </object>
-  <object id="64" template="../obj/enemy.tx" x="527.989" y="340.222">
-   <properties>
-    <property name="enemy" value="Green Beast"/>
-   </properties>
-  </object>
-  <object id="65" template="../obj/enemy.tx" x="387.042" y="397.283">
-   <properties>
-    <property name="enemy" value="Fox"/>
-   </properties>
-  </object>
-  <object id="66" template="../obj/enemy.tx" x="69.0575" y="142.701">
+  <object id="56" template="../obj/enemy.tx" x="303.059" y="176.054">
    <properties>
     <property name="enemy" value="Bear"/>
+    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="67" template="../obj/enemy.tx" x="515.308" y="140.263">
+  <object id="62" template="../obj/enemy.tx" x="79.889" y="367.701">
+   <properties>
+    <property name="enemy" value="Squirrel"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/enemy.tx" x="513.96" y="174.058">
    <properties>
     <property name="enemy" value="Treefolk"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/enemy.tx" x="385.042" y="366.783">
+   <properties>
+    <property name="enemy" value="Fox"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="65.5575" y="124.951">
+   <properties>
+    <property name="enemy" value="Beastmaster"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="478.558" y="111.013">
+   <properties>
+    <property name="enemy" value="Treefolk"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="68" template="../obj/treasure.tx" x="222.685" y="60.7665"/>
   <object id="70" template="../obj/gold.tx" x="68.0821" y="226.099"/>
   <object id="71" template="../obj/gold.tx" x="401.185" y="431.423"/>
-  <object id="72" template="../obj/gold.tx" x="63.6927" y="29.0656"/>
+  <object id="72" template="../obj/gold.tx" x="45.6927" y="80.6475"/>
+  <object id="88" template="../obj/manashards.tx" x="288" y="64"/>
+  <object id="89" template="../obj/manashards.tx" x="303.5" y="62"/>
+  <object id="90" template="../obj/manashards.tx" x="320.5" y="270"/>
+  <object id="91" template="../obj/manashards.tx" x="513" y="336.5"/>
+  <object id="94" template="../obj/collision.tx" x="-0.25" y="0" width="544.5" height="16"/>
+  <object id="95" template="../obj/collision.tx" x="543.75" y="0.5" width="19.5" height="431"/>
+  <object id="96" template="../obj/collision.tx" x="344.25" y="432.5" width="136" height="16"/>
  </objectgroup>
 </map>

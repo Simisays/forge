@@ -8,7 +8,6 @@ import forge.StaticData;
 import forge.adventure.data.GeneratedDeckData;
 import forge.adventure.data.GeneratedDeckTemplateData;
 import forge.adventure.data.RewardData;
-import forge.adventure.world.WorldSave;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
@@ -298,13 +297,14 @@ public class CardUtil {
         return result;
     }
 
-    public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count)
+    public static List<PaperCard> generateCards(Iterable<PaperCard> cards,final RewardData data, final int count, Random r)
     {
+
         final List<PaperCard> result = new ArrayList<>();
         List<PaperCard> pool = getPredicateResult(cards, data);
         if (pool.size() > 0) {
             for (int i = 0; i < count; i++) {
-                PaperCard candidate = pool.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(pool.size()));
+                PaperCard candidate = pool.get(r.nextInt(pool.size()));
                 if (candidate != null) {
                     result.add(candidate);
                 }
@@ -648,7 +648,9 @@ public class CardUtil {
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())
             return generateDeck(json.fromJson(GeneratedDeckData.class, handle), starterEdition, discourageDuplicates);
-        return null;
+        Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, true, false, true);
+        System.err.println("Error loading JSON: " + handle.path() + "\nGenerating random deck: "+deck.getName());
+        return deck;
 
     }
 

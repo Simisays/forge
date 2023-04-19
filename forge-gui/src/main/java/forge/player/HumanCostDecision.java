@@ -47,20 +47,16 @@ import forge.util.collect.FCollectionView;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
-    private final SpellAbility ability;
-    private final Card source;
     private String orString = null;
     private boolean mandatory;
 
-    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, final Card source) {
-        this(controller, p, sa, effect, source, null);
+    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect) {
+        this(controller, p, sa, effect, sa.getHostCard(), null);
     }
     public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, final Card source, final String orString) {
-        super(p, effect);
+        super(p, effect, sa, source);
         this.controller = controller;
-        ability = sa;
         mandatory = sa.getPayCosts().isMandatory();
-        this.source = source;
         this.orString = orString;
     }
 
@@ -244,7 +240,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         CardCollection list;
-        if (cost.sameZone) {
+        if (cost.zoneRestriction != 1) {
             list = new CardCollection(game.getCardsIn(cost.from));
         } else {
             list = new CardCollection(player.getCardsIn(cost.from));
@@ -273,9 +269,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return inp.hasCancelled() ? null : PaymentDecision.card(inp.getSelected());
         }
 
-        if (cost.from == ZoneType.Library) { return exileFromTop(cost, ability, player, c); }
-        if (fromTopGrave) { return exileFromTopGraveType(ability, c, list); }
-        if (!cost.sameZone) { return exileFromMiscZone(cost, ability, c, list); }
+        if (cost.from == ZoneType.Library) { return exileFromTop(cost, c); }
+        if (fromTopGrave) { return exileFromTopGraveType(c, list); }
+        if (cost.zoneRestriction != 0) { return exileFromMiscZone(cost, c, list); }
 
         final FCollectionView<Player> players = game.getPlayers();
         final List<Player> payableZone = new ArrayList<>();
@@ -291,12 +287,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     // Inputs
-
-    // Exile<Num/Type{/TypeDescription}>
-    // ExileFromHand<Num/Type{/TypeDescription}>
-    // ExileFromGrave<Num/Type{/TypeDescription}>
-    // ExileFromTop<Num/Type{/TypeDescription}> (of library)
-    // ExileSameGrave<Num/Type{/TypeDescription}>
 
     private PaymentDecision exileFromSame(final CostExile cost, final CardCollectionView list, final int nNeeded, final List<Player> payableZone) {
         if (nNeeded == 0) {
@@ -373,23 +363,27 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.spellabilities(exiled);
     }
 
-    private PaymentDecision exileFromTop(final CostExile cost, final SpellAbility sa, final Player player, final int nNeeded) {
+    private PaymentDecision exileFromTop(final CostExile cost, final int nNeeded) {
         final CardCollectionView list = player.getCardsIn(ZoneType.Library, nNeeded);
-
-        if (list.size() > nNeeded || !confirmAction(cost, Localizer.getInstance().getMessage("lblExileNCardFromYourTopLibraryConfirm"))) {
+        if (!confirmAction(cost, Localizer.getInstance().getMessage("lblExileNCardFromYourTopLibraryConfirm"))) {
             return null;
         }
         return PaymentDecision.card(list);
     }
 
-    private PaymentDecision exileFromMiscZone(final CostExile cost, final SpellAbility sa, final int nNeeded, final CardCollection typeList) {
-        if (typeList.size() < nNeeded) { return null; }
+    private PaymentDecision exileFromMiscZone(final CostExile cost, final int nNeeded, final CardCollection typeList) {
+        // when it's always a single triggered card getting exiled don't act like it might be different by offering the zone for choice
+        if (cost.zoneRestriction == -1 && ability.isTrigger() && nNeeded == 1 && typeList.size() == 1) {
+            if (confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(typeList.getFirst().getName())))) {
+                return PaymentDecision.card(typeList.getFirst());
+            }
+            return null;
+        }
 
-        final List<ZoneType> origin = Lists.newArrayList();
-        origin.add(cost.from);
+        final List<ZoneType> origin = Lists.newArrayList(cost.from);
         final CardCollection exiled = new CardCollection();
 
-        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, mandatory ? nNeeded : 0,
+        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, ability, typeList, mandatory ? nNeeded : 0,
                 nNeeded, null, cost.toString(), null);
 
         exiled.addAll(chosen);
@@ -399,9 +393,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(exiled);
     }
 
-    private PaymentDecision exileFromTopGraveType(final SpellAbility sa, final int nNeeded, final CardCollection typeList) {
-        if (typeList.size() < nNeeded) { return null; }
-
+    private PaymentDecision exileFromTopGraveType(final int nNeeded, final CardCollection typeList) {
         Collections.reverse(typeList);
         return PaymentDecision.card(Iterables.limit(typeList, nNeeded));
     }
@@ -602,7 +594,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         Integer c = cost.getAbilityAmount(ability);
 
         if (player.canPayShards(c) &&
-                confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.MANASHARDS)), "{M} (Mana Shards)"))) {
+                confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getNumManaShards()), "{M} (Mana Shards)"))) {
             return PaymentDecision.number(c);
         }
         return null;

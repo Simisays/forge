@@ -2040,7 +2040,7 @@ public class ComputerUtilCombat {
 
         final boolean hasTrample = attacker.hasKeyword(Keyword.TRAMPLE);
 
-        if (combat != null && hasTrample && attacker.isAttacking()) {
+        if (combat != null && remaining != null && hasTrample && attacker.isAttacking()) {
             // if attacker has trample and some of its blockers are also blocking others it's generally a good idea
             // to assign those without trample first so we can maximize the damage to the defender
             for (final Card c : remaining) {
@@ -2150,24 +2150,15 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a int.
      */
-    public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat,
-            final boolean noPrevention) {
-        final int killDamage = getDamageToKill(c, false);
+    public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat, final boolean noPrevention) {
+        int killDamage = getDamageToKill(c, false);
 
         if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || (c.getShieldCount() > 0 && c.canBeShielded())) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
                 return maxDamage + 1;
             }
-        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && !c.isPlaneswalker()) {
-            for (int i = 1; i <= maxDamage; i++) {
-                if (noPrevention) {
-                    if (c.staticReplaceDamage(i, source, isCombat) > 0) {
-                        return i;
-                    }
-                } else if (predictDamageTo(c, i, source, isCombat) > 0) {
-                    return i;
-                }
-            }
+        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && c.isCreature()) {
+            killDamage = 1;
         }
 
         for (int i = 1; i <= maxDamage; i++) {
@@ -2195,14 +2186,7 @@ public class ComputerUtilCombat {
      */
     public final static int getDamageToKill(final Card c, boolean withShields) {
         int damageShield = withShields ? c.getPreventNextDamageTotalShields() : 0;
-        int killDamage = 0;
-        if (c.isCreature()) {
-            killDamage = Math.max(0, c.getLethalDamage());
-        }
-        if (c.isPlaneswalker()) {
-            int killDamagePW = c.getCurrentLoyalty();
-            killDamage = c.isCreature() ? Math.min(killDamage, killDamagePW) : killDamagePW;
-        }
+        int killDamage = c.getExcessDamageValue(false);
 
         if (killDamage > damageShield
                 && c.hasSVar("DestroyWhenDamaged")) {
@@ -2410,7 +2394,6 @@ public class ComputerUtilCombat {
         // (currently looks for the creature with maximum raw power since that's what the AI usually judges by when
         // deciding whether the creature is worth blocking).
         // If the creature doesn't change into anything, returns the original creature.
-        if (attacker == null) { return null; }
         Card attackerAfterTrigs = attacker;
 
         // Test for some special triggers that can change the creature in combat
@@ -2492,12 +2475,12 @@ public class ComputerUtilCombat {
         return poison;
     }
 
-    public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, FCollection<GameEntity> defenders) {
+    public static GameEntity addAttackerToCombat(SpellAbility sa, Card attacker, Iterable<? extends GameEntity> defenders) {
         Combat combat = sa.getHostCard().getGame().getCombat();
         if (combat != null) {
             // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
+            if (def instanceof Card && ((Card)def).isPlaneswalker() && Iterables.contains(defenders, def)) {
                 return def;
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.

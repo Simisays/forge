@@ -43,6 +43,12 @@ public class MakeCardEffect extends SpellAbilityEffect {
             List<ICardFace> faces = new ArrayList<>();
             List<PaperCard> pack = null;
             List<String> names = Lists.newArrayList();
+            
+            final String desc = sa.getParamOrDefault("OptionPrompt", "");
+            if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed
+                    !player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(desc), null)) {
+            		return;
+            }
             if (sa.hasParam("Name")) {
                 final String n = sa.getParam("Name");
                 if (n.equals("ChosenName")) {
@@ -167,7 +173,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 game.getTriggerHandler().runTrigger(TriggerType.ConjureAll, runParams, false);
             }
 
-            if (zone.equals(ZoneType.Library)) {
+            if (zone.equals(ZoneType.Library) && !sa.hasParam("LibraryPosition")) {
                 player.shuffle(sa);
             }
         }

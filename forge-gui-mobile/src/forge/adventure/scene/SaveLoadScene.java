@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -21,6 +20,7 @@ import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundSystem;
 import forge.util.TextUtil;
 
 import java.io.File;
@@ -44,20 +44,22 @@ public class SaveLoadScene extends UIScene {
     int currentSlot = 0, lastSelectedSlot = 0;
     Image previewImage;
     TextraLabel previewDate, playerLocation;
-    Image previewBorder;
     TextraButton saveLoadButton, back;
     Selectable<TextraButton> quickSave;
     Selectable<TextraButton> autoSave;
-    Actor lastHighlightedSave;
     SelectBox difficulty;
     ScrollPane scrollPane;
     char ASCII_179 = '│';
+    Dialog saveDialog;
 
     private SaveLoadScene() {
         super(Forge.isLandscapeMode() ? "ui/save_load.json" : "ui/save_load_portrait.json");
 
+        Table root = new Table();
         layout = new Table();
-        stage.addActor(layout);
+        scrollPane = new ScrollPane(layout);
+        Window window = ui.findActor("saveSlots");
+        window.add(root);
         textInput = Controls.newTextField("");
         int c = 0;
         String[] diffList = new String[Config.instance().getConfigData().difficulties.length];
@@ -78,9 +80,11 @@ public class SaveLoadScene extends UIScene {
         playerLocation.setY(previewImage.getY() + 5);
         ui.addActor(playerLocation);
         header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSave"));
-        header.setAlignment(Align.center);
-        layout.add(header).pad(2).colspan(4).align(Align.center).expandX();
-        layout.row();
+        root.row();
+        root.add(header).grow();
+        root.add(difficulty);
+        root.row();
+        root.add(scrollPane).colspan(2).width(window.getWidth() - 20);
         autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
         quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
         for (int i = 1; i < NUMBEROFSAVESLOTS; i++)
@@ -88,13 +92,9 @@ public class SaveLoadScene extends UIScene {
 
         saveLoadButton = ui.findActor("save");
         saveLoadButton.setText(Forge.getLocalizer().getMessage("lblSave"));
-        ui.onButtonPress("save", () -> SaveLoadScene.this.loadSave());
+        ui.onButtonPress("save", SaveLoadScene.this::loadSave);
         back = ui.findActor("return");
-        ui.onButtonPress("return", () -> SaveLoadScene.this.back());
-
-        scrollPane = ui.findActor("saveSlots");
-        scrollPane.setActor(layout);
-        ui.addActor(difficulty);
+        ui.onButtonPress("return", SaveLoadScene.this::back);
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
         difficulty.getStyle().fontColor = Color.GOLD;
@@ -137,7 +137,6 @@ public class SaveLoadScene extends UIScene {
             super.onSelect(scene);
             updateSlot(slotNumber);
         }
-
     }
 
     private Selectable<TextraButton> addSaveSlot(String name, int i) {
@@ -150,7 +149,6 @@ public class SaveLoadScene extends UIScene {
         return button;
 
     }
-
 
     public boolean select(int slot) {
         if (!buttons.containsKey(slot))
@@ -193,7 +191,6 @@ public class SaveLoadScene extends UIScene {
             if (previewDate != null)
                 previewDate.setVisible(false);
         }
-
         return true;
     }
 
@@ -202,16 +199,21 @@ public class SaveLoadScene extends UIScene {
             case Save:
                 if (currentSlot > 0) {
                     //prevent NPE, allowed saveslot is 1 to 10..
-                    textInput.setText(buttons.get(currentSlot).actor.getText().toString());
-
-                    Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblSave"), ButtonOk | ButtonAbort, () -> SaveLoadScene.this.save());
-
-                    dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
-                    dialog.getContentTable().row();
-                    dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left).pad(2, 15, 2, 2);
-                    dialog.getContentTable().add(textInput).fillX().expandX().padRight(15);
-                    dialog.getContentTable().row();
-                    showDialog(dialog);
+                    textInput.setText(buttons.get(currentSlot).actor.getText());
+                    if (saveDialog == null) {
+                        saveDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblSave"), null,
+                                Forge.getLocalizer().getMessage("lblOk"),
+                                Forge.getLocalizer().getMessage("lblAbort"), () -> {
+                                    this.save();
+                                    removeDialog();
+                                }, this::removeDialog);
+                        saveDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
+                        saveDialog.getContentTable().row();
+                        saveDialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left).pad(2, 15, 2, 2);
+                        saveDialog.getContentTable().add(textInput).fillX().expandX().padRight(15);
+                        saveDialog.getContentTable().row();
+                    }
+                    showDialog(saveDialog);
                     stage.setKeyboardFocus(textInput);
                 }
                 break;
@@ -219,6 +221,7 @@ public class SaveLoadScene extends UIScene {
                 try {
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         if (WorldSave.load(currentSlot)) {
+                            SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
                         } else {
                             Forge.clearTransitionScreen();
@@ -238,6 +241,8 @@ public class SaveLoadScene extends UIScene {
                                 Current.player().updateDifficulty(Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()]);
                             Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
                             Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                            Current.player().getQuests().clear();
+                            SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
                         } else {
                             Forge.clearTransitionScreen();
@@ -247,13 +252,12 @@ public class SaveLoadScene extends UIScene {
                     Forge.clearTransitionScreen();
                 }
                 break;
-
         }
     }
 
 
     public void save() {
-        if (WorldSave.getCurrentSave().save(textInput.getText() + ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true), currentSlot)) {
+        if (WorldSave.getCurrentSave().save(textInput.getText() + ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true, true), currentSlot)) {
             updateFiles();
             //ensure the dialog is hidden before switching
 
@@ -281,7 +285,6 @@ public class SaveLoadScene extends UIScene {
         for (File name : names) {
             if (WorldSave.isSafeFile(name.getName())) {
                 try {
-
                     try (FileInputStream fos = new FileInputStream(name.getAbsolutePath());
                          InflaterInputStream inf = new InflaterInputStream(fos);
                          ObjectInputStream oos = new ObjectInputStream(inf)) {
@@ -298,10 +301,7 @@ public class SaveLoadScene extends UIScene {
                         }
                         previews.put(slot, header);
                     }
-
                 } catch (ClassNotFoundException | IOException | GdxRuntimeException e) {
-
-
                 }
             }
         }
@@ -351,7 +351,7 @@ public class SaveLoadScene extends UIScene {
                 difficulty.setVisible(false);
             }
         }
+        performTouch(scrollPane); //can use mouse wheel if available to scroll
         super.enter();
     }
-
 }

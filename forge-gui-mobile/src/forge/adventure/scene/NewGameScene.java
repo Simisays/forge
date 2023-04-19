@@ -12,10 +12,7 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
-import forge.adventure.util.AdventureModes;
-import forge.adventure.util.Config;
-import forge.adventure.util.Selector;
-import forge.adventure.util.UIActor;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -24,6 +21,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.TransitionScreen;
+import forge.sound.SoundSystem;
 import forge.util.NameGenerator;
 
 import java.util.Random;
@@ -190,16 +188,17 @@ public class NewGameScene extends UIScene {
         }
         Runnable runnable = () -> {
             started = false;
-            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+            //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
             WorldSave.generateNewWorld(selectedName.getText(),
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[colorId.getCurrentIndex()],
+                    colorIds[custom.isEmpty() ? colorId.getCurrentIndex() : 0],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
                     editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
+            SoundSystem.instance.changeBackgroundTrack();
             Forge.switchScene(GameScene.instance());
         };
         Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));

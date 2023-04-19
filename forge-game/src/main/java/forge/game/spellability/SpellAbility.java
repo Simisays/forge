@@ -147,7 +147,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private List<SpellAbility> paidAbilities = Lists.newArrayList();
     private Integer xManaCostPaid = null;
 
-    private HashMap<String, CardCollection> paidLists = Maps.newHashMap();
+    private TreeBasedTable<String, Boolean, CardCollection> paidLists = TreeBasedTable.create();
 
     private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
 
@@ -508,6 +508,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isAlternativeCost(AlternativeCost.Cycling);
     }
 
+    public boolean isBackup() {
+        return this.hasParam("Backup");
+    }
+
     public boolean isBoast() {
         return this.hasParam("Boast");
     }
@@ -618,7 +622,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payingMana.clear();
     }
 
-    //getSpendPhyrexianMana
     public final int getSpendPhyrexianMana() {
         return this.spentPhyrexian;
     }
@@ -645,8 +648,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 mana.getManaAbility().createETBCounters(host, getActivatingPlayer());
             }
 
-            if (mana.addsNoCounterMagic(this) && host != null) {
-                host.setCanCounter(false);
+            if (mana.addsNoCounterMagic(this)) {
+                mana.getManaAbility().addNoCounterEffect(this);
             }
 
             if (isSpell() && host != null) {
@@ -689,22 +692,29 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     // Combined PaidLists
-    public Map<String, CardCollection> getPaidHash() {
+    public TreeBasedTable<String, Boolean, CardCollection> getPaidHash() {
         return paidLists;
     }
-    public void setPaidHash(final Map<String, CardCollection> hash) {
-        paidLists = Maps.newHashMap(hash);
+    public void setPaidHash(final TreeBasedTable<String, Boolean, CardCollection> hash) {
+        paidLists = TreeBasedTable.create(hash);
     }
 
-    public CardCollection getPaidList(final String str) {
-        return paidLists.get(str);
+    // use if it doesn't matter if payment was caused by extrinsic cost modifier
+    public Iterable<Card> getPaidList(final String str) {
+        return Iterables.concat(paidLists.row(str).values());
     }
-    public void addCostToHashList(final Card c, final String str) {
-        if (!paidLists.containsKey(str)) {
-            paidLists.put(str, new CardCollection());
+
+    public CardCollection getPaidList(final String str, final boolean intrinsic) {
+        return paidLists.get(str, intrinsic);
+    }
+
+    public void addCostToHashList(final Card c, final String str, final boolean intrinsic) {
+        if (!paidLists.contains(str, intrinsic)) {
+            paidLists.put(str, intrinsic, new CardCollection());
         }
-        paidLists.get(str).add(c);
+        paidLists.get(str, intrinsic).add(c);
     }
+
     public void resetPaidHash() {
         paidLists.clear();
     }
@@ -1365,67 +1375,56 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     soFar += c.getNetPower();
                 }
 
-                if (soFar > tr.getMaxTotalPower(getHostCard(),this)) {
+                if (soFar > tr.getMaxTotalPower(getHostCard(), this)) {
                     return false;
                 }
             }
 
-            if (tr.isSameController()) {
+            if (tr.isSameController() && entity instanceof Card) {
                 Player newController;
-                if (entity instanceof Card) {
-                    newController = ((Card) entity).getController();
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && !c.getController().equals(newController))
-                            return false;
-                    }
+                newController = ((Card) entity).getController();
+                for (final Card c : targetChosen.getTargetCards()) {
+                    if (entity != c && !c.getController().equals(newController))
+                        return false;
                 }
             }
 
-            if (tr.isDifferentControllers()) {
+            if (tr.isDifferentControllers() && entity instanceof Card) {
                 Player newController;
-                if (entity instanceof Card) {
-                    newController = ((Card) entity).getController();
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && c.getController().equals(newController))
-                            return false;
+                newController = ((Card) entity).getController();
+                for (final Card c : targetChosen.getTargetCards()) {
+                    if (entity != c && c.getController().equals(newController))
+                        return false;
+                }
+            }
+
+            if (tr.isWithoutSameCreatureType() && entity instanceof Card) {
+                for (final Card c : targetChosen.getTargetCards()) {
+                    if (entity != c && c.sharesCreatureTypeWith((Card) entity)) {
+                        return false;
                     }
                 }
             }
 
-            if (tr.isWithoutSameCreatureType()) {
-                if (entity instanceof Card) {
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && c.sharesCreatureTypeWith((Card) entity)) {
-                            return false;
-                        }
+            if (tr.isWithSameCreatureType() && entity instanceof Card) {
+                for (final Card c : targetChosen.getTargetCards()) {
+                    if (entity != c && !c.sharesCreatureTypeWith((Card) entity)) {
+                        return false;
                     }
                 }
             }
 
-            if (tr.isWithSameCreatureType()) {
-                if (entity instanceof Card) {
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && !c.sharesCreatureTypeWith((Card) entity)) {
-                            return false;
-                        }
-                    }
-                }
-            }
-
-            if (tr.isWithSameCardType()) {
-                if (entity instanceof Card) {
-                    for (final Card c : targetChosen.getTargetCards()) {
-                        if (entity != c && !c.sharesCardTypeWith((Card) entity)) {
-                            return false;
-                        }
+            if (tr.isWithSameCardType() && entity instanceof Card) {
+                for (final Card c : targetChosen.getTargetCards()) {
+                    if (entity != c && !c.sharesCardTypeWith((Card) entity)) {
+                        return false;
                     }
                 }
             }
 
             if (entity instanceof GameEntity) {
-                String[] validTgt = tr.getValidTgts();
                 GameEntity e = (GameEntity)entity;
-                if (!e.isValid(validTgt, getActivatingPlayer(), getHostCard(), this)) {
+                if (!e.isValid(tr.getValidTgts(), getActivatingPlayer(), getHostCard(), this)) {
                     return false;
                 }
                 if (hasParam("TargetType") && !e.isValid(getParam("TargetType").split(","), getActivatingPlayer(), getHostCard(), this)) {
@@ -1752,7 +1751,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isZeroTargets() {
-        return getMinTargets() == 0 && getTargets().size() == 0;
+        return getMinTargets() == 0 && getTargets().isEmpty();
     }
 
     public boolean isMinTargetChosen() {

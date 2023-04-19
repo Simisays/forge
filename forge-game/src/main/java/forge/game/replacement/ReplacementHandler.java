@@ -143,15 +143,6 @@ public class ReplacementHandler {
                 }
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-                    // Replacement effects that are tied to keywords (e.g. damage prevention effects - if the keyword is removed, the replacement
-                    // effect should be inactive)
-                    if (replacementEffect.hasParam("TiedToKeyword")) {
-                        String kw = replacementEffect.getParam("TiedToKeyword");
-                        if (!c.hasKeyword(kw)) {
-                            continue;
-                        }
-                    }
-
                     if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
                             && (layer == null || replacementEffect.getLayer() == layer)
                             && event.equals(replacementEffect.getMode())
@@ -176,6 +167,7 @@ public class ReplacementHandler {
                 }
                 // need to copy stored keywords from lki into real object to prevent the replacement effect from making new ones
                 affectedCard.setStoredKeywords(affectedLKI.getStoredKeywords(), true);
+                affectedCard.setStoredReplacements(affectedLKI.getStoredReplacements());
                 if (affectedCard.getCastSA() != null && affectedCard.getCastSA().getKeyword() != null) {
                    // need to readd the CastSA Keyword into the Card
                    affectedCard.addKeywordForStaticAbility(affectedCard.getCastSA().getKeyword());
@@ -227,7 +219,13 @@ public class ReplacementHandler {
             return ReplacementResult.NotReplaced;
         }
 
-        ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
+        ReplacementEffect chosenRE;
+        // "can't" is never a choice
+        if (layer == ReplacementLayer.CantHappen) {
+            chosenRE = possibleReplacers.get(0);
+        } else {
+            chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
+        }
 
         possibleReplacers.remove(chosenRE);
 

@@ -478,12 +478,17 @@ public class GameAction {
                 }
             }
 
-            // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
-            // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
-            if (zoneFrom.is(ZoneType.Stack) && toBattlefield && c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
-                KeywordInterface ki = c.getCastSA().getKeyword();
-                ki.setHostCard(copied);
-                copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getTimestamp(), 0, true);
+            if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
+                // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
+                // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
+                if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
+                    KeywordInterface ki = c.getCastSA().getKeyword();
+                    ki.setHostCard(copied);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getTimestamp(), 0, true);
+                }
+
+                // 607.2q linked ability can find cards exiled as cost while it was a spell
+                copied.addExiledCards(c.getExiledCards());
             }
         }
 
@@ -580,12 +585,10 @@ public class GameAction {
 
         // 400.7g try adding keyword back into card if it doesn't already have it
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
-            if (cause.getKeyword() != null) {
-                if (!copied.getKeywords().contains(cause.getKeyword())) {
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
-                    // update Keyword Cache
-                    copied.updateKeywords();
-                }
+            if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
+                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, false);
+                // update Keyword Cache
+                copied.updateKeywords();
             }
         }
 
@@ -1279,8 +1282,7 @@ public class GameAction {
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }
-                    final Iterable<Card> cards = p.getCardsIn(zt).threadSafeIterable();
-                    for (final Card c : cards) {
+                    for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
                         checkAgain |= stateBasedAction704_5d(c);
                          // Dungeon Card won't affect other cards, so don't need to set checkAgain
                         stateBasedAction_Dungeon(c);
@@ -1293,6 +1295,7 @@ public class GameAction {
             CardCollection sacrificeList = new CardCollection();
             PlayerCollection spaceSculptors = new PlayerCollection();
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                boolean checkAgainCard = false;
                 if (c.hasKeyword(Keyword.SPACE_SCULPTOR)) {
                     spaceSculptors.add(c.getController());
                 }
@@ -1300,7 +1303,7 @@ public class GameAction {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
                         noRegCreats.add(c);
-                        checkAgain = true;
+                        checkAgainCard = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
                             if (desCreats == null) {
@@ -1308,7 +1311,7 @@ public class GameAction {
                             }
                             desCreats.add(c);
                             c.setHasBeenDealtDeathtouchDamage(false);
-                            checkAgain = true;
+                            checkAgainCard = true;
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
@@ -1319,20 +1322,21 @@ public class GameAction {
                         }
                         desCreats.add(c);
                         c.setHasBeenDealtDeathtouchDamage(false);
-                        checkAgain = true;
+                        checkAgainCard = true;
                     }
                 }
 
-                checkAgain |= stateBasedAction_Saga(c, sacrificeList);
-                checkAgain |= stateBasedAction704_attach(c, unAttachList); // Attachment
+                checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
+                checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
+                checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
 
-                checkAgain |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
+                checkAgainCard |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
 
                 final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
 
                 if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
                     c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
-                    checkAgain = true;
+                    checkAgainCard = true;
                 }
 
                 if (c.hasKeyword("The number of loyalty counters on CARDNAME is equal to the number of Beebles you control.")) {
@@ -1347,17 +1351,18 @@ public class GameAction {
                     }
                     // Only check again if counters actually changed
                     if (c.getCounters(CounterEnumType.LOYALTY) != loyal) {
-                        checkAgain = true;
+                        checkAgainCard = true;
                     }
                 }
 
                 // cleanup aura
                 if (c.isAura() && c.isInPlay() && !c.isEnchanting()) {
                     noRegCreats.add(c);
-                    checkAgain = true;
+                    checkAgainCard = true;
                 }
-                if (checkAgain) {
+                if (checkAgainCard) {
                     cardsToUpdateLKI.add(c);
+                    checkAgain = true;
                 }
             }
             for (Card u : unAttachList) {
@@ -1500,6 +1505,23 @@ public class GameAction {
         return checkAgain;
     }
 
+    private boolean stateBasedAction_Battle(Card c, CardCollection removeList) {
+        boolean checkAgain = false;
+        if (!c.getType().isBattle()) {
+            return false;
+        }
+        if (c.getCounters(CounterEnumType.DEFENSE) > 0) {
+            return false;
+        }
+        // 704.5v If a battle has defense 0 and it isn’t the source of an ability that has triggered but not yet left the stack,
+        // it’s put into its owner’s graveyard.
+        if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isTrigger())) {
+            removeList.add(c);
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
+
     private void stateBasedAction_Dungeon(Card c) {
         if (!c.getType().isDungeon() || !c.isInLastRoom()) {
             return;
@@ -1528,7 +1550,7 @@ public class GameAction {
                 }
             }
         }
-        if (c.isCreature() && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
+        if ((c.isCreature() || c.isBattle()) && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
             unAttachList.add(c);
             checkAgain = true;
         }
@@ -2400,16 +2422,7 @@ public class GameAction {
 
                 if (e.getKey() instanceof Card && !lethalDamage.containsKey(e.getKey())) {
                     Card c = (Card) e.getKey();
-                    int lethal = 0;
-                    if (c.isCreature()) {
-                        lethal = Math.max(0, c.getLethalDamage());
-                    }
-                    if (c.isPlaneswalker()) {
-                        int lethalPW = c.getCurrentLoyalty();
-                        // CR 120.10
-                        lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
-                    }
-                    lethalDamage.put(c, lethal);
+                    lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
