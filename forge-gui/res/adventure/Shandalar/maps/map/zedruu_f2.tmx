@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="214">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
+ <tileset firstgid="12929" source="../tileset/FarmFood.tsx"/>
+ <layer id="23" name="Background" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYKANMOEjjGkFBtLuUTAKRsEoGAWDB8wXHWgXjIJRMAooAQAjjgVZ
+  </data>
+ </layer>
+ <layer id="22" name="Walls" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJwz4WNgMKERJgRoZS8xboDJM4oyMDDhwXZi1MXMogi7FwLZIZKoGATeS9IGz6fA7r8i+Pm0tBukfrsEAoP46Goa+RkYmpBwMz/97JYXYGBQQMKKArjtRk9fzFjMo5XdMP8iy+Oy2wqaXmHutBej3G5kvY5YzCMF7wXatQ8J76eSv6mdx9Djex4d7UZP55T4m1A5SchuSuIbZN4iPdyYlv4mZPdCJLvnUDm+QWFGrN0D6W96x/dg8betGGZ8W2MRoxYGlcHEtHmEBbBjerS3aGU3ACLTp8Y=
+  </data>
+ </layer>
+ <layer id="24" name="CullterBis" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFpID/ItQ174IwA8NBTggGsfGB+aLUtRsdOIoNnN3UAk38EIwPkBLmpIBESQaGJEnqmUcK+A+yV4qwupGa1mD+JgTokc6ZRBF4MRLbWgyVj46ZSXQbNdP5HKDdj/QYGB4D8RMgfgrEz4D4ORB36BFvziEJCCaWDQNM+kD/AzELELMCMRsQswPxCix24/I3FzB/cEsRz0YHS4B2LQXiZST4FwaUJSCYWDY6OAK08ygQH8NjNy5/YwtPegFKw5wYgMvf+MITH1gHTFfpxhDMDsWFJuS7bxRQDgCLC0MD
+  </data>
+ </layer>
+ <layer id="25" name="Clutter" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF6OC/COVmpEhix4TAQlHK7WaSwo4JAUcxyu0mFyD7+58kKk0JUJEgzW5agjlY7JlHI39jAxeEiVeLza3EAmLCHBnQ09+khAExIIQdtxy2MJxLYVoTYSNNfCgATv2BdgEqOGuCXfy4HgNDCxQPVXBIAoLR2coSEEwr0EWlOD5LZtgj+w8XmxB4S+N4tx7A+newAwBjXyDH
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="115" template="../obj/gold.tx" x="93.4733" y="133.077"/>
+  <object id="117" template="../obj/enemy.tx" x="408.759" y="257.485">
+   <properties>
+    <property name="enemy" value="The Cheff"/>
+   </properties>
+  </object>
+  <object id="122" template="../obj/enemy.tx" x="332.435" y="75.2914">
+   <properties>
+    <property name="enemy" value="Red Wiz1"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="183,184"/>
+   </properties>
+  </object>
+  <object id="162" template="../obj/enemy.tx" x="382.842" y="294.105">
+   <properties>
+    <property name="enemy" value="Bear"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="163,165"/>
+   </properties>
+  </object>
+  <object id="163" template="../obj/waypoint.tx" x="223.619" y="204.276"/>
+  <object id="167" template="../obj/entry_up.tx" x="222.342" y="344.605">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="169" template="../obj/enemy.tx" x="173.373" y="118.246">
+   <properties>
+    <property name="enemy" value="Wizard Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="175,176,177,176"/>
+   </properties>
+  </object>
+  <object id="173" template="../obj/waypoint.tx" x="327.209" y="294.093"/>
+  <object id="178" template="../obj/enemy.tx" x="371.946" y="112.624">
+   <properties>
+    <property name="enemy" value="Wizard Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="179" template="../obj/waypoint.tx" x="222.455" y="292.348"/>
+  <object id="180" template="../obj/waypoint.tx" x="124.673" y="292.971"/>
+  <object id="183" template="../obj/waypoint.tx" x="124.861" y="206.17"/>
+  <object id="185" template="../obj/manashards.tx" x="134.816" y="58.3119"/>
+  <object id="186" template="../obj/manashards.tx" x="178.144" y="59.0319"/>
+  <object id="192" template="../obj/waypoint.tx" x="327.356" y="203.896"/>
+  <object id="193" template="../obj/collision.tx" x="-14.9079" y="-24.3947" width="524.5" height="16"/>
+  <object id="194" template="../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
+  <object id="195" template="../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
+  <object id="196" template="../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
+  <object id="197" template="../obj/door_up.tx" x="253.144" y="103.708">
+   <properties>
+    <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
+    <property name="teleportObjectId" value="114"/>
+   </properties>
+  </object>
+  <object id="201" template="../obj/waypoint.tx" x="271.404" y="200.102"/>
+  <object id="202" template="../obj/waypoint.tx" x="269.14" y="290.214"/>
+  <object id="203" template="../obj/gold.tx" x="45.8978" y="199.196"/>
+  <object id="204" template="../obj/gold.tx" x="45.8978" y="54.2929"/>
+  <object id="205" template="../obj/enemy.tx" x="68.9918" y="79.1982">
+   <properties>
+    <property name="enemy" value="Elf Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="206" template="../obj/enemy.tx" x="68.0862" y="151.197">
+   <properties>
+    <property name="enemy" value="Dwarf Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="207" template="../obj/enemy.tx" x="70.3503" y="214.139">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="208" template="../obj/enemy.tx" x="79.8596" y="275.723">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="210" template="../obj/gold.tx" x="93.4443" y="297.459"/>
+  <object id="211" template="../obj/booster.tx" x="156.387" y="117.235">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="212" template="../obj/booster.tx" x="189.443" y="83.7264">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="213" template="../obj/booster.tx" x="188.99" y="150.744">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

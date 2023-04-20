@@ -1,130 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="24" nextobjectid="201">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="44" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="28" nextobjectid="222">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
- <layer id="23" name="Background" width="35" height="25">
+ <layer id="24" name="Background" width="44" height="40">
   <data encoding="base64" compression="zlib">
-   eJztw6ENAAAMAjDU/n8WzxsTbdJeUlVVVV8do9JaFw==
+   eJzt00EKgCAQhWFXWXSadl2lM3SJoEN1Iq9Q24gQdDAazRiFt/hWhfMjjmmUMglW7Us5wzV1t9hvktwm2ijda3tquFO3laO2XunmlF7Jbjt77N9J9m6tPzvUd/1XSi+dHWqlvbS5pF7Om5B6C6X3hna9hH1btE+ql+7Ek3mIPzN3L7c11s644y+9f3YfTLlnAwAAAAAAAABQJ9eE1vI=
   </data>
  </layer>
- <layer id="22" name="Clutter" width="35" height="25">
+ <layer id="25" name="Walls" width="44" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBje4AojA8NVKB5od4gyI/gizLjV0tMdMFDCRH+3FCHZGavJwBCnieqWWSyomF5uqQS6owrJLYLsDAzXWCF4AzsE08styADZHfRyC7a0IsiOsJuebikDxQUzEmZHtZuebkEHyPFCrTg6S6Y+bO7YbQBxh4IBfd2CDzgMoFv+6UMwpQDklnX6uDE9AS3iiFyA7pZGQwQmFbSQmU4ocUujAcReQriZRLeRE0eLgHZo6BPGi4awW3I4GBgms2FiIzxuPAi04xBafCwF4gxgvC5BEjtMYfqBAXzhlWZIGqalW3ClXVC4UJJ2yXELrdLLUHcLrrQLArjSLgDRSYHd
+   eJztmWtKw0AUhUPRpGm30C5DW6HrEOseBDcgFXUN1ihW3IZ1G+oPEUGs6AZsffzwDunA5Haeydw0ogcOlMzk5uvMmYRMkkYQnILPwHl1EAXBW5j+7jSDoAveaMr7voSLx3pCX3webjPVd2W+gTq34DsHXqZRQ86L20z18zBPwIli3lS8TOeN1Ko2Cj3PeVXzpuNdhjivbN5e4fhRlL8uhTjvBNUvwsrrcs1W89eR1cW8RVl5XQqxNXeIXJSViYqXSr+N91/l6APuDZ/gL3Cv7XbuI2TqCfk7ztq3TsLUSejGy1j3IztT8HYiN96BJatvZs7rmgdXXl/spjzsKp59eXl1Oq7Z87rkYdQqNr46bhOzmId74L1s6ftfQPtDm47XJDEPTDpmzupyb6DKb0eoo8pFzwNrUeY1OHc9yvKyMa61Fu0jB9wDj/c4nf4ar/j8L0N7BTM7ROu76sziesHveFVjFrNQJmteZjELy+DdjFPmdl3POZuPJ87CMpiZ8H4A5+RMMst0Bf97DL6u0zOLwntntuO4BfPVB28TvJfsrKSW7cPivTNb3nfgnIJnhLzconzueZo0rmetko5X1Z9C3WbWqmurrOtLwW1iNfHa2Kdsvg9Uide0Vniuqa7vS/1Y7SpqGqtdpn4A1WIuKg==
   </data>
  </layer>
- <objectgroup id="12" name="Kopie van Objects" visible="0" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="115" template="../obj/gold.tx" x="460.713" y="311.037"/>
-  <object id="117" template="../obj/enemy.tx" x="336.76" y="199.976">
+ <layer id="26" name="Clutter" width="44" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzVmE1rFDEYx5+d3dl2d/EmKqJQ8NJtkVprtYrgVfCkB9+OepSt3qptverdFtdVEdZvsFAVX1rQg61H3w4qelPwA3S7q1R8Yib4TCbZSTIzFf/wJ9tJJvPLkyfJdAD06vg9KonmvPg2pn2ZSPTVyanrvxV5+bLEvVwy7/P4EMCJoeSMkf6RdR7j1KwC3K+G6wSvi2rIOpkirzxPi8i6VFW3TdKvrHe7uF3biFwYKwDsC/y2YM9pKlfeG5gDh3f2vu8ctjnv8ZL+jlOaa8y034v+33ir7DoHqwMA7cDLI1GLurWB6L0svou4JpYU62IyJkZx9fd2uPGujOj7ZLwfkPWjBe/mqhmvnGuPR9Ph1SmOZ1MxnB9vpHwZz2DNJuGlauZ5+1fBeXI3H64XsWXqjoKzPiGvh3nWVOSaCe/wMC+PFHj7lYD3UIb7oU428WU6hnF7PgjwYjAbnjjZ8l5A3s/I+iVj3p8aLlPemb3psZjoQB8vvXzYjFe+loZ++NwsTo0iP7OoTTUm7UeX/Oz2p1tF7kbw/nfTs+eFfNh/8kG6lpbqEi9ldtEvz3692WiiL8y7ew8vk7wnZcnLRHlbwbX/hVeoF6/IeTn3mWbxvqsbwLvuh/dTwXsqF/U45tB+YrGvbZREnChzRyqpuhnHL050btfJnsyU1f8nScVYVXMseJ/0AzxFP+v/d4wmDNcD7tP4vncGfZZ890jyjcFFKoYuyQfBysa1im0eYdkhba9h/VEF80nNNx8XfS1yM7Xx2WulMAM977o5/biE5BinyUqZdapLewVjVo1LSJcTLfXl1FWXzgHdO66QzEs5Xyvey74nGJ/IVWr57KJ1KvYka852DuRzytQuaqeQ11PoK5aednyWzFsmc2Ua5y3Yx9bA29EPDJ2EV8VWC/I87jygvNsSzFejDHAbfaccz8tEmVsBr7D4WzUuFe9liM8JWazviQrAwYoZr06Uu6bYWxbIHD/MRcegs6z3FbMYZ7Enu/CazoMsOpfT5NqUxqpn2PKy/mcg2ma2xziE6X0iHxcMnm/r34WfFLE=
+  </data>
+ </layer>
+ <layer id="27" name="Tilelaag 4" width="44" height="40">
+  <data encoding="base64" compression="zlib">
+   eJy9mUtPFEEQx3t3mRkQ0egZ9OCFRSASRU304kEQPfg4kHhUQyRRFvwCxF2IXjwJEY3Ri/gR9qwfwEdAT+rByENNfBw0yIoGu5iubE1P9WzPzOI/qcxuz2z3r6urq3t6hbDTJ1eICa9qp9uFOCPtrLRz7ZaVKBUcIRbd2u19rvEMaCob5AKDskkv+NwVyXhV2oi0QgLeEqlf5wJWaK/E3KOazobLHuSEWFa/2d8gxAHN5tW1tyEeL1VJ8w/1jYl5JSNEZ6b6HT8fafB5n0gfPiXjj1do+1ajb0l4X+8xG8cMV/D/oxxfN47NW8n2jow/Xv8HLwjj/XbWZz7GjGeLLH8VMc4Xsn7bmVzVbDTqhOPKZHqcrTrh+KFxNOrwbaLGHHPdJunxG0fA+7A1WJbPC9EhbUjNP/AjtYvSLqkryNa/j5vj8XZJhu58mJcKGI/LZ/oIL+Wjn/H+urxmc1UT5PPRtiDrbLM974BkOGng5XIV2BgTa/Pk87YaOZ2rE35jG784fzBHIO9Ah2/o4yHiP/p9iMwx8Os6k7Op0L+zyr/oZ9T3HiGeM/atx78PbVWk/Za25oTjQfcz599rjn0uQF7KTPW1J1xWlGVfCO+M9OtdZbqG9/q2Q+bWnWqdvSxjaDhfvWcbfwuy/jdt0c/Ui7dLsnYr3gnJOpmAF5mj9FJyPWPshSWvbTzEEWVeZWIwSrV4beuIqw+ub+/VHK+oOtYMdc0p32x30/FiHUl13fOZe72gn2dknrlDcg3NC3+cdP5NK2SuqBz1k+wLgRn6ocdBHN6OTO1n4mh3o8962AvzgmBvW4t3QParX8v9uAfurCNvUcUBstxzk/EuZnnmzdCCil/khT1thTDb8BblelWSNmG5btWDeUbxgigz8kKfDhI75FXzikk0d8XJmybtavQNYpjyIjO8206rPQrESavWbr/r2wk3yET3qvoeJamK2js2jO9fh8/BBWYelsl1mfST8hWccFlSIa8ek9THOi/48eM+388g9CfwAtMPL/w7LEvLPO7xcwh457Q1n65JZUN9eiwgL37H+0nieFzNFRMvt8ZDO+Bbnc+kOdVPGuNJWQebzKwmXir6ikkZ5rQxuUniA2N8MBOcozjnOUNW3Avcd8M5CszEi2zgZ85X+Dtgoqx4brKxNqk1/oa63++a7ZQb9C0Xq6Y9FOa3KZKbaSwvq3GhrGWGFTQG+2DtvAHrAj40rLeX+DPp+QNdA5EJ6jL59VemyrrV8fuvM3NzsiCfGSGW5ryEMm3U7YTPePCdAM6wyqp9lL7268K+Aef5pvS8lBXUYjgbgHMAPHMraD7l/Kyz1su/yForT9EzcZ0XmXFuNDu+ISsqipebg5xR9THzG3MW8kK/ViLG37QW6X23KeNE/QrzbEkxLbnBfQX1bxSvjdLwok+BVf9PhZ7NQ31byDhTcWM5HzGm3PmZ7TssjrE+73SZ5qGprbQ5y6SSF/6Pox7aLN5/Vt2Z0A==
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="115" template="../obj/gold.tx" x="615.213" y="34.537"/>
+  <object id="119" template="../obj/enemy.tx" x="106.531" y="81.107">
    <properties>
-    <property name="enemy" value="Fire Giant"/>
-   </properties>
-  </object>
-  <object id="118" template="../obj/enemy.tx" x="277.693" y="226.745">
-   <properties>
-    <property name="enemy" value="Magma Fire Elemental"/>
-    <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="172,171"/>
-   </properties>
-  </object>
-  <object id="119" template="../obj/enemy.tx" x="157.031" y="119.107">
-   <properties>
-    <property name="enemy" value="Phoenix"/>
+    <property name="enemy" value="Guard Construct"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="179,180,198,171,176,174,191"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="101.042" y="176.271">
+  <object id="122" template="../obj/enemy.tx" x="102.042" y="189.771">
    <properties>
     <property name="enemy" value="Red Wiz1"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="183,184"/>
    </properties>
   </object>
-  <object id="137" template="../obj/enemy.tx" x="42.263" y="48.2299">
+  <object id="137" template="../obj/enemy.tx" x="76.763" y="408.23">
    <properties>
-    <property name="enemy" value="Bandit"/>
+    <property name="enemy" value="Archer Mercenary"/>
     <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="181,192"/>
    </properties>
   </object>
-  <object id="150" template="../obj/enemy.tx" x="213.842" y="94.272">
+  <object id="162" template="../obj/enemy.tx" x="526.342" y="192.105">
    <properties>
-    <property name="enemy" value="Magma Fire Elemental"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="174,173"/>
-   </properties>
-  </object>
-  <object id="162" template="../obj/enemy.tx" x="382.842" y="294.105">
-   <properties>
-    <property name="enemy" value="Bear"/>
+    <property name="enemy" value="Elephant"/>
     <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="163,165"/>
    </properties>
   </object>
   <object id="163" template="../obj/waypoint.tx" x="427.842" y="297.105"/>
-  <object id="165" template="../obj/waypoint.tx" x="345.569" y="296.378"/>
-  <object id="167" template="../obj/entry_up.tx" x="222.342" y="344.605">
+  <object id="165" template="../obj/waypoint.tx" x="58.569" y="451.878"/>
+  <object id="169" template="../obj/enemy.tx" x="386.842" y="36.1053">
    <properties>
-    <property name="teleport" value=""/>
-   </properties>
-  </object>
-  <object id="169" template="../obj/enemy.tx" x="360.842" y="71.6053">
-   <properties>
-    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="enemy" value="Vulture"/>
     <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="175,176,177,176"/>
    </properties>
   </object>
-  <object id="170" template="../obj/enemy.tx" x="236.842" y="199.605">
-   <properties>
-    <property name="enemy" value="Fire Giant"/>
-   </properties>
-  </object>
-  <object id="171" template="../obj/waypoint.tx" x="271.342" y="264.105"/>
+  <object id="171" template="../obj/waypoint.tx" x="56.842" y="531.605"/>
   <object id="172" template="../obj/waypoint.tx" x="274.842" y="162.105"/>
-  <object id="173" template="../obj/waypoint.tx" x="244.342" y="135.605"/>
-  <object id="174" template="../obj/waypoint.tx" x="242.342" y="55.1053"/>
-  <object id="175" template="../obj/waypoint.tx" x="308.842" y="51.1053"/>
-  <object id="176" template="../obj/waypoint.tx" x="394.342" y="83.1053"/>
-  <object id="177" template="../obj/waypoint.tx" x="404.842" y="129.605"/>
-  <object id="178" template="../obj/enemy.tx" x="363.342" y="141.605">
+  <object id="173" template="../obj/waypoint.tx" x="127.842" y="155.105"/>
+  <object id="174" template="../obj/waypoint.tx" x="252.342" y="102.105"/>
+  <object id="175" template="../obj/waypoint.tx" x="599.842" y="151.105"/>
+  <object id="177" template="../obj/waypoint.tx" x="460.842" y="96.105"/>
+  <object id="178" template="../obj/enemy.tx" x="495.342" y="151.105">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Human Mercenary"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="191,190,189"/>
    </properties>
   </object>
-  <object id="179" template="../obj/waypoint.tx" x="180.342" y="117.105"/>
+  <object id="179" template="../obj/waypoint.tx" x="127.842" y="105.605"/>
   <object id="180" template="../obj/waypoint.tx" x="199.842" y="162.105"/>
   <object id="181" template="../obj/waypoint.tx" x="32.3421" y="14.1053"/>
   <object id="183" template="../obj/waypoint.tx" x="105.842" y="139.605"/>
   <object id="184" template="../obj/waypoint.tx" x="105.342" y="221.105"/>
-  <object id="185" template="../obj/manashards.tx" x="402.887" y="196.423"/>
-  <object id="186" template="../obj/manashards.tx" x="66.2966" y="27.7871"/>
-  <object id="188" template="../obj/manashards.tx" x="50.2966" y="261.878"/>
-  <object id="189" template="../obj/waypoint.tx" x="359.842" y="117.605"/>
-  <object id="190" template="../obj/waypoint.tx" x="379.342" y="183.605"/>
+  <object id="185" template="../obj/manashards.tx" x="658.387" y="71.923"/>
+  <object id="186" template="../obj/manashards.tx" x="54.2966" y="88.2871"/>
+  <object id="188" template="../obj/manashards.tx" x="156.797" y="325.878"/>
+  <object id="189" template="../obj/waypoint.tx" x="460.342" y="150.105"/>
+  <object id="190" template="../obj/waypoint.tx" x="460.342" y="8.605"/>
   <object id="191" template="../obj/waypoint.tx" x="325.842" y="135.105"/>
   <object id="192" template="../obj/waypoint.tx" x="20.3421" y="77.1053"/>
-  <object id="194" template="../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
-  <object id="195" template="../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
-  <object id="196" template="../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
-  <object id="197" template="../obj/door_up.tx" x="284.842" y="71.105">
+  <object id="194" template="../obj/collision.tx" x="-3.9079" y="633.105" width="704" height="16"/>
+  <object id="195" template="../obj/collision.tx" x="702.342" y="-7.9362" width="16" height="650.083"/>
+  <object id="196" template="../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="670.083"/>
+  <object id="197" template="../obj/door_up.tx" x="68.842" y="60.105">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>
-  <object id="198" template="../obj/waypoint.tx" x="225.342" y="221.105"/>
+  <object id="198" template="../obj/waypoint.tx" x="154.842" y="539.605"/>
   <object id="199" template="../obj/waypoint.tx" x="202.342" y="251.605"/>
+  <object id="201" template="../obj/enemy.tx" x="579.342" y="192.605">
+   <properties>
+    <property name="enemy" value="Elephant"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="202" template="../obj/enemy.tx" x="123.342" y="386.105">
+   <properties>
+    <property name="enemy" value="Archer Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="203" template="../obj/enemy.tx" x="230.342" y="547.605">
+   <properties>
+    <property name="enemy" value="Minotaur Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="181,192"/>
+   </properties>
+  </object>
+  <object id="204" template="../obj/enemy.tx" x="415.842" y="534.105">
+   <properties>
+    <property name="enemy" value="Minotaur Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="181,192"/>
+   </properties>
+  </object>
+  <object id="205" template="../obj/enemy.tx" x="62.8421" y="457.605">
+   <properties>
+    <property name="enemy" value="Minotaur Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="181,192"/>
+   </properties>
+  </object>
+  <object id="206" template="../obj/enemy.tx" x="605.842" y="366.605">
+   <properties>
+    <property name="enemy" value="Minotaur Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="181,192"/>
+   </properties>
+  </object>
+  <object id="207" template="../obj/collision.tx" x="-2.65789" y="-23.3947" width="704" height="16"/>
+  <object id="209" template="../obj/enemy.tx" x="551.842" y="87.6053">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="210" template="../obj/enemy.tx" x="317.342" y="150.605">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="211" template="../obj/enemy.tx" x="174.842" y="152.105">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="212" template="../obj/enemy.tx" x="252.842" y="42.1053">
+   <properties>
+    <property name="enemy" value="Dwarf Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="213" template="../obj/enemy.tx" x="123.842" y="263.605">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="214" template="../obj/enemy.tx" x="381.842" y="152.605">
+   <properties>
+    <property name="enemy" value="Guard Construct"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="179,180,198,171,176,174,191"/>
+   </properties>
+  </object>
+  <object id="217" template="../obj/waypoint.tx" x="160.842" y="616.105"/>
+  <object id="218" template="../obj/waypoint.tx" x="266.842" y="599.105"/>
+  <object id="219" template="../obj/waypoint.tx" x="540.342" y="599.605"/>
+  <object id="220" template="../obj/waypoint.tx" x="542.342" y="555.605"/>
+  <object id="221" template="../obj/waypoint.tx" x="684.342" y="554.105"/>
  </objectgroup>
 </map>
