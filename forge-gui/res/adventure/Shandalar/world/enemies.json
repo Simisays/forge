@@ -8601,6 +8601,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
+	"scale":0.5,
 	"life": 20,
 	"rewards": [
 		{
@@ -13981,6 +13982,61 @@
 		"IdentityBlue",
 		"IdentityWhite",
 		"IdentityAzorius"
+	]
+},
+{
+	"name": "The Judge",
+	"sprite": "sprites/dungeon/thejudge.atlas",
+	"deck": [
+		"decks/thejudge.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"scale":0.75,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 200
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Sun",
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"IdentityWhite"
 	]
 },
 {

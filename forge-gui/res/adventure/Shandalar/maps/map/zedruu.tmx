@@ -86,7 +86,7 @@
   <object id="186" template="../obj/manashards.tx" x="54.2966" y="88.2871"/>
   <object id="188" template="../obj/manashards.tx" x="156.797" y="325.878"/>
   <object id="189" template="../obj/waypoint.tx" x="460.342" y="150.105"/>
-  <object id="190" template="../obj/waypoint.tx" x="462.842" y="30.605"/>
+  <object id="190" template="../obj/waypoint.tx" x="460.842" y="38.605"/>
   <object id="191" template="../obj/waypoint.tx" x="325.842" y="135.105"/>
   <object id="194" template="../obj/collision.tx" x="-3.9079" y="633.105" width="704" height="16"/>
   <object id="195" template="../obj/collision.tx" x="702.342" y="-7.9362" width="16" height="650.083"/>

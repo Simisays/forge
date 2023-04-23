@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYMAOonkZGHbxoOIoXoQ4MhtdDSVAlgdTbCcPQnwPkN6NRY00FjFK7QUBmF07ccjTyl5CYNTeUXtH7R259sLKW2Q+qOzdiyQGK59x6SEHYPMvyC/RvITV0MJeUtUMFXtB8VjHjYqx2YuuZg+R9gIAn9sfig==
+   eJxjYMAOonkZGHbxoOIoXogciE1IDblAlgdTbCea2G4saqSxiFFqLzFg1N5Re0ftHbWX3vbCyltkPqjs3YskBiufcekhB2DzL8gv0byE1dDCXlLVDBV7QfFYx42KsdmLrmYPkfYCAOs1HD4=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzr42Rg6MOCM7jJx22chDE2O0ftHbV31N5Re0ftHbV31F7a2gsA0ioEPg==
+   eJzr42Rg6MOCg03Ix22chDE2O3HZm8GNioezveh20spebPYQi0ftHbV31N5Re0ftHbr2AgD+aQfq
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy1lU0OgkAMhbtkkDsYD6Ou1MSDeQ3jCv9uhaJHkAYbHrUdiYwvach0hn4p0xYiomtGtA6dnZt1aJ65YeKfOPvsRz0hplYV+txNY/vweY4l/oOzj/4Y02LfI9xZ0T6nRZy7Mpg7J2b1ZrI87jcJt4IctDQf12O5rNsPMVJwYzpl9ndPyS0bxlHVFt9BHVp+Sq7kUkKP1hAT+0d6KAVXtFXxha17N1U9szhnjn/JutmEfSV7WPOp6wp71BPfyb/rmYX1zMwnzGGRNXuHnBkqmalWvjoX7wzXzsPoEW9OCnMsV9ev5mvh/zAVN8bG/HmmMn+eEy2ULfP+e94ZzbXYLzN8X9U=
+   eJy1ldsNwjAMRf3ZhHVYAfgCJNiLNRBf5bVVoXQEYoHVW+NUVWuuZFV5+ciJ7RIR3QuiTWjtmsYhfaNhMj/LrPM8qgGfWlXocrfJjur8fv5rlk5wro9psZ8O3LXBPAT7TPVlsqZyK4hBS/NxrLlDhff8GOHDg9unS2Hfuye3TIyzyi1+gzp8+J5ciaWEGq3BJ9aP1JAHV7RT/oWtazeXz2O4HDP7vxVtb8K6kjXMee+8whrNid/k3/nMwnxmZgN9WGT13iF7hkp6qhWvjiW3h3PnZdRIrk8KcypX56/ma+H/0Ivbx8b4uacyfxGJlspWsXsut0dzLfYb5aFmBA==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -25,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYICA85wQupqXgSqAkDn45Oczk2YXIfVVULsucOJXZ8tCmr3I6n2QxM9jsQfZ7kpeTD2UgAoi4qyKwng9JIFfHhafr5DEXiKxkcNktjaEXimKEMPHhqlHBtjiEhQOxIQFvQEl/iUl3nDlKWUCcYcLIMdlJZrZ+NxFiX+x5R18gFCephQguwfGfoldKRyEsuPnowNqlbmUAuQ4RXZTOZr7tBkRbB1GBqzgJxL7Fw77iIm7V4SVoIBvwLBeAWUHCaLKofsDBmDxics9D3gYGB4C8SMgvs+DXY0aNI+tQWKTAygtp2HAG0ojp1/kOAUAhCA2tQ==
+   eJxjYICA85wQupqXgSqAkDn45Ocz49d7zICB4bgB8eqroHZd4MSvzpYFlX8EaMdJQwaGU0B8Gog5DCHiJwww1fsg6TuPxR5kuyt5MfVQAiqIiLMqKsUrLgCLz1dIYi+R2Mhh0iIOoVeKIsTwsWHqkQG2uASFAzFhQW9AiX9JiTdq5V0YQI7LSjSz8bmLEv9iyzv4AKE8TSlAdg+M/RK7UjgIZcfPRwfUjjdyAXKcIrupHM192owItg4jA1bwE4n9C4d9xMTdK8JKUMA3YFivgLKDBFHl0P0BA7D4xOWeBzwMDA+B+BEQ3+fBrkZNAkKvQWKTA6hVTntDaeT0ixynAMdqO6E=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -42,14 +43,16 @@
     <property name="waypoints" value="64,65"/>
    </properties>
   </object>
-  <object id="51" template="../obj/treasure.tx" x="207.333" y="27.3333"/>
+  <object id="51" template="../obj/treasure.tx" x="131.869" y="29.9355"/>
   <object id="52" template="../obj/gold.tx" x="257.779" y="256.26"/>
-  <object id="53" template="../obj/enemy.tx" x="206.867" y="60.8177">
+  <object id="53" template="../obj/enemy.tx" x="207.734" y="32.1933">
    <properties>
-    <property name="enemy" value="Angel Warrior"/>
+    <property name="enemy" value="The Judge"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="63,62"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="277.887" y="225.445">
+  <object id="54" template="../obj/enemy.tx" x="271.815" y="225.445">
    <properties>
     <property name="enemy" value="Hidden Snake"/>
    </properties>
@@ -64,11 +67,13 @@
   <object id="56" template="../obj/enemy.tx" x="142.495" y="111.268">
    <properties>
     <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="57" template="../obj/enemy.tx" x="288.652" y="177.191">
    <properties>
     <property name="enemy" value="Monk"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="58" template="../obj/enemy.tx" x="266.967" y="85.6797">
@@ -106,6 +111,7 @@
   <object id="60" template="../obj/enemy.tx" x="135.555" y="202.779">
    <properties>
     <property name="enemy" value="Armored Knight"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="61" template="../obj/manashards.tx" x="136.857" y="237.042"/>
@@ -115,5 +121,7 @@
   <object id="65" template="../obj/waypoint.tx" x="164.18" y="181.962"/>
   <object id="66" template="../obj/waypoint.tx" x="266.534" y="55.7542"/>
   <object id="67" template="../obj/waypoint.tx" x="265.666" y="178.926"/>
+  <object id="68" template="../obj/waypoint.tx" x="270.003" y="28.8647"/>
+  <object id="69" template="../obj/waypoint.tx" x="163.746" y="28.8647"/>
  </objectgroup>
 </map>

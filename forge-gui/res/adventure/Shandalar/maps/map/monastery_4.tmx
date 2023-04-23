@@ -35,16 +35,16 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="279.5" y="375"/>
-  <object id="50" template="../obj/enemy.tx" x="199.02" y="304.092">
+  <object id="50" template="../obj/enemy.tx" x="202.411" y="304.092">
    <properties>
     <property name="enemy" value="Gargoyle"/>
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="216.171" y="122.719"/>
   <object id="52" template="../obj/gold.tx" x="152.5" y="374.5"/>
-  <object id="53" template="../obj/enemy.tx" x="215.505" y="142.945">
+  <object id="53" template="../obj/enemy.tx" x="212.792" y="157.866">
    <properties>
-    <property name="enemy" value="Monk"/>
+    <property name="enemy" value="Sun Giant"/>
    </properties>
   </object>
   <object id="56" template="../obj/enemy.tx" x="233.5" y="304.25">
