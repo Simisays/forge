@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="214">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="215">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
- <tileset firstgid="12929" source="../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../tileset/FarmFood.tsx"/>
  <layer id="23" name="Background" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYKANMOEjjGkFBtLuUTAKRsEoGAWDB8wXHWgXjIJRMAooAQAjjgVZ
+   eJxjYKANMOEjjGkFBtLuUTAKRsEoGAXUBU16uDEhMF+UMrsP6WFiYu2mFFDi71G7h57dowA7AACqHyN5
   </data>
  </layer>
  <layer id="22" name="Walls" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJwz4WNgMKERJgRoZS8xboDJM4oyMDDhwXZi1MXMogi7FwLZIZKoGATeS9IGz6fA7r8i+Pm0tBukfrsEAoP46Goa+RkYmpBwMz/97JYXYGBQQMKKArjtRk9fzFjMo5XdMP8iy+Oy2wqaXmHutBej3G5kvY5YzCMF7wXatQ8J76eSv6mdx9Djex4d7UZP55T4m1A5SchuSuIbZN4iPdyYlv4mZPdCJLvnUDm+QWFGrN0D6W96x/dg8betGGZ8W2MRoxYGlcHEtHmEBbBjerS3aGU3ACLTp8Y=
+   eJwz4WNgMKERJgRoZS8xboDJM4oyMDDhwXZi1MXMogi7FwLZIZKoGATeS9IGz6fA7r8i+Pm0tBukfrsEAoP46Goa+RkYmpBwMz/97JYXYGBQQMKKArjtRk9fzFjMo5XdMP8iy+Oy2wqaXmHutBej3G5kvY5YzCMF7wXatQ8J76eSv6mdx9Djex4d7UZP55T4m1A5SchuSuIbZN4CHgRepIeKaelvkHno9iHjhUh2z6FyfIPCjFi7B9LftIjvweJvdwdI/YDNblsxzPi2xiJGLQwqg4lp8wgLYMf0aG/Rym4AycGmQQ==
   </data>
  </layer>
  <layer id="24" name="CullterBis" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpID/ItQ174IwA8NBTggGsfGB+aLUtRsdOIoNnN3UAk38EIwPkBLmpIBESQaGJEnqmUcK+A+yV4qwupGa1mD+JgTokc6ZRBF4MRLbWgyVj46ZSXQbNdP5HKDdj/QYGB4D8RMgfgrEz4D4ORB36BFvziEJCCaWDQNM+kD/AzELELMCMRsQswPxCix24/I3FzB/cEsRz0YHS4B2LQXiZST4FwaUJSCYWDY6OAK08ygQH8NjNy5/YwtPegFKw5wYgMvf+MITH1gHTFfpxhDMDsWFJuS7bxRQDgCLC0MD
+   eJxjYBgFpID/ItQ174IwA8NBTggGsfGB+aLUtRsdOIoNnN3UAk38EIwPkBLmpIBESQaGJEnqmUcK+A+yV4qwupGa1mD+JgTokc6ZRBF4MRLbWgyVj46ZSXQbNdP5HKDdj/QYGB4D8RMgfgrEz4D4uR5p5hySgGBi2eQAXP7mAuYPbini2ejgCNCvR4H4GIl+BgFlCQgmlo0OWPQZGFiBmE0ftx24/E1peFICKA1zYgAuf+MLT3xgHTCM0+0hGBmECJLvxlFAGQAAEzg9yQ==
   </data>
  </layer>
  <layer id="25" name="Clutter" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF6OC/COVmpEhix4TAQlHK7WaSwo4JAUcxyu0mFyD7+58kKk0JUJEgzW5agjlY7JlHI39jAxeEiVeLza3EAmLCHBnQ09+khAExIIQdtxy2MJxLYVoTYSNNfCgATv2BdgEqOGuCXfy4HgNDCxQPVXBIAoLR2coSEEwr0EWlOD5LZtgj+w8XmxB4S+N4tx7A+newAwBjXyDH
+   eJxjYBgF6OC/COVmpEhix4TAQlEEu0WcNDth6pmksGNCwFGMNPuoCZD9/U8SlSYXrASaqSJBmt20BHOw2DOPBv7GBS4IE68Wm1uJAcSGOTKgp79JCQNiQAg7bjlsYTiXwrQmwkaaODXBZQMGhitAfBWIXfQZGFyB2A2IO/QYGDr1yDeXU5+wGmFDoB+BWBSIW4DqW4G4DYhPAO09SaLdyOUqNjavM3Z9x4H2tEDxUAWHJCAYna0sAcG0AoTCnNYA2X+42DDQbs/A4O4AwSCgJgHBtAbWA1j/DnYAADKEMJg=
   </data>
  </layer>
- <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+ <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="115" template="../obj/gold.tx" x="93.4733" y="133.077"/>
-  <object id="117" template="../obj/enemy.tx" x="408.759" y="257.485">
+  <object id="117" template="../obj/enemy.tx" x="412.834" y="262.013">
    <properties>
     <property name="enemy" value="The Cheff"/>
    </properties>
@@ -41,19 +41,7 @@
     <property name="waypoints" value="183,184"/>
    </properties>
   </object>
-  <object id="162" template="../obj/enemy.tx" x="382.842" y="294.105">
-   <properties>
-    <property name="enemy" value="Bear"/>
-    <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="163,165"/>
-   </properties>
-  </object>
   <object id="163" template="../obj/waypoint.tx" x="223.619" y="204.276"/>
-  <object id="167" template="../obj/entry_up.tx" x="222.342" y="344.605">
-   <properties>
-    <property name="teleport" value=""/>
-   </properties>
-  </object>
   <object id="169" template="../obj/enemy.tx" x="173.373" y="118.246">
    <properties>
     <property name="enemy" value="Wizard Mercenary"/>
@@ -76,10 +64,9 @@
   <object id="185" template="../obj/manashards.tx" x="134.816" y="58.3119"/>
   <object id="186" template="../obj/manashards.tx" x="178.144" y="59.0319"/>
   <object id="192" template="../obj/waypoint.tx" x="327.356" y="203.896"/>
-  <object id="193" template="../obj/collision.tx" x="-14.9079" y="-24.3947" width="524.5" height="16"/>
-  <object id="194" template="../obj/collision.tx" x="-16.4079" y="346.105" width="527.5" height="16"/>
-  <object id="195" template="../obj/collision.tx" x="492.342" y="-22.9362" width="16" height="387.083"/>
-  <object id="196" template="../obj/collision.tx" x="-17.6579" y="-19.9362" width="16" height="382.083"/>
+  <object id="193" template="../obj/collision.tx" x="29.4688" y="23.1517" width="460.199" height="16"/>
+  <object id="195" template="../obj/collision.tx" x="479.663" y="27.3272" width="16" height="286.103"/>
+  <object id="196" template="../obj/collision.tx" x="27.6244" y="28.5159" width="16" height="334.084"/>
   <object id="197" template="../obj/door_up.tx" x="253.144" y="103.708">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
@@ -194,5 +181,6 @@
 </property>
    </properties>
   </object>
+  <object id="214" template="../obj/collision.tx" x="28.0216" y="296.553" width="464.275" height="16"/>
  </objectgroup>
 </map>
