@@ -110,19 +110,19 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;editions&quot;: [ &quot;A25&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;editions&quot;: [ &quot;A25&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;editions&quot;: [ &quot;A25&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
@@ -160,19 +160,19 @@
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;editions&quot;: [ &quot;A25&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;editions&quot;: [ &quot;A25&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
-    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;editions&quot;: [ &quot;A25&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]

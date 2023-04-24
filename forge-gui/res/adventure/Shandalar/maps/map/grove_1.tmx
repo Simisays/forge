@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="81">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzlkt0NhCAQhPcdrgKxMa8WtS4EeztInEhwVzFe4MFJJiH8zDcEiIiMPvr7IVq28RDGT4SshckCD+r1Pm+1fO6MAbsk12YZcb9juLksw09ZTjiXqtM8s0RWuE+JwJXu9m+hp6nMhVpzTWVu7feNGhWRb8DtGv2rt3Kj1+BZ1edK7Pj3pos+2FPaO+eCPandPlvnenmht9SH4145zR6ZXnf8A/HKNLw=
@@ -35,51 +35,95 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="111.667" y="31.4167"/>
-  <object id="50" template="../obj/enemy.tx" x="207.333" y="214.667">
+  <object id="50" template="../obj/enemy.tx" x="206.023" y="206.37">
    <properties>
     <property name="enemy" value="Dino"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="67,73,72"/>
    </properties>
   </object>
   <object id="52" template="../obj/gold.tx" x="449.583" y="96.25"/>
-  <object id="54" template="../obj/enemy.tx" x="147.5" y="64.3334">
-   <properties>
-    <property name="enemy" value="Elf warrior"/>
-   </properties>
-  </object>
-  <object id="55" template="../obj/enemy.tx" x="347.834" y="228.666">
+  <object id="55" template="../obj/enemy.tx" x="384.517" y="224.736">
    <properties>
     <property name="enemy" value="Spider"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="70,75,74"/>
    </properties>
   </object>
-  <object id="56" template="../obj/enemy.tx" x="279" y="85.6667">
+  <object id="56" template="../obj/enemy.tx" x="257.165" y="87.8502">
    <properties>
     <property name="enemy" value="Bear"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="80,79,77"/>
    </properties>
   </object>
-  <object id="57" template="../obj/enemy.tx" x="424.333" y="94.667">
+  <object id="57" template="../obj/enemy.tx" x="381.536" y="101.218">
    <properties>
     <property name="enemy" value="Green Wiz1"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="77,78,71,72,78"/>
    </properties>
   </object>
   <object id="58" template="../obj/enemy.tx" x="83" y="207.333">
    <properties>
     <property name="enemy" value="Snake"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="64,66,64,76"/>
    </properties>
   </object>
-  <object id="59" template="../obj/enemy.tx" x="79" y="127.333">
+  <object id="59" template="../obj/enemy.tx" x="104.765" y="98.9474">
    <properties>
     <property name="enemy" value="Hydra"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="64,66,69,68"/>
    </properties>
   </object>
-  <object id="60" template="../obj/enemy.tx" x="65" y="56.3333">
+  <object id="62" template="../obj/booster.tx" x="433.068" y="30.4297">
    <properties>
-    <property name="enemy" value="Elf"/>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
    </properties>
   </object>
-  <object id="61" template="../obj/enemy.tx" x="111.917" y="53.5833">
+  <object id="63" template="../obj/enemy.tx" x="111.219" y="68.8594">
    <properties>
-    <property name="enemy" value="High Elf"/>
+    <property name="enemy" value="Hidden Bush"/>
    </properties>
   </object>
+  <object id="64" template="../obj/waypoint.tx" x="103.359" y="143.535"/>
+  <object id="65" template="../obj/waypoint.tx" x="229.565" y="132.618"/>
+  <object id="66" template="../obj/waypoint.tx" x="92.0045" y="67.5493"/>
+  <object id="67" template="../obj/waypoint.tx" x="164.497" y="201.18"/>
+  <object id="68" template="../obj/waypoint.tx" x="40.0371" y="199.87"/>
+  <object id="69" template="../obj/waypoint.tx" x="37.4169" y="70.6062"/>
+  <object id="70" template="../obj/waypoint.tx" x="423.897" y="230.002"/>
+  <object id="71" template="../obj/waypoint.tx" x="425.207" y="132.618"/>
+  <object id="72" template="../obj/waypoint.tx" x="308.172" y="136.548"/>
+  <object id="73" template="../obj/waypoint.tx" x="282.843" y="201.18"/>
+  <object id="74" template="../obj/waypoint.tx" x="345.728" y="202.053"/>
+  <object id="75" template="../obj/waypoint.tx" x="347.911" y="239.173"/>
+  <object id="76" template="../obj/waypoint.tx" x="89.821" y="211.661"/>
+  <object id="77" template="../obj/waypoint.tx" x="363.196" y="53.5749"/>
+  <object id="78" template="../obj/waypoint.tx" x="370.62" y="137.421"/>
+  <object id="79" template="../obj/waypoint.tx" x="292.887" y="85.0173"/>
+  <object id="80" template="../obj/waypoint.tx" x="166.68" y="88.5109"/>
  </objectgroup>
 </map>
