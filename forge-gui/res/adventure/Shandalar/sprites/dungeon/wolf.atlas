@@ -32,33 +32,57 @@ Idle
   size: 40, 40  
 Idle 
   xy: 523, 152
-  size: 50, 40
+  size: 40, 40
 Idle 
   xy: 587, 152
+  size: 40, 40
+Idle 
+  xy: 11, 24
+  size: 40, 40    
+Idle 
+  xy: 75, 24
+  size: 40, 40         
+Idle 
+  xy: 139, 24
+  size: 40, 40    
+Idle 
+  xy: 203, 24
+  size: 40, 40    
+Idle 
+  xy: 267, 24
+  size: 40, 40         
+Idle 
+  xy: 331, 24
+  size: 40, 40    
+Idle 
+  xy: 395, 24
+  size: 40, 40  
+Idle 
+  xy: 459, 24
+  size: 40, 40  
+Walk 
+  xy: 11, 88
   size: 50, 40
 Walk 
-  xy: 11, 80
+  xy: 75, 88
   size: 50, 40
 Walk 
-  xy: 75, 80
+  xy: 139, 88
   size: 50, 40
 Walk 
-  xy: 139, 80
+  xy: 203, 88
   size: 50, 40
 Walk 
-  xy: 203, 80
+  xy: 267, 88
   size: 50, 40
 Walk 
-  xy: 267, 80
+  xy: 331, 88
   size: 50, 40
 Walk 
-  xy: 331, 80
+  xy: 395, 88
   size: 50, 40
 Walk 
-  xy: 395, 80
-  size: 50, 40
-Walk 
-  xy: 459, 80
+  xy: 459, 88
   size: 50, 40
 Attack 
   xy: 11, 216
@@ -76,20 +100,20 @@ Attack
   xy: 267, 216
   size: 50, 40
 Attack 
-  xy: 331, 68
-  size: 32, 28
+  xy: 331, 216
+  size: 50, 40
 Attack 
-  xy: 395, 68
-  size: 32, 28
+  xy: 395, 216
+  size: 50, 40
 Death
   xy: 11, 344
-  size: 40, 40
+  size: 50, 40
 Death
   xy: 75, 344
-  size: 40, 40
+  size: 50, 40
 Death
   xy: 139, 344
-  size: 40, 40
+  size: 50, 40
 Death
   xy: 203, 344
-  size: 40, 40
+  size: 50, 40

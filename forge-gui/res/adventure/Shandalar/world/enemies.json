@@ -7358,7 +7358,7 @@
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.8,
-	"speed": 31,
+	"speed": 18,
 	"scale": 0.55,
 	"life": 30,
 	"rewards": [
@@ -8692,6 +8692,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
+	"scale":0.75,
 	"life": 20,
 	"rewards": [
 		{
@@ -15579,27 +15580,50 @@
 		"decks/wolfboss.dck"
 	],
 	"spawnRate": 1,
+	"scale":0.5,
 	"difficulty": 0.1,
-	"speed": 26,
-	"life": 16,
+	"speed": 16,
+	"life": 20,
 	"rewards": [
 		{
-			"type": "randomCard",
+			"type": "deckCard",
+			"probability": 1,
 			"count": 2,
-			"addMaxCount": 8
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.6,
-			"count": 7,
-			"addMaxCount": 32
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 5
 		}
 	],
-	"colors": "GR",
+	"colors": "G",
 	"questTags": [
 		"Nocturnal",
 		"Animal",
-		"Humanoid",
 		"Human",
 		"Beast",
 		"Wild",
@@ -15607,8 +15631,6 @@
 		"Aggressive",
 		"Territorial",
 		"IdentityGreen",
-		"IdentityRed",
-		"IdentityGruul",
 		"BiomeGreen"
 	]
 },
