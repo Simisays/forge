@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="73">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydVUtOwzAQHSEoC+cWNaTis+MInCYHKUW0XAIOAcskED5LxAZW3AGBWOLB85SpazsRTxrFnZm+N+NxYktEFXmcbvk1bG6I9gqifWdl0ce1/7/GXCQ6HfVg/9Lxdy7nztl94fVgoe5U8mB2QBeolGYtPbWih9rYV0lNbaCDupDbDmhj324mPv920us3lAd61zV3KvaY0a5ihIJrMyA8AOZO9Y34x3af/7m7/v+ZWr+VRO+ln4XGgzxd6K9XADMJtTGPsfhyxN/luFzUGzuHDOw1010l9taqJ9bThF6t4k+yDnXR79GI+o+dHQrfaySu9+7lxD8PErr6XPGM+Hd4jjFTK3ocf1b+IXA9MV32h+dEAzNtpGfWtpSfdfiepPZ5FuTBz7SxOSI/NWMAZzvUXTj/udnkyPUfQ267f3bi3/O68Nq5b8g8OOeoK/Ye6po5Hpuv1r406zysdeZsZTZjqTibrpF7XQ7cX+hbczYSW8k8ukAXfBdmfc9wZ2qOnNUy80Ukv1T3l41wom7cFTnNX6G0fyk=
+   eJydVUtOw0AMtRCURXKLDqTicwtOk4OUIlouAYeAZRIInzUbWHEHBGLJmPFTnOl8Ip5kZWq7fv4lY4ioJoezHXeGLAuig5Lo0EpVDnat/69wLBKengawfm3j99bn3spD6fggPu9c/CAmwwvUirORmjrhQ26sqyWnzuNBXvDtMtzo2+3M+d/NBv6W0kDtOude2Z4S3HUooOCmyBBnwLFjdcP+sTv4f+6P/79Q57eK6L1ys9B4lKc1/dUKYCY+N+YxFV828Hc1zRf5hvaQgV5zuOtIb4164jyP8DXK/ixnnxf1nkzI/9TKscR7DdhDvTuK8Oq94hnxb3+PMVMjfGx/UfocOJ8QL+v9PdHATFupmbkNpWftvyexPi88P+g5bGiO8I/NGMBu+7wrq78otmOk6g8h1e6fvfD3vCkdd+obsvT2HHmFdknnzPbQfDX3VTGOw1znVjbFti1mZ9E5cq3rzP2FunXMVmwbmUfv8SLeZTHuGe5MHSMljcx8FfCv1P1lAjGRN+6KFOcvqmx+Iw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -36,27 +36,78 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="16.8337" y="79.5834"/>
-  <object id="52" template="../obj/gold.tx" x="48.9163" y="63.917"/>
+  <object id="52" template="../obj/gold.tx" x="339.916" y="143.417"/>
   <object id="54" template="../obj/enemy.tx" x="48.9849" y="84.0001">
    <properties>
     <property name="enemy" value="High Elf"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="55" template="../obj/enemy.tx" x="87.834" y="77.166">
    <properties>
     <property name="enemy" value="Elf warrior"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="56" template="../obj/enemy.tx" x="51.833" y="113">
    <properties>
     <property name="enemy" value="Elf"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="62" template="../obj/waypoint.tx" x="243.103" y="107.726"/>
-  <object id="63" template="../obj/enemy.tx" x="196.495" y="145.441">
+  <object id="63" template="../obj/enemy.tx" x="201.995" y="146.441">
    <properties>
     <property name="enemy" value="Forest Giant"/>
    </properties>
   </object>
+  <object id="64" template="../obj/enemy.tx" x="292.5" y="116">
+   <properties>
+    <property name="enemy" value="Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="62,65,66"/>
+   </properties>
+  </object>
+  <object id="65" template="../obj/waypoint.tx" x="369" y="145.5"/>
+  <object id="66" template="../obj/waypoint.tx" x="298" y="218"/>
+  <object id="67" template="../obj/enemy.tx" x="110" y="113.5">
+   <properties>
+    <property name="enemy" value="Elf warrior"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="69,68,70"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/waypoint.tx" x="172" y="128"/>
+  <object id="69" template="../obj/waypoint.tx" x="120.5" y="153.5"/>
+  <object id="70" template="../obj/waypoint.tx" x="147" y="76.5"/>
+  <object id="71" template="../obj/booster.tx" x="201" y="131">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;VOW&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="72" template="../obj/manashards.tx" x="397.5" y="143.5"/>
  </objectgroup>
 </map>
