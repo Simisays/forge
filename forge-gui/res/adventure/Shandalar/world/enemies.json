@@ -12952,15 +12952,7 @@
 	"scale": 0.4,
 	"life": 40,
 	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common"
-			]
-		},
+		}
 		{
 			"type": "deckCard",
 			"probability": 1,
