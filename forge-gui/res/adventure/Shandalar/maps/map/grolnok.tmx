@@ -243,7 +243,7 @@
     <property name="waypoints" value="85,65,84,83"/>
    </properties>
   </object>
-  <object id="98" template="../obj/treasure.tx" x="453.907" y="261.283">
+  <object id="98" template="../obj/treasure.tx" x="454.407" y="259.783">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -330,7 +330,7 @@
   <object id="151" template="../obj/gold.tx" x="790.5" y="375.5"/>
   <object id="152" template="../obj/gold.tx" x="708" y="196"/>
   <object id="153" template="../obj/gold.tx" x="807" y="375.5"/>
-  <object id="154" template="../obj/booster.tx" x="496.5" y="269">
+  <object id="154" template="../obj/booster.tx" x="473" y="259">
    <properties>
     <property name="reward">[
   {

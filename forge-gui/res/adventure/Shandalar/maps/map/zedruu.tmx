@@ -55,7 +55,7 @@
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="163" template="../obj/waypoint.tx" x="427.842" y="297.105"/>
+  <object id="163" template="../obj/waypoint.tx" x="603.842" y="306.605"/>
   <object id="165" template="../obj/waypoint.tx" x="58.569" y="451.878"/>
   <object id="169" template="../obj/enemy.tx" x="386.842" y="36.1053">
    <properties>
