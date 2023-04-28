@@ -190,7 +190,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
-	"scale": 0.9,
 	"life": 20,
 	"rewards": [
 		{
@@ -14207,7 +14206,7 @@
 	"name": "Sun Giant",
 	"sprite": "sprites/dungeon/ascendedtitan.atlas",
 	"deck": [
-		"decks/suntitan.dck"
+		"decks/sun titan.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,

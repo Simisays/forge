@@ -58,18 +58,21 @@
     &quot;editions&quot;: [ &quot;IKO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;IKO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;IKO&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;blue&quot; ],
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
 ]

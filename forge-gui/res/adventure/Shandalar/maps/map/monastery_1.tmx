@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="71">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
+ <layer id="7" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYMAOonkZGHbxoOIoXogciE1IDblAlgdTbCea2G4saqSxiFFqLzFg1N5Re0ftHbWX3vbCyltkPqjs3YskBiufcekhB2DzL8gv0byE1dDCXlLVDBV7QfFYx42KsdmLrmYPkfYCAOs1HD4=
+   eJxjYMAO3DgZGFZzkI5B+igB5Oqnlb0gcRimp7200jdq76i9o/YOD3uRzcBWRhGjhhx7CYkRo4Ye9tLTv8SEAan2YsOkqsEFAKhhG+s=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzr42Rg6MOCg03Ix22chDE2O3HZm8GNioezveh20spebPYQi0ftHbV31N5Re0ftHbr2AgD+aQfq
+   eJzr42Rg6MOCg03Ix22chDE2O3HZm8GNioezveh20tO/uNxBT3vpma5G7R21dzjZi6+sGI7+pZe9xIbrUPIvACvNFsI=
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy1ldsNwjAMRf3ZhHVYAfgCJNiLNRBf5bVVoXQEYoHVW+NUVWuuZFV5+ciJ7RIR3QuiTWjtmsYhfaNhMj/LrPM8qgGfWlXocrfJjur8fv5rlk5wro9psZ8O3LXBPAT7TPVlsqZyK4hBS/NxrLlDhff8GOHDg9unS2Hfuye3TIyzyi1+gzp8+J5ciaWEGq3BJ9aP1JAHV7RT/oWtazeXz2O4HDP7vxVtb8K6kjXMee+8whrNid/k3/nMwnxmZgN9WGT13iF7hkp6qhWvjiW3h3PnZdRIrk8KcypX56/ma+H/0Ivbx8b4uacyfxGJlspWsXsut0dzLfYb5aFmBA==
+   eJy1lUsOwjAMRL1synW4ArACJLgX10Bdld+tCoUjUAusTgenitQwklXl4zw5sV0RkVshsgm9Xbpx6L6lYzY/i6zrPOoFZ7KaMORuOzuS/37+a54q8BtjeuxHBu7aYR6C79N8mSrjerwUbgMxsJiP4xz3fI/ENybmpqpK9DsX/r3n5NYd40S5pW/Qhg8/J9diqaFGWzgT68dqKAfXtKPzjc21y/k8hasx6/nXou9NWFe2hjmfO6+wRmPSN/l3Pqswn5X5gj5s8npvyp5UWU/14uVYYns0d55OjcT6pDGncjl/mc/C/2Eu7hgb49eeqvxFKbIkW5VDv9ge5nrsN0BKabU=
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -26,7 +26,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYICA85wQupqXgSqAkDn45Ocz49d7zICB4bgB8eqroHZd4MSvzpYFlX8EaMdJQwaGU0B8Gog5DCHiJwww1fsg6TuPxR5kuyt5MfVQAiqIiLMqKsUrLgCLz1dIYi+R2Mhh0iIOoVeKIsTwsWHqkQG2uASFAzFhQW9AiX9JiTdq5V0YQI7LSjSz8bmLEv9iyzv4AKE8TSlAdg+M/RK7UjgIZcfPRwfUjjdyAXKcIrupHM192owItg4jA1bwE4n9C4d9xMTdK8JKUMA3YFivgLKDBFHl0P0BA7D4xOWeBzwMDA+B+BEQ3+fBrkZNAkKvQWKTA6hVTntDaeT0ixynAMdqO6E=
+   eJxjYICA85wQupqXgSqAkDn45Ocz49d7zICB4bgB8eqroHZd4MSvzpYFlX8EaMdJQwaGU0B8Gog5DCHiJwww1fsg6TuPxR5kuyt5MfVQAiqIiLMqMuI12ASCiQGw+HyFJPYSiY0cJi3iEHqlKEIMHxumHhlgi0tQOBATFvQGlPiXlHijVt6FAeS4rEQzG5+7KPEvtryDDxDK05QCZPfA2C+xK4WDUHb8fHRA7XgjFyDHKbKbytHcp82IYOswMmAFP5HYv3DYR0zcvSKsBAV8A4b1Cig7SBBVDt0fMACLT1zuecDDwPAQiB8B8X0e7GrUJCD0GiQ2OYCcchob8IbSyOkXOU4B80g8rw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -44,20 +44,20 @@
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="131.869" y="29.9355"/>
-  <object id="52" template="../obj/gold.tx" x="257.779" y="256.26"/>
-  <object id="53" template="../obj/enemy.tx" x="207.734" y="32.1933">
+  <object id="52" template="../obj/gold.tx" x="272.091" y="227.202"/>
+  <object id="53" template="../obj/enemy.tx" x="215.541" y="99.8509">
    <properties>
-    <property name="enemy" value="The Judge"/>
+    <property name="enemy" value="Human elite"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="63,62"/>
    </properties>
   </object>
-  <object id="54" template="../obj/enemy.tx" x="271.815" y="225.445">
+  <object id="54" template="../obj/enemy.tx" x="288.729" y="226.312">
    <properties>
     <property name="enemy" value="Hidden Snake"/>
    </properties>
   </object>
-  <object id="55" template="../obj/enemy.tx" x="215.312" y="123.091">
+  <object id="55" template="../obj/enemy.tx" x="215.746" y="123.525">
    <properties>
     <property name="enemy" value="White Wiz1"/>
     <property name="threatRange" type="int" value="40"/>
@@ -123,5 +123,33 @@
   <object id="67" template="../obj/waypoint.tx" x="265.666" y="178.926"/>
   <object id="68" template="../obj/waypoint.tx" x="270.003" y="28.8647"/>
   <object id="69" template="../obj/waypoint.tx" x="163.746" y="28.8647"/>
+  <object id="70" template="../obj/booster.tx" x="240.511" y="32.3343">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;IKO&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>
