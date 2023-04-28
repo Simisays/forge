@@ -186,22 +186,31 @@
 		"decks/angelwarrior.dck"
 	],
 	"ai": "",
-	"randomizeDeck": true,
+	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
 	"scale": 0.9,
-	"life": 11,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 5,
+			"colors": [
+				"White"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Angel"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "gold",
@@ -213,9 +222,17 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"White"
+			],
 			"rarity": [
-				"Rare"
-			]
+				"Rare",
+				"Common",
+				"Uncommon"
+			],
+			"colorType": "MonoColor",
+			"cardText": "gain life"
 		},
 		{
 			"type": "card",
@@ -223,25 +240,29 @@
 			"count": 1,
 			"rarity": [
 				"uncommon",
-				"common"
+				"common",
+				"Rare",
+				"Mythic Rare"
 			],
 			"cardTypes": [
 				"Land"
-			]
+			],
+			"colorType": "Colorless",
+			"cardText": "{W}"
 		}
 	],
-	"colors": "UB",
+	"colors": "W",
 	"questTags": [
-		"Animal",
-		"Prey",
-		"Swimming",
-		"Wild",
-		"Water",
-		"Tiny",
-		"IdentityBlue",
-		"IdentityBlack",
-		"IdentityDimir",
-		"BiomeBlue"
+		"Angel",
+		"Floating",
+		"Holy",
+		"Humanoid",
+		"IdentityWhite",
+		"Mythical",
+		"Warrior",
+		null,
+		null,
+		null
 	]
 },
 {
@@ -335,6 +356,7 @@
 	"deck": [
 		"decks/ape.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -507,34 +529,38 @@
 	"life": 25,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 6,
+			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"rarity": [
-				"Rare"
+				"uncommon",
+				"Rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Equipment"
+			],
+			"cardTypes": [
+				"Artifact"
 			]
 		},
 		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
+			"addMaxCount": 3,
+			"colors": [
+				"White"
 			],
-			"cardTypes": [
-				"Land"
-			]
+			"rarity": [
+				"Rare"
+			],
+			"subTypes": [
+				"Knight"
+			],
+			"cardText": "Equipment"
 		},
 		{
 			"type": "item",
@@ -549,6 +575,7 @@
 			"addMaxCount": 100
 		}
 	],
+	"colors": "WR",
 	"questTags": [
 		"Human",
 		"Soldier",
@@ -563,25 +590,27 @@
 	"name": "Artifact Warrior",
 	"sprite": "sprites/dungeon/artifactsoldier.atlas",
 	"deck": [
-		"decks/angelwarrior.dck"
+		"decks/artifactwarrior.dck"
 	],
 	"ai": "",
-	"randomizeDeck": true,
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 0.3,
 	"speed": 20,
-	"scale": 0.9,
-	"life": 11,
+	"life": 18,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 5,
 			"rarity": [
 				"common",
 				"uncommon"
-			]
+			],
+			"cardTypes": [
+				"Artifact"
+			],
+			"colorType": "Colorless"
 		},
 		{
 			"type": "gold",
@@ -591,11 +620,17 @@
 		},
 		{
 			"type": "card",
-			"probability": 0.5,
+			"probability": 0.4,
 			"count": 1,
 			"rarity": [
-				"Rare"
-			]
+				"Rare",
+				"Mythic Rare"
+			],
+			"cardTypes": [
+				"Planeswalker"
+			],
+			"colorType": "Colorless",
+			"cardText": "Karn"
 		},
 		{
 			"type": "card",
@@ -603,25 +638,28 @@
 			"count": 1,
 			"rarity": [
 				"uncommon",
-				"common"
+				"common",
+				"Rare"
 			],
 			"cardTypes": [
 				"Land"
-			]
+			],
+			"colorType": "Colorless",
+			"cardText": "{C}"
 		}
 	],
-	"colors": "UB",
+	"colors": "B",
 	"questTags": [
-		"Animal",
-		"Prey",
-		"Swimming",
-		"Wild",
-		"Water",
-		"Tiny",
-		"IdentityBlue",
-		"IdentityBlack",
-		"IdentityDimir",
-		"BiomeBlue"
+		"Guardian",
+		"Artifact",
+		"Furnace",
+		"IdentityColorless",
+		"Construct",
+		"Robot",
+		null,
+		null,
+		null,
+		null
 	]
 },
 {
@@ -630,6 +668,7 @@
 	"deck": [
 		"decks/ashmouth_devil.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -751,28 +790,38 @@
 		"decks/badger.dck"
 	],
 	"ai": "",
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 15,
 	"scale": 0.8,
-	"life": 10,
+	"life": 20,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Landfall"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
 			"rarity": [
-				"Rare"
+				"Rare",
+				"Mythic Rare"
+			],
+			"cardTypes": [
+				"Planeswalker"
 			]
 		},
 		{
@@ -787,13 +836,14 @@
 			"count": 1,
 			"rarity": [
 				"uncommon",
-				"common"
+				"common",
+				"Mythic Rare",
+				"Rare"
 			],
-			"cardTypes": [
-				"Land"
-			]
+			"cardText": "Badger"
 		}
 	],
+	"colors": "G",
 	"questTags": [
 		"Animal",
 		"Territorial",
@@ -897,19 +947,25 @@
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 30,
+	"speed": 25,
 	"scale": 0.8,
 	"life": 14,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Bat"
 		},
 		{
 			"type": "gold",
@@ -921,13 +977,17 @@
 			"type": "card",
 			"probability": 1,
 			"count": 1,
+			"addMaxCount": 3,
+			"colors": [
+				"Black"
+			],
 			"rarity": [
 				"uncommon",
-				"common"
+				"common",
+				"Rare"
 			],
-			"cardTypes": [
-				"Land"
-			]
+			"colorType": "MonoColor",
+			"cardText": "Bat"
 		}
 	],
 	"colors": "B",
@@ -1032,6 +1092,7 @@
 	"deck": [
 		"decks/beastmaster.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1241,6 +1302,7 @@
 	"deck": [
 		"decks/zombie_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -1687,10 +1749,17 @@
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Rare",
+				"Mythic Rare"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Boar"
 		},
 		{
 			"type": "card",
@@ -1701,7 +1770,8 @@
 			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
@@ -1799,10 +1869,16 @@
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Mythic Rare",
+				"Rare"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
@@ -1813,7 +1889,8 @@
 			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
@@ -2132,6 +2209,98 @@
 		"IdentityWhite",
 		"IdentitySelesnya",
 		"BiomeGreen"
+	]
+},
+{
+	"name": "Cephalid",
+	"sprite": "sprites/dungeon/cephalid.atlas",
+	"deck": [
+		"decks/cephalid.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.5,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"colors": [
+				"Black",
+				"Blue",
+				"White"
+			],
+			"rarity": [
+				"Common",
+				"Uncommon",
+				"Rare"
+			],
+			"subTypes": [
+				"Cephalid"
+			],
+			"colorType": "MultiColor"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5,
+			"colors": [
+				"Black",
+				"Blue",
+				"White"
+			],
+			"rarity": [
+				"Common",
+				"Uncommon",
+				"Rare"
+			],
+			"colorType": "MultiColor"
+		}
+	],
+	"questTags": [
+		"Cephalid",
+		"Intelligent",
+		"Humanoid",
+		"IdentityEsper",
+		"Large",
+		"Mystic",
+		"Octopus",
+		"Sneaky",
+		"Wandering",
+		null,
+		null,
+		null
 	]
 },
 {
@@ -3281,9 +3450,12 @@
 		},
 		{
 			"type": "item",
-			"probability": 1,
+			"probability": 0.3,
 			"count": 1,
-			"itemName": "Chicken Egg"
+			"itemName": "Chicken Egg",
+			"itemNames": [
+				"Chicken Egg"
+			]
 		}
 	],
 	"colors": "WG",
@@ -3496,7 +3668,7 @@
 	"name": "Copper Host Brutalizer",
 	"sprite": "sprites/copperhostbrutalizer.atlas",
 	"deck": [
-		"decks/copperhostbrutalizer.dck" 
+		"decks/copperhostbrutalizer.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -3664,14 +3836,25 @@
 	"life": 11,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 5,
+			"colors": [
+				"Blue"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Rare"
+			],
+			"subTypes": [
+				"Crab"
+			],
+			"cardTypes": [
+				"Creature"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "gold",
@@ -3727,18 +3910,22 @@
 	"life": 20,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 3,
-			"addMaxCount": 6
+			"addMaxCount": 6,
+			"subTypes": [
+				"Curse"
+			],
+			"cardTypes": [
+				"Enchantment"
+			]
 		},
 		{
-			"type": "card",
+			"type": "deckCard",
 			"probability": 0.5,
-			"count": 4,
-			"rarity": [
-				"Rare"
-			]
+			"count": 2,
+			"addMaxCount": 4
 		},
 		{
 			"type": "card",
@@ -3767,7 +3954,9 @@
 		"IdentityBlue",
 		"IdentityBlack",
 		"IdentityGrixis",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Evil",
+		"Curses"
 	]
 },
 {
@@ -3813,48 +4002,29 @@
 		"decks/darkenchanter.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 35,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
-			"count": 2,
-			"addMaxCount": 5
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
 			"count": 1,
-			"addMaxCount": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black",
+				"Green"
+			],
 			"rarity": [
-				"uncommon"
+				"rare",
+				"Uncommon"
 			],
 			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
+				"Enchantment"
 			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
+			"colorType": "Any"
 		},
 		{
 			"type": "deckCard",
@@ -3869,9 +4039,15 @@
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 300
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Enchantress's Presence "
 		}
 	],
 	"colors": "GB",
@@ -3883,7 +4059,8 @@
 		"Leader",
 		"Mystic",
 		"Enchanter",
-		"Unholy"
+		"Unholy",
+		"Evil"
 	]
 },
 {
@@ -4390,20 +4567,6 @@
 	"life": 12,
 	"rewards": [
 		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			]
-		},
-		{
 			"type": "gold",
 			"probability": 1,
 			"count": 50,
@@ -4412,24 +4575,42 @@
 		{
 			"type": "card",
 			"probability": 1,
-			"count": 1,
+			"count": 3,
+			"addMaxCount": 6,
+			"colors": [
+				"Blue",
+				"White"
+			],
 			"rarity": [
 				"uncommon",
-				"common"
+				"common",
+				"Rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Monk",
+				"Wizard",
+				"Advisor"
 			],
 			"cardTypes": [
-				"Land"
+				"Creature"
 			]
 		},
 		{
 			"type": "card",
 			"probability": 1,
 			"count": 1,
+			"addMaxCount": 2,
 			"colors": [
-				"Blue"
+				"Blue",
+				"White"
 			],
 			"rarity": [
 				"Rare"
+			],
+			"cardTypes": [
+				"Instant",
+				"Sorcery"
 			]
 		}
 	],
@@ -4551,7 +4732,8 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"uncommon"
+				"uncommon",
+				"Rare"
 			]
 		},
 		{
@@ -4581,6 +4763,7 @@
 			]
 		}
 	],
+	"colors": "W",
 	"questTags": [
 		"Predator",
 		"Prey",
@@ -4812,6 +4995,7 @@
 	"deck": [
 		"decks/drossgrimnarch.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -4844,7 +5028,7 @@
 		},
 		{
 			"type": "deckCard",
-			"probability": 0.50,
+			"probability": 0.5,
 			"count": 1,
 			"addMaxCount": 2,
 			"rarity": [
@@ -5269,6 +5453,7 @@
 	"deck": [
 		"decks/elephant.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -5276,10 +5461,13 @@
 	"life": 12,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"subTypes": [
+				"Elephant"
+			]
 		},
 		{
 			"type": "gold",
@@ -5290,7 +5478,8 @@
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 3,
+			"count": 1,
+			"addMaxCount": 3,
 			"colors": [
 				"White"
 			],
@@ -5301,13 +5490,13 @@
 	],
 	"colors": "W",
 	"questTags": [
-		"Golem",
-		"Elemental",
-		"Humanoid",
-		"IdentityWhite",
-		"IdentityRed",
-		"BiomeWhite",
-		"BiomeRed"
+		"Elephant",
+		"Beast",
+		"Wild",
+		"Huge",
+		"Wandering",
+		"IdentitySelesnya",
+		"Domesticated"
 	]
 },
 {
@@ -5576,13 +5765,22 @@
 	"life": 11,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 5,
+			"colors": [
+				"White",
+				"Green"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
+				"uncommon",
+				"Rare",
+				"Mythic Rare"
+			],
+			"subTypes": [
+				"Archer"
 			]
 		},
 		{
@@ -5612,18 +5810,18 @@
 			]
 		}
 	],
-	"colors": "UB",
+	"colors": "GW",
 	"questTags": [
-		"Animal",
-		"Prey",
-		"Swimming",
-		"Wild",
-		"Water",
-		"Tiny",
-		"IdentityBlue",
-		"IdentityBlack",
-		"IdentityDimir",
-		"BiomeBlue"
+		"Archer",
+		"Human",
+		"Elite",
+		"Guardian",
+		"IdentitySelesnya",
+		"Soldier",
+		null,
+		null,
+		null,
+		null
 	]
 },
 {
@@ -5711,6 +5909,15 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"Rare"
+			]
 		}
 	],
 	"colors": "B",
@@ -5718,7 +5925,9 @@
 		"Aberration",
 		"Floating",
 		"IdentityBlack",
-		"BiomeBlack"
+		"BiomeBlack",
+		"Horror",
+		"Evil"
 	]
 },
 {
@@ -5901,18 +6110,30 @@
 	"life": 15,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"colors": [
+				"Red"
+			],
+			"subTypes": [
+				"Giant"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 4,
+			"count": 2,
+			"addMaxCount": 3,
+			"colors": [
+				"Red"
+			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "gold",
@@ -6038,22 +6259,26 @@
 	"life": 13,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 8,
-			"rarity": [
-				"common",
-				"uncommon"
+			"subTypes": [
+				"Witch"
 			]
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Black"
+			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "gold",
@@ -6096,18 +6321,30 @@
 	"life": 25,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"subTypes": [
+				"Giant"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 4,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "gold",
@@ -6128,7 +6365,7 @@
 			]
 		}
 	],
-	"colors": "R",
+	"colors": "G",
 	"questTags": [
 		"Forest",
 		"Giant",
@@ -6225,6 +6462,10 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
+			"colors": [
+				"Green",
+				"Blue"
+			],
 			"rarity": [
 				"Rare"
 			]
@@ -8746,7 +8987,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"scale":0.75,
+	"scale": 0.75,
 	"life": 20,
 	"rewards": [
 		{
@@ -8830,7 +9071,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
-	"scale":0.5,
+	"scale": 0.5,
 	"life": 20,
 	"rewards": [
 		{
@@ -9083,6 +9324,67 @@
 		"IdentityRed",
 		"BiomeWhite",
 		"BiomeRed"
+	]
+},
+{
+	"name": "Homarid",
+	"sprite": "sprites/dungeon/homarid.atlas",
+	"deck": [
+		"decks/homarid.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.5,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"questTags": [
+		"Tiny",
+		"Insect",
+		"Nature",
+		"Territorial",
+		"Predator",
+		"Ambush",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"BiomeRed",
+		"BiomeWhite",
+		"BiomeBlue"
 	]
 },
 {
@@ -12881,6 +13183,66 @@
 	]
 },
 {
+	"name": "Scarab",
+	"sprite": "sprites/dungeon/scarab.atlas",
+	"deck": [
+		"decks/scarab.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.8,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"questTags": [
+		"Tiny",
+		"Insect",
+		"Nature",
+		"Territorial",
+		"Predator",
+		"Ambush",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityGolgari",
+		"BiomeRed",
+		"BiomeWhite",
+		"BiomeBlue"
+	]
+},
+{
 	"name": "Scarecrow",
 	"sprite": "sprites/dungeon/scarecrow.atlas",
 	"deck": [
@@ -12952,7 +13314,6 @@
 	"scale": 0.4,
 	"life": 40,
 	"rewards": [
-		}
 		{
 			"type": "deckCard",
 			"probability": 1,
@@ -14215,7 +14576,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale":0.75,
+	"scale": 0.75,
 	"life": 20,
 	"rewards": [
 		{
@@ -15626,9 +15987,9 @@
 		"decks/wolfboss.dck"
 	],
 	"spawnRate": 1,
-	"scale":0.5,
 	"difficulty": 0.1,
 	"speed": 16,
+	"scale": 0.5,
 	"life": 20,
 	"rewards": [
 		{
