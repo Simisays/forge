@@ -1264,6 +1264,7 @@
 	"deck": [
 		"decks/berserker.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
@@ -2221,8 +2222,8 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.5,
-	"life": 11,
+	"scale": 0.4,
+	"life": 25,
 	"rewards": [
 		{
 			"type": "card",
@@ -2242,7 +2243,7 @@
 			"subTypes": [
 				"Cephalid"
 			],
-			"colorType": "MultiColor"
+			"colorType": "Any"
 		},
 		{
 			"type": "card",
@@ -4917,6 +4918,7 @@
 	"deck": [
 		"decks/drossgladiator.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 35,
@@ -6604,22 +6606,28 @@
 	"life": 10,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
 				"uncommon"
-			]
+			],
+			"cardText": "Saproling"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
+			"colors": [
+				"Black",
+				"Green"
+			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "Any"
 		},
 		{
 			"type": "gold",
@@ -6638,6 +6646,25 @@
 			"cardTypes": [
 				"Land"
 			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green",
+				"Black"
+			],
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			],
+			"subTypes": [
+				"Fungus"
+			],
+			"colorType": "Any"
 		}
 	],
 	"colors": "G",
@@ -7039,6 +7066,7 @@
 		"decks/miniboss/garruk.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 1,
 	"speed": 30,
@@ -7658,15 +7686,32 @@
 	"life": 30,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"colors": [
+				"Red",
+				"Green"
+			],
+			"rarity": [
+				"Rare",
+				"Uncommon",
+				"Common"
+			],
+			"subTypes": [
+				"Ape"
+			]
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
-			"count": 4,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green",
+				"Red"
+			],
 			"rarity": [
 				"Rare"
 			]
@@ -7741,9 +7786,13 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 4,
+			"colors": [
+				"Red"
+			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "gold",
@@ -7767,6 +7816,7 @@
 	"deck": [
 		"decks/goblin_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
@@ -7821,6 +7871,7 @@
 	"deck": [
 		"decks/goblin_artificer.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.3,
 	"speed": 27,
@@ -7883,6 +7934,7 @@
 	"deck": [
 		"decks/goblin_good.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
@@ -7997,6 +8049,7 @@
 	"deck": [
 		"decks/goblin_mid.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 28,
@@ -8045,6 +8098,7 @@
 	"deck": [
 		"decks/golem.json"
 	],
+	"ai": "",
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -8094,6 +8148,7 @@
 	"deck": [
 		"decks/golem.json"
 	],
+	"ai": "",
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -8154,6 +8209,7 @@
 	"deck": [
 		"decks/gorgon.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -8237,6 +8293,7 @@
 	"deck": [
 		"decks/gorgon_2.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -8320,6 +8377,7 @@
 	"deck": [
 		"decks/beast_green.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
@@ -8402,6 +8460,7 @@
 	"deck": [
 		"decks/green_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -8483,6 +8542,7 @@
 	"deck": [
 		"decks/trample.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -8564,6 +8624,7 @@
 	"deck": [
 		"decks/ramp.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -8899,6 +8960,7 @@
 	"deck": [
 		"decks/hellhound.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -8984,6 +9046,7 @@
 	"deck": [
 		"decks/plant.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -9001,40 +9064,8 @@
 			]
 		},
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
 			"count": 1,
 			"rarity": [
 				"rare"
@@ -9052,14 +9083,14 @@
 	],
 	"colors": "GU",
 	"questTags": [
-		"Animal",
+		"Beast",
 		"Wild",
-		"Nature",
-		"Territorial",
-		"Predator",
 		"IdentityGreen",
-		"IdentityBlue",
-		"IdentitySimic"
+		"Hidden",
+		"Sneaky",
+		"Plant",
+		null,
+		null
 	]
 },
 {
@@ -9068,6 +9099,7 @@
 	"deck": [
 		"decks/snake.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -9085,39 +9117,7 @@
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 0.1,
 			"count": 1,
 			"rarity": [
@@ -9136,14 +9136,14 @@
 	],
 	"colors": "GU",
 	"questTags": [
-		"Animal",
-		"Wild",
-		"Nature",
-		"Territorial",
-		"Predator",
+		"Snake",
+		"Hidden",
+		"Sneaky",
+		"Ambush",
 		"IdentityGreen",
-		"IdentityBlue",
-		"IdentitySimic"
+		null,
+		null,
+		null
 	]
 },
 {
@@ -9152,6 +9152,7 @@
 	"deck": [
 		"decks/elf_good.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 26,
@@ -9285,6 +9286,7 @@
 	"deck": [
 		"decks/hippo.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -9317,13 +9319,13 @@
 	],
 	"colors": "W",
 	"questTags": [
-		"Golem",
-		"Elemental",
-		"Humanoid",
-		"IdentityWhite",
-		"IdentityRed",
-		"BiomeWhite",
-		"BiomeRed"
+		"Beast",
+		"Wild",
+		"Huge",
+		"Forest",
+		"Water",
+		"Territorial",
+		"IdentityGreen"
 	]
 },
 {
@@ -9336,8 +9338,8 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.5,
-	"life": 11,
+	"scale": 0.45,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -11735,6 +11737,7 @@
 	"deck": [
 		"decks/miniboss/nahiri.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -12612,7 +12615,8 @@
 			"count": 1,
 			"rarity": [
 				"Rare"
-			]
+			],
+			"cardText": "Rat"
 		},
 		{
 			"type": "gold",
@@ -12661,14 +12665,21 @@
 	"life": 12,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
 			"addMaxCount": 4,
+			"colors": [
+				"Black",
+				"Blue"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Raven"
 		},
 		{
 			"type": "card",
@@ -12697,6 +12708,7 @@
 			]
 		}
 	],
+	"colors": "BU",
 	"questTags": [
 		"Bird",
 		"Flying",
@@ -13016,6 +13028,7 @@
 	"deck": [
 		"decks/sandgolem.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -13062,6 +13075,7 @@
 	"deck": [
 		"decks/sandwurm.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 13,
@@ -13091,7 +13105,7 @@
 			]
 		}
 	],
-	"colors": "W",
+	"colors": "G",
 	"questTags": [
 		"Wurm",
 		"Nature",
@@ -13105,6 +13119,7 @@
 	"deck": [
 		"decks/satyr.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -13192,7 +13207,8 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"life": 11,
+	"scale": 0.75,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13204,9 +13220,13 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
+			"colors": [
+				"Black"
+			],
 			"rarity": [
 				"Rare"
-			]
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
@@ -13219,27 +13239,22 @@
 			"cardTypes": [
 				"Land"
 			]
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 50,
-			"addMaxCount": 100
 		}
 	],
+	"colors": "B",
 	"questTags": [
-		"Tiny",
 		"Insect",
+		"Small",
+		"Flying",
+		"Beast",
 		"Nature",
-		"Territorial",
-		"Predator",
-		"Ambush",
 		"IdentityBlack",
-		"IdentityGreen",
-		"IdentityGolgari",
-		"BiomeRed",
-		"BiomeWhite",
-		"BiomeBlue"
+		"Scarab",
+		null,
+		null,
+		null,
+		null,
+		null
 	]
 },
 {
@@ -13248,6 +13263,7 @@
 	"deck": [
 		"decks/scarecrow.dck"
 	],
+	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -13292,7 +13308,7 @@
 			]
 		}
 	],
-	"colors": "U",
+	"colors": "B",
 	"questTags": [
 		"Construct",
 		"Nature",
@@ -13307,6 +13323,8 @@
 	"deck": [
 		"decks/scarecrowcaptain.dck"
 	],
+	"ai": "",
+	"boss": true,
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -13745,6 +13763,7 @@
 	"deck": [
 		"decks/sliver.json"
 	],
+	"ai": "",
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -13780,6 +13799,7 @@
 		"decks/miniboss/slobad.dck"
 	],
 	"ai": "",
+	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 15,
@@ -13863,6 +13883,7 @@
 	"deck": [
 		"decks/boss/sliver_queen.dck"
 	],
+	"ai": "",
 	"boss": true,
 	"speed": 1,
 	"life": 100,
@@ -14073,16 +14094,24 @@
 	"deck": [
 		"decks/stormtitan.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 25,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 8
+			"addMaxCount": 8,
+			"colors": [
+				"Blue"
+			],
+			"subTypes": [
+				"Giant"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "gold",
@@ -14102,15 +14131,15 @@
 			]
 		}
 	],
-	"colors": "W",
+	"colors": "U",
 	"questTags": [
-		"Golem",
-		"Elemental",
 		"Humanoid",
-		"IdentityWhite",
-		"IdentityRed",
-		"BiomeWhite",
-		"BiomeRed"
+		"IdentityBlue",
+		"Giant",
+		"Huge",
+		"Aberration",
+		"Aggressive",
+		"Leader"
 	]
 },
 {
@@ -14163,6 +14192,7 @@
 			]
 		}
 	],
+	"colors": "W",
 	"questTags": [
 		"Cat",
 		"Animal",
@@ -14185,10 +14215,17 @@
 	"life": 20,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4
+			"addMaxCount": 4,
+			"colors": [
+				"White"
+			],
+			"subTypes": [
+				"Giant"
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "card",
@@ -14217,7 +14254,7 @@
 			]
 		}
 	],
-	"colors": "R",
+	"colors": "W",
 	"questTags": [
 		"Sun",
 		"Giant",
@@ -14232,6 +14269,7 @@
 	"deck": [
 		"decks/squirrel.dck"
 	],
+	"ai": "",
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -14239,14 +14277,20 @@
 	"life": 13,
 	"rewards": [
 		{
-			"type": "deckCard",
+			"type": "card",
 			"probability": 1,
 			"count": 3,
 			"addMaxCount": 6,
+			"colors": [
+				"Green"
+			],
 			"rarity": [
 				"common",
-				"uncommon"
-			]
+				"uncommon",
+				"Rare"
+			],
+			"colorType": "MonoColor",
+			"cardText": "Squirrel"
 		},
 		{
 			"type": "gold",
@@ -14276,6 +14320,7 @@
 	"deck": [
 		"decks/swamptroll.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -14374,6 +14419,7 @@
 	"deck": [
 		"decks/symbiote.dck"
 	],
+	"ai": "",
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 27,
@@ -14567,61 +14613,6 @@
 	]
 },
 {
-	"name": "The Judge",
-	"sprite": "sprites/dungeon/thejudge.atlas",
-	"deck": [
-		"decks/thejudge.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 23,
-	"scale": 0.75,
-	"life": 20,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 4,
-			"rarity": [
-				"Rare"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 50,
-			"addMaxCount": 200
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		}
-	],
-	"colors": "R",
-	"questTags": [
-		"Sun",
-		"Giant",
-		"Warrior",
-		"Territorial",
-		"IdentityWhite"
-	]
-},
-{
 	"name": "Tibalt",
 	"sprite": "sprites/boss/tibalt.atlas",
 	"deck": [
@@ -14763,7 +14754,8 @@
 		"Devil",
 		"Flying",
 		"Aggressive",
-		"IdentityBlack"
+		"IdentityBlack",
+		"Evil"
 	]
 },
 {
@@ -15438,6 +15430,7 @@
 			]
 		}
 	],
+	"colors": "U",
 	"questTags": [
 		"Aberration",
 		"Sneaky",
@@ -15882,6 +15875,7 @@
 			]
 		}
 	],
+	"colors": "B",
 	"questTags": [
 		"Subterranean",
 		"Animal",
@@ -15986,6 +15980,7 @@
 	"deck": [
 		"decks/wolfboss.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
@@ -16144,6 +16139,7 @@
 	"deck": [
 		"decks/water_elemental.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -16188,6 +16184,7 @@
 	"deck": [
 		"decks/witch.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 12,
@@ -16455,6 +16452,7 @@
 	"deck": [
 		"decks/miniboss/zedruu.dck"
 	],
+	"ai": "",
 	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -16466,25 +16464,25 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"cardName": "Jace, the Mind Sculptor"
+			"cardName": "Zedruu the Greathearted"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"cardName": "Jace, the Perfected Mind"
+			"cardName": "Approach of the Second Sun"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"cardName": "Jace's Defeat"
+			"cardName": "Akroan Horse"
 		},
 		{
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"cardName": "Treasure Cruise"
+			"cardName": "Nine Lives"
 		},
 		{
 			"type": "card",
@@ -16496,7 +16494,7 @@
 			"type": "card",
 			"probability": 0.5,
 			"count": 1,
-			"cardName": "Counterspell"
+			"cardName": "Role Reversal"
 		},
 		{
 			"type": "gold",
@@ -16508,18 +16506,22 @@
 			"type": "item",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Jace's Signature Hoodie"
+			"itemName": "Jace's Signature Hoodie",
+			"itemNames": [
+				"Zedruu's Lantern"
+			]
 		}
 	],
-	"colors": "UW",
+	"colors": "WUBR",
 	"questTags": [
 		"Boss",
-		"Jace",
-		"Planeswalker",
+		"Minotaur",
+		"IdentityJeskai",
+		"Monk",
+		"Humanoid",
 		"Illusionist",
-		"IdentityBlue",
-		"IdentityWhite",
-		"IdentityAzorius"
+		"Leader",
+		"Large"
 	]
 },
 {
@@ -16572,6 +16574,7 @@
 	"deck": [
 		"decks/zombie_good.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
