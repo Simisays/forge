@@ -592,3 +592,6 @@ farm
 hall_of_flame
   xy: 194, 864
   size: 32, 32     
+ruinedcity
+  xy: 319, 96
+  size: 50, 30     

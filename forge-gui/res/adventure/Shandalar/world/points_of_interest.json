@@ -3245,6 +3245,19 @@
 	]
 },
 {
+	"name": "Zedruu City",
+	"type": "cave",
+	"count": 2,
+	"spriteAtlas": "maps/tileset/buildings.atlas",
+	"sprite": "ruinedcity",
+	"map": "maps/map/zedruu.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"BiomeRed",
+		"Boss"
+	]
+},
+{
 	"name": "Zombie Town",
 	"type": "dungeon",
 	"count": 1,

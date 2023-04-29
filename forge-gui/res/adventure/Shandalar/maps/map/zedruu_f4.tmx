@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="44" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="35" nextobjectid="225">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
+ <layer id="34" name="BackGroundDirt" width="44" height="33">
+  <data encoding="base64" compression="zlib">
+   eJztl0EKwCAMBL32k/3/M3oqaEiz2xZKxQkMiCRmoidbG2PfRvq9c51FrOlzr2qqcHtH35ib+VS+zqyqv+Og7li5qTPuuFZzO/lZ7ze+jqczw9P87K3UjF/6/u18AAAAAAAAWJfZ/pyz+QKsyAFjjCLo
+  </data>
+ </layer>
+ <layer id="33" name="Background" width="44" height="33">
+  <data encoding="base64" compression="zlib">
+   eJztk1EKgzAMhvPU6sV0R5geR8XdadtxnEdQH00fCnaUZLoNFf4Pfiii8StJiAAAAAAAAAAAAHA2WkuUmzAXs7fVOtwdzubcK77ZwXoi+TrXmw2ftTb+buzbf9zP+d4TogfnmYT/e3f1eGdpHzo+v4zev7XE9jAXXLVa3rnic81pNtTRGFKikTOl39c64g7H5mfJHs6S05X7UHBKoR+/nlsNyemT+fG+3UbvGUNPJ9w=
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+  <object id="122" template="../obj/enemy.tx" x="102.042" y="77.771">
+   <properties>
+    <property name="enemy" value="Red Wiz1"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="183,184"/>
+   </properties>
+  </object>
+  <object id="137" template="../obj/enemy.tx" x="76.763" y="296.23">
+   <properties>
+    <property name="enemy" value="Archer Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="162" template="../obj/enemy.tx" x="494.842" y="79.105">
+   <properties>
+    <property name="enemy" value="Camel"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="163" template="../obj/waypoint.tx" x="603.842" y="194.605"/>
+  <object id="165" template="../obj/waypoint.tx" x="58.569" y="339.878"/>
+  <object id="172" template="../obj/waypoint.tx" x="274.842" y="50.105"/>
+  <object id="173" template="../obj/waypoint.tx" x="127.842" y="43.105"/>
+  <object id="175" template="../obj/waypoint.tx" x="638.342" y="82.105"/>
+  <object id="178" template="../obj/enemy.tx" x="495.342" y="39.105">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="180" template="../obj/waypoint.tx" x="199.842" y="50.105"/>
+  <object id="183" template="../obj/waypoint.tx" x="105.842" y="27.605"/>
+  <object id="184" template="../obj/waypoint.tx" x="105.342" y="109.105"/>
+  <object id="188" template="../obj/manashards.tx" x="156.797" y="213.878"/>
+  <object id="189" template="../obj/waypoint.tx" x="460.342" y="38.105"/>
+  <object id="191" template="../obj/waypoint.tx" x="325.842" y="23.105"/>
+  <object id="194" template="../obj/collision.tx" x="-3.9079" y="521.105" width="704" height="16"/>
+  <object id="195" template="../obj/collision.tx" x="702.342" y="-7.9362" width="16" height="538.083"/>
+  <object id="196" template="../obj/collision.tx" x="-17.6579" y="-8.9362" width="16" height="547.083"/>
+  <object id="199" template="../obj/waypoint.tx" x="202.342" y="139.605"/>
+  <object id="201" template="../obj/enemy.tx" x="579.342" y="74.605">
+   <properties>
+    <property name="enemy" value="Camel"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="202" template="../obj/enemy.tx" x="123.342" y="274.105">
+   <properties>
+    <property name="enemy" value="Archer Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="205" template="../obj/enemy.tx" x="62.8421" y="345.605">
+   <properties>
+    <property name="enemy" value="Minotaur Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="181,192"/>
+   </properties>
+  </object>
+  <object id="206" template="../obj/enemy.tx" x="605.842" y="254.605">
+   <properties>
+    <property name="enemy" value="Minotaur Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+    <property name="waypoints" value="181,192"/>
+   </properties>
+  </object>
+  <object id="210" template="../obj/enemy.tx" x="317.342" y="38.605">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="211" template="../obj/enemy.tx" x="174.842" y="40.105">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="213" template="../obj/enemy.tx" x="123.842" y="151.605">
+   <properties>
+    <property name="enemy" value="Human Mercenary"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="191,190,189"/>
+   </properties>
+  </object>
+  <object id="214" template="../obj/enemy.tx" x="381.842" y="40.605">
+   <properties>
+    <property name="enemy" value="Guard Construct"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="179,180,198,171,176,174,191"/>
+   </properties>
+  </object>
+  <object id="223" template="../obj/door_up.tx" x="463.842" y="524.605">
+   <properties>
+    <property name="teleport" value="maps/map/zedruu_f4.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

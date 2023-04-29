@@ -23,6 +23,9 @@
   </data>
  </layer>
  <layer id="25" name="Clutter" width="31" height="22">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgF6OC/COVmpEhix4TAQlEEu0WcNDth6pmksGNCwFGMNPuoCZD9/U8SlSYXrASaqSJBmt20BHOw2DOPBv7GBS4IE68Wm1uJAcSGOTKgp79JCQNiQAg7bjlsYTiXwrQmwkaaODXBZQMGhitAfBWIXfQZGFyB2A2IO/QYGDr1yDeXU5+wGmFDoB+BWBSIW4DqW4G4DYhPAO09SaLdyOUqNjavM3Z9x4H2tEDxUAWHJCAYna0sAcG0AoTCnNYA2X+42DDQbs/A4O4AwSCgJgHBtAbWA1j/DnYAADKEMJg=
   </data>

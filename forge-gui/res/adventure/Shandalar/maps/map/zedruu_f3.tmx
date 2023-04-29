@@ -23,6 +23,9 @@
   </data>
  </layer>
  <layer id="29" name="Teleport" width="29" height="20">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRQCx4yDPQLhgFo2AU0AIAAJvdAO4=
   </data>

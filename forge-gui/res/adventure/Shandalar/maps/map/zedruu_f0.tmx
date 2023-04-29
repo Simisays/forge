@@ -23,6 +23,9 @@
   </data>
  </layer>
  <layer id="25" name="Clutter Biss" width="35" height="35">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJztl0FOwzAQRS2xiVkjAdfgAE0WhFZZsELAebhEuUEL6XEKLetA4RjYcr4ytTxO4yh1F/mSJaeJnZeZP5NUiFGjhtEiEeItiU1hVEkhfmRsCl5PqRDPaWwKo7nieHWwDJlPvfeS2f8ia87/SjP+1NjVc9eas9twDr33e+L2y4Ni+VSxKdX5VWKu+5ZmlMwarZcAnpxw4PkRA8w1z0dqmIb0N+oH8blzjJ3cZwLXUMoZDjqmJCbwUV8P01xgr6r2gPbEoSxFHbNQ/9JcuPwKJniVsswslqpmn1p7HKpCNrXQ5sOqZiod12sWrdwTmzZxvd7uIUtHHtdp493HrNlPx2YWGBuOkeYFsdPHeG7EwlYuw1jgfa4G4BfEjh5zLD4P+4Qc5bKb59YkL1S6XkLytLDeKV3Wop/YfqI9oUtPpnXhe5dwLHQ9fBVaz1Quv/j6qO2Vgrwf+vZe2y/ogfQ3Vw1DtE/35bFZ8Jxda7MiPNw3kE+uGNi13JWn7XuGE/1miS1f/c0z9Y2bmTn8upkIsVXja3IEOKKNuv822/frpZpfqXF9Iv8JTkXnN+55DN1Hvv+o4+gfdkO4Ew==
   </data>
