@@ -1921,6 +1921,75 @@
 	]
 },
 {
+	"name": "Camel",
+	"nameOverride": "",
+	"sprite": "sprites/dungeon/camel.atlas",
+	"deck": [
+		"decks/camel.dck"
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.8,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Animal",
+		"Desert",
+		"Domesticated",
+		"Beast",
+		"IdentityWhite",
+		null,
+		null,
+		null,
+		null,
+		null
+	]
+},
+{
 	"name": "Cat",
 	"sprite": "sprites/lion.atlas",
 	"deck": [
@@ -5157,6 +5226,92 @@
 	]
 },
 {
+	"name": "Dwarf Mercenary",
+	"nameOverride": "",
+	"sprite": "sprites/dwarf_4.atlas",
+	"deck": [
+		"decks/dwarfmercenary.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Soldier",
+		"IdentityGreen",
+		"Mercenary",
+		"IdentityGruul",
+		"IdentityRed",
+		"Dwarf",
+		null,
+		null,
+		null
+	]
+},
+{
 	"name": "Efreet",
 	"sprite": "sprites/efreet_2.atlas",
 	"deck": [
@@ -6013,6 +6168,92 @@
 		"IdentityBlue",
 		"IdentitySultai",
 		"BiomeGreen"
+	]
+},
+{
+	"name": "Farmer",
+	"nameOverride": "",
+	"sprite": "sprites/farmer.atlas",
+	"deck": [
+		"decks/farmer.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Human",
+		"Religious",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"Mercenary",
+		"Peasant",
+		"Farmer",
+		"Poor"
 	]
 },
 {
@@ -7533,6 +7774,74 @@
 		"Phyrexian",
 		"Humanoid",
 		"IdentityBlue"
+	]
+},
+{
+	"name": "Grave Titan",
+	"nameOverride": "",
+	"sprite": "sprites/dungeon/gravetitan.atlas",
+	"deck": [
+		"decks/gravetitan.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"subTypes": [
+				"Giant"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"addMaxCount": 3,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 200
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"Grave",
+		"Zombie",
+		"IdentityBlack"
 	]
 },
 {
@@ -9533,6 +9842,7 @@
 	"deck": [
 		"decks/horsemanship.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -9708,6 +10018,92 @@
 		"IdentityBlack",
 		"IdentityOrzhov",
 		"BiomeWhite"
+	]
+},
+{
+	"name": "Human Mercenary",
+	"nameOverride": "",
+	"sprite": "sprites/swordsman_3.atlas",
+	"deck": [
+		"decks/humanmercenary.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Soldier",
+		"Human",
+		"Religious",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"Mercenary",
+		null,
+		null
 	]
 },
 {
@@ -10409,6 +10805,7 @@
 	"deck": [
 		"decks/knight.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -10445,6 +10842,92 @@
 		"Warrior",
 		"IdentityWhite",
 		"BiomeWhite"
+	]
+},
+{
+	"name": "Knight Mercenary",
+	"nameOverride": "",
+	"sprite": "sprites/cavalier_2.atlas",
+	"deck": [
+		"decks/knightmercenary.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "UW",
+	"questTags": [
+		"Soldier",
+		"Human",
+		"Religious",
+		"IdentityGreen",
+		"IdentityWhite",
+		"IdentitySelesnya",
+		"Mercenary",
+		null,
+		null
 	]
 },
 {
@@ -10517,6 +11000,7 @@
 	"deck": [
 		"decks/kor_warrior.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -10573,6 +11057,7 @@
 	"deck": [
 		"decks/lich.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -10698,6 +11183,7 @@
 	"deck": [
 		"decks/lightning_elemental.dck"
 	],
+	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -10938,6 +11424,107 @@
 		"Elemental",
 		"Subterranean",
 		"IdentityRed"
+	]
+},
+{
+	"name": "Master Warlock",
+	"nameOverride": "",
+	"sprite": "sprites/dungeon/warlockmaster.atlas",
+	"deck": [
+		"decks/warlockmaster.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.8,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Asceticism"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Golgari Grave-Troll"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Gyome, Master Chef"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BR",
+	"questTags": [
+		"Humanoid",
+		"Leader",
+		"Human",
+		"Boss",
+		"Evil",
+		"Warlock",
+		"Intelligent",
+		null
 	]
 },
 {
@@ -11429,6 +12016,7 @@
 	"deck": [
 		"decks/minotaur.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -11511,6 +12099,7 @@
 	"deck": [
 		"decks/minotaur.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -11597,6 +12186,7 @@
 		"decks/angel.json",
 		"decks/monk.json"
 	],
+	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -14613,6 +15203,107 @@
 	]
 },
 {
+	"name": "The Cheff",
+	"nameOverride": "",
+	"sprite": "sprites/dungeon/ironcheffboss.atlas",
+	"deck": [
+		"decks/thecheff.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.8,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 5
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Asceticism"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Golgari Grave-Troll"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Gyome, Master Chef"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GBR",
+	"questTags": [
+		"Humanoid",
+		"IdentityGreen",
+		"Leader",
+		"IdentityGolgari",
+		"Cook",
+		"Human",
+		"Boss",
+		null
+	]
+},
+{
 	"name": "Tibalt",
 	"sprite": "sprites/boss/tibalt.atlas",
 	"deck": [
@@ -15548,6 +16239,7 @@
 	"deck": [
 		"decks/white_dwarf.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
@@ -15582,6 +16274,7 @@
 	"deck": [
 		"decks/white_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -15664,6 +16357,7 @@
 	"deck": [
 		"decks/basri.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -15747,6 +16441,7 @@
 	"deck": [
 		"decks/human_soldier_token.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -16370,6 +17065,7 @@
 	"deck": [
 		"decks/yeti.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -16614,276 +17310,6 @@
 		"Leader",
 		"IdentityBlack",
 		"BiomeBlack"
-	]
-},
-{
-	"name": "Grave Titan",
-	"nameOverride": "",
-	"sprite": "sprites/dungeon/gravetitan.atlas",
-	"deck": [
-		"decks/gravetitan.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 23,
-	"life": 15,
-	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"colors": [
-				"Black"
-			],
-			"subTypes": [
-				"Giant"
-			],
-			"colorType": "MonoColor"
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 2,
-			"addMaxCount": 3,
-			"colors": [
-				"Black"
-			],
-			"rarity": [
-				"Rare"
-			],
-			"colorType": "MonoColor"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 50,
-			"addMaxCount": 200
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		}
-	],
-	"colors": "B",
-	"questTags": [
-		"Giant",
-		"Warrior",
-		"Territorial",
-		"Grave",
-		"Zombie",
-		"IdentityBlack"
-	]
-},
-{
-	"name": "The Cheff",
-	"nameOverride": "",
-	"sprite": "sprites/dungeon/ironcheffboss.atlas",
-	"deck": [
-		"decks/thecheff.dck"
-	],
-	"ai": "",
-	"boss": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 25,
-	"scale": 0.8,
-	"life": 35,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 5
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"cardName": "Asceticism"
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"cardName": "Golgari Grave-Troll"
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"cardName": "Gyome, Master Chef"
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "GBR",
-	"questTags": [
-		"Humanoid",
-		"IdentityGreen",
-		"Leader",
-		"IdentityGolgari",
-		"Cook",
-		"Human",
-		"Boss",
-		null
-	]
-},
-{
-	"name": "Master Warlock",
-	"nameOverride": "",
-	"sprite": "sprites/dungeon/warlockmaster.atlas",
-	"deck": [
-		"decks/warlockmaster.dck"
-	],
-	"ai": "",
-	"boss": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 25,
-	"scale": 0.8,
-	"life": 35,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 5
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"cardName": "Asceticism"
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"cardName": "Golgari Grave-Troll"
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"cardName": "Gyome, Master Chef"
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "BR",
-	"questTags": [
-		"Humanoid",
-		"Leader",
-		"Human",
-		"Boss",
-		"Evil",
-		"Warlock",
-		"Intelligent",
-		null
 	]
 }
 ]
