@@ -27,7 +27,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgF6OC/COVmpEhix4TAQlEEu0WcNDth6pmksGNCwFGMNPuoCZD9/U8SlSYXrASaqSJBmt20BHOw2DOPBv7GBS4IE68Wm1uJAcSGOTKgp79JCQNiQAg7bjlsYTiXwrQmwkaaODXBZQMGhitAfBWIXfQZGFyB2A2IO/QYGDr1yDeXU5+wGmFDoB+BWBSIW4DqW4G4DYhPAO09SaLdyOUqNjavM3Z9x4H2tEDxUAWHJCAYna0sAcG0AoTCnNYA2X+42DDQbs/A4O4AwSCgJgHBtAbWA1j/DnYAADKEMJg=
+   eJxjYBgF6OC/CGE1fKb45VMksWNCYKEogt0iTlg9MoCpZ5LCjgkBRzHS7KMmQPb3P0lUmlywEmimigRpdtMSzMFizzwa+BsXuCBMvFpsbiUGEBvmyICe/iYlDIgBIey45bCF4VwSw5UHrZwRYcOuDpc4NcFlAwaGK0B8FYhd9BkYXIHYDYg79BgYOvXIN5dTn7AaYUOgH4FYFIhbgOpbgbgNiE8A7T1Jot3I5So2Nq8zdn3Hgfa0QPFQBYckIBidrSwBwbQChMKc1gDZf7jYMNBuz8Dg7gDBIKAmAcG0BtYDWP8OdgAA8Z8xHA==
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
