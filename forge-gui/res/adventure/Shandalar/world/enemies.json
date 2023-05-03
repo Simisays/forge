@@ -9703,6 +9703,7 @@
 	"deck": [
 		"decks/horror.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -9786,6 +9787,7 @@
 	"deck": [
 		"decks/horse.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -9889,6 +9891,7 @@
 	"deck": [
 		"decks/human_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
@@ -9935,6 +9938,7 @@
 	"deck": [
 		"decks/human_good.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -9980,6 +9984,7 @@
 	"deck": [
 		"decks/human_mid.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -10112,6 +10117,7 @@
 	"deck": [
 		"decks/hydra.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -10157,6 +10163,7 @@
 	"deck": [
 		"decks/illusion.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -10206,6 +10213,7 @@
 	"deck": [
 		"decks/insect.dck"
 	],
+	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -10266,6 +10274,7 @@
 	"deck": [
 		"decks/immersturm_demon.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -10405,6 +10414,7 @@
 	"deck": [
 		"decks/miniboss/jace.dck"
 	],
+	"ai": "",
 	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -10538,6 +10548,7 @@
 	"deck": [
 		"decks/kavu.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -10627,6 +10638,7 @@
 	"deck": [
 		"decks/mardu.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -11287,6 +11299,7 @@
 	"deck": [
 		"decks/boss/lorthos.dck"
 	],
+	"ai": "",
 	"boss": true,
 	"speed": 1,
 	"life": 80,
@@ -11328,6 +11341,7 @@
 	"deck": [
 		"decks/magma_elemental.dck"
 	],
+	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -11427,11 +11441,11 @@
 	]
 },
 {
-	"name": "Master Warlock",
+	"name": "Master Conjurer",
 	"nameOverride": "",
 	"sprite": "sprites/dungeon/warlockmaster.atlas",
 	"deck": [
-		"decks/warlockmaster.dck"
+		"decks/conjure.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -11515,7 +11529,7 @@
 			"addMaxCount": 90
 		}
 	],
-	"colors": "BR",
+	"colors": "UB",
 	"questTags": [
 		"Humanoid",
 		"Leader",
@@ -11533,6 +11547,7 @@
 	"deck": [
 		"decks/merfolk_bad.json"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="35" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="201">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="35" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="204">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -7,9 +7,14 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
  <tileset firstgid="16001" source="../tileset/dungeon.tsx"/>
+ <layer id="26" name="Collision" width="35" height="35">
+  <data encoding="base64" compression="zlib">
+   eJzt0TkKACAMBEBbP+b/n2QvWMQDD2YglZBsYkoAAADwj5L7FXnfmeWE3v4jPVZkmb3FTX+0OkubKzJj912i9ZIKw50TwQ==
+  </data>
+ </layer>
  <layer id="22" name="Background" width="35" height="35">
   <data encoding="base64" compression="zlib">
-   eJzt1kkKgDAMBdDoSneCw2102Yt4MG/juVS0UIpDTdMmYj/8lZA8akFVCaBSvVtU/pXioPBg94XwUJ4JhYXS9Ne7It2BsYS4pxItbzyhHa6eWI4nS0xHssSzbJHkCXU+HJYrD7eFa79Ei7R3w+2R9H38osX2ZC1AflJ7vvnsbubb/ymz0zp7rveODa7a4uOgtPhUh9tihtNix7RgPVSWvgMYjmJD4aCKy+4FsTLyTA==
+   eJzt1l8KgCAMB+DVU70F/blNPXqRDtZtOldFBSKVNjdd5OD3JGwfKqgqAVSKd4rKP1IcFB7sPA4P5Z5QWChNf70r0h0YC8c9lWh54+F2uHpCOWyWkI5kCWfZSpKHa39iWO48sS2x5ku0SDub2B5J7+MXLaYnawHyi5j99bWnnm//U3qmtfdc7xkbXE6Lj4PSQpFksVuwHipL3wEMR7CFmctVLrMXWw72Tw==
   </data>
  </layer>
  <layer id="23" name="Wall" width="35" height="35">
@@ -19,7 +24,7 @@
  </layer>
  <layer id="24" name="Clutter" width="35" height="35">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwxH4azAwBGjgF2tzwK6O2iAbaH4OEM8FsueRKEZtcMIegq0ZGRhsGEkTG2jgDAwbFxrHFQxMtccvHw90RwKd3CLiQB97RgEqOEEgDYxEQGmYgMpcagBaxU0EDcwl1c8zgW6YDsQz7MnTPwoGNxhp8RkIrCeD6FRXEgK5QHfkDRK3kAKwpZmhkI4ItV2cCMhTExDjFicCaqgFCLnlnRhdnMHAJIqgYWx00CNOfXvvajIw3APiY8A67ioUDxT4CXTHL6hbOBwgeKBAkSYEDwYAi6M8EQgOEhw4t8DiiBS3qEtA8CigDAAArKs4pg==
+   eJxjYBgFwxH4azAwBGiQJ0ZtkA00PweI5wLZ80gUozY4YQ/B1owMDDaMpIkNNHAGho0LjeMKBqba45ePB7ojgU5uEXGgjz2jYBTQGrQ5DLQLhgaYjlT+jIbZ8AIjLT4DgfVkEJ3qSkIgF+iOvEHiFlIAtjQzFNLRYGq7DCW3vBOjizMYmEQRNIyNDnrEqW/vXU0GhntAfAxYz12F4oECP4Hu+AV1C4cDBA8UKNKE4MEAYHGUJwLBQYID5xZYHJHiFnUJCB4FlAEAW6QwOQ==
   </data>
  </layer>
  <layer id="25" name="Clutter Biss" width="35" height="35">
@@ -27,19 +32,19 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztl0FOwzAQRS2xiVkjAdfgAE0WhFZZsELAebhEuUEL6XEKLetA4RjYcr4ytTxO4yh1F/mSJaeJnZeZP5NUiFGjhtEiEeItiU1hVEkhfmRsCl5PqRDPaWwKo7nieHWwDJlPvfeS2f8ia87/SjP+1NjVc9eas9twDr33e+L2y4Ni+VSxKdX5VWKu+5ZmlMwarZcAnpxw4PkRA8w1z0dqmIb0N+oH8blzjJ3cZwLXUMoZDjqmJCbwUV8P01xgr6r2gPbEoSxFHbNQ/9JcuPwKJniVsswslqpmn1p7HKpCNrXQ5sOqZiod12sWrdwTmzZxvd7uIUtHHtdp493HrNlPx2YWGBuOkeYFsdPHeG7EwlYuw1jgfa4G4BfEjh5zLD4P+4Qc5bKb59YkL1S6XkLytLDeKV3Wop/YfqI9oUtPpnXhe5dwLHQ9fBVaz1Quv/j6qO2Vgrwf+vZe2y/ogfQ3Vw1DtE/35bFZ8Jxda7MiPNw3kE+uGNi13JWn7XuGE/1miS1f/c0z9Y2bmTn8upkIsVXja3IEOKKNuv822/frpZpfqXF9Iv8JTkXnN+55DN1Hvv+o4+gfdkO4Ew==
+   eJztlktOwzAQhi2xiVlzEi4QLwitsmCFgPN0xQ3KDVoIxymPfaBwDDyyR5kOY6dxlHqTX7LkPOx8mflnEqVmzZpGm0Kp5yI3hVOrlfrWuSnCui+VeihzUzitLceTwDJlPmHvbWD/C9Nd/9Fu/Nqx93NpzdlVOgfs/VLIfrm1LO82No29/lq4+760G01gDWiVwFMRDnx/jAHOgeetdExT+hvrB+NzLYy9PmRCrqlUBTjoWJCYoI/GepjmAvdqvQfAE8ey1D5mqf6luZD8ikzoVcqyZCytZ1+wPY5Vrbta6PNh65ka4X5gAVWR2PSJ9/pHvyfvIVshj7uy8+6d6faD2CwTYxNipHnB2MExvjfGgqvSaSzo/VANoF8wdvQ4xBLzcEyYo0oP89yO5IUK6iUlTxv2TRmyFvsJ9xPtCUN6Mq2L2LckxELXo69S65lK8kusj3Kv1OT7MLb3cr9gD6TnpBpG0T49loez4HsOrc2W8IT+gWKSYsBruU8r83/tUA+C6D9LbsXqb23sP65x81BvO5U+7PM/jezXWYc6v5TnOXST+fmzTqM/dWe1Vg==
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="115" template="../obj/gold.tx" x="447.713" y="382.537"/>
-  <object id="117" template="../obj/enemy.tx" x="376.76" y="272.476">
+  <object id="117" template="../obj/enemy.tx" x="395.76" y="315.976">
    <properties>
-    <property name="enemy" value="Fire Giant"/>
+    <property name="enemy" value="Dwarven Miner"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="139.193" y="361.745">
+  <object id="118" template="../obj/enemy.tx" x="131.193" y="350.745">
    <properties>
-    <property name="enemy" value="Magma Fire Elemental"/>
+    <property name="enemy" value="Dwarven Mercenary"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
@@ -48,7 +53,7 @@
   </object>
   <object id="119" template="../obj/enemy.tx" x="230.031" y="52.107">
    <properties>
-    <property name="enemy" value="Phoenix"/>
+    <property name="enemy" value="Dwarven Miner"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="179,180,198,171,176,174,191"/>
@@ -56,7 +61,7 @@
   </object>
   <object id="122" template="../obj/enemy.tx" x="108.042" y="199.771">
    <properties>
-    <property name="enemy" value="Goblin"/>
+    <property name="enemy" value="Dwarven Miner"/>
     <property name="threatRange" type="int" value="20"/>
     <property name="waypoints" value="183,184"/>
    </properties>
@@ -76,11 +81,10 @@
     <property name="waypoints" value="174,173"/>
    </properties>
   </object>
-  <object id="162" template="../obj/enemy.tx" x="294.342" y="327.105">
+  <object id="162" template="../obj/enemy.tx" x="251.842" y="463.105">
    <properties>
-    <property name="enemy" value="Bear"/>
+    <property name="enemy" value="Sand Guardian"/>
     <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="163,165"/>
    </properties>
   </object>
   <object id="163" template="../obj/waypoint.tx" x="463.342" y="301.605"/>
@@ -107,11 +111,10 @@
   <object id="174" template="../obj/waypoint.tx" x="380.342" y="57.1053"/>
   <object id="175" template="../obj/waypoint.tx" x="286.842" y="59.6053"/>
   <object id="176" template="../obj/waypoint.tx" x="430.842" y="357.605"/>
-  <object id="178" template="../obj/enemy.tx" x="303.842" y="107.105">
+  <object id="178" template="../obj/enemy.tx" x="316.842" y="100.605">
    <properties>
-    <property name="enemy" value="The Kind Workmaster"/>
+    <property name="enemy" value="Conjurer"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="191,190,189"/>
    </properties>
   </object>
   <object id="179" template="../obj/waypoint.tx" x="180.342" y="117.105"/>
@@ -124,11 +127,29 @@
   <object id="188" template="../obj/manashards.tx" x="50.2966" y="261.878"/>
   <object id="190" template="../obj/waypoint.tx" x="379.342" y="183.605"/>
   <object id="191" template="../obj/waypoint.tx" x="353.342" y="105.105"/>
-  <object id="197" template="../obj/door_up.tx" x="340.842" y="488.105">
+  <object id="197" template="../obj/door_up.tx" x="385.342" y="479.105">
    <properties>
-    <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
-    <property name="teleportObjectId" value="114"/>
+    <property name="teleport" value="maps/map/Zedruu_f1.tmx"/>
    </properties>
   </object>
+  <object id="201" template="../obj/enemy.tx" x="213.342" y="125.105">
+   <properties>
+    <property name="enemy" value="Dwarven Mercenary"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="172,171"/>
+   </properties>
+  </object>
+  <object id="202" template="../obj/enemy.tx" x="366.342" y="201.105">
+   <properties>
+    <property name="enemy" value="Dwarven Mercenary"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="172,171"/>
+   </properties>
+  </object>
+  <object id="203" template="../obj/waypoint.tx" x="145.342" y="250.605"/>
  </objectgroup>
 </map>
