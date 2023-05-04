@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="25" nextobjectid="206">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="215">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -7,6 +7,11 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
  <tileset firstgid="16001" source="../tileset/FarmFood.tsx"/>
+ <layer id="25" name="Colision" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF1AJ8AvgxJfrpYTc2mhhAyG5SzCIVDKTdhNxFL3uI8SelYYFNL7a0gksdsv3Y2PjcR4yZwx3gyp/4wmw4hBGp/h4oQKj8IUcOn1py3UiKPDXDeKTaPQqoAwCwuQ0/
+  </data>
+ </layer>
  <layer id="23" name="Background" width="31" height="22">
   <data encoding="base64" compression="zlib">
    eJxjYBgFAwUiORHsOnn62w2zn5DdjKIMDExomBr2E2P3fKBdC5AwNQExdm+XQGBKwUM5BCYEqG03MqC3v5HBe0kE+6MkbnW0AO8J2IcuD+LDML3tRrafmnZj8xMxbsOHibWbFHmY+FC121oMvzwhgM2ej0juwgdA6kKwYHLsJtXf1LIb3R2gsp8Uux/w0Nff1Ab0tm+wAwAZD2uZ
@@ -135,5 +140,13 @@
     <property name="teleportObjectId" value="114"/>
    </properties>
   </object>
+  <object id="206" template="../obj/collision.tx" x="22.0759" y="20.7719" width="460.199" height="16"/>
+  <object id="207" template="../obj/collision.tx" x="6.07594" y="294.772" width="216.866" height="16"/>
+  <object id="208" template="../obj/collision.tx" x="10.7426" y="22.7719" width="16.8657" height="285.333"/>
+  <object id="209" template="../obj/collision.tx" x="463.076" y="26.7721" width="16.8657" height="285.333"/>
+  <object id="210" template="../obj/collision.tx" x="269.076" y="28.1054" width="16.8657" height="122.666"/>
+  <object id="211" template="../obj/collision.tx" x="203.743" y="36.1054" width="16.8657" height="114"/>
+  <object id="212" template="../obj/collision.tx" x="76.4093" y="136.105" width="16.8657" height="166"/>
+  <object id="214" template="../obj/collision.tx" x="239.742" y="294.772" width="216.866" height="16"/>
  </objectgroup>
 </map>

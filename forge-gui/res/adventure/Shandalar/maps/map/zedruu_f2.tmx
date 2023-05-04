@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="26" nextobjectid="215">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="217">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -9,17 +9,17 @@
  <tileset firstgid="16001" source="../tileset/FarmFood.tsx"/>
  <layer id="23" name="Background" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYKANMOEjjGkFBtLuUTAKRsEoGAXUBU16uDEhMF+UMrsP6WFiYu2mFFDi71G7h57dowA7AACqHyN5
+   eJxjYKANMOEjjGkFaGm3Gyf13EnIfHS7aG03PkBrt2DzNzpND7sJyVFqN0g/OkY3e7D4G5c7qQ0I+ZtW9pEqR65dxIYjsv9xYUrdQoleQpgUc4hlw/hNergxIbtJsQ+b3Yf0MDEuu3GFCzl2g8BA+ZtSu9HDgxS7Bzq+qeFvZHdQS/1A1v8DDQDuGUmn
   </data>
  </layer>
  <layer id="22" name="Walls" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJwz4WNgMKERJgRoZS8xboDJM4oyMDDhwXZi1MXMogi7FwLZIZKoGATeS9IGz6fA7r8i+Pm0tBukfrsEAoP46Goa+RkYmpBwMz/97JYXYGBQQMKKArjtRk9fzFjMo5XdMP8iy+Oy2wqaXmHutBej3G5kvY5YzCMF7wXatQ8J76eSv6mdx9Djex4d7UZP55T4m1A5SchuSuIbZN4CHgRepIeKaelvkHno9iHjhUh2z6FyfIPCjFi7B9LftIjvweJvdwdI/YDNblsxzPi2xiJGLQwqg4lp8wgLYMf0aG/Rym4AycGmQQ==
+   eJwz4WNgMKERJgRoZS8xboDJM4oyMDDhwXZi1MXMogi7FwLZIZKoGATeS9IGz6fA7r8i+Pm0tBukfrsEAoP46Goa+RkYmpBwMz/97JYXYGBQQMKKArjtRk9fzFjMo5XdMP8iy+Oy2wqaXmHutBej3G5kvZSm871Au/Yh4f1U8je18xh6fM+jo93o6ZwSfxMqJynJY4QwyLwFPAi8SA8V09LfIPPQ7UPGC5HsnkPl+AYBYu0eSH/TIr4Hi7/dHVDjAdluWzHM+LbGIkYtDCqDiWnzCAtgx/Rob9HKbgBreqTl
   </data>
  </layer>
  <layer id="24" name="CullterBis" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpID/ItQ174IwA8NBTggGsfGB+aLUtRsdOIoNnN3UAk38EIwPkBLmpIBESQaGJEnqmUcK+A+yV4qwupGa1mD+JgTokc6ZRBF4MRLbWgyVj46ZSXQbNdP5HKDdj/QYGB4D8RMgfgrEz4D4uR5p5hySgGBi2eQAXP7mAuYPbini2ejgCNCvR4H4GIl+BgFlCQgmlo0OWPQZGFiBmE0ftx24/E1peFICKA1zYgAuf+MLT3xgHTCM0+0hGBmECJLvxlFAGQAAEzg9yQ==
+   eJxjYBgFpID/ItQ174IwA8NBTggGsfGB+aLUtZsUMJB2kwKa+CEYHyAlzEkBiZIMDEmS1DOPFPAfZK8UYXUjNa3B/D0QdqMDJlEERuZbi2HKI2NmEt1GzXQ+B2j3Iz0GhsdA/ASInwLxMyB+rkeaOYckIJhYNjkAl7+5gPmDW4p4Njo4AvTrUSA+RqKfQUBZAoKJZaMDFn0GBlYgZtPHbQcuf1ManpQASsOcGIDL3/jCEx9YBwzjdHsIRgYhguS7cRRQBgCtdzur
   </data>
  </layer>
  <layer id="25" name="Clutter" width="31" height="22">
@@ -27,13 +27,20 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgF6OC/CGE1fKb45VMksWNCYKEogt0iTlg9MoCpZ5LCjgkBRzHS7KMmQPb3P0lUmlywEmimigRpdtMSzMFizzwa+BsXuCBMvFpsbiUGEBvmyICe/iYlDIgBIey45bCF4VwSw5UHrZwRYcOuDpc4NcFlAwaGK0B8FYhd9BkYXIHYDYg79BgYOvXIN5dTn7AaYUOgH4FYFIhbgOpbgbgNiE8A7T1Jot3I5So2Nq8zdn3Hgfa0QPFQBYckIBidrSwBwbQChMKc1gDZf7jYMNBuz8Dg7gDBIKAmAcG0BtYDWP8OdgAA8Z8xHA==
+   eJxjYBgF6OC/CGE1fKb45VMksWNCYKEogt0iTlg9MoCpZ5LCjgczQPb3P0lUmlywEmimigRpdtMSzMFizzwa+BsXuCBMvFpsbiUGEBvmyICe/iYlDIgBIey45bCF4VwSw5UHrZwRYcOuDpc4NcFlAwaGK0B8FYhd9BkYXIHYDYg79BgYOvVoa7ewIdCPQCwKxC1AO1uBuA2ITwDtPUllu3mdsYsfB9rTAsVDFRySgGB0trIEBNMbkFrHkQuQ/YeLDQPt9gwM7g4QDAJqEhBMa2AtRns7hioAAMZMLYY=
+  </data>
+ </layer>
+ <layer id="26" name="AboveSprites" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowACHMUG2gWjYKSA0bQGAYtF8fOHCxiNb9LBUA6zgXZ7izh99IwC+gAAxp0EWg==
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="115" template="../obj/gold.tx" x="93.4733" y="133.077"/>
   <object id="117" template="../obj/enemy.tx" x="412.834" y="262.013">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;The Cheff's Boss Effect&quot; ]
+}</property>
     <property name="enemy" value="The Cheff"/>
    </properties>
   </object>
@@ -45,16 +52,16 @@
    </properties>
   </object>
   <object id="163" template="../obj/waypoint.tx" x="223.619" y="204.276"/>
-  <object id="169" template="../obj/enemy.tx" x="173.373" y="118.246">
+  <object id="169" template="../obj/enemy.tx" x="132.706" y="119.913">
    <properties>
-    <property name="enemy" value="Wizard Mercenary"/>
+    <property name="enemy" value="Rogue"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="175,176,177,176"/>
+    <property name="waypoints" value="216,215"/>
    </properties>
   </object>
   <object id="173" template="../obj/waypoint.tx" x="327.209" y="294.093"/>
-  <object id="178" template="../obj/enemy.tx" x="371.946" y="112.624">
+  <object id="178" template="../obj/enemy.tx" x="374.613" y="118.291">
    <properties>
     <property name="enemy" value="Wizard Mercenary"/>
     <property name="threatRange" type="int" value="40"/>
@@ -70,7 +77,7 @@
   <object id="193" template="../obj/collision.tx" x="29.4688" y="23.1517" width="460.199" height="16"/>
   <object id="195" template="../obj/collision.tx" x="479.663" y="27.3272" width="16" height="286.103"/>
   <object id="196" template="../obj/collision.tx" x="27.6244" y="28.5159" width="16" height="334.084"/>
-  <object id="197" template="../obj/door_up.tx" x="253.144" y="103.708">
+  <object id="197" template="../obj/door_up.tx" x="238.477" y="87.3747" width="44.6667" height="16">
    <properties>
     <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
     <property name="teleportObjectId" value="114"/>
@@ -185,5 +192,7 @@
    </properties>
   </object>
   <object id="214" template="../obj/collision.tx" x="28.0216" y="296.553" width="464.275" height="16"/>
+  <object id="215" template="../obj/waypoint.tx" x="131.175" y="163.439"/>
+  <object id="216" template="../obj/waypoint.tx" x="131.175" y="79.4386"/>
  </objectgroup>
 </map>

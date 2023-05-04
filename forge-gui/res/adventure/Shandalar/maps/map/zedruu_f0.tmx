@@ -9,7 +9,7 @@
  <tileset firstgid="16001" source="../tileset/dungeon.tsx"/>
  <layer id="26" name="Collision" width="35" height="35">
   <data encoding="base64" compression="zlib">
-   eJzt0TkKACAMBEBbP+b/n2QvWMQDD2YglZBsYkoAAADwj5L7FXnfmeWE3v4jPVZkmb3FTX+0OkubKzJj912i9ZIKw50TwQ==
+   eJzt0LsJACAMANG0DuBKzumokjYifogQ5R6kMuihCAAAAAAA/6h5PLNzu+vRUlI/u3d4tagoLSfv326J8i/Ktqw2ebZ4zSsa/fQnAg==
   </data>
  </layer>
  <layer id="22" name="Background" width="35" height="35">
@@ -81,7 +81,7 @@
     <property name="waypoints" value="174,173"/>
    </properties>
   </object>
-  <object id="162" template="../obj/enemy.tx" x="251.842" y="463.105">
+  <object id="162" template="../obj/enemy.tx" x="246.842" y="464.105">
    <properties>
     <property name="enemy" value="Sand Guardian"/>
     <property name="threatRange" type="int" value="20"/>
@@ -111,8 +111,15 @@
   <object id="174" template="../obj/waypoint.tx" x="380.342" y="57.1053"/>
   <object id="175" template="../obj/waypoint.tx" x="286.842" y="59.6053"/>
   <object id="176" template="../obj/waypoint.tx" x="430.842" y="357.605"/>
-  <object id="178" template="../obj/enemy.tx" x="316.842" y="100.605">
+  <object id="178" template="../obj/enemy.tx" x="290.842" y="110.105">
    <properties>
+    <property name="effect">{ 
+&quot;lifeModifier&quot;: 50,
+&quot;startBattleWithCard&quot;: [ &quot;Thayan Evokers
+&quot;,&quot;Tome of the Infinite&quot;,&quot;Thayan Evokers&quot;]
+}
+
+</property>
     <property name="enemy" value="Conjurer"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>

@@ -33,6 +33,8 @@
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="201" template="../obj/enemy.tx" x="220.224" y="129.407">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Zedruu Boss Effect&quot; ]
+}</property>
     <property name="enemy" value="Zedruu"/>
     <property name="spawn.Easy" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>

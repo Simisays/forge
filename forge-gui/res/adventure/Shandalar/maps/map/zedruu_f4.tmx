@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="44" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="35" nextobjectid="225">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="44" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="37" nextobjectid="225">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
+ <layer id="36" name="dirt biss" width="44" height="33">
+  <data encoding="base64" compression="zlib">
+   eJzt0rENACAMA8HswJDsvwFiAUSDFKO7zt0XrgI6m+O8u0vr5V9pX9T71u5NbU7sBgAAuLUA6H8FuQ==
+  </data>
+ </layer>
  <layer id="34" name="BackGroundDirt" width="44" height="33">
   <data encoding="base64" compression="zlib">
-   eJztl0EKwCAMBL32k/3/M3oqaEiz2xZKxQkMiCRmoidbG2PfRvq9c51FrOlzr2qqcHtH35ib+VS+zqyqv+Og7li5qTPuuFZzO/lZ7ze+jqczw9P87K3UjF/6/u18AAAAAAAAWJfZ/pyz+QKsyAFjjCLo
+   eJztldEKAiEQRfeteg76tAVfeu07gr4s+rBYaEiHueO4rtrSCAesRj3a3XWa0nY9pcTfUV9qfExci8YsbVbms6zNfXmt5KP5austrtxXWt/ikDtjIoB6bY4ZgFy1fVvq47rwoZevtgcLgXE7f5H+R813rXPO93lMvV7sMyGdPfJde7YWJDfJk/rSHDPo93blvpSL3twvNleJll7o2alhZDZLoD2jtazv0C3yWetrudNqfUPBnlAeeGuZiTjbWm3LvJb4Wn8fQS6rI900Z3SnOo7j/Dpb3ZE9eRzGOzh17C13e/N1nH/kDXC2MrE=
   </data>
  </layer>
  <layer id="33" name="Background" width="44" height="33">
   <data encoding="base64" compression="zlib">
-   eJztlt9NAzEMxvOU0nYGWANY4GAEYJrqQO0MwCbAGpQFWkQXAB5x1LNkWYnjy7lHHvpJ31Ovzk+O/2QxcW5x9NGV+ezk/xn6OOhUwVybcsw1KjCn6qNmxXJduzjzIfQ4c+4J/DyziUeZl+Ar79y1t4kddD537gJ8OZe/a/z+7Nz5IR7WNOrTkPcd4q/BHwJvYF1197v1+7ylmGPxLHklRsznKlKLEjPXGLwbxRlajjF5pX6skVfqR4mj8brvrNRCfe58uh+/4LeHxIzF/tx1nGPwBrXkTCoNK/7/fpL+9hDCM6n5+blZUps0s8RCVruY8lrvd6rcLtbs34bVgHa/lyjW+5tu31KGVH9zVh4T3zvUlm8f5OWK8cZYNeqzxzXiMyw1u4bMgdw8bnreCTKnWIfOg9xe5LlYKnLTkjm7ZfEteF/gffwKfiPvZKnGkFnTD9a8sT4s3TW5fijtM67vqXM/4N/p8FgpZivWEsXqh4ozj8EqMd3APdyC74T7wD4eK68Sk6Z+kLe0v/4ATxP1ww==
+   eJy1mF1uEzEQx91IyfbjqeHjJlCQ+tz0BBHwQOGp1yihat8BiaaFiwBPcAbgAtsILgBpCYIZeUc7DJ6xvfL+pb+yqzjen8YzY2+mG85NwSeVc/sjf225FmOWQ+cuR62/gY8rf30F312Df4kxR5Ufh5+x50nj86YZzJJXsvL71+Az8Jxxop9XcVYpbdxC8PAY4f2seV7IFFfyHbi/C96pWl6NLSW2NI7HWPLyGGlx1Uy5cSTiyWOWq1h8eYw01sMbrZdrsCZr/vrYiGdXhdY0NufHdec+MSMfCllfDZx7MWiZ0SU4STw/Sdbcz257cyHfy4FnRfF4lxbPz5hCrCH1xYri+akJGVcbaayoPuMrhTVNceTOUZ+8uEdMRn6fQC0S8iKmLrz7mc9dRHgfbzt3AL55Kz6X5MU95rvBgz2R9tZSvCtg/Q3+A56PPftBc/1kO8zK4xtjRqUwL4f/cmq/IV5p1Jvx/5yhXKgT4peaj3ycZH4LPG7s+Z6Cd4HlYtyaeGMi3vmmc+fgi80yvJwZOc4Z224gjqm1Rbw7W87dA9/fyuPda77DnAiNW4y6s4VEOfwZOL+AvwpeOh9prKesBjTe0tLqLoUVzw4zds4hyRosrdAZWrIi46Qxsa6G4flIffGmqGbvU9cN61mEpwuvVfs5qtn7FDdqqcS5C69V+yhaY2tfoHzVeEOy8t9SqPbrZr89ZfNpsdgT+Sp56bxTglVTaF8L8cZYZXx5reaelyzJHqbFI8Zq5UMsd3m/ieUjZ9ZYqR9YrF15ad24ThLyZ8b67KWYX+sHObzv4N33PfjDus0qmScJsS/NS3UorbFaip1rrf6Vyov6Ae+YP/H/nwL/HWjM2PtT6iyFN1eh/LGYZf/qg9diegDr8BD8yFgPquOUXluC12JKyR/iTe1f0n8Bx5d5xA==
   </data>
  </layer>
- <objectgroup id="12" name="Kopie van Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
+ <layer id="35" name="Tilelaag 3" width="44" height="33">
+  <data encoding="base64" compression="zlib">
+   eJzt000OQDAQhuFWpD2AQ1o7AyfAFSW1t7DUWUzakAqiP4vvSWaDxCumQqSzKDfGzqATvjxgrsL3uJNQ66LSNH1lCu8jvXZTCn8v/Wul2KUQU+WGnPs2ef2GHKj17kyx0T7T1fF77jxtZbma+f+/aWW0F7H5u/m1k6Xo/RPtxJr5zLVN3vcDAAAAAAAA/O0Aw9wi6w==
+  </data>
+ </layer>
+ <objectgroup id="12" name="Kopie van Objects" visible="0" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="122" template="../obj/enemy.tx" x="102.042" y="77.771">
    <properties>
     <property name="enemy" value="Red Wiz1"/>
@@ -51,7 +61,7 @@
   <object id="180" template="../obj/waypoint.tx" x="199.842" y="50.105"/>
   <object id="183" template="../obj/waypoint.tx" x="105.842" y="27.605"/>
   <object id="184" template="../obj/waypoint.tx" x="105.342" y="109.105"/>
-  <object id="188" template="../obj/manashards.tx" x="156.797" y="213.878"/>
+  <object id="188" template="../obj/manashards.tx" x="475.797" y="244.378"/>
   <object id="189" template="../obj/waypoint.tx" x="460.342" y="38.105"/>
   <object id="191" template="../obj/waypoint.tx" x="325.842" y="23.105"/>
   <object id="194" template="../obj/collision.tx" x="-3.9079" y="521.105" width="704" height="16"/>
