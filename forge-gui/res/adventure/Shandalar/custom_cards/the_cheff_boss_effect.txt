@@ -1,9 +1,0 @@
-Name:The Cheffs Boss Effect
-ManaCost:no cost
-Colors:black,green
-Types:Enchantment
-S:Mode$ Continuous | Affected$ Forest,Saproling | SetPower$ 1 | SetToughness$ 1 | EffectZone$ Command | AddType$ Land & Creature & Forest & Saproling | SetColor$ Green | Description$ All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types. (They're affected by summoning sickness.)
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever a land enters the battlefield, that creature's controller creates a food token. 
-SVar:TrigToken:DB$ Token | TokenOwner$ TriggeredCardController | TokenAmount$ 1 | TokenScript$ 
-
-Oracle:Whenever a Saproling dies, Slimefoot deals 1 damage to each opponent and gains 1 life.\nAll Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types. (They’re affected by summoning sickness.)\nWhenever a creature dies, that creature's controller creates a 1/1 green Saproling creature token.\n

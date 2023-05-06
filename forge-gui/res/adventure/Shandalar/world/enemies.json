@@ -5,6 +5,7 @@
 	"deck": [
 		"decks/adventurer.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -72,6 +73,7 @@
 	"deck": [
 		"decks/aether_channeler.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -5907,80 +5909,6 @@
 	]
 },
 {
-	"name": "Elite Archer",
-	"sprite": "sprites/dungeon/bowmandefender.atlas",
-	"deck": [
-		"decks/elitearcher.dck"
-	],
-	"ai": "",
-	"randomizeDeck": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 20,
-	"scale": 0.9,
-	"life": 11,
-	"rewards": [
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 5,
-			"colors": [
-				"White",
-				"Green"
-			],
-			"rarity": [
-				"common",
-				"uncommon",
-				"Rare",
-				"Mythic Rare"
-			],
-			"subTypes": [
-				"Archer"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			]
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		}
-	],
-	"colors": "GW",
-	"questTags": [
-		"Archer",
-		"Human",
-		"Elite",
-		"Guardian",
-		"IdentitySelesnya",
-		"Soldier",
-		null,
-		null,
-		null,
-		null
-	]
-},
-{
 	"name": "Emrakul",
 	"sprite": "sprites/boss/emrakul.atlas",
 	"deck": [
@@ -11441,7 +11369,7 @@
 	]
 },
 {
-	"name": "Master Conjurer",
+	"name": "Conjurer",
 	"nameOverride": "",
 	"sprite": "sprites/dungeon/warlockmaster.atlas",
 	"deck": [
@@ -15222,15 +15150,16 @@
 	"nameOverride": "",
 	"sprite": "sprites/dungeon/ironcheffboss.atlas",
 	"deck": [
-		"decks/thecheff.dck"
+		"decks/miniboss/thecheff.dck"
 	],
 	"ai": "",
 	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 25,
-	"scale": 0.8,
-	"life": 35,
+	"speed": 15,
+	"scale": 0.6,
+	"life": 50,
+	"flying":true,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -17162,7 +17091,7 @@
 	"name": "Zedruu",
 	"sprite": "sprites/boss/zedru.atlas",
 	"deck": [
-		"decks/miniboss/zedruu.dck"
+		"decks/boss/zedruu.dck"
 	],
 	"ai": "",
 	"boss": true,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="217">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="31" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="28" nextobjectid="222">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -7,9 +7,14 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/dungeon.tsx"/>
  <tileset firstgid="16001" source="../tileset/FarmFood.tsx"/>
+ <layer id="27" name="Colission" width="31" height="22">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoGL9DWxI2Hs92jgP5gNL4HHwAAmOcG5Q==
+  </data>
+ </layer>
  <layer id="23" name="Background" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYKANMOEjjGkFaGm3Gyf13EnIfHS7aG03PkBrt2DzNzpND7sJyVFqN0g/OkY3e7D4G5c7qQ0I+ZtW9pEqR65dxIYjsv9xYUrdQoleQpgUc4hlw/hNergxIbtJsQ+b3Yf0MDEuu3GFCzl2g8BA+ZtSu9HDgxS7Bzq+qeFvZHdQS/1A1v8DDQDuGUmn
+   eJxjYKANMOEjjGkFaGm3Gyf13EnIfHS7aG03PkBrt2DzNzpND7sJyVFqN0g/OkY3e7D4G5c7qQ0I+ZtW9pEqR65dxIYjsv9xYUrdQoneMi3cmFizkf1BDBvGb9LDjQnZTYp92Ow+pIeJcdmNK87IsRsEBsrflNqNHh6k2D3Q8U0NfyO7g1rqB7L+H2gAAMHYS94=
   </data>
  </layer>
  <layer id="22" name="Walls" width="31" height="22">
@@ -27,31 +32,30 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgF6OC/CGE1fKb45VMksWNCYKEogt0iTlg9MoCpZ5LCjgczQPb3P0lUmlywEmimigRpdtMSzMFizzwa+BsXuCBMvFpsbiUGEBvmyICe/iYlDIgBIey45bCF4VwSw5UHrZwRYcOuDpc4NcFlAwaGK0B8FYhd9BkYXIHYDYg79BgYOvVoa7ewIdCPQCwKxC1AO1uBuA2ITwDtPUllu3mdsYsfB9rTAsVDFRySgGB0trIEBNMbkFrHkQuQ/YeLDQPt9gwM7g4QDAJqEhBMa2AtRns7hioAAMZMLYY=
+   eJxjYBgF6OC/CGE1fKb45VMksWNCYKEogt0iTlg9MoCpZ5LCjgczQPb3P0lUmlywEmimigRpdtMSzMFizzwa+BsXuCBMvFpsbiUGEBvmyICe/iYlDIgBIey45bCF4VwSw5UHrZwRYcOuDpc4NcFlAwaGK0B8FYhd9BkYXIHYDYg79BgYOvVoa7ewIdCPQCwKxC1AO1uBuA2ITwDtPUllu3mdsYsfB9rTAsVDFRySgGB0trIEBGMDR4D+PQrEx2jgb0J1HAswjlmBmE2fMnuQ/YeLDQPt9gwM7g4QDAJqEhBMa2AtRns7hioAAB6cMPs=
   </data>
  </layer>
  <layer id="26" name="AboveSprites" width="31" height="22">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowACHMUG2gWjYKSA0bQGAYtF8fOHCxiNb9LBUA6zgXZ7izh99IwC+gAAxp0EWg==
+   eJxjYBgFowACHMUG2gWjYKSA0bQGAYtF8fOHCxiNb9LBYAmzdj0IZtcnXg+13M4CtJMViNlIsBsEWsRJt4scPaOAPgAAEkMGlg==
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
-  <object id="115" template="../obj/gold.tx" x="93.4733" y="133.077"/>
-  <object id="117" template="../obj/enemy.tx" x="412.834" y="262.013">
+  <object id="115" template="../obj/gold.tx" x="92.4733" y="149.744"/>
+  <object id="117" template="../obj/enemy.tx" x="410.167" y="232.68" width="16.6667" height="12.6667">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;The Cheff's Boss Effect&quot; ]
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Chef's Boss Effect&quot; ]
 }</property>
     <property name="enemy" value="The Cheff"/>
+    <property name="waypoints" value="219,218"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="332.435" y="75.2914">
+  <object id="122" template="../obj/enemy.tx" x="378.102" y="117.958">
    <properties>
     <property name="enemy" value="Red Wiz1"/>
-    <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="183,184"/>
+    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="163" template="../obj/waypoint.tx" x="223.619" y="204.276"/>
   <object id="169" template="../obj/enemy.tx" x="132.706" y="119.913">
    <properties>
     <property name="enemy" value="Rogue"/>
@@ -61,35 +65,25 @@
    </properties>
   </object>
   <object id="173" template="../obj/waypoint.tx" x="327.209" y="294.093"/>
-  <object id="178" template="../obj/enemy.tx" x="374.613" y="118.291">
+  <object id="178" template="../obj/enemy.tx" x="218.946" y="201.624">
    <properties>
-    <property name="enemy" value="Wizard Mercenary"/>
+    <property name="enemy" value="Blue Wiz2"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="191,190,189"/>
+    <property name="waypoints" value="192,183"/>
    </properties>
   </object>
-  <object id="179" template="../obj/waypoint.tx" x="222.455" y="292.348"/>
-  <object id="180" template="../obj/waypoint.tx" x="124.673" y="292.971"/>
-  <object id="183" template="../obj/waypoint.tx" x="124.861" y="206.17"/>
+  <object id="183" template="../obj/waypoint.tx" x="140.194" y="202.17"/>
   <object id="185" template="../obj/manashards.tx" x="134.816" y="58.3119"/>
   <object id="186" template="../obj/manashards.tx" x="178.144" y="59.0319"/>
   <object id="192" template="../obj/waypoint.tx" x="327.356" y="203.896"/>
   <object id="193" template="../obj/collision.tx" x="29.4688" y="23.1517" width="460.199" height="16"/>
   <object id="195" template="../obj/collision.tx" x="479.663" y="27.3272" width="16" height="286.103"/>
   <object id="196" template="../obj/collision.tx" x="27.6244" y="28.5159" width="16" height="334.084"/>
-  <object id="197" template="../obj/door_up.tx" x="238.477" y="87.3747" width="44.6667" height="16">
-   <properties>
-    <property name="teleport" value="maps/map/tibalt_f1.tmx"/>
-    <property name="teleportObjectId" value="114"/>
-   </properties>
-  </object>
-  <object id="201" template="../obj/waypoint.tx" x="271.404" y="200.102"/>
-  <object id="202" template="../obj/waypoint.tx" x="269.14" y="290.214"/>
-  <object id="203" template="../obj/gold.tx" x="45.8978" y="199.196"/>
-  <object id="204" template="../obj/gold.tx" x="45.8978" y="54.2929"/>
+  <object id="203" template="../obj/gold.tx" x="45.8978" y="214.529"/>
+  <object id="204" template="../obj/gold.tx" x="45.5645" y="70.6262"/>
   <object id="205" template="../obj/enemy.tx" x="68.9918" y="79.1982">
    <properties>
-    <property name="enemy" value="Elf Mercenary"/>
+    <property name="enemy" value="High Elf"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
@@ -108,7 +102,7 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="208" template="../obj/enemy.tx" x="79.8596" y="275.723">
+  <object id="208" template="../obj/enemy.tx" x="64.5263" y="280.39">
    <properties>
     <property name="enemy" value="Human Mercenary"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -116,7 +110,7 @@
    </properties>
   </object>
   <object id="210" template="../obj/gold.tx" x="93.4443" y="297.459"/>
-  <object id="211" template="../obj/booster.tx" x="156.387" y="117.235">
+  <object id="211" template="../obj/booster.tx" x="160.72" y="122.902">
    <properties>
     <property name="reward">[
   {
@@ -141,7 +135,7 @@
 </property>
    </properties>
   </object>
-  <object id="212" template="../obj/booster.tx" x="189.443" y="83.7264">
+  <object id="212" template="../obj/booster.tx" x="191.776" y="89.7264">
    <properties>
     <property name="reward">[
   {
@@ -166,7 +160,7 @@
 </property>
    </properties>
   </object>
-  <object id="213" template="../obj/booster.tx" x="188.99" y="150.744">
+  <object id="213" template="../obj/booster.tx" x="193.657" y="154.744">
    <properties>
     <property name="reward">[
   {
@@ -194,5 +188,21 @@
   <object id="214" template="../obj/collision.tx" x="28.0216" y="296.553" width="464.275" height="16"/>
   <object id="215" template="../obj/waypoint.tx" x="131.175" y="163.439"/>
   <object id="216" template="../obj/waypoint.tx" x="131.175" y="79.4386"/>
+  <object id="217" template="../obj/enemy.tx" x="324.842" y="243.105">
+   <properties>
+    <property name="enemy" value="Blue Wiz3"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="192,173"/>
+   </properties>
+  </object>
+  <object id="218" template="../obj/waypoint.tx" x="432.509" y="228.439"/>
+  <object id="219" template="../obj/waypoint.tx" x="395.509" y="229.105"/>
+  <object id="220" template="../obj/collision.tx" x="351.038" y="183.105" width="142.275" height="13.6667"/>
+  <object id="221" template="../obj/door_down.tx" x="242.334" y="95.0333" width="32.3503" height="30.8105" rotation="0.284412">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="maps/map/zedruu_f1.tmx"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

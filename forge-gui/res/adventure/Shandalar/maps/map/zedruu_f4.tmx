@@ -8,22 +8,22 @@
  <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
  <layer id="36" name="dirt biss" width="44" height="33">
   <data encoding="base64" compression="zlib">
-   eJzt0rENACAMA8HswJDsvwFiAUSDFKO7zt0XrgI6m+O8u0vr5V9pX9T71u5NbU7sBgAAuLUA6H8FuQ==
+   eJzt1EEKgCAURVELWkF7awstyR20zgYhSSg5kf8e3AMOdHT5iinpuLb2AlpmvI1zf5aSb0/Z1+dqzbXeTJWbexyb8XK7P3rnUvzv/5Rmx254yWt0wbhjiS4Y5zRXAACASDeBGg9F
   </data>
  </layer>
  <layer id="34" name="BackGroundDirt" width="44" height="33">
   <data encoding="base64" compression="zlib">
-   eJztldEKAiEQRfeteg76tAVfeu07gr4s+rBYaEiHueO4rtrSCAesRj3a3XWa0nY9pcTfUV9qfExci8YsbVbms6zNfXmt5KP5austrtxXWt/ikDtjIoB6bY4ZgFy1fVvq47rwoZevtgcLgXE7f5H+R813rXPO93lMvV7sMyGdPfJde7YWJDfJk/rSHDPo93blvpSL3twvNleJll7o2alhZDZLoD2jtazv0C3yWetrudNqfUPBnlAeeGuZiTjbWm3LvJb4Wn8fQS6rI900Z3SnOo7j/Dpb3ZE9eRzGOzh17C13e/N1nH/kDXC2MrE=
+   eJztl1EKwjAMQMtQ3L4Fj1boj79+eQcFT+CPN/Agw2PtQ8YWyLIka+dambbwoMS0e82CZcYMx7EagmMw5wZdg3OlNe2w/W/3wpimGvMq9X2oL83lfDRf7aytqyUx+uzLrmPKYarGgBPytT2sAFcr7Cz5atA81xPTF5yfW/39++AIddn13GnP95Lm61vjUN+69wHAD8fbGFd7yde3PnPArkCD4uAJc24PK8xTuFKwL/RFaq4HP1eO2O+a1udTUvfmXODM5w3/LN//0CX6M9QXg11j+rqAM9F+AFc6YvYDvhe0fG5fXNtU/TuVo3nGcOW8pV7l1jyKca+m8gVn6U7VvL7lO9crtWOob2qnTOZXWOKOTM1N+E7KrIe19d3afDOZf+QNA7w9+Q==
   </data>
  </layer>
  <layer id="33" name="Background" width="44" height="33">
   <data encoding="base64" compression="zlib">
-   eJy1mF1uEzEQx91IyfbjqeHjJlCQ+tz0BBHwQOGp1yihat8BiaaFiwBPcAbgAtsILgBpCYIZeUc7DJ6xvfL+pb+yqzjen8YzY2+mG85NwSeVc/sjf225FmOWQ+cuR62/gY8rf30F312Df4kxR5Ufh5+x50nj86YZzJJXsvL71+Az8Jxxop9XcVYpbdxC8PAY4f2seV7IFFfyHbi/C96pWl6NLSW2NI7HWPLyGGlx1Uy5cSTiyWOWq1h8eYw01sMbrZdrsCZr/vrYiGdXhdY0NufHdec+MSMfCllfDZx7MWiZ0SU4STw/Sdbcz257cyHfy4FnRfF4lxbPz5hCrCH1xYri+akJGVcbaayoPuMrhTVNceTOUZ+8uEdMRn6fQC0S8iKmLrz7mc9dRHgfbzt3AL55Kz6X5MU95rvBgz2R9tZSvCtg/Q3+A56PPftBc/1kO8zK4xtjRqUwL4f/cmq/IV5p1Jvx/5yhXKgT4peaj3ycZH4LPG7s+Z6Cd4HlYtyaeGMi3vmmc+fgi80yvJwZOc4Z224gjqm1Rbw7W87dA9/fyuPda77DnAiNW4y6s4VEOfwZOL+AvwpeOh9prKesBjTe0tLqLoUVzw4zds4hyRosrdAZWrIi46Qxsa6G4flIffGmqGbvU9cN61mEpwuvVfs5qtn7FDdqqcS5C69V+yhaY2tfoHzVeEOy8t9SqPbrZr89ZfNpsdgT+Sp56bxTglVTaF8L8cZYZXx5reaelyzJHqbFI8Zq5UMsd3m/ieUjZ9ZYqR9YrF15ad24ThLyZ8b67KWYX+sHObzv4N33PfjDus0qmScJsS/NS3UorbFaip1rrf6Vyov6Ae+YP/H/nwL/HWjM2PtT6iyFN1eh/LGYZf/qg9diegDr8BD8yFgPquOUXluC12JKyR/iTe1f0n8Bx5d5xA==
+   eJy1mEtuE0EQhtuR7LGTVczjJhCQso5zAgtYkJAN1wATJfuARJzAlkMAK+AKwAUcCy7gOME8qtTza4pyPyeTX/rlGbnV87m6qrrHw54xQ/JBYcx2x16HPFFj5m1jzjqVf5D3C3t9Qd9dkn+pMc8KO44/Zy07zzsa83Jl2Ret5ecNM5g1r2aV96/Jx+Sx4GS/KKrrmeBhZu0jB7P0VPHIGPH9qHyey4grfIfu75I3ior31Uo1N5hZPl4wf+lW42SMNa+MkS+uPiM3wAVWSDKzfbxg/tyNx1fGyMf69EblecuuH1/vF+41dCnGC7nW1Dcn9KlrfyvMfCxm5Rgi5/AbQpypzGCV+SnXyafnt62ljspaZlaWjHeuZH7IPIFkfsbkYnVJstZhhiQzJPMzxLnopbFK3quwQjrWWpybiKN0jprk1eI9YtCx+8Rer5ln1OHdTshHqWmE9/G6MTvkm7fic2le3mN+Bni4J2JvzeHFs1xaEOtv8l/yuG/Zd8rr3XU3q5wrxsxKYZ63/+f944kxeLVZb/rLnK45JgnxmybGGON4bTTzW+Ixfcv3hLxJ3532K4M3JvCOV405IZ+uXp0XAjP7RLBtOuKYWlvg3Vgz5h75/loe71b5HeeEa5yPq24PQQ5/Jc5v5O+KF+cjH+uhqAEXb+ra5MhXdymsfHYYiXMOpGuwabnO0JqVGQelwbpou+eDros3RRPxPnVZsh5HeOrwhmo/RxPxPiXNmnviXIc3VPssrHFoX0C++nhdCuV/SK7an5T77aGYzxeLLZWvmhfnnSZYfXLtay7eGKuOr6zV3PNSSLqH+eIRYw3lQyx3Zb+J5aNk9rGiH4RY6/Ji3aQOEvJnJPrsmZrf1w9yeN/Tu8YH8sdumFUzDxJi3zQv6lDbxxpS7Fwb6l+pvKwZndHO+f+fhP8O6jJz70+psxTeXLnyJ8Ss+9d18IaYHtA6PCQ/CqwH6jil1zbBG2JKyR/wpvYv7X812p8p
   </data>
  </layer>
  <layer id="35" name="Tilelaag 3" width="44" height="33">
   <data encoding="base64" compression="zlib">
-   eJzt000OQDAQhuFWpD2AQ1o7AyfAFSW1t7DUWUzakAqiP4vvSWaDxCumQqSzKDfGzqATvjxgrsL3uJNQ66LSNH1lCu8jvXZTCn8v/Wul2KUQU+WGnPs2ef2GHKj17kyx0T7T1fF77jxtZbma+f+/aWW0F7H5u/m1k6Xo/RPtxJr5zLVN3vcDAAAAAAAA/O0Aw9wi6w==
+   eJztlj0OgkAQRlklYu/dkBtYWXgDEo0HUIMX8gBewkR7Y7STCX5h0QX2Vy3mJV8BIcvbYYZsFH2P06jOucwqiaL8lc3giyISu473wpMgV7rOJec2DmO/jrrAFRTl3jLR70u1f4iwbmCZ1FFBzlPR9FaF2HrqGbkv5XumZC011OmZLu6i2iui8ruKzz3ooHJ28SXXrpkC1HOL2Hx9gB4BNr66rsDVeZ3Uzia++P4mruDqONfkTLVG2tzk2HgCV98+bp7Xp564WPwrdNHxnU3Cvd8U3/Ul9gHPBoXj2qlozge5zuMqobB1Tt/8QnvK4CxiAlx/BfWyjfevwOyR83GofgY98G+onP/VFeCsKs8+wzAMwzAM45cnv0xQLA==
   </data>
  </layer>
  <objectgroup id="12" name="Kopie van Objects" visible="0" opacity="0.9" offsetx="3.15789" offsety="7.89474">

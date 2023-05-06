@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="35" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="204">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="35" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="218">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -9,7 +9,7 @@
  <tileset firstgid="16001" source="../tileset/dungeon.tsx"/>
  <layer id="26" name="Collision" width="35" height="35">
   <data encoding="base64" compression="zlib">
-   eJzt0LsJACAMANG0DuBKzumokjYifogQ5R6kMuihCAAAAAAA/6h5PLNzu+vRUlI/u3d4tagoLSfv326J8i/Ktqw2ebZ4zSsa/fQnAg==
+   eJxjYBgFo2AUjIJRMApGwSgYBaNgFIyCUTAKhg8w4cONCckvEEVVSyu3kGoGtd3ixonAA+0WYuzCpo6ecUTILnq4hVBYkZu+SHULOXioAAArfhPx
   </data>
  </layer>
  <layer id="22" name="Background" width="35" height="35">
@@ -37,18 +37,18 @@
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="115" template="../obj/gold.tx" x="447.713" y="382.537"/>
-  <object id="117" template="../obj/enemy.tx" x="395.76" y="315.976">
+  <object id="117" template="../obj/enemy.tx" x="438.76" y="251.476">
    <properties>
-    <property name="enemy" value="Dwarven Miner"/>
+    <property name="enemy" value="Cave Spider"/>
    </properties>
   </object>
-  <object id="118" template="../obj/enemy.tx" x="131.193" y="350.745">
+  <object id="118" template="../obj/enemy.tx" x="300.193" y="358.245">
    <properties>
-    <property name="enemy" value="Dwarven Mercenary"/>
+    <property name="enemy" value="Human elite"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="172,171"/>
+    <property name="waypoints" value="206,213,206,190,183,214,205,214,183,190"/>
    </properties>
   </object>
   <object id="119" template="../obj/enemy.tx" x="230.031" y="52.107">
@@ -59,11 +59,10 @@
     <property name="waypoints" value="179,180,198,171,176,174,191"/>
    </properties>
   </object>
-  <object id="122" template="../obj/enemy.tx" x="108.042" y="199.771">
+  <object id="122" template="../obj/enemy.tx" x="91.042" y="187.271">
    <properties>
-    <property name="enemy" value="Dwarven Miner"/>
+    <property name="enemy" value="Dwarven Mercenary"/>
     <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="183,184"/>
    </properties>
   </object>
   <object id="137" template="../obj/enemy.tx" x="407.763" y="152.73">
@@ -73,90 +72,171 @@
     <property name="waypoints" value="181,192"/>
    </properties>
   </object>
-  <object id="150" template="../obj/enemy.tx" x="213.842" y="94.272">
-   <properties>
-    <property name="enemy" value="Magma Fire Elemental"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="174,173"/>
-   </properties>
-  </object>
   <object id="162" template="../obj/enemy.tx" x="246.842" y="464.105">
    <properties>
     <property name="enemy" value="Sand Guardian"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="163" template="../obj/waypoint.tx" x="463.342" y="301.605"/>
-  <object id="165" template="../obj/waypoint.tx" x="66.569" y="290.378"/>
-  <object id="167" template="../obj/entry_up.tx" x="222.342" y="344.605">
-   <properties>
-    <property name="teleport" value=""/>
-   </properties>
-  </object>
-  <object id="169" template="../obj/enemy.tx" x="94.842" y="279.605">
-   <properties>
-    <property name="enemy" value="Human"/>
-    <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="175,176,177,176"/>
-   </properties>
-  </object>
-  <object id="170" template="../obj/enemy.tx" x="217.342" y="253.105">
-   <properties>
-    <property name="enemy" value="Kobold"/>
-   </properties>
-  </object>
-  <object id="173" template="../obj/waypoint.tx" x="244.342" y="135.605"/>
+  <object id="163" template="../obj/waypoint.tx" x="417.342" y="340.105"/>
   <object id="174" template="../obj/waypoint.tx" x="380.342" y="57.1053"/>
   <object id="175" template="../obj/waypoint.tx" x="286.842" y="59.6053"/>
-  <object id="176" template="../obj/waypoint.tx" x="430.842" y="357.605"/>
+  <object id="176" template="../obj/waypoint.tx" x="215.342" y="355.605"/>
   <object id="178" template="../obj/enemy.tx" x="290.842" y="110.105">
    <properties>
-    <property name="effect">{ 
-&quot;lifeModifier&quot;: 50,
-&quot;startBattleWithCard&quot;: [ &quot;Thayan Evokers
-&quot;,&quot;Tome of the Infinite&quot;,&quot;Thayan Evokers&quot;]
-}
-
-</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;,&quot;Thayan Evokers&quot;]
+}</property>
     <property name="enemy" value="Conjurer"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
   <object id="179" template="../obj/waypoint.tx" x="180.342" y="117.105"/>
-  <object id="180" template="../obj/waypoint.tx" x="199.842" y="162.105"/>
+  <object id="180" template="../obj/waypoint.tx" x="100.342" y="282.605"/>
   <object id="181" template="../obj/waypoint.tx" x="434.342" y="221.105"/>
-  <object id="183" template="../obj/waypoint.tx" x="330.342" y="259.605"/>
-  <object id="184" template="../obj/waypoint.tx" x="146.342" y="202.105"/>
+  <object id="183" template="../obj/waypoint.tx" x="363.842" y="262.605"/>
+  <object id="184" template="../obj/waypoint.tx" x="225.342" y="251.605"/>
   <object id="185" template="../obj/manashards.tx" x="402.887" y="196.423"/>
   <object id="186" template="../obj/manashards.tx" x="122.797" y="182.787"/>
   <object id="188" template="../obj/manashards.tx" x="50.2966" y="261.878"/>
-  <object id="190" template="../obj/waypoint.tx" x="379.342" y="183.605"/>
+  <object id="190" template="../obj/waypoint.tx" x="317.342" y="262.605"/>
   <object id="191" template="../obj/waypoint.tx" x="353.342" y="105.105"/>
-  <object id="197" template="../obj/door_up.tx" x="385.342" y="479.105">
+  <object id="197" template="../obj/door_up.tx" x="380.342" y="461.105">
    <properties>
     <property name="teleport" value="maps/map/Zedruu_f1.tmx"/>
    </properties>
   </object>
-  <object id="201" template="../obj/enemy.tx" x="213.342" y="125.105">
+  <object id="201" template="../obj/enemy.tx" x="241.342" y="112.105">
    <properties>
-    <property name="enemy" value="Dwarven Mercenary"/>
+    <property name="enemy" value="Construct"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="172,171"/>
-   </properties>
-  </object>
-  <object id="202" template="../obj/enemy.tx" x="366.342" y="201.105">
-   <properties>
-    <property name="enemy" value="Dwarven Mercenary"/>
-    <property name="spawn.Easy" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="172,171"/>
+    <property name="waypoints" value="191,179,206,180"/>
    </properties>
   </object>
   <object id="203" template="../obj/waypoint.tx" x="145.342" y="250.605"/>
+  <object id="204" template="../obj/waypoint.tx" x="50.8421" y="352.105"/>
+  <object id="205" template="../obj/waypoint.tx" x="321.842" y="182.105"/>
+  <object id="206" template="../obj/waypoint.tx" x="295.842" y="374.605"/>
+  <object id="207" template="../obj/enemy.tx" x="355.342" y="297.105">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="183,163"/>
+   </properties>
+  </object>
+  <object id="208" template="../obj/enemy.tx" x="349.342" y="398.605">
+   <properties>
+    <property name="enemy" value="Cave Spider"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="204,176"/>
+   </properties>
+  </object>
+  <object id="209" template="../obj/enemy.tx" x="132.342" y="282.605">
+   <properties>
+    <property name="enemy" value="Dwarven Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="210" template="../obj/enemy.tx" x="54.3421" y="372.605">
+   <properties>
+    <property name="enemy" value="Dwarven Mercenary"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="211" template="../obj/enemy.tx" x="141.342" y="377.105">
+   <properties>
+    <property name="enemy" value="Dwarven Miner"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="212" template="../obj/enemy.tx" x="340.342" y="202.605">
+   <properties>
+    <property name="enemy" value="Human elite"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="205,214,183,190,206,213,206,190,183,214"/>
+   </properties>
+  </object>
+  <object id="213" template="../obj/waypoint.tx" x="250.842" y="376.105"/>
+  <object id="214" template="../obj/waypoint.tx" x="365.342" y="184.105"/>
+  <object id="215" template="../obj/booster.tx" x="9.34211" y="353.605">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="216" template="../obj/booster.tx" x="311.842" y="110.105">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="217" template="../obj/booster.tx" x="439.342" y="284.105">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;A25&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>
