@@ -153,11 +153,14 @@ public class PlayAi extends SpellAbilityAi {
                 // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
                 // of which spell was the reason for the choice can be used there
                 for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai, state)) {
-                    if (!(s instanceof Spell)) {
+                    if (!sa.matchesValidParam("ValidSA", s)) {
                         continue;
                     }
+                    if (s instanceof LandAbility) {
+                        // might want to run some checks here but it's rare anyway
+                        return true;
+                    }
                     Spell spell = (Spell) s;
-                    s.setActivatingPlayer(ai, true);
                     if (params != null && params.containsKey("CMCLimit")) {
                         Integer cmcLimit = (Integer) params.get("CMCLimit");
                         if (spell.getPayCosts().getTotalMana().getCMC() > cmcLimit)
@@ -210,11 +213,10 @@ public class PlayAi extends SpellAbilityAi {
 
     private static List<Card> getPlayableCards(SpellAbility sa, Player ai) {
         List<Card> cards = null;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
-        if (tgt != null) {
-            cards = CardUtil.getValidCardsToTarget(tgt, sa);
+        if (sa.usesTargeting()) {
+            cards = CardUtil.getValidCardsToTarget(sa);
         } else if (!sa.hasParam("Valid")) {
             cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         }
