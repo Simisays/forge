@@ -35,13 +35,12 @@
 	"Shroom2"
 ],
 "enemies": [
+	"Adept Black Wizard",
+	"Apprentice Black Wizard",
 	"Bat",
 	"Beholder",
 	"Big Zombie",
 	"Black Sliver",
-	"Black Wiz1",
-	"Black Wiz2",
-	"Black Wiz3",
 	"Challenger 20",
 	"Challenger 21",
 	"Challenger 22",
@@ -62,6 +61,7 @@
 	"Horror",
 	"Insect",
 	"Lich",
+	"Master Black Wizard",
 	"Mindclaw Shaman",
 	"Mummy",
 	"Rakdos Devil",

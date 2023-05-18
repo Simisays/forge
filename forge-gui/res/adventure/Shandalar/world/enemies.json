@@ -1,5 +1,275 @@
 [
 {
+	"name": "Adept Black Wizard",
+	"sprite": "sprites/black_wiz2.atlas",
+	"deck": [
+		"decks/fear.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 20,
+			"addMaxCount": 80
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
+},
+{
+	"name": "Adept Blue Wizard",
+	"sprite": "sprites/blue_wiz2.atlas",
+	"deck": [
+		"decks/mill.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 80,
+			"addMaxCount": 40
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Illusionist",
+		"Wizard",
+		"Human",
+		"IdentityBlue",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
+},
+{
+	"name": "Adept Green Wizard",
+	"sprite": "sprites/green_wiz2.atlas",
+	"deck": [
+		"decks/trample.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Nature",
+		"Wizard",
+		"Human",
+		"IdentityGreen",
+		"BiomeGreen",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Adept Red Wizard",
+	"sprite": "sprites/red_wiz2.atlas",
+	"deck": [
+		"decks/haste_burn.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"count": 25,
+			"addMaxCount": 200
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Wizard",
+		"Human",
+		"Fire",
+		"Pyromancer",
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Adept White Wizard",
+	"sprite": "sprites/white_wiz2.atlas",
+	"deck": [
+		"decks/basri.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Holy",
+		"Wizard",
+		"Human",
+		"Religious",
+		"Passive",
+		"IdentityWhite",
+		"BiomeColorless",
+		"BiomeWhite"
+	]
+},
+{
 	"name": "Adventurer",
 	"sprite": "sprites/swordsman_3.atlas",
 	"deck": [
@@ -436,6 +706,419 @@
 	]
 },
 {
+	"name": "Apprentice Black Wizard",
+	"sprite": "sprites/black_wizard.atlas",
+	"deck": [
+		"decks/black_bad.json"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
+},
+{
+	"name": "Apprentice Blue Wizard",
+	"sprite": "sprites/mage.atlas",
+	"deck": [
+		"decks/blue_bad.json"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Wizard",
+		"Illusionist",
+		"Flying",
+		"Human",
+		"IdentityBlue",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
+},
+{
+	"name": "Apprentice Green Wizard",
+	"sprite": "sprites/green_wiz1.atlas",
+	"deck": [
+		"decks/green_bad.json"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Nature",
+		"Wizard",
+		"Human",
+		"IdentityGreen",
+		"BiomeGreen",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Apprentice Red Wizard",
+	"sprite": "sprites/enchanter.atlas",
+	"deck": [
+		"decks/red_bad.json"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Wizard",
+		"Human",
+		"Fire",
+		"Pyromancer",
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Apprentice White Wizard",
+	"sprite": "sprites/priest.atlas",
+	"deck": [
+		"decks/white_bad.json"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Holy",
+		"Wizard",
+		"Human",
+		"Religious",
+		"IdentityWhite",
+		"BiomeColorless",
+		"BiomeWhite"
+	]
+},
+{
 	"name": "Archer",
 	"sprite": "sprites/archer_2.atlas",
 	"deck": [
@@ -602,7 +1285,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale":0.75,
+	"scale": 0.75,
 	"life": 18,
 	"rewards": [
 		{
@@ -1653,309 +2336,6 @@
 		"IdentityRed",
 		"IdentityBlue",
 		"IdentityGrixis"
-	]
-},
-{
-	"name": "Black Wiz1",
-	"sprite": "sprites/black_wizard.atlas",
-	"deck": [
-		"decks/black_bad.json"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "B",
-	"questTags": [
-		"Wizard",
-		"Necromancer",
-		"IdentityBlack",
-		"BiomeColorless",
-		"BiomeBlack"
-	]
-},
-{
-	"name": "Black Wiz2",
-	"sprite": "sprites/black_wiz2.atlas",
-	"deck": [
-		"decks/fear.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 8
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 20,
-			"addMaxCount": 80
-		}
-	],
-	"colors": "B",
-	"questTags": [
-		"Wizard",
-		"Necromancer",
-		"IdentityBlack",
-		"BiomeColorless",
-		"BiomeBlack"
-	]
-},
-{
-	"name": "Black Wiz3",
-	"sprite": "sprites/black_wiz3.atlas",
-	"deck": [
-		"decks/black_wiz3.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 8
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 20,
-			"addMaxCount": 80
-		}
-	],
-	"colors": "B",
-	"questTags": [
-		"Wizard",
-		"Necromancer",
-		"IdentityBlack",
-		"BiomeColorless",
-		"BiomeBlack"
-	]
-},
-{
-	"name": "Blue Wiz1",
-	"sprite": "sprites/mage.atlas",
-	"deck": [
-		"decks/blue_bad.json"
-	],
-	"ai": "",
-	"flying": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 31,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "U",
-	"questTags": [
-		"Wizard",
-		"Illusionist",
-		"Flying",
-		"Human",
-		"IdentityBlue",
-		"BiomeColorless",
-		"BiomeBlue"
-	]
-},
-{
-	"name": "Blue Wiz2",
-	"sprite": "sprites/blue_wiz2.atlas",
-	"deck": [
-		"decks/mill.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 80,
-			"addMaxCount": 40
-		}
-	],
-	"colors": "U",
-	"questTags": [
-		"Illusionist",
-		"Wizard",
-		"Human",
-		"IdentityBlue",
-		"BiomeColorless",
-		"BiomeBlue"
-	]
-},
-{
-	"name": "Blue Wiz3",
-	"sprite": "sprites/mage_2.atlas",
-	"deck": [
-		"decks/counter.dck"
-	],
-	"ai": "",
-	"flying": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 31,
-	"life": 14,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 8
-		},
-		{
-			"type": "gold",
-			"count": 50,
-			"addMaxCount": 300
-		}
-	],
-	"colors": "U",
-	"questTags": [
-		"Human",
-		"Wizard",
-		"Illusionist",
-		"IdentityBlue",
-		"BiomeColorless",
-		"BiomeBlue"
 	]
 },
 {
@@ -9826,252 +10206,6 @@
 	]
 },
 {
-	"name": "Green Wiz1",
-	"sprite": "sprites/green_wiz1.atlas",
-	"deck": [
-		"decks/green_bad.json"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "G",
-	"questTags": [
-		"Nature",
-		"Wizard",
-		"Human",
-		"IdentityGreen",
-		"BiomeGreen",
-		"BiomeColorless"
-	]
-},
-{
-	"name": "Green Wiz2",
-	"sprite": "sprites/green_wiz2.atlas",
-	"deck": [
-		"decks/trample.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "G",
-	"questTags": [
-		"Nature",
-		"Wizard",
-		"Human",
-		"IdentityGreen",
-		"BiomeGreen",
-		"BiomeColorless"
-	]
-},
-{
-	"name": "Green Wiz3",
-	"sprite": "sprites/green_wiz3.atlas",
-	"deck": [
-		"decks/ramp.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "G",
-	"questTags": [
-		"Nature",
-		"Wizard",
-		"Human",
-		"IdentityGreen",
-		"BiomeGreen",
-		"BiomeColorless"
-	]
-},
-{
 	"name": "Griffin",
 	"sprite": "sprites/griffin.atlas",
 	"deck": [
@@ -12863,6 +12997,274 @@
 	]
 },
 {
+	"name": "Master Black Wizard",
+	"sprite": "sprites/black_wiz3.atlas",
+	"deck": [
+		"decks/black_wiz3.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 200
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Wizard",
+		"Necromancer",
+		"IdentityBlack",
+		"BiomeColorless",
+		"BiomeBlack"
+	]
+},
+{
+	"name": "Master Blue Wizard",
+	"sprite": "sprites/mage_2.atlas",
+	"deck": [
+		"decks/counter.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"count": 50,
+			"addMaxCount": 300
+		}
+	],
+	"colors": "U",
+	"questTags": [
+		"Human",
+		"Wizard",
+		"Illusionist",
+		"IdentityBlue",
+		"BiomeColorless",
+		"BiomeBlue"
+	]
+},
+{
+	"name": "Master Green Wizard",
+	"sprite": "sprites/green_wiz3.atlas",
+	"deck": [
+		"decks/ramp.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Nature",
+		"Wizard",
+		"Human",
+		"IdentityGreen",
+		"BiomeGreen",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Master Red Wizard",
+	"sprite": "sprites/red_wiz3.atlas",
+	"deck": [
+		"decks/lava_axe.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8
+		},
+		{
+			"type": "gold",
+			"count": 50,
+			"addMaxCount": 300
+		}
+	],
+	"colors": "R",
+	"questTags": [
+		"Wizard",
+		"Human",
+		"Fire",
+		"Pyromancer",
+		"IdentityRed",
+		"BiomeRed",
+		"BiomeColorless"
+	]
+},
+{
+	"name": "Master White Wizard",
+	"sprite": "sprites/white_wiz3.atlas",
+	"deck": [
+		"decks/human_soldier_token.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Holy",
+		"Wizard",
+		"Human",
+		"IdentityWhite",
+		"BiomeColorless",
+		"BiomeWhite"
+	]
+},
+{
 	"name": "Merfolk",
 	"sprite": "sprites/waterelemental.atlas",
 	"deck": [
@@ -14310,7 +14712,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
-	"scale":0.75,
+	"scale": 0.75,
 	"life": 18,
 	"rewards": [
 		{
@@ -14989,159 +15391,6 @@
 	]
 },
 {
-	"name": "Red Wiz1",
-	"sprite": "sprites/enchanter.atlas",
-	"deck": [
-		"decks/red_bad.json"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 8,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "R",
-	"questTags": [
-		"Wizard",
-		"Human",
-		"Fire",
-		"Pyromancer",
-		"IdentityRed",
-		"BiomeRed",
-		"BiomeColorless"
-	]
-},
-{
-	"name": "Red Wiz2",
-	"sprite": "sprites/red_wiz2.atlas",
-	"deck": [
-		"decks/haste_burn.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 8
-		},
-		{
-			"type": "gold",
-			"count": 25,
-			"addMaxCount": 200
-		}
-	],
-	"colors": "R",
-	"questTags": [
-		"Wizard",
-		"Human",
-		"Fire",
-		"Pyromancer",
-		"IdentityRed",
-		"BiomeRed",
-		"BiomeColorless"
-	]
-},
-{
-	"name": "Red Wiz3",
-	"sprite": "sprites/red_wiz3.atlas",
-	"deck": [
-		"decks/lava_axe.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 14,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 8
-		},
-		{
-			"type": "gold",
-			"count": 50,
-			"addMaxCount": 300
-		}
-	],
-	"colors": "R",
-	"questTags": [
-		"Wizard",
-		"Human",
-		"Fire",
-		"Pyromancer",
-		"IdentityRed",
-		"BiomeRed",
-		"BiomeColorless"
-	]
-},
-{
 	"name": "Rogue",
 	"sprite": "sprites/rogue.atlas",
 	"deck": [
@@ -15422,7 +15671,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.35,
 	"life": 13,
 	"rewards": [
 		{
@@ -15483,7 +15731,6 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale": 0.4,
 	"life": 40,
 	"rewards": [
 		{
@@ -18027,255 +18274,6 @@
 		"Humanoid",
 		"Subterranean",
 		"IdentityWhite",
-		"BiomeWhite"
-	]
-},
-{
-	"name": "White Wiz1",
-	"sprite": "sprites/priest.atlas",
-	"deck": [
-		"decks/white_bad.json"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "W",
-	"questTags": [
-		"Holy",
-		"Wizard",
-		"Human",
-		"Religious",
-		"IdentityWhite",
-		"BiomeColorless",
-		"BiomeWhite"
-	]
-},
-{
-	"name": "White Wiz2",
-	"sprite": "sprites/white_wiz2.atlas",
-	"deck": [
-		"decks/basri.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "W",
-	"questTags": [
-		"Holy",
-		"Wizard",
-		"Human",
-		"Religious",
-		"Passive",
-		"IdentityWhite",
-		"BiomeColorless",
-		"BiomeWhite"
-	]
-},
-{
-	"name": "White Wiz3",
-	"sprite": "sprites/white_wiz3.atlas",
-	"deck": [
-		"decks/human_soldier_token.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 24,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"basicland"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
-		}
-	],
-	"colors": "W",
-	"questTags": [
-		"Holy",
-		"Wizard",
-		"Human",
-		"IdentityWhite",
-		"BiomeColorless",
 		"BiomeWhite"
 	]
 },
