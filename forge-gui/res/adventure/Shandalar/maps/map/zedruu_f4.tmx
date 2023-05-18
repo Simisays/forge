@@ -7,7 +7,7 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
  <tileset firstgid="16001" source="../tileset/dungeon.tsx"/>
- <layer id="37" name="Colission" width="44" height="33">
+ <layer id="37" name="Collision" width="44" height="33">
   <data encoding="base64" compression="zlib">
    eJzVmFsKwjAQRfvZ/Iir0uJGxceuxNplyKAXhziPtElsPBDUgulhMjNJ23W/ZbN9jXP/+mwN7gTPW+i6e1jPyQK+cG0d8hxCu2uPwX8PK689reuFjbiGWvKV6po7xtD1cQXfnB60NMZWHCzIM6e2c3LC841z81Kgr5fICS3WNWoDvpLzpFyX5viVL3Htv50n9t1zlnxr9R7yoj346uSW5az5jgX2okf4DB7DQ0Is9o5zDNZsaX1Mxv9q+ILxHZ85WK5Erq83/77wOQU5rEG9VDtnTiHNl/Byw5uHozlbrriHFzu+NlrvnOMKyDnekyR43aYQ59IY9NovTUqut8S/+dZcOw+K1S4aOX2rNvAFlu/aroB6GJyls/Sxr+tK88/pN+i72rm/Zn0hFvx5OOW8Yb0nqeUL13jt4PwQRgolfKV7e/sijzmP/cl5/svNXem+0kgB51PNuZWewNGcW3Tl8Oet1l0J+C6tryf/Rnz7
   </data>
