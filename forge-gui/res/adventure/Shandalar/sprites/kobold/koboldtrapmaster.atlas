@@ -1,5 +1,5 @@
-kobolddragoncaller.png
-size: 256,192
+koboldtrapmaster.png
+size: 256,448
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
@@ -7,17 +7,29 @@ Avatar
   xy: 103, 75
   size: 16, 16     
 Idle 
-  xy: 0, 0
-  size: 32, 32   
+  xy: 7, 82
+  size: 21, 23   
 Idle 
-  xy: 32, 0
-  size: 32, 32   
+  xy: 39, 82
+  size: 21, 23   
 Idle 
-  xy: 64, 0
-  size: 32, 32  
+  xy: 71, 82
+  size: 21, 23    
 Idle 
-  xy: 96, 0
-  size: 32, 32   
+  xy: 103, 82
+  size: 21, 23    
+Idle 
+  xy: 135, 82
+  size: 21, 23   
+Idle 
+  xy: 167, 82
+  size: 21, 23   
+Idle 
+  xy: 199, 82
+  size: 21, 23    
+Idle 
+  xy: 231, 82
+  size: 21, 23    
 Walk
   xy: 0, 32
   size: 32, 32      

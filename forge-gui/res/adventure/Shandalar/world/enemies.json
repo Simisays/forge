@@ -2825,9 +2825,9 @@
 },
 {
 	"name": "Cave Spider",
-	"sprite": "sprites/spider_2.atlas",
+	"sprite": "sprites/arachnida/spider_cave.atlas",
 	"deck": [
-		"decks/cave_spider.dck"
+		"decks/arachnida/cave_spider.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -8672,9 +8672,9 @@
 },
 {
 	"name": "Giant Spider",
-	"sprite": "sprites/spider_2.atlas",
+	"sprite": "sprites/spider_purple.atlas",
 	"deck": [
-		"decks/spider_token.dck"
+		"decks/arachnida/spider_token.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -11437,9 +11437,9 @@
 },
 {
 	"name": "Insect",
-	"sprite": "sprites/dragonfly.atlas",
+	"sprite": "sprites/arachnida/dragonfly.atlas",
 	"deck": [
-		"decks/insect.dck"
+		"decks/arachnida/insect.dck"
 	],
 	"ai": "",
 	"flying": true,
@@ -12170,10 +12170,10 @@
 	]
 },
 {
-	"name": "Kobold",
-	"sprite": "sprites/kobold.atlas",
+	"name": "Kobold Worker",
+	"sprite": "sprites/kobold/koboldworker.atlas",
 	"deck": [
-		"decks/kobold.dck"
+		"decks/kobold/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -15602,9 +15602,9 @@
 },
 {
 	"name": "Scarab",
-	"sprite": "sprites/dungeon/scarab.atlas",
+	"sprite": "sprites/arachnida/scarab.atlas",
 	"deck": [
-		"decks/scarab.dck"
+		"decks/arachnida/scarab.dck"
 	],
 	"ai": "",
 	"spawnRate": 0.8,
@@ -15786,9 +15786,9 @@
 },
 {
 	"name": "Scorpion",
-	"sprite": "sprites/scorpion.atlas",
+	"sprite": "sprites/arachnida/scorpion.atlas",
 	"deck": [
-		"decks/scorpion.dck"
+		"decks/arachnida/scorpion.dck"
 	],
 	"ai": "",
 	"spawnRate": 0.8,
@@ -16578,9 +16578,9 @@
 },
 {
 	"name": "Spider",
-	"sprite": "sprites/spider.atlas",
+	"sprite": "sprites/arachnida/spider_black.atlas",
 	"deck": [
-		"decks/spider.json"
+		"decks/arachnida/spider.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -18143,9 +18143,9 @@
 },
 {
 	"name": "Wasp",
-	"sprite": "sprites/dungeon/wasp.atlas",
+	"sprite": "sprites/arachnida/wasp.atlas",
 	"deck": [
-		"decks/insect.dck"
+		"decks/arachnida/insect.dck"
 	],
 	"ai": "",
 	"flying": true,
@@ -19069,6 +19069,396 @@
 		"Leader",
 		"IdentityBlack",
 		"BiomeBlack"
+	]
+},
+{
+	"name": "Kobold Warrior",
+	"nameOverride": "",
+	"sprite": "sprites/kobold/koboldwarrior.atlas",
+	"deck": [
+		"decks/kobold/koboldworker.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"scale": 0.75,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "RB",
+	"questTags": [
+		"Kobold",
+		"Coward",
+		"Sneaky",
+		"Small",
+		"Humanoid",
+		"Thief",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Kobold Pyromancer",
+	"nameOverride": "",
+	"sprite": "sprites/kobold/koboldpyromancer.atlas",
+	"deck": [
+		"decks/kobold/koboldworker.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"scale": 0.75,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "RB",
+	"questTags": [
+		"Kobold",
+		"Coward",
+		"Sneaky",
+		"Small",
+		"Humanoid",
+		"Thief",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Kobold Dragoncaller",
+	"nameOverride": "",
+	"sprite": "sprites/kobold/kobolddragoncaller.atlas",
+	"deck": [
+		"decks/kobold/koboldworker.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"scale": 0.75,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "RB",
+	"questTags": [
+		"Kobold",
+		"Coward",
+		"Sneaky",
+		"Small",
+		"Humanoid",
+		"Thief",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Kobold Shaman",
+	"nameOverride": "",
+	"sprite": "sprites/kobold/koboldshaman.atlas",
+	"deck": [
+		"decks/kobold/koboldworker.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"scale": 0.75,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "RB",
+	"questTags": [
+		"Kobold",
+		"Coward",
+		"Sneaky",
+		"Small",
+		"Humanoid",
+		"Thief",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Kobold Trapmaster",
+	"nameOverride": "",
+	"sprite": "sprites/kobold/koboldtrapmaster.atlas",
+	"deck": [
+		"decks/kobold/koboldworker.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"scale": 0.75,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "RB",
+	"questTags": [
+		"Kobold",
+		"Coward",
+		"Sneaky",
+		"Small",
+		"Humanoid",
+		"Thief",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
+	]
+},
+{
+	"name": "Kobold Slinger",
+	"nameOverride": "",
+	"sprite": "sprites/kobold/koboldshaman.atlas",
+	"deck": [
+		"decks/kobold/koboldworker.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 31,
+	"scale": 0.75,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 8,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "RB",
+	"questTags": [
+		"Kobold",
+		"Coward",
+		"Sneaky",
+		"Small",
+		"Humanoid",
+		"Thief",
+		"IdentityRed",
+		"IdentityBlack",
+		"IdentityRakdos",
+		"BiomeRed"
 	]
 }
 ]
