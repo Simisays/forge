@@ -1,0 +1,89 @@
+spider_cave.png
+size: 256,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 170, 19
+  size: 13, 13    
+Idle 
+  xy: 8, 176
+  size: 16, 16 
+Idle 
+  xy: 40, 176
+  size: 16, 16 
+Idle 
+  xy: 72, 176
+  size: 16, 16 
+Idle 
+  xy: 104, 176
+  size: 16, 16 
+Idle 
+  xy: 8, 16
+  size: 16, 16
+Idle 
+  xy: 40, 16
+  size: 16, 16   
+Idle 
+  xy: 72, 16
+  size: 16, 16
+Idle 
+  xy: 104, 16
+  size: 16, 16   
+Idle 
+  xy: 136, 16
+  size: 16, 16
+Idle 
+  xy: 168, 16
+  size: 16, 16   
+Idle
+  xy: 200, 16
+  size: 16, 16
+Idle 
+  xy: 232, 16
+  size: 16, 16  
+Walk 
+  xy: 8, 48
+  size: 16, 16
+Walk 
+  xy: 40, 48
+  size: 16, 16   
+Walk 
+  xy: 72, 48
+  size: 16, 16
+Walk 
+  xy: 104, 48
+  size: 16, 16   
+Attack 
+  xy: 8, 16
+  size: 16, 16
+Attack 
+  xy: 40, 16
+  size: 16, 16   
+Attack 
+  xy: 72, 16
+  size: 16, 16
+Attack 
+  xy: 104, 16
+  size: 16, 16   
+Attack 
+  xy: 136, 16
+  size: 16, 16
+Attack 
+  xy: 168, 16
+  size: 16, 16   
+Attack 
+  xy: 200, 16
+  size: 16, 16
+Attack 
+  xy: 232, 16
+  size: 16, 16            
+Death 
+  xy: 8, 112
+  size: 16, 16    
+Death 
+  xy: 40, 112
+  size: 16, 16 
+Death 
+  xy: 72, 112
+  size: 16, 16      
