@@ -1591,7 +1591,7 @@
 },
 {
 	"name": "Badger",
-	"sprite": "sprites/badger.atlas",
+	"sprite": "sprites/animals/badger.atlas",
 	"deck": [
 		"decks/badger.dck"
 	],
@@ -1798,7 +1798,7 @@
 },
 {
 	"name": "Bat",
-	"sprite": "sprites/bat.atlas",
+	"sprite": "sprites/animals/bat.atlas",
 	"deck": [
 		"decks/bat.dck"
 	],
@@ -1865,7 +1865,7 @@
 },
 {
 	"name": "Bear",
-	"sprite": "sprites/bear.atlas",
+	"sprite": "sprites/animals/bear.atlas",
 	"deck": [
 		"decks/bear.json"
 	],
@@ -2340,7 +2340,7 @@
 },
 {
 	"name": "Boar",
-	"sprite": "sprites/boar.atlas",
+	"sprite": "sprites/animals/boar.atlas",
 	"deck": [
 		"decks/boar.json"
 	],
@@ -2460,7 +2460,7 @@
 },
 {
 	"name": "Bull",
-	"sprite": "sprites/bull.atlas",
+	"sprite": "sprites/animals/bull.atlas",
 	"deck": [
 		"decks/bull.dck"
 	],
@@ -2583,7 +2583,7 @@
 {
 	"name": "Camel",
 	"nameOverride": "",
-	"sprite": "sprites/dungeon/camel.atlas",
+	"sprite": "sprites/animals/camel.atlas",
 	"deck": [
 		"decks/camel.dck"
 	],
@@ -4161,7 +4161,7 @@
 },
 {
 	"name": "Chicken",
-	"sprite": "sprites/dungeon/chicken.atlas",
+	"sprite": "sprites/animals/chicken.atlas",
 	"deck": [
 		"decks/chicken.dck"
 	],
@@ -6689,7 +6689,7 @@
 },
 {
 	"name": "Elephant",
-	"sprite": "sprites/dungeon/elephant.atlas",
+	"sprite": "sprites/animals/elephant.atlas",
 	"deck": [
 		"decks/elephant.json"
 	],
@@ -9132,7 +9132,7 @@
 },
 {
 	"name": "Gorilla",
-	"sprite": "sprites/dungeon/gorilla.atlas",
+	"sprite": "sprites/animals/gorilla.atlas",
 	"deck": [
 		"decks/gorilla.dck"
 	],
@@ -10819,7 +10819,7 @@
 },
 {
 	"name": "Hippo",
-	"sprite": "sprites/dungeon/hippo.atlas",
+	"sprite": "sprites/animals/hippo.atlas",
 	"deck": [
 		"decks/hippo.dck"
 	],
@@ -11012,7 +11012,7 @@
 },
 {
 	"name": "Horse",
-	"sprite": "sprites/dungeon/horse.atlas",
+	"sprite": "sprites/animals/horse.atlas",
 	"deck": [
 		"decks/horse.dck"
 	],
@@ -18822,7 +18822,7 @@
 },
 {
 	"name": "Wolf",
-	"sprite": "sprites/dungeon/wolf.atlas",
+	"sprite": "sprites/animals/wolf.atlas",
 	"deck": [
 		"decks/wolfboss.dck"
 	],
@@ -18929,7 +18929,7 @@
 },
 {
 	"name": "Vulture",
-	"sprite": "sprites/dungeon/vulture.atlas",
+	"sprite": "sprites/animals/vulture.atlas",
 	"deck": [
 		"decks/vulture.dck"
 	],
