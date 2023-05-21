@@ -1,11 +1,14 @@
 [
 {
 	"name": "Adept Black Wizard",
-	"sprite": "sprites/black_wiz2.atlas",
+	"sprite": "sprites/wizards/black_wiz2.atlas",
 	"deck": [
-		"decks/fear.dck"
+		"decks/wizards/blackwizard_medium_demonicpact.dck",
+		"decks/wizards/blackwizard_medium_fear.dck",
+		"decks/wizards/blackwizard_medium_goblins.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -35,11 +38,15 @@
 },
 {
 	"name": "Adept Blue Wizard",
-	"sprite": "sprites/blue_wiz2.atlas",
+	"sprite": "sprites/wizards/blue_wiz2.atlas",
 	"deck": [
-		"decks/mill.dck"
+		"decks/wizards/bluewizard_medium_donate.dck",
+		"decks/wizards/bluewizard_medium_dragons.dck",
+		"decks/wizards/bluewizard_medium_midrange.dck",
+		"decks/wizards/bluewizard_medium_mill.dck"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -70,11 +77,15 @@
 },
 {
 	"name": "Adept Green Wizard",
-	"sprite": "sprites/green_wiz2.atlas",
+	"sprite": "sprites/wizards/green_wiz2.atlas",
 	"deck": [
-		"decks/trample.dck"
+		"decks/wizards/greenwizard_medium_cheatramp.dck",
+		"decks/wizards/greenwizard_medium_nissa.dck",
+		"decks/wizards/greenwizard_medium_snakes.dck",
+		"decks/wizards/greenwizard_medium_trample.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -152,11 +163,16 @@
 },
 {
 	"name": "Adept Red Wizard",
-	"sprite": "sprites/red_wiz2.atlas",
+	"sprite": "sprites/wizards/red_wiz2.atlas",
 	"deck": [
-		"decks/haste_burn.dck"
+		"decks/wizards/redwizard_medium_artifact.dck",
+		"decks/wizards/redwizard_medium_giant.dck",
+		"decks/wizards/redwizard_medium_circleofflame.dck",
+		"decks/wizards/redwizard_medium_ralburn.dck",
+		"decks/wizards/redwizard_medium_hasteburn.dck"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -187,11 +203,13 @@
 },
 {
 	"name": "Adept White Wizard",
-	"sprite": "sprites/white_wiz2.atlas",
+	"sprite": "sprites/wizards/white_wiz2.atlas",
 	"deck": [
-		"decks/basri.dck"
+		"decks/wizards/whitewizard_medium_aggro.dck",
+		"decks/wizards/whitewizard_medium_basri.dck",
+		"decks/wizards/whitewizard_medium_control.dck",
+		"decks/wizards/whitewizard_medium_knight.dck"
 	],
-	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -707,11 +725,15 @@
 },
 {
 	"name": "Apprentice Black Wizard",
-	"sprite": "sprites/black_wizard.atlas",
+	"sprite": "sprites/wizards/black_wizard.atlas",
 	"deck": [
-		"decks/black_bad.json"
+		"decks/wizards/blackwizard_easy_artifact.dck",
+		"decks/wizards/blackwizard_easy_badmoon.dck",
+		"decks/wizards/blackwizard_easy_mill.dck",
+		"decks/wizards/blackwizard_easy.json"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -788,11 +810,15 @@
 },
 {
 	"name": "Apprentice Blue Wizard",
-	"sprite": "sprites/mage.atlas",
+	"sprite": "sprites/wizards/mage.atlas",
 	"deck": [
-		"decks/blue_bad.json"
+		"decks/wizards/bluewizard_easy_artifact.dck",
+		"decks/wizards/bluewizard_easy_control.dck",
+		"decks/wizards/bluewizard_easy_thassa.dck",
+		"decks/wizards/bluewizard_easy.json"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -872,10 +898,15 @@
 },
 {
 	"name": "Apprentice Green Wizard",
-	"sprite": "sprites/green_wiz1.atlas",
+	"sprite": "sprites/wizards/green_wiz1.atlas",
 	"deck": [
-		"decks/green_bad.json"
+		"decks/wizards/greenwizard_easy_elf.dck",
+		"decks/wizards/greenwizard_easy_enchantment.dck",
+		"decks/wizards/greenwizard_easy_vanilla.dck",
+		"decks/wizards/greenwizard_easy.json"
 	],
+	"ai": "",
+	"randomizeDeck": true,
 	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -954,11 +985,15 @@
 },
 {
 	"name": "Apprentice Red Wizard",
-	"sprite": "sprites/enchanter.atlas",
+	"sprite": "sprites/wizards/enchanter.atlas",
 	"deck": [
-		"decks/red_bad.json"
+		"decks/wizards/redwizard_easy_burn.dck",
+		"decks/wizards/redwizard_easy_dragons.dck",
+		"decks/wizards/redwizard_easy_gauntletofmight.dck",
+		"decks/wizards/redwizard_easy.json"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1037,11 +1072,14 @@
 },
 {
 	"name": "Apprentice White Wizard",
-	"sprite": "sprites/priest.atlas",
+	"sprite": "sprites/wizards/priest.atlas",
 	"deck": [
-		"decks/white_bad.json"
+		"decks/wizards/whitewizard_easy_ajani.dck",
+		"decks/wizards/whitewizard_easy_wanderer.dck",
+		"decks/wizards/whitewizard_easy_angelhuman.dck"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -13388,11 +13426,15 @@
 },
 {
 	"name": "Master Black Wizard",
-	"sprite": "sprites/black_wiz3.atlas",
+	"sprite": "sprites/wizards/black_wiz3.atlas",
 	"deck": [
-		"decks/black_wiz3.dck"
+		"decks/wizards/blackwizard_hard_gravepact.dck",
+		"decks/wizards/blackwizard_hard_knight.dck",
+		"decks/wizards/blackwizard_hard_liliana.dck",
+		"decks/wizards/blackwizard_hard_sacrifice.dck"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -13422,11 +13464,15 @@
 },
 {
 	"name": "Master Blue Wizard",
-	"sprite": "sprites/mage_2.atlas",
+	"sprite": "sprites/wizards/mage_2.atlas",
 	"deck": [
-		"decks/counter.dck"
+		"decks/wizards/bluewizard_hard_control.dck",
+		"decks/wizards/bluewizard_hard_control2.dck",
+		"decks/wizards/bluewizard_hard_artifact.dck",
+		"decks/wizards/bluewizard_hard_bounce.dck"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
@@ -13457,11 +13503,14 @@
 },
 {
 	"name": "Master Green Wizard",
-	"sprite": "sprites/green_wiz3.atlas",
+	"sprite": "sprites/wizards/green_wiz3.atlas",
 	"deck": [
-		"decks/ramp.dck"
+		"decks/wizards/greenwizard_hard_ramp.dck",
+		"decks/wizards/greenwizard_hard_rampbis.dck",
+		"decks/wizards/greenwizard_hard_sapproling.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -13539,11 +13588,15 @@
 },
 {
 	"name": "Master Red Wizard",
-	"sprite": "sprites/red_wiz3.atlas",
+	"sprite": "sprites/wizards/red_wiz3.atlas",
 	"deck": [
-		"decks/lava_axe.dck"
+		"decks/wizards/redwizard_hard_burn.dck",
+		"decks/wizards/redwizard_hard_dragons.dck",
+		"decks/wizards/redwizard_hard_fight.dck",
+		"decks/wizards/redwizard_hard_lavaaxe.dck"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -13574,11 +13627,16 @@
 },
 {
 	"name": "Master White Wizard",
-	"sprite": "sprites/white_wiz3.atlas",
+	"sprite": "sprites/wizards/white_wiz3.atlas",
 	"deck": [
-		"decks/human_soldier_token.dck"
+		"decks/wizards/whitewizard_hard_humility.dck",
+		"decks/wizards/whitewizard_hard_hatebears.dck",
+		"decks/wizards/whitewizard_hard_humansoldier.dck",
+		"decks/wizards/whitewizard_hard_armaggedon.dck",
+		"decks/wizards/whitewizard_hard_enchantments.dck"
 	],
 	"ai": "",
+	"randomizeDeck":true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
