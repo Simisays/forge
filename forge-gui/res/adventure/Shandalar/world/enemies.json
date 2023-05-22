@@ -9,10 +9,10 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 1,
+	"spawnRate": 0.75,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -47,10 +47,10 @@
 	],
 	"ai": "",
 	"randomizeDeck":true,
-	"spawnRate": 1,
+	"spawnRate": 0.75,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -86,10 +86,10 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 1,
+	"spawnRate": 0.75,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -173,10 +173,10 @@
 	],
 	"ai": "",
 	"randomizeDeck":true,
-	"spawnRate": 1,
+	"spawnRate": 0.75,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -210,10 +210,11 @@
 		"decks/wizards/whitewizard_medium_control.dck",
 		"decks/wizards/whitewizard_medium_knight.dck"
 	],
-	"spawnRate": 1,
+	"spawnRate": 0.75,
+	"randomizeDeck":true,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -289,9 +290,9 @@
 },
 {
 	"name": "Adventurer",
-	"sprite": "sprites/swordsman_3.atlas",
+	"sprite": "sprites/humans/swordsman_3.atlas",
 	"deck": [
-		"decks/adventurer.dck"
+		"decks/humans/adventurer.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -357,7 +358,7 @@
 },
 {
 	"name": "Aether Channeler",
-	"sprite": "sprites/monk_3.atlas",
+	"sprite": "sprites/holy/monk_3.atlas",
 	"deck": [
 		"decks/aether_channeler.dck"
 	],
@@ -822,7 +823,7 @@
 	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
-	"speed": 31,
+	"speed": 25,
 	"life": 10,
 	"rewards": [
 		{
@@ -997,7 +998,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 8,
+	"life": 10,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13437,7 +13438,7 @@
 	"randomizeDeck":true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
-	"speed": 30,
+	"speed": 25,
 	"life": 20,
 	"rewards": [
 		{
@@ -13474,10 +13475,10 @@
 	"ai": "",
 	"randomizeDeck":true,
 	"flying": true,
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
-	"speed": 31,
-	"life": 14,
+	"speed": 25,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13511,10 +13512,10 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13597,10 +13598,10 @@
 	],
 	"ai": "",
 	"randomizeDeck":true,
-	"spawnRate": 1,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 14,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
