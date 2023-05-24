@@ -18,13 +18,41 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 8
+			"addMaxCount": 6,
+			"rarity": [
+				"Common",
+				"Uncommon"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 1,
 			"count": 20,
-			"addMaxCount": 80
+			"addMaxCount": 70
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Common",
+				"Uncommon"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 3,
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			]
 		}
 	],
 	"colors": "B",
@@ -46,7 +74,7 @@
 		"decks/wizards/bluewizard_medium_mill.dck"
 	],
 	"ai": "",
-	"randomizeDeck":true,
+	"randomizeDeck": true,
 	"spawnRate": 0.75,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -55,24 +83,43 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 6,
+			"rarity": [
+				"Common",
+				"Uncommon"
+			]
 		},
 		{
 			"type": "gold",
 			"probability": 1,
-			"count": 80,
-			"addMaxCount": 40
+			"count": 20,
+			"addMaxCount": 70
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Common",
+				"Uncommon"
+			],
+			"colorType": "MonoColor"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 4,
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			]
 		}
-	],
-	"colors": "U",
-	"questTags": [
-		"Illusionist",
-		"Wizard",
-		"Human",
-		"IdentityBlue",
-		"BiomeColorless",
-		"BiomeBlue"
 	]
 },
 {
@@ -95,60 +142,41 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 6,
 			"rarity": [
-				"common",
-				"uncommon"
+				"Common",
+				"Uncommon"
 			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 70
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Uncommon",
+				"Rare",
+			],
+			"colorType": "MonoColor"
 		},
 		{
 			"type": "deckCard",
 			"probability": 0.5,
 			"count": 1,
-			"addMaxCount": 2,
+			"addMaxCount": 4,
 			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+				"Rare",
+				"Mythic Rare"
 			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.3,
-			"count": 10,
-			"addMaxCount": 90
 		}
 	],
 	"colors": "G",
@@ -172,7 +200,7 @@
 		"decks/wizards/redwizard_medium_hasteburn.dck"
 	],
 	"ai": "",
-	"randomizeDeck":true,
+	"randomizeDeck": true,
 	"spawnRate": 0.75,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -210,8 +238,8 @@
 		"decks/wizards/whitewizard_medium_control.dck",
 		"decks/wizards/whitewizard_medium_knight.dck"
 	],
+	"randomizeDeck": true,
 	"spawnRate": 0.75,
-	"randomizeDeck":true,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 15,
@@ -557,7 +585,7 @@
 },
 {
 	"name": "Amonkhet Minotaur",
-	"sprite": "sprites/demonic/warden.atlas",
+	"sprite": "sprites/unholy/warden.atlas",
 	"deck": [
 		"decks/monsters/amonkhet_minotaur.dck"
 	],
@@ -795,7 +823,7 @@
 		},
 		{
 			"type": "gold",
-			"probability": 0.3,
+			"probability": 1,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -819,8 +847,8 @@
 		"decks/wizards/bluewizard_easy.json"
 	],
 	"ai": "",
-	"randomizeDeck": true,
 	"flying": true,
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -908,7 +936,6 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -994,7 +1021,7 @@
 		"decks/wizards/redwizard_easy.json"
 	],
 	"ai": "",
-	"randomizeDeck":true,
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1073,14 +1100,14 @@
 },
 {
 	"name": "Apprentice White Wizard",
-	"sprite": "sprites/wizards/priest.atlas",
+	"sprite": "sprites/holy/priest.atlas",
 	"deck": [
 		"decks/wizards/whitewizard_easy_ajani.dck",
 		"decks/wizards/whitewizard_easy_wanderer.dck",
 		"decks/wizards/whitewizard_easy_angelhuman.dck"
 	],
 	"ai": "",
-	"randomizeDeck":true,
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -1363,9 +1390,9 @@
 },
 {
 	"name": "Armored Knight",
-	"sprite": "sprites/humans/knight.atlas",
+	"sprite": "sprites/holy/knight.atlas",
 	"deck": [
-		"decks/humans/armored_knight.dck"
+		"decks/holy/armored_knight.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -1509,9 +1536,9 @@
 },
 {
 	"name": "Ashmouth Devil",
-	"sprite": "sprites/demonic/devil.atlas",
+	"sprite": "sprites/unholy/devil.atlas",
 	"deck": [
-		"decks/demonic/ashmouth_devil.dck"
+		"decks/unholy/ashmouth_devil.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -2197,9 +2224,9 @@
 },
 {
 	"name": "Big Zombie",
-	"sprite": "sprites/undead/zombie_2.atlas",
+	"sprite": "sprites/unholy/zombie_2.atlas",
 	"deck": [
-		"decks/undead/zombie_bad.json"
+		"decks/unholy/zombie_bad.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -2381,9 +2408,12 @@
 	"name": "Boar",
 	"sprite": "sprites/animals/boar.atlas",
 	"deck": [
-		"decks/animals/boar.json"
+		"decks/animals/boar.json",
+		"decks/animals/boar_gruul.dck",
+		"decks/animals/boar_monogreenlifegain.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.4,
 	"speed": 31,
@@ -3593,9 +3623,9 @@
 },
 {
 	"name": "Chandra's Hellhound",
-	"sprite": "sprites/demonics/hellhound_2.atlas",
+	"sprite": "sprites/unholy/hellhound_2.atlas",
 	"deck": [
-		"decks/demonics/hellhound2.dck"
+		"decks/unholy/hellhound2.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -4290,7 +4320,7 @@
 {
 	"name": "Conjurer",
 	"nameOverride": "",
-	"sprite": "sprites/miniboss/warlockmaster.atlas",
+	"sprite": "sprites/miniboss/conjurer.atlas",
 	"deck": [
 		"decks/miniboss/conjure.dck"
 	],
@@ -4950,9 +4980,9 @@
 },
 {
 	"name": "Dark Spirit",
-	"sprite": "sprites/undead/ghost.atlas",
+	"sprite": "sprites/unholy/ghost.atlas",
 	"deck": [
-		"decks/undead/dark_spirit.dck"
+		"decks/unholy/dark_spirit.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -5031,9 +5061,9 @@
 },
 {
 	"name": "Dawnhart Witch",
-	"sprite": "sprites/wizards/dawnhart_witch.atlas",
+	"sprite": "sprites/unholy/dawnhart_witch.atlas",
 	"deck": [
-		"decks/wizards/dawnhart_witch.dck"
+		"decks/unholy/dawnhart_witch.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -5196,9 +5226,9 @@
 },
 {
 	"name": "Demon",
-	"sprite": "sprites/demonics/demon_3.atlas",
+	"sprite": "sprites/unholy/demon_3.atlas",
 	"deck": [
-		"decks/demonics/demon.json"
+		"decks/unholy/demon.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -5277,9 +5307,9 @@
 },
 {
 	"name": "Devil",
-	"sprite": "sprites/demonics/imp.atlas",
+	"sprite": "sprites/unholy/imp.atlas",
 	"deck": [
-		"decks/demonics/devil.json"
+		"decks/unholy/devil.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -6559,7 +6589,7 @@
 },
 {
 	"name": "Eldrazi",
-	"sprite": "sprites/monsters/mindelemental.atlas",
+	"sprite": "sprites/elementals/mindelemental.atlas",
 	"deck": [
 		"decks/monsters/eldrazi.json"
 	],
@@ -6984,9 +7014,9 @@
 },
 {
 	"name": "Eye",
-	"sprite": "sprites/eye.atlas",
+	"sprite": "sprites/monsters/eye.atlas",
 	"deck": [
-		"decks/eye.dck"
+		"decks/monsters/eye.dck"
 	],
 	"ai": "",
 	"flying": true,
@@ -7536,9 +7566,9 @@
 },
 {
 	"name": "Flying Witch",
-	"sprite": "sprites/wizards/flyingwitch.atlas",
+	"sprite": "sprites/unholy/flyingwitch.atlas",
 	"deck": [
-		"decks/wizards/witch.dck"
+		"decks/unholy/witch.dck"
 	],
 	"ai": "",
 	"flying": true,
@@ -7668,9 +7698,11 @@
 	"name": "Fox",
 	"sprite": "sprites/animals/fox.atlas",
 	"deck": [
-		"decks/animals/fox.json"
+		"decks/animals/fox.json",
+		"decks/animals/fox_greenwhite.json"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -7968,9 +8000,9 @@
 },
 {
 	"name": "Furnace Goblin",
-	"sprite": "sprites/goblins/furnacegoblin.atlas",
+	"sprite": "sprites/phyrexians/furnacegoblin.atlas",
 	"deck": [
-		"decks/goblins/furnacegoblin.json"
+		"decks/phyrexians/furnacegoblin.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -8428,9 +8460,9 @@
 },
 {
 	"name": "Geist",
-	"sprite": "sprites/undead/ghost.atlas",
+	"sprite": "sprites/unholy/ghost.atlas",
 	"deck": [
-		"decks/undead/ghost_blue.dck"
+		"decks/unholy/ghost_blue.dck"
 	],
 	"ai": "",
 	"flying": true,
@@ -8510,9 +8542,9 @@
 },
 {
 	"name": "Ghoul",
-	"sprite": "sprites/undead/ghoul.atlas",
+	"sprite": "sprites/unholy/ghoul.atlas",
 	"deck": [
-		"decks/undead/ghoul.dck"
+		"decks/unholy/ghoul.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -8545,9 +8577,9 @@
 },
 {
 	"name": "Ghost",
-	"sprite": "sprites/undead/ghost_2.atlas",
+	"sprite": "sprites/unholy/ghost_2.atlas",
 	"deck": [
-		"decks/undead/ghost.json"
+		"decks/unholy/ghost.json"
 	],
 	"ai": "",
 	"flying": true,
@@ -8884,9 +8916,9 @@
 },
 {
 	"name": "Greater Zombie",
-	"sprite": "sprites/undead/zombie.atlas",
+	"sprite": "sprites/unholy/zombie.atlas",
 	"deck": [
-		"decks/undead/zombie_greater.dck"
+		"decks/unholy/zombie_greater.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.2,
@@ -10080,7 +10112,7 @@
 },
 {
 	"name": "Green Beast",
-	"sprite": "sprites/monsters/basilisk.atlas",
+	"sprite": "sprites/lizards/basilisk.atlas",
 	"deck": [
 		"decks/monsters/beast_green.json"
 	],
@@ -10163,9 +10195,9 @@
 },
 {
 	"name": "Griffin",
-	"sprite": "sprites/monsters/griffin.atlas",
+	"sprite": "sprites/animals/griffin.atlas",
 	"deck": [
-		"decks/monsters/griffin.json"
+		"decks/animals/griffin.json"
 	],
 	"ai": "",
 	"flying": true,
@@ -10449,9 +10481,9 @@
 },
 {
 	"name": "Hellhound",
-	"sprite": "sprites/demonics/hellhound_2.atlas",
+	"sprite": "sprites/unholy/hellhound_2.atlas",
 	"deck": [
-		"decks/demonics/hellhound.dck"
+		"decks/unholy/hellhound.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -11454,9 +11486,9 @@
 },
 {
 	"name": "Immersturm Demon",
-	"sprite": "sprites/demonics/devil_2.atlas",
+	"sprite": "sprites/unholy/devil_2.atlas",
 	"deck": [
-		"decks/demonics/immersturm_demon.dck"
+		"decks/unholy/immersturm_demon.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12043,9 +12075,9 @@
 {
 	"name": "Knight Mercenary",
 	"nameOverride": "",
-	"sprite": "sprites/holy/cavalier_2.atlas",
+	"sprite": "sprites/humans/cavalier_2.atlas",
 	"deck": [
-		"decks/holy/knightmercenary.dck"
+		"decks/humans/knightmercenary.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12128,9 +12160,9 @@
 {
 	"name": "Kobold Dragoncaller",
 	"nameOverride": "",
-	"sprite": "sprites/kobold/kobolddragoncaller.atlas",
+	"sprite": "sprites/kobolds/kobolddragoncaller.atlas",
 	"deck": [
-		"decks/kobold/koboldworker.dck"
+		"decks/kobolds/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12193,9 +12225,9 @@
 {
 	"name": "Kobold Pyromancer",
 	"nameOverride": "",
-	"sprite": "sprites/kobold/koboldpyromancer.atlas",
+	"sprite": "sprites/kobolds/koboldpyromancer.atlas",
 	"deck": [
-		"decks/kobold/koboldworker.dck"
+		"decks/kobolds/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12258,9 +12290,9 @@
 {
 	"name": "Kobold Shaman",
 	"nameOverride": "",
-	"sprite": "sprites/kobold/koboldshaman.atlas",
+	"sprite": "sprites/kobolds/koboldshaman.atlas",
 	"deck": [
-		"decks/kobold/koboldworker.dck"
+		"decks/kobolds/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12323,9 +12355,9 @@
 {
 	"name": "Kobold Slinger",
 	"nameOverride": "",
-	"sprite": "sprites/kobold/koboldshaman.atlas",
+	"sprite": "sprites/kobolds/koboldshaman.atlas",
 	"deck": [
-		"decks/kobold/koboldworker.dck"
+		"decks/kobolds/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12388,9 +12420,9 @@
 {
 	"name": "Kobold Trapmaster",
 	"nameOverride": "",
-	"sprite": "sprites/kobold/koboldtrapmaster.atlas",
+	"sprite": "sprites/kobolds/koboldtrapmaster.atlas",
 	"deck": [
-		"decks/kobold/koboldworker.dck"
+		"decks/kobolds/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12453,9 +12485,9 @@
 {
 	"name": "Kobold Warrior",
 	"nameOverride": "",
-	"sprite": "sprites/kobold/koboldwarrior.atlas",
+	"sprite": "sprites/kobolds/koboldwarrior.atlas",
 	"deck": [
-		"decks/kobold/koboldworker.dck"
+		"decks/kobolds/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12517,9 +12549,9 @@
 },
 {
 	"name": "Kobold Worker",
-	"sprite": "sprites/kobold/koboldworker.atlas",
+	"sprite": "sprites/kobolds/koboldworker.atlas",
 	"deck": [
-		"decks/kobold/koboldworker.dck"
+		"decks/kobolds/koboldworker.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12581,9 +12613,9 @@
 },
 {
 	"name": "Kor Warrior",
-	"sprite": "sprites/mineguard.atlas",
+	"sprite": "sprites/kor/mineguard.atlas",
 	"deck": [
-		"decks/kor_warrior.dck"
+		"decks/kor/kor_warrior.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12764,9 +12796,9 @@
 },
 {
 	"name": "Leonin Warrior",
-	"sprite": "sprites/lion.atlas",
+	"sprite": "sprites/leonin/lion.atlas",
 	"deck": [
-		"decks/cat.json"
+		"decks/animals/cat.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -12951,7 +12983,7 @@
 },
 {
 	"name": "Liliana",
-	"sprite": "sprites/black_wiz3.atlas",
+	"sprite": "sprites/wizards/black_wiz3.atlas",
 	"deck": [
 		"decks/miniboss/liliana_zombies.dck"
 	],
@@ -13435,7 +13467,7 @@
 		"decks/wizards/blackwizard_hard_sacrifice.dck"
 	],
 	"ai": "",
-	"randomizeDeck":true,
+	"randomizeDeck": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -13473,8 +13505,8 @@
 		"decks/wizards/bluewizard_hard_bounce.dck"
 	],
 	"ai": "",
-	"randomizeDeck":true,
 	"flying": true,
+	"randomizeDeck": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -13597,7 +13629,7 @@
 		"decks/wizards/redwizard_hard_lavaaxe.dck"
 	],
 	"ai": "",
-	"randomizeDeck":true,
+	"randomizeDeck": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -13637,7 +13669,7 @@
 		"decks/wizards/whitewizard_hard_enchantments.dck"
 	],
 	"ai": "",
-	"randomizeDeck":true,
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
@@ -13715,7 +13747,7 @@
 },
 {
 	"name": "Merfolk",
-	"sprite": "sprites/cwaterelemental.atlas",
+	"sprite": "sprites/elementals/waterelemental.atlas",
 	"deck": [
 		"decks/merfolk/merfolk_bad.json"
 	],
@@ -13982,7 +14014,7 @@
 },
 {
 	"name": "Merfolk warrior",
-	"sprite": "sprites/elemental/airelemental.atlas",
+	"sprite": "sprites/elementals/airelemental.atlas",
 	"deck": [
 		"decks/merfolk/merfolk_mid.json"
 	],
@@ -14116,9 +14148,9 @@
 },
 {
 	"name": "Mindclaw Shaman",
-	"sprite": "sprites/lizard/dreamwalker.atlas",
+	"sprite": "sprites/lizards/dreamwalker.atlas",
 	"deck": [
-		"decks/lizard/mindclaw_shaman.dck"
+		"decks/lizards/mindclaw_shaman.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -14287,9 +14319,9 @@
 },
 {
 	"name": "Minotaur Flayer",
-	"sprite": "sprites/demonics/warden_2.atlas",
+	"sprite": "sprites/unholy/warden_2.atlas",
 	"deck": [
-		"decks/monsters/minotaur.dck"
+		"decks/unholy/minotaur.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -14456,9 +14488,9 @@
 },
 {
 	"name": "Mummy",
-	"sprite": "sprites/undead/mummy.atlas",
+	"sprite": "sprites/unholy/mummy.atlas",
 	"deck": [
-		"decks/undead/mummy.dck"
+		"decks/unholy/mummy.dck"
 	],
 	"ai": "",
 	"spawnRate": 0.5,
@@ -14640,6 +14672,70 @@
 	]
 },
 {
+	"name": "Nezumi Ninja",
+	"sprite": "sprites/nezumi/humanoidrat.atlas",
+	"deck": [
+		"decks/nezumi/humanoidrat.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 15,
+	"scale": 0.75,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"Rare"
+			],
+			"cardText": "Rat"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"questTags": [
+		"Humanoid",
+		"Ninja",
+		"Bandit",
+		"Rat",
+		"Sneaky",
+		"Thief",
+		"Subterranean",
+		"Scavenger",
+		"IdentityBlack",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Octopus",
 	"sprite": "sprites/animals/octopus.atlas",
 	"deck": [
@@ -14705,9 +14801,13 @@
 	"name": "Ooze",
 	"sprite": "sprites/monsters/ooze.atlas",
 	"deck": [
-		"decks/monsters/ooze.json"
+		"decks/monsters/ooze.json",
+		"decks/monsters/ooze_greenblackred.dck",
+		"decks/monsters/ooze_monogreen.dck",
+		"decks/monsters/ooze_greenblue.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -15468,9 +15568,9 @@
 },
 {
 	"name": "Rakdos Devil",
-	"sprite": "sprites/demonics/juggler.atlas",
+	"sprite": "sprites/unholy/juggler.atlas",
 	"deck": [
-		"decks/demonics/rakdos_devil.dck"
+		"decks/unholy/rakdos_devil.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -15587,70 +15687,6 @@
 	]
 },
 {
-	"name": "Rat Ninja",
-	"sprite": "sprites/humanoidrat.atlas",
-	"deck": [
-		"decks/humanoidrat.dck"
-	],
-	"ai": "",
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 15,
-	"scale": 0.75,
-	"life": 10,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "card",
-			"probability": 0.5,
-			"count": 1,
-			"rarity": [
-				"Rare"
-			],
-			"cardText": "Rat"
-		},
-		{
-			"type": "gold",
-			"probability": 1,
-			"count": 50,
-			"addMaxCount": 100
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		}
-	],
-	"questTags": [
-		"Humanoid",
-		"Ninja",
-		"Bandit",
-		"Rat",
-		"Sneaky",
-		"Thief",
-		"Subterranean",
-		"Scavenger",
-		"IdentityBlack",
-		"BiomeBlack"
-	]
-},
-{
 	"name": "Raven",
 	"sprite": "sprites/animals/raven.atlas",
 	"deck": [
@@ -15725,7 +15761,7 @@
 },
 {
 	"name": "Red Beast",
-	"sprite": "sprites/monsters/basilisk_2.atlas",
+	"sprite": "sprites/lizards/basilisk_2.atlas",
 	"deck": [
 		"decks/monsters/beast_red.json"
 	],
@@ -15808,9 +15844,9 @@
 },
 {
 	"name": "Reassembling Skeleton",
-	"sprite": "sprites/undead/skeleton.atlas",
+	"sprite": "sprites/unholy/skeleton.atlas",
 	"deck": [
-		"decks/undead/reassemblingskeleton.dck"
+		"decks/unholy/reassemblingskeleton.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -15875,10 +15911,64 @@
 	]
 },
 {
-	"name": "Sand Golem",
-	"sprite": "sprites/constructs/sandelemental.atlas",
+	"name": "Runelord",
+	"sprite": "sprites/wizards/runescribe.atlas",
 	"deck": [
-		"decks/constructs/sandgolem.dck"
+		"decks/wizards/runelord.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 6
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"rarity": [
+				"uncomon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Necromancer",
+		"Unholy",
+		"Wizard",
+		"Human",
+		"IdentityBlack"
+	]
+},
+{
+	"name": "Sand Golem",
+	"sprite": "sprites/elementals/sandelemental.atlas",
+	"deck": [
+		"decks/elementals/sandgolem.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -16545,10 +16635,67 @@
 	]
 },
 {
-	"name": "Skeleton",
-	"sprite": "sprites/undead/skeleton.atlas",
+	"name": "Simic Wizard",
+	"sprite": "sprites/lizards/lizardwizard.atlas",
 	"deck": [
-		"decks/undead/skeleton.dck"
+		"decks/wizards/simicwizard_intruderalarm.dck",
+		"decks/wizards/simicwizard_evolve.dck"
+	],
+	"ai": "",
+	"randomizeDeck": true,
+	"spawnRate": 0.5,
+	"difficulty": 0.1,
+	"speed": 25,
+	"scale": 0.75,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 6
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 4,
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"rarity": [
+				"uncomon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 50,
+			"addMaxCount": 100
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Necromancer",
+		"Unholy",
+		"Wizard",
+		"Human",
+		"IdentityBlack"
+	]
+},
+{
+	"name": "Skeleton",
+	"sprite": "sprites/unholy/skeleton.atlas",
+	"deck": [
+		"decks/unholy/skeleton.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -16579,9 +16726,9 @@
 },
 {
 	"name": "Skeleton Soldier",
-	"sprite": "sprites/undead/skeleton_2.atlas",
+	"sprite": "sprites/unholy/skeleton_2.atlas",
 	"deck": [
-		"decks/undead/skeleton_2.dck"
+		"decks/unholy/skeleton_2.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -16613,9 +16760,9 @@
 },
 {
 	"name": "Skeleton Champion",
-	"sprite": "sprites/undead/skeleton_2.atlas",
+	"sprite": "sprites/unholy/skeleton_2.atlas",
 	"deck": [
-		"decks/undead/skeleton_champion.dck"
+		"decks/unholy/skeleton_champion.dck"
 	],
 	"spawnRate": 1,
 	"difficulty": 0.2,
@@ -17168,9 +17315,13 @@
 	"name": "Stray Cat",
 	"sprite": "sprites/animals/cat.atlas",
 	"deck": [
-		"decks/animals/straycat.dck"
+		"decks/animals/cat_greenblack.dck",
+		"decks/animals/straycat.dck",
+		"decks/animals/cat_greenwhite.dck",
+		"decks/animals/cat_greenwhite2.dck"
 	],
 	"ai": "",
+	"randomizeDeck": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -18253,9 +18404,9 @@
 },
 {
 	"name": "Viashino",
-	"sprite": "sprites/lizard/battler.atlas",
+	"sprite": "sprites/lizards/battler.atlas",
 	"deck": [
-		"decks/lizard/viashino.dck"
+		"decks/lizards/viashino.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -18337,9 +18488,9 @@
 },
 {
 	"name": "Viper",
-	"sprite": "sprites/lizard/big_snake_2.atlas",
+	"sprite": "sprites/lizards/big_snake_2.atlas",
 	"deck": [
-		"decks/lizard/snake.dck"
+		"decks/lizards/snake.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -18424,9 +18575,9 @@
 },
 {
 	"name": "Volcano Elemental",
-	"sprite": "sprites/elemental/volcanoelemental.atlas",
+	"sprite": "sprites/elementals/volcanoelemental.atlas",
 	"deck": [
-		"decks/elemental/br_elemental.dck"
+		"decks/elementals/br_elemental.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -18652,7 +18803,7 @@
 },
 {
 	"name": "Werewolf",
-	"sprite": "sprites/demonics/hellhound.atlas",
+	"sprite": "sprites/unholy/hellhound.atlas",
 	"deck": [
 		"decks/monsters/werewolf.dck"
 	],
@@ -19085,7 +19236,7 @@
 },
 {
 	"name": "Witch",
-	"sprite": "sprites/wizards/witchlarge.atlas",
+	"sprite": "sprites/unholy/witchlarge.atlas",
 	"deck": [
 		"decks/wizards/witch.dck"
 	],
@@ -19429,9 +19580,9 @@
 },
 {
 	"name": "Zombie",
-	"sprite": "sprites/undead/zombie.atlas",
+	"sprite": "sprites/unholy/zombie.atlas",
 	"deck": [
-		"decks/undead/zombie_bad.json"
+		"decks/unholy/zombie_bad.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -19478,7 +19629,7 @@
 	"name": "Zombie Lord",
 	"sprite": "sprites/unholy/lich.atlas",
 	"deck": [
-		"decks/undead/zombie_good.json"
+		"decks/unholy/zombie_good.json"
 	],
 	"ai": "",
 	"spawnRate": 1,
