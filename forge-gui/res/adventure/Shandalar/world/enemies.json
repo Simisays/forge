@@ -5228,10 +5228,14 @@
 	"name": "Demon",
 	"sprite": "sprites/unholy/demon_3.atlas",
 	"deck": [
-		"decks/unholy/demon.json"
+		"decks/unholy/demon.json",
+		"decks/unholy/demonshard.dck",
+		"decks/unholy/demonblackred.dck",
+		"decks/unholy/demonmonoblack.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
+	"randomizeDeck":true,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 18,
@@ -14238,10 +14242,14 @@
 	"name": "Minotaur",
 	"sprite": "sprites/monsters/minotaur.atlas",
 	"deck": [
-		"decks/monsters/minotaur.json"
+		"decks/monsters/minotaur.json",
+		"decks/monsters/minotaurblackredmadness.dck",
+		"decks/monsters/minotaurmid.dck",
+		"decks/monsters/minotaurmonored.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
+	"randomizeDeck":true,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 16,
@@ -14321,7 +14329,7 @@
 	"name": "Minotaur Flayer",
 	"sprite": "sprites/unholy/warden_2.atlas",
 	"deck": [
-		"decks/unholy/minotaur.dck"
+		"decks/monsters/minotaur.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
