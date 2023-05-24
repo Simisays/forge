@@ -182,16 +182,16 @@ ChaosShop
   xy: 352, 816
   size: 16, 16
 InsectShop
-  xy: 368, 928
+  xy: 368, 912
   size: 16, 16
 CatShop
-  xy: 388, 928
+  xy: 288, 928
   size: 16, 16
 ShapeshifterShop
   xy: 384, 912
   size: 16, 16
 GodMinigodShop
-  xy: 320, 912
+  xy: 320, 928
   size: 16, 16
 EldraziShop
   xy: 304, 928

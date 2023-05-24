@@ -4462,7 +4462,7 @@
 	}
 	]
 		},{
-  "name":"Small Cats",
+  "name":"SmallCats",
   "description":"The Feline Kingdom",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"CatShop",
@@ -4507,7 +4507,7 @@
   "name":"Gods",
   "description":"Al's Dose of Apotheosis",
   "spriteAtlas":"maps/tileset/buildings.atlas",
-  "sprite":"GodDemigodShop",
+  "sprite":"GodMinigodShop",
   "rewards": [
   {
 	  "count":4,

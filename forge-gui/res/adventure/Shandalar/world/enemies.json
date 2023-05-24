@@ -164,7 +164,7 @@
 			],
 			"rarity": [
 				"Uncommon",
-				"Rare",
+				"Rare"
 			],
 			"colorType": "MonoColor"
 		},
@@ -2600,7 +2600,7 @@
 	"name": "Bog Witch",
 	"sprite": "sprites/wizards/black_wiz3.atlas",
 	"deck": [
-		"decks/wizards/witch.dck"
+		"decks/unholy/witch.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -19246,7 +19246,7 @@
 	"name": "Witch",
 	"sprite": "sprites/unholy/witchlarge.atlas",
 	"deck": [
-		"decks/wizards/witch.dck"
+		"decks/unholy/witch.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
