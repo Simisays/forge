@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="58" height="46" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="174">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="65" height="52" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="179">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,59 +7,48 @@
  <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../tileset/FarmFood.tsx"/>
  <tileset firstgid="16001" source="../tileset/main-nocollide.tsx"/>
- <layer id="8" name="Collision" width="58" height="46">
+ <layer id="1" name="Background" width="65" height="52">
   <data encoding="base64" compression="zlib">
-   eJztmEsOAiEMQGfjwo2n8QCuXM7SM3kyz2Ua04QgBVpahXZeQuJngD4+Bd02/9zP/47AHnD07omOnj1TxwieXsnn0atrBM/c6/BcmwhrFnidPqXk58275Wnter18Fw0wdvBrPZc+b8UMnr+Y05In9Pe4tWN77vXvqbVaq2MBNYe1PnvGHx2x9GJ19rQ8835K5wOVW2o5tgettdzak5RTyzX9TMtT6tuTe0YdNfKLhafUlROvFE3PkbHj7Nt8/iV99ELNJ3dPStZ2HrulJ+Xa85xk7Wp5cusgUk8utTOK24aFp2buxPZKr3vrjp6lnHY18qZVzBIgDq07/cHBbKS/S2bZc9po5+NZkdyFVh0Tjmf6fjVPQPPOOzsenSgiOAIRHIEIjoDUb7VxkcYaZR0AUTwR6l5h1dcMZ2GU+V3Rc+T/Og+8AYqSgY0=
+   eJztmE0KwjAQRougIm7EE7nwB72D1xB06RVcC4p38QCuxWO4VUMJxpimkzZpMp0ZeAht2uZ7jiE1y7i4uLDUZlCPNhQ7iOug7rOxwA7YATvw4+DazYmdI3YfpOqh22/OQaqwA3aA2QFkXRHZJPq54eh7PHUHR+D81LxFmMb5cjAf5MT87iEOTPldgDhowoOv/KEczKY5lB3E6AU1iy1nmQPIumYrOUbkT3EfqLvSkfvXc0lvQBxID7HzugLdw0Md6PeOnc/FA2UH0HlWcYCFU+L7RN+sP3vkx/j32B54bRscbGte78uB6Lum2VqeS8HBc5EjPbx6uB1cFEQu1+v1/BgdhIAdsAPMDjKCDkzFDtzvId4JMDvwATv4/kdA2UFRP1B0wH3w3wtUHVDtA/HeeF/ScGB7BhUHHcu5VBzI9ahozxIS3cHNce4h+sCXB+h9dqvf8S7zrurAdK7q/H3hmrsJB6E4TOy9qP4m27Imqpl09HEqRWuW+onJQVl+qAOTD8EbT8+qWw==
   </data>
  </layer>
- <layer id="1" name="Background" width="58" height="46">
+ <layer id="2" name="Ground" width="65" height="52">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <layer id="2" name="Ground" width="58" height="46">
-  <data encoding="base64" compression="zlib">
-   eJzNms1OFEEQxwfYYRaiCeBH4l0jntQH0AQTExTCI3hRT2q8iMarBDH6CMjHXn0KL8DJj4SDePJiiEB8A0Tnz04xNbXVPT0zPbP+k8rOzvZ016+r+msgCOrXeqRbU2qqLY3x+UizbWt6OaKbj/Zc49keSw0q0y95bYFJ88sHr0mcy9VsculTYqEym2HXiLUO5fldtLxr3vB8lazzI9kyPuSLs+x8x1nJ5muIab85ofOj9c5JNr9N0sr3c+3K88Mnp2yjHzIxluE0zbf9ZpQ+wOBnFU5b/f0U9wPztpQvTlv7TQj7mcPBrPE9juseQP7uOu80FW9XTn5NtjqdLaf5nud/U/NwHqdWnuxwqjfWZf2tk1VjJE7Jyvlc/C0j2tf55jVx/lFYXRihqj763lOc5J6Bk8dVMvKypNCjf75YbYywe4b7mn0c6FoofPrR1tepKrxlOF05XA05QGcn2CuPZ4r/hXMhqG8OIZWp98Itf6wLwg/Ywamu+ebk+haPi6+BPjZCVlYbo3LeyVt3yMIom7PQs4v1cg5GXXOZA0yc8Btm2kPwMrC/w81znonP3mdjOzfqxqmtHeT/4u3ijLAPl/wyEidsJ87X7+3UTxfxNZGe0dhljnLbCHs5fceSNJ/48MKwZ0HbO+3sdynuu41L43war58PhlOT8hVf8ge5qnHyfrBJi6kL5+k4p8Ox9B5n8xlbHgNNGLPUDzfbqXEN5vBIw7gM2PjYCrOc0NXxILgW2/Vxs+9l1kUaH0X8XUvaWCnIuUKsTLNDWc5PMd/n2L44cBbhpXGnjTNuA1G6/kjRs8e/Rfb8fd3qfX6Sjf1HE0HwOLYnE+6cLqzglOsfN/Q/8b1VfHwv2lgWvC6cmu82FeWknCV/OFsgcgz5hT3T3pC5vmn221Ir6IktPk3Pa77Ts3nvUfNEf3MgPyh2MkakudjH3cRPxJYM+q30wxvGSpwos6LUb2OpyinL4fu0JV6k/YSJjNgo5gesjo6IKYRryVonpyb4KnNrqdVbhs+R/HpXPLssxiof+9TOdmD3vQon+hPr4SqbI2i9INa7zGfEWZuHXNQxcM6w+l18L8Op7V94LmEs/kr8oDydYfdMupP0x7tW2lc8ptxQL+bfvHjaWMtw4npNPLvY6vLNOY5bsM0mZXm/dBTOovHUeIty0rXkzNNRsvbsJ2N2xtAfGmdVEevPtrkM9jfH+5Aoy4ncPVLODzblMUKrCud28pvrmdAkW1wx95+c5RVWTfwcRWeph8Np3lOdUqZ5yJd4DsvxS+ukjZWfUcBjO0vft+QA4q3tLXE+26r4vpazSm6YXOdMZ2aX9wOwG4Yx0onM9W8kjJNhsTXf5f8rTt4jMk7pM2daj/IZ+fkZ4u8H6PqKOPtdFnHM2x+U5dwTnNjbol/53MTvBxY+bp3kE3lM15jDN8O0/smwdxxre1DTWvkPu/ZEhg==
-  </data>
- </layer>
- <layer id="3" name="Clutter" width="58" height="46">
+ <layer id="3" name="Clutter" width="65" height="52">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
- <layer id="7" name="ClutterBis" width="58" height="46">
+ <layer id="7" name="ClutterBis" width="65" height="52">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy1mlloHVUcxk9umk6aNGlTk2hFfLBo65K0VVGKqDc+uIMKYhXBF3HBKG5pq+D2KK6t4ItoNC24gA9WC6K+CSoREm2lVrFK0QcVt9bdJz1fzvmYb/5zZu5tUz/4Mzczc2fO7/yXs9zMDjg3e5jtI2+3rXBzunTYueczV9JkPHfrsvnZif3l9/Ma9O/CcNTz1ubDCY3G43OGcyoL/KoNi8Lx1aGiUZcMF20kPnum4t3KqG2BvjXvnhk4NG6+a/8J+bPAek53MPhyo+d6sC9cu9d//sKf78rKnF1ZmhPnYePGN7cZP1rOEeODOzucmxC7q6PYdztNH4wvq/bnan9cI7ZW+gG893hrNpzb1lFtY+b6eQ1XK5sr6k/VEv+c16Ld4Z/b1wis46bf6I9Un1JVfQ6R88vY7v2+fV8vDsdn/PGG5c7duDxc/8X7cb+3A1n4u8uwwP/kUU7Ez2zs49XS18M94fpDfSFGlhhW5aOlxFpUJVwnZ5U6j3ZuwdGB6/EjnXvC26XHljkZj3iexixqwWiL/FLRv0tjv6/symN6g7C/3xVMlYrZ+/vydm0Szgf6qplxjdfBOZJop83LVpyXmJqEGqV16vqFeVzDz2Alo+XUZyNm0ZZGFqwzK8YtdK58Pn8454Kai/O/1Z9gsYztcEIjcgQjxwLbj+ACaxUn85J8th3kfHkomDK/MpRzrTwqN3K+KzXd1p4XspCb4LTjz0xkuGg476cD8Vn0px37yGptlbF+ab+OMeD8SurpvnifxvB9ncXa+0Bnuc93efst8vHZ9CVr4ceGE1oTfbtmIJ1jrWS58X7YVBw/IRyHenIfXhu/+5LMEZ5ZnH/+24V7t/eE8feNWDNvWhKOfP7qWFvpv7k4iuPtx5FTmex8SuOaOatWpY3eD7uNfdqR+4ScygT9moWxFf7TGnRZr3OXe7uiN+RD19Jg4Dy3uxynp7mQW8pqc1XnizOJemznAepzjmeD/h2fDjq3x9sG76vP/HFC4ljjknOA61zO9U/83JSYhbT2gJPz5pmB8li/17BWjenw17icI0PdHJP3gXNiKDDCNg4FTsSejrPwrTJrvl61PPc77kPMa+3ZttRVivXg9o4Q15iLgadqPqjtoZRTfY/243tXNn0O+rYv8889ItogzJ+7qlnsD34P32F84x4yqy+Vc0p4z5D6xTn06hhjmGcf4fvqmJ5gzDXW2tGB/N7UfJ+cVvjeXTFmEauq3YNlVgiMb8p3eA9qz+s9uS81ZneVX13QXI7G9n8vfXU3aoQZjxiz5NRalZpDgZGcEzFWLeduk6fK+LnkMlnxPNYe6Lf4PfXng+JP+tbmFVkHGnnOqlhXq3KSuUZGCDFLzvulDfhMnzJG3zR5rPlMVo3XF+Jx0rSTouvGTc0BA1jByfrEsQe52876lpxknPNZDSfr8B6px2rMZwi+py/JeFP8++Z4vNjkFd7z5MLcRrOQj2DVdTHGninTX2DWNSfXPWuF+8MLir7ZbfKT0vpUZdSqRWWjXswCs813SNdj01lxLFwrNWpOif2Our0bywnbY3x3MNrofblDchmxuiArjwXkpfB5RvofnDYeZyMr8mFvZIV+MPMWK/TH9Rc691cz+EtjUI21yPLvGcyvwcD41Jh/r9RK8G317dkWbVFsG+sy5oTsA10vkdOy4pqOx5+49Fw+pc1jgXVC6gnavGUst03+701DeW7O1ZzhcN9AZzAwqt84R9dzg9HX6ArOCaGjGmlOu/f10UCZs11hfYn3MwfRftSSdfH6OpeeK9F/6xLPnIp7YJZza/TpT73h/C+9gXFHo1gvb+4u16WZeXJCm8eK/kP7Oa5hvHx6rNgPsN+bxdqR4oRsbd0q8QsNN4rrbDzras9/TW9+z7Rw2j1Yyr4npc6K75Lxz2axH9gXWjtKSuSisr7RCLajUV5ng/VZeZRypnTyktaMVlv688+/NkONge80jqnU3iKFtReEfRTNRbtusmtL5ijEmFdO1tft8q5UzW1Vh6H1MWY3i+9UynpWzb4YhFz8uTfkIpTaB9L9BDCijafK3l3Kn1Ucp7u8f05PmNV3bdbrOmn+6hwlZZzTof00zFG7Iifn7py3dtW9OCGyf+LK9cuO7wfLrvmrx5RBfZxjCC8ETo1Tm4/WT7xX27uypmNSfm5XnbInUMVmOSnwdmbF/PzRM//k7eeavNtecT41/lzZZu1qp8ZxD5gxqcx2n1iFPYUbFhb9+YivA496e6xFPVAdip92mr8PKX+z4l4xdU538bapRNyu6g+/pZ7U79pSFaOtR/ysvx1ara353aVK1n+TWbEOwJc4p+POdLzf1gvqtDbfrXzoQ8ZuK9a3/Nj/trd3etLXU+JaUvep2X4y2nXztPTLs4lnqo/mU1OqtN6PibeuyOdo62tyh78x2P1nGjSVWI8pp46ph1tV4yv0h+f709tfvRU3iCZjzqXWlbNtcv6fahUHW9qoC5NSV6o4EcepPWrUZbt+sWuZh8372h0zrFhb62psXY5WsVl/Ys2V2tujmMdaL9gHo/P0eTvjB3OU9/I3FLarHc7Z4/I1F+cJZENecg6A8Yi/7ylzXWyn6jHOMVYPxxwXsr+VpOxzF5jAekdHcV+PNRmM/fI7bp/sRSmn5dqZ+Ixjq73zdnRKVp1TKVOe9zzDB96+6Q6GuSnGXP4+q79lkrUufu0cZz56OLJRt8Q5Tt/x1Qa9nHjW2XFs3dcdDHmb+p0adnsca9A/+xbU1yzaSFbu4yqlvn9Ld/pe5imYzlxRPMe1m56jNJbrGK0w9+b/PvG5WrumTY2ummcdjKr2kCjWKKu90oYq1kOV5nLdvPZgVLuH5PIa9R9LAmyQ
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects" visible="0">
-  <object id="38" template="../obj/entry_up.tx" x="431.488" y="720.508">
+  <object id="38" template="../obj/entry_up.tx" x="543.488" y="816.508">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="49" template="../obj/gold.tx" x="283.705" y="488.536"/>
-  <object id="55" template="../obj/manashards.tx" x="193.653" y="436.398"/>
-  <object id="56" template="../obj/enemy.tx" x="588.474" y="442.344" width="16" height="17.6724">
+  <object id="49" template="../obj/gold.tx" x="395.705" y="584.536"/>
+  <object id="55" template="../obj/manashards.tx" x="305.653" y="532.398"/>
+  <object id="56" template="../obj/enemy.tx" x="700.474" y="538.344" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Frog"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="82,71,137"/>
    </properties>
   </object>
-  <object id="57" template="../obj/enemy.tx" x="685.774" y="309.541" width="16" height="17.6724">
-   <properties>
-    <property name="enemy" value="Raven"/>
-    <property name="threatRange" type="int" value="60"/>
-   </properties>
-  </object>
-  <object id="58" template="../obj/enemy.tx" x="322.167" y="477.33" width="16" height="17.6724">
+  <object id="58" template="../obj/enemy.tx" x="434.167" y="573.33" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Insect"/>
     <property name="spriteLayer" type="bool" value="true"/>
@@ -67,7 +56,7 @@
     <property name="waypoints" value="71,64,72,63,66,65,67"/>
    </properties>
   </object>
-  <object id="59" template="../obj/booster.tx" x="34" y="61.833">
+  <object id="59" template="../obj/booster.tx" x="146" y="157.833">
    <properties>
     <property name="reward">[
   {
@@ -92,8 +81,8 @@
 </property>
    </properties>
   </object>
-  <object id="60" template="../obj/manashards.tx" x="799.563" y="393.051"/>
-  <object id="61" template="../obj/treasure.tx" x="606.111" y="211.151">
+  <object id="60" template="../obj/manashards.tx" x="911.563" y="489.051"/>
+  <object id="61" template="../obj/treasure.tx" x="718.111" y="307.151">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -109,48 +98,46 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="63" template="../obj/waypoint.tx" x="494.667" y="393.667"/>
-  <object id="64" template="../obj/waypoint.tx" x="669.667" y="610"/>
-  <object id="65" template="../obj/waypoint.tx" x="489.5" y="539.333"/>
-  <object id="66" template="../obj/waypoint.tx" x="256" y="514.333"/>
-  <object id="67" template="../obj/waypoint.tx" x="574.167" y="737.333"/>
-  <object id="68" template="../obj/waypoint.tx" x="299" y="390"/>
-  <object id="69" template="../obj/waypoint.tx" x="216" y="424"/>
-  <object id="70" template="../obj/waypoint.tx" x="875.117" y="271.323"/>
-  <object id="71" template="../obj/waypoint.tx" x="598" y="507"/>
-  <object id="72" template="../obj/waypoint.tx" x="649" y="682"/>
-  <object id="73" template="../obj/enemy.tx" x="565.5" y="493.664" width="16" height="17.6724">
+  <object id="63" template="../obj/waypoint.tx" x="606.667" y="489.667"/>
+  <object id="64" template="../obj/waypoint.tx" x="781.667" y="706"/>
+  <object id="65" template="../obj/waypoint.tx" x="601.5" y="635.333"/>
+  <object id="66" template="../obj/waypoint.tx" x="368" y="610.333"/>
+  <object id="67" template="../obj/waypoint.tx" x="686.167" y="833.333"/>
+  <object id="68" template="../obj/waypoint.tx" x="411" y="486"/>
+  <object id="69" template="../obj/waypoint.tx" x="328" y="520"/>
+  <object id="71" template="../obj/waypoint.tx" x="710" y="603"/>
+  <object id="72" template="../obj/waypoint.tx" x="761" y="778"/>
+  <object id="73" template="../obj/enemy.tx" x="677.5" y="589.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Insect"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="66,68,63,72,64,71"/>
    </properties>
   </object>
-  <object id="74" template="../obj/enemy.tx" x="303.5" y="497.664" width="16" height="17.6724">
+  <object id="74" template="../obj/enemy.tx" x="415.5" y="593.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Frog"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="75,83,66"/>
    </properties>
   </object>
-  <object id="75" template="../obj/waypoint.tx" x="351" y="481"/>
-  <object id="76" template="../obj/collision.tx" x="-15.1423" y="0.580737" width="16" height="733.444"/>
-  <object id="77" template="../obj/collision.tx" x="930.049" y="-1.31779" width="16" height="736.453"/>
-  <object id="78" template="../obj/collision.tx" x="-4.76435" y="-17.3014" width="932.462" height="16"/>
-  <object id="79" template="../obj/collision.tx" x="-12.1117" y="736.5" width="961.301" height="16"/>
-  <object id="80" template="../obj/enemy.tx" x="672.5" y="588.164" width="16" height="17.6724">
+  <object id="75" template="../obj/waypoint.tx" x="463" y="577"/>
+  <object id="76" template="../obj/collision.tx" x="96.8577" y="96.5807" width="16" height="733.444"/>
+  <object id="78" template="../obj/collision.tx" x="107.236" y="78.6986" width="932.462" height="16"/>
+  <object id="79" template="../obj/collision.tx" x="99.8883" y="832.5" width="961.301" height="16"/>
+  <object id="80" template="../obj/enemy.tx" x="784.5" y="684.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Frog"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="64,72,81"/>
    </properties>
   </object>
-  <object id="81" template="../obj/waypoint.tx" x="632.5" y="563"/>
-  <object id="82" template="../obj/waypoint.tx" x="637" y="454.5"/>
-  <object id="83" template="../obj/waypoint.tx" x="371.509" y="582.873"/>
-  <object id="84" template="../obj/waypoint.tx" x="423" y="518.5"/>
-  <object id="85" template="../obj/waypoint.tx" x="474.5" y="617"/>
-  <object id="86" template="../obj/booster.tx" x="3.6353" y="736.721">
+  <object id="81" template="../obj/waypoint.tx" x="744.5" y="659"/>
+  <object id="82" template="../obj/waypoint.tx" x="749" y="550.5"/>
+  <object id="83" template="../obj/waypoint.tx" x="483.509" y="678.873"/>
+  <object id="84" template="../obj/waypoint.tx" x="535" y="614.5"/>
+  <object id="85" template="../obj/waypoint.tx" x="586.5" y="713"/>
+  <object id="86" template="../obj/booster.tx" x="115.635" y="832.721">
    <properties>
     <property name="reward">[
   {
@@ -175,15 +162,13 @@
 </property>
    </properties>
   </object>
-  <object id="88" template="../obj/collision.tx" x="139.03" y="643.332" width="113.725" height="91.9653"/>
-  <object id="89" template="../obj/collision.tx" x="0.814872" y="460.453" width="77.8525" height="158.787"/>
-  <object id="90" template="../obj/enemy.tx" x="522.046" y="411.39" width="16" height="17.6724">
+  <object id="90" template="../obj/enemy.tx" x="634.046" y="507.39" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Raven"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="91" template="../obj/booster.tx" x="822.664" y="409.21">
+  <object id="91" template="../obj/booster.tx" x="934.664" y="505.21">
    <properties>
     <property name="reward">[
   {
@@ -208,7 +193,7 @@
 </property>
    </properties>
   </object>
-  <object id="92" template="../obj/booster.tx" x="640.944" y="143.099">
+  <object id="92" template="../obj/booster.tx" x="752.944" y="239.099">
    <properties>
     <property name="reward">[
   {
@@ -233,18 +218,18 @@
 </property>
    </properties>
   </object>
-  <object id="93" template="../obj/waypoint.tx" x="615.968" y="105.659"/>
-  <object id="94" template="../obj/waypoint.tx" x="527.834" y="163.235"/>
-  <object id="95" template="../obj/waypoint.tx" x="551.893" y="264.912"/>
-  <object id="96" template="../obj/waypoint.tx" x="623.756" y="189.913"/>
-  <object id="97" template="../obj/enemy.tx" x="437.589" y="580.997" width="16" height="17.6724">
+  <object id="93" template="../obj/waypoint.tx" x="727.968" y="201.659"/>
+  <object id="94" template="../obj/waypoint.tx" x="639.834" y="259.235"/>
+  <object id="95" template="../obj/waypoint.tx" x="663.893" y="360.912"/>
+  <object id="96" template="../obj/waypoint.tx" x="735.756" y="285.913"/>
+  <object id="97" template="../obj/enemy.tx" x="549.589" y="676.997" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Frog"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="85,65,84,83"/>
    </properties>
   </object>
-  <object id="98" template="../obj/treasure.tx" x="454.407" y="259.783">
+  <object id="98" template="../obj/treasure.tx" x="566.407" y="355.783">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -260,7 +245,7 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="101" template="../obj/enemy.tx" x="116" y="124.164" width="16" height="17.6724">
+  <object id="101" template="../obj/enemy.tx" x="228" y="220.164" width="16" height="17.6724">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Asceticism&quot;,&quot;Grismold, the Dreadsower&quot;]
 }</property>
@@ -268,70 +253,70 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="102" template="../obj/enemy.tx" x="374" y="49.6638" width="16" height="17.6724">
+  <object id="102" template="../obj/enemy.tx" x="486" y="145.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Flying Witch"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="166,144,69,144,166"/>
    </properties>
   </object>
-  <object id="104" template="../obj/waypoint.tx" x="373.5" y="91.5"/>
-  <object id="107" template="../obj/waypoint.tx" x="349" y="332"/>
-  <object id="108" template="../obj/waypoint.tx" x="299.5" y="130.5"/>
-  <object id="109" template="../obj/waypoint.tx" x="406" y="221.5"/>
-  <object id="111" template="../obj/waypoint.tx" x="326.5" y="271"/>
-  <object id="124" template="../obj/enemy.tx" x="578.5" y="113.664" width="16" height="17.6724">
+  <object id="104" template="../obj/waypoint.tx" x="485.5" y="187.5"/>
+  <object id="107" template="../obj/waypoint.tx" x="461" y="428"/>
+  <object id="108" template="../obj/waypoint.tx" x="411.5" y="226.5"/>
+  <object id="109" template="../obj/waypoint.tx" x="518" y="317.5"/>
+  <object id="111" template="../obj/waypoint.tx" x="438.5" y="367"/>
+  <object id="124" template="../obj/enemy.tx" x="690.5" y="209.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Witch"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="93,127,96,128,96,127,93,129"/>
    </properties>
   </object>
-  <object id="125" template="../obj/enemy.tx" x="774" y="96.164" width="16" height="17.6724">
+  <object id="125" template="../obj/enemy.tx" x="886" y="192.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Witch"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="134,135"/>
    </properties>
   </object>
-  <object id="126" template="../obj/enemy.tx" x="603.5" y="40.1638" width="16" height="17.6724">
+  <object id="126" template="../obj/enemy.tx" x="715.5" y="136.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Witch"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="130,132,133"/>
    </properties>
   </object>
-  <object id="127" template="../obj/waypoint.tx" x="657" y="130"/>
-  <object id="128" template="../obj/waypoint.tx" x="565" y="191"/>
-  <object id="129" template="../obj/waypoint.tx" x="553.5" y="107.5"/>
-  <object id="130" template="../obj/waypoint.tx" x="531" y="40"/>
-  <object id="131" template="../obj/waypoint.tx" x="418.5" y="99.5"/>
-  <object id="132" template="../obj/waypoint.tx" x="642.5" y="45.5"/>
-  <object id="133" template="../obj/waypoint.tx" x="730" y="36.5"/>
-  <object id="134" template="../obj/waypoint.tx" x="791" y="71.5"/>
-  <object id="135" template="../obj/waypoint.tx" x="760" y="153.5"/>
-  <object id="136" template="../obj/waypoint.tx" x="734.5" y="232"/>
-  <object id="137" template="../obj/waypoint.tx" x="550" y="442.5"/>
-  <object id="139" template="../obj/waypoint.tx" x="-1" y="319.5"/>
-  <object id="140" template="../obj/waypoint.tx" x="51.5" y="322.5"/>
-  <object id="141" template="../obj/waypoint.tx" x="49" y="396"/>
-  <object id="142" template="../obj/waypoint.tx" x="112" y="401.5"/>
-  <object id="143" template="../obj/waypoint.tx" x="113" y="622"/>
-  <object id="144" template="../obj/waypoint.tx" x="113" y="485"/>
-  <object id="145" template="../obj/manashards.tx" x="32" y="76"/>
-  <object id="146" template="../obj/manashards.tx" x="720" y="126"/>
-  <object id="147" template="../obj/gold.tx" x="306.5" y="288.5"/>
-  <object id="148" template="../obj/enemy.tx" x="51.5" y="709.164" width="16" height="17.6724">
+  <object id="127" template="../obj/waypoint.tx" x="769" y="226"/>
+  <object id="128" template="../obj/waypoint.tx" x="677" y="287"/>
+  <object id="129" template="../obj/waypoint.tx" x="665.5" y="203.5"/>
+  <object id="130" template="../obj/waypoint.tx" x="643" y="136"/>
+  <object id="131" template="../obj/waypoint.tx" x="530.5" y="195.5"/>
+  <object id="132" template="../obj/waypoint.tx" x="754.5" y="141.5"/>
+  <object id="133" template="../obj/waypoint.tx" x="842" y="132.5"/>
+  <object id="134" template="../obj/waypoint.tx" x="903" y="167.5"/>
+  <object id="135" template="../obj/waypoint.tx" x="872" y="249.5"/>
+  <object id="136" template="../obj/waypoint.tx" x="846.5" y="328"/>
+  <object id="137" template="../obj/waypoint.tx" x="662" y="538.5"/>
+  <object id="139" template="../obj/waypoint.tx" x="111" y="415.5"/>
+  <object id="140" template="../obj/waypoint.tx" x="163.5" y="418.5"/>
+  <object id="141" template="../obj/waypoint.tx" x="161" y="492"/>
+  <object id="142" template="../obj/waypoint.tx" x="224" y="497.5"/>
+  <object id="143" template="../obj/waypoint.tx" x="225" y="718"/>
+  <object id="144" template="../obj/waypoint.tx" x="225" y="581"/>
+  <object id="145" template="../obj/manashards.tx" x="144" y="172"/>
+  <object id="146" template="../obj/manashards.tx" x="832" y="222"/>
+  <object id="147" template="../obj/gold.tx" x="418.5" y="384.5"/>
+  <object id="148" template="../obj/enemy.tx" x="157" y="822.164" width="16" height="17.6724">
    <properties>
-    <property name="enemy" value="Lich"/>
+    <property name="enemy" value="Nightmare"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="150" template="../obj/gold.tx" x="905.5" y="227.5"/>
-  <object id="151" template="../obj/gold.tx" x="790.5" y="375.5"/>
-  <object id="152" template="../obj/gold.tx" x="708" y="196"/>
-  <object id="153" template="../obj/gold.tx" x="807" y="375.5"/>
-  <object id="154" template="../obj/booster.tx" x="473" y="259">
+  <object id="150" template="../obj/gold.tx" x="944.5" y="346"/>
+  <object id="151" template="../obj/gold.tx" x="902.5" y="471.5"/>
+  <object id="152" template="../obj/gold.tx" x="820" y="292"/>
+  <object id="153" template="../obj/gold.tx" x="919" y="471.5"/>
+  <object id="154" template="../obj/booster.tx" x="585" y="355">
    <properties>
     <property name="reward">[
   {
@@ -356,7 +341,7 @@
 </property>
    </properties>
   </object>
-  <object id="155" template="../obj/enemy.tx" x="473" y="300.664" width="16" height="17.6724">
+  <object id="155" template="../obj/enemy.tx" x="585" y="396.664" width="16" height="17.6724">
    <properties>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Enchantress's Presence&quot;]
 }</property>
@@ -373,60 +358,60 @@
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="156" template="../obj/collision.tx" x="427.769" y="190" width="71.462" height="45"/>
-  <object id="158" template="../obj/enemy.tx" x="787.5" y="431.164" width="16" height="17.6724">
+  <object id="156" template="../obj/collision.tx" x="539.769" y="286" width="71.462" height="45"/>
+  <object id="158" template="../obj/enemy.tx" x="906" y="514.164" width="16" height="17.6724">
    <properties>
-    <property name="enemy" value="Gorgon"/>
+    <property name="enemy" value="Golgari Fungus"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="159" template="../obj/door_up.tx" x="680.493" y="222.665" width="23.9816" height="16.6705" rotation="359.74">
+  <object id="159" template="../obj/door_up.tx" x="792.493" y="318.665" width="23.9816" height="16.6705" rotation="359.74">
    <properties>
     <property name="direction" value="up"/>
     <property name="teleport" value="maps/map/grolnok_f1.tmx"/>
    </properties>
   </object>
-  <object id="160" template="../obj/enemy.tx" x="48.5" y="356.164" width="16" height="17.6724">
+  <object id="160" template="../obj/enemy.tx" x="160.5" y="452.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Vampire"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="141,142,141,140,139,140"/>
    </properties>
   </object>
-  <object id="161" template="../obj/enemy.tx" x="283.5" y="155.664" width="16" height="17.6724">
+  <object id="161" template="../obj/enemy.tx" x="395.5" y="251.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Bat"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="164,166,107,109,95"/>
    </properties>
   </object>
-  <object id="162" template="../obj/enemy.tx" x="137" y="250.164" width="16" height="17.6724">
+  <object id="162" template="../obj/enemy.tx" x="249" y="346.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Bat"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value="166,107,165,164"/>
    </properties>
   </object>
-  <object id="163" template="../obj/waypoint.tx" x="230" y="242"/>
-  <object id="164" template="../obj/waypoint.tx" x="230" y="152.5"/>
-  <object id="165" template="../obj/waypoint.tx" x="381.5" y="179"/>
-  <object id="166" template="../obj/waypoint.tx" x="194.5" y="317"/>
-  <object id="167" template="../obj/enemy.tx" x="871.5" y="299.164" width="16" height="17.6724">
+  <object id="163" template="../obj/waypoint.tx" x="342" y="338"/>
+  <object id="164" template="../obj/waypoint.tx" x="342" y="248.5"/>
+  <object id="165" template="../obj/waypoint.tx" x="493.5" y="275"/>
+  <object id="166" template="../obj/waypoint.tx" x="306.5" y="413"/>
+  <object id="167" template="../obj/enemy.tx" x="933.5" y="362.831" width="16" height="17.6724">
    <properties>
-    <property name="enemy" value="Spider"/>
+    <property name="enemy" value="Fungus"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="169" template="../obj/enemy.tx" x="859" y="676.664" width="16" height="17.6724">
+  <object id="169" template="../obj/enemy.tx" x="930" y="701.664" width="16" height="17.6724">
    <properties>
-    <property name="enemy" value="Dark Knight"/>
+    <property name="enemy" value="Frog"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="170,171"/>
+    <property name="waypoints" value="177,174"/>
    </properties>
   </object>
-  <object id="170" template="../obj/waypoint.tx" x="912.5" y="675"/>
-  <object id="171" template="../obj/waypoint.tx" x="755" y="671"/>
-  <object id="172" template="../obj/booster.tx" x="457" y="577.5">
+  <object id="170" template="../obj/waypoint.tx" x="1024.5" y="771"/>
+  <object id="171" template="../obj/waypoint.tx" x="867" y="767"/>
+  <object id="172" template="../obj/booster.tx" x="569" y="673.5">
    <properties>
     <property name="reward">[
   {
@@ -451,6 +436,22 @@
 </property>
    </properties>
   </object>
-  <object id="173" template="../obj/collision.tx" x="500.638" y="705.017" width="335.725" height="31.4653"/>
+  <object id="173" template="../obj/collision.tx" x="612.638" y="801.017" width="426.058" height="31.4653"/>
+  <object id="174" template="../obj/enemy.tx" x="968.667" y="680.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Frog"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="177,174"/>
+   </properties>
+  </object>
+  <object id="175" template="../obj/enemy.tx" x="928.333" y="765.497" width="16" height="17.6724">
+   <properties>
+    <property name="enemy" value="Death Knight"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="170,171"/>
+   </properties>
+  </object>
+  <object id="176" template="../obj/waypoint.tx" x="999.333" y="673"/>
+  <object id="177" template="../obj/waypoint.tx" x="902.667" y="726.333"/>
  </objectgroup>
 </map>
