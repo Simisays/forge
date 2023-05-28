@@ -1,59 +1,77 @@
-swamptroll.png
-size: 512, 512
+shade.png
+size: 1536, 576
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 Avatar
-  xy: 88, 156
-  size: 20, 20
+  xy: 427, 275
+  size: 16, 16
+Hidden
+  xy: 28, 53
+  size: 18, 11   
+Wake
+  xy: 115, 10
+  size: 54, 53
+Wake
+  xy: 211, 10
+  size: 54, 53
+Wake
+  xy: 307, 10
+  size: 54, 53
+Wake
+  xy: 403, 10
+  size: 54, 53
+Wake
+  xy: 499, 10
+  size: 54, 53
+Wake
+  xy: 595, 10
+  size: 54, 53
+Wake
+  xy: 691, 10
+  size: 54, 53
+Wake
+  xy: 787, 10
+  size: 54, 53
+Wake
+  xy: 883, 10
+  size: 54, 53
+Wake
+  xy: 979, 10
+  size: 54, 53
 Idle
-  xy: 10, 29
-  size: 40, 35
+  xy: 28, 69
+  size: 18, 53   
 Idle
-  xy: 74, 29
-  size: 40, 35
+  xy: 115, 69
+  size: 54, 53
 Idle
-  xy: 138, 29
-  size: 40, 35
+  xy: 211, 69
+  size: 54, 53
 Idle
-  xy: 202, 29
-  size: 40, 35
+  xy: 307, 69
+  size: 54, 53
 Idle
-  xy: 10, 285
-  size: 40, 35
+  xy: 403, 69
+  size: 54, 53
 Idle
-  xy: 74, 285
-  size: 40, 35
+  xy: 499, 69
+  size: 54, 53
 Idle
-  xy: 138, 285
-  size: 40, 35
+  xy: 595, 69
+  size: 54, 53
 Idle
-  xy: 202, 285
-  size: 40, 35
+  xy: 691, 69
+  size: 54, 53
 Idle
-  xy: 10, 477
-  size: 40, 35
+  xy: 787, 69
+  size: 54, 53
 Idle
-  xy: 74, 477
-  size: 40, 35
+  xy: 883, 69
+  size: 54, 53
 Idle
-  xy: 138, 477
-  size: 40, 35
-Idle
-  xy: 202, 477
-  size: 40, 35
-Idle
-  xy: 266, 477
-  size: 40, 35
-Idle
-  xy: 330, 477
-  size: 40, 35
-Idle
-  xy: 394, 477
-  size: 40, 35
-Idle
-  xy: 458, 477
-  size: 40, 35
+  xy: 979, 69
+  size: 54, 53
 Walk
   xy: 5, 88
   size: 40, 40

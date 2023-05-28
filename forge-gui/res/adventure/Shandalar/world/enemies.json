@@ -10877,7 +10877,7 @@
 },
 {
 	"name": "Horse",
-	"sprite": "sprites/animals/horse.atlas",
+	"sprite": "sprites/animals/horseblack.atlas",
 	"deck": [
 		"decks/animals/horse.dck"
 	],
@@ -15075,7 +15075,8 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"life": 10,
+	"scale":0.8,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
