@@ -5779,6 +5779,67 @@
 	]
 },
 {
+	"name": "Dragonfly",
+	"sprite": "sprites/arachnida/dragonfly.atlas",
+	"deck": [
+		"decks/arachnida/insect.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "WBG",
+	"questTags": [
+		"Insect",
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Swarming",
+		"Flying",
+		"Tiny",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityAbzan",
+		"BiomeColorless",
+		"BiomeWhite",
+		"BiomeBlack"
+	]
+},
+{
 	"name": "Dross Gladiator",
 	"sprite": "sprites/phyrexians/drossgladiator.atlas",
 	"deck": [
@@ -8536,6 +8597,68 @@
 	]
 },
 {
+	"name": "Giant Fly",
+	"sprite": "sprites/arachnida/giantfly.atlas",
+	"deck": [
+		"decks/arachnida/insect.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Insect",
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Swarming",
+		"Flying",
+		"Tiny",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityAbzan",
+		"BiomeGreen",
+		null,
+		null
+	]
+},
+{
 	"name": "Giant Spider",
 	"sprite": "sprites/arachnida/spider_purple.atlas",
 	"deck": [
@@ -10162,6 +10285,7 @@
 	"deck": [
 		"decks/miniboss/angel_rainbow_encounter.dck"
 	],
+	"ai": "",
 	"difficulty": 0.2,
 	"speed": 20,
 	"life": 50,
@@ -11298,67 +11422,6 @@
 		"Scientist",
 		"IdentityBlue",
 		"BiomeBlue"
-	]
-},
-{
-	"name": "Insect",
-	"sprite": "sprites/arachnida/dragonfly.atlas",
-	"deck": [
-		"decks/arachnida/insect.dck"
-	],
-	"ai": "",
-	"flying": true,
-	"spawnRate": 1,
-	"difficulty": 0.1,
-	"speed": 30,
-	"scale": 0.5,
-	"life": 14,
-	"rewards": [
-		{
-			"type": "deckCard",
-			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
-			"rarity": [
-				"common",
-				"uncommon"
-			]
-		},
-		{
-			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		},
-		{
-			"type": "card",
-			"probability": 1,
-			"count": 1,
-			"rarity": [
-				"uncommon",
-				"common"
-			],
-			"cardTypes": [
-				"Land"
-			]
-		}
-	],
-	"colors": "WBG",
-	"questTags": [
-		"Insect",
-		"Animal",
-		"Wild",
-		"Nesting",
-		"Swarming",
-		"Flying",
-		"Tiny",
-		"IdentityWhite",
-		"IdentityBlack",
-		"IdentityGreen",
-		"IdentityAbzan",
-		"BiomeColorless",
-		"BiomeWhite",
-		"BiomeBlack"
 	]
 },
 {
@@ -12552,6 +12615,68 @@
 		"IdentityWhite",
 		"IdentityBoros",
 		"BiomeWhite"
+	]
+},
+{
+	"name": "Ladybug",
+	"sprite": "sprites/arachnida/ladybug.atlas",
+	"deck": [
+		"decks/arachnida/insect.dck"
+	],
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"scale": 0.5,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"rarity": [
+				"uncommon",
+				"common"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Insect",
+		"Animal",
+		"Wild",
+		"Nesting",
+		"Swarming",
+		"Flying",
+		"Tiny",
+		"IdentityWhite",
+		"IdentityBlack",
+		"IdentityGreen",
+		"IdentityAbzan",
+		"BiomeGreen",
+		null,
+		null
 	]
 },
 {
@@ -15075,7 +15200,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale":0.8,
+	"scale": 0.8,
 	"life": 15,
 	"rewards": [
 		{
@@ -18621,7 +18746,7 @@
 	"name": "Wasp",
 	"sprite": "sprites/arachnida/wasp.atlas",
 	"deck": [
-		"decks/arachnida/insect.dck"
+		"decks/arachnida/wasp.dck"
 	],
 	"ai": "",
 	"flying": true,
@@ -18629,6 +18754,7 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 10,
+	"scale":0.75,
 	"rewards": [
 		{
 			"type": "deckCard",
