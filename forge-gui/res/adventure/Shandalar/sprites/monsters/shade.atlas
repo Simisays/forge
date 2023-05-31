@@ -4,11 +4,8 @@ format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 Avatar
-  xy: 427, 275
+  xy: 139,85
   size: 16, 16
-Hidden
-  xy: 28, 53
-  size: 18, 11   
 Wake
   xy: 115, 10
   size: 54, 53
@@ -40,86 +37,173 @@ Wake
   xy: 979, 10
   size: 54, 53
 Idle
-  xy: 28, 69
-  size: 18, 53   
+  xy: 31, 76
+  size: 37, 52   
 Idle
-  xy: 115, 69
-  size: 54, 53
+  xy: 127, 76
+  size: 37, 52   
 Idle
-  xy: 211, 69
-  size: 54, 53
+  xy: 223, 76
+  size: 37, 52   
 Idle
-  xy: 307, 69
-  size: 54, 53
+  xy: 319, 76
+  size: 37, 52   
 Idle
-  xy: 403, 69
-  size: 54, 53
+  xy: 415, 76
+  size: 37, 52   
 Idle
-  xy: 499, 69
-  size: 54, 53
+  xy: 511, 76
+  size: 37, 52   
 Idle
-  xy: 595, 69
-  size: 54, 53
+  xy: 607, 76
+  size: 37, 52   
 Idle
-  xy: 691, 69
-  size: 54, 53
+  xy: 703, 76
+  size: 37, 52   
 Idle
-  xy: 787, 69
-  size: 54, 53
+  xy: 799, 76
+  size: 37, 52   
 Idle
-  xy: 883, 69
-  size: 54, 53
+  xy: 895, 76
+  size: 37, 52   
 Idle
-  xy: 979, 69
-  size: 54, 53
+  xy: 991, 76
+  size: 37, 52
+Idle
+  xy: 1087, 76
+  size: 37, 52   
+Idle
+  xy: 1183, 76
+  size: 37, 52  
+Idle
+  xy: 1279, 76
+  size: 37, 52          
 Walk
-  xy: 5, 88
-  size: 40, 40
+  xy: 28, 206
+  size: 42, 50
 Walk
-  xy: 69, 88
-  size: 40, 40
+  xy: 124, 206
+  size: 42, 50
 Walk
-  xy: 133, 88
-  size: 40, 40
+  xy: 220, 206
+  size: 42, 50
 Walk
-  xy: 197, 88
-  size: 40, 40
+  xy: 316, 206
+  size: 42, 50
 Walk
-  xy: 261, 88
-  size: 40, 40
+  xy: 412, 206
+  size: 42, 50
 Walk
-  xy: 325, 88
-  size: 40, 40
+  xy: 508, 206
+  size: 42, 50
 Walk
-  xy: 389, 88
-  size: 40, 40
+  xy: 604, 206
+  size: 42, 50
 Walk
-  xy: 453, 88
-  size: 40, 40
+  xy: 700, 206
+  size: 42, 50
+Walk
+  xy: 796, 206
+  size: 42, 50
+Walk
+  xy: 892, 206
+  size: 42, 50
+Walk
+   xy: 988, 206
+  size: 42, 50
+Walk
+  xy: 1084, 206
+  size: 42, 50
+Walk
+  xy: 1180, 206
+  size: 42, 50
+Walk
+   xy: 1276, 206
+  size: 42, 50
+Walk
+  xy: 1372, 206
+  size: 42, 50
+Walk
+  xy: 1468, 206
+  size: 42, 50
 Attack
-  xy: 0, 157
-  size: 55, 35
+  xy: 27, 270
+  size: 65, 50
 Attack
-  xy: 64, 157
-  size: 55, 35
+  xy: 123, 270
+  size: 65, 50
 Attack
-  xy: 128, 157
-  size: 55, 35
+  xy: 219, 270
+  size: 65, 50
 Attack
-  xy: 192, 157
-  size: 55, 35
+  xy: 315, 270
+  size: 65, 50
 Attack
-  xy: 256, 157
-  size: 55, 35
+  xy: 411, 270
+  size: 65, 50
+Attack
+  xy: 507, 270
+  size: 65, 50
+Attack
+  xy: 603, 270
+  size: 65, 50
+Attack
+  xy: 699, 270
+  size: 65, 50
+Attack
+  xy: 795, 270
+  size: 65, 50
+Attack
+  xy: 891, 270
+  size: 65, 50
+Attack
+  xy: 987, 270
+  size: 65, 50
+Attack
+  xy: 1083, 270
+  size: 65, 50
+Attack
+  xy: 1179, 270
+  size: 65, 50
+Attack
+  xy: 1275, 270
+  size: 65, 50
+Attack
+  xy: 1371, 270
+  size: 65, 50
+Attack
+  xy: 1467, 270
+  size: 65, 50
 Death
-  xy: 0, 350
-  size: 55, 35
+  xy: 26, 512
+  size: 50, 64
 Death
-  xy: 64, 350
-  size: 55, 35
+  xy: 122, 512
+  size: 50, 64
 Death
-  xy: 128, 350
-  size: 55, 35
+  xy: 218, 512
+  size: 50, 64
 Death
-  xy: 192, 350
-  size: 55, 35
+  xy: 314, 512
+  size: 50, 64
+Death
+  xy: 410, 512
+  size: 50, 64
+Death
+  xy: 506, 512
+  size: 50, 64
+Death
+  xy: 602, 512
+  size: 50, 64
+Death
+  xy: 698, 512
+  size: 50, 64
+Death
+  xy: 794, 512
+  size: 50, 64
+Death
+  xy: 890, 512
+  size: 50, 64
+Death
+  xy: 986, 512
+  size: 50, 64
