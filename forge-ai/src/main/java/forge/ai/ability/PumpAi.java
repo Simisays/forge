@@ -21,7 +21,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
@@ -182,7 +181,7 @@ public class PumpAi extends PumpAiBase {
                                 return false;
                             }
 
-                            final Card srcCardCpy = CardUtil.getLKICopy(card);
+                            final Card srcCardCpy = CardCopyService.getLKICopy(card);
                             // cant use substract on Copy
                             srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
@@ -231,7 +230,7 @@ public class PumpAi extends PumpAiBase {
                                     return false;
                                 }
 
-                                final Card srcCardCpy = CardUtil.getLKICopy(card);
+                                final Card srcCardCpy = CardCopyService.getLKICopy(card);
                                 // cant use substract on Copy
                                 srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
@@ -313,26 +312,10 @@ public class PumpAi extends PumpAiBase {
                 attack = root.getXManaCostPaid();
             }
         } else {
+            // TODO add Double
             attack = AbilityUtils.calculateAmount(sa.getHostCard(), numAttack, sa);
             if (numAttack.contains("X") && sa.getSVar("X").equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 attack--; // the card will be spent casting the spell, so actual power is 1 less
-            }
-        }
-
-        if ("ContinuousBonus".equals(aiLogic)) {
-            // P/T bonus in a continuous static ability
-            for (StaticAbility stAb : source.getStaticAbilities()) {
-                if ("Continuous".equals(stAb.getParam("Mode"))) {
-                    if (stAb.hasParam("AddPower")) {
-                        attack += AbilityUtils.calculateAmount(source, stAb.getParam("AddPower"), stAb);
-                    }
-                    if (stAb.hasParam("AddToughness")) {
-                        defense += AbilityUtils.calculateAmount(source, stAb.getParam("AddToughness"), stAb);
-                    }
-                    if (stAb.hasParam("AddKeyword")) {
-                        keywords.addAll(Lists.newArrayList(stAb.getParam("AddKeyword").split(" & ")));
-                    }
-                }
             }
         }
 
@@ -441,6 +424,10 @@ public class PumpAi extends PumpAiBase {
                 for (Card c : list) {
                     if (c.isCreature() && c.getController() == ai
                             && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
+                        canDieToPump.add(c);
+                    }
+                    // Also, don't pump itself if the SA involves a sacrifice self cost
+                    if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
                         canDieToPump.add(c);
                     }
                 }

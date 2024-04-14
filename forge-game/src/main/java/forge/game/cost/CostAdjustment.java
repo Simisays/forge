@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.player.PlayerCollection;
 import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
@@ -52,7 +53,7 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
-            if (sa.isCastFaceDown()) {
+            if (sa.isCastFaceDown() && !host.isFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
                 host.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
@@ -65,7 +66,7 @@ public class CostAdjustment {
                     result.add(new Cost(ManaCost.get(n), false));
                 }
             }
-        } // isSpell
+        }
 
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
@@ -147,6 +148,15 @@ public class CostAdjustment {
                     count += tc.size();
                 }
                 --count;
+            } else if ("Spree".equals(amount)) {
+                SpellAbility sub = sa;
+                while (sub != null) {
+                    if (sub.hasParam("SpreeCost")) {
+                        Cost part = new Cost(sub.getParam("SpreeCost"), sa.isAbility(), sa.getHostCard().equals(hostCard));
+                        cost.mergeTo(part, count, sa);
+                    }
+                    sub = sub.getSubAbility();
+                }
             } else {
                 if (StringUtils.isNumeric(amount)) {
                     count = Integer.parseInt(amount);
@@ -171,9 +181,9 @@ public class CostAdjustment {
 
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
-    public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
+    public static boolean adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
         if (sa.isTrigger() || sa.isReplacementAbility()) {
-            return;
+            return true;
         }
 
         final Game game = sa.getActivatingPlayer().getGame();
@@ -181,7 +191,7 @@ public class CostAdjustment {
         boolean isStateChangeToFaceDown = false;
 
         if (sa.isSpell()) {
-            if (sa.isCastFaceDown()) {
+            if (sa.isCastFaceDown() && !originalCard.isFaceDown()) {
                 // Turn face down to apply cost modifiers correctly
                 originalCard.turnFaceDownNoUpdate();
                 isStateChangeToFaceDown = true;
@@ -200,7 +210,7 @@ public class CostAdjustment {
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
-                if (stAb.checkMode("ReduceCost")) {
+                if (stAb.checkMode("ReduceCost") && checkRequirement(sa, stAb)) {
                     reduceAbilities.add(stAb);
                 }
                 else if (stAb.checkMode("SetCost")) {
@@ -223,7 +233,7 @@ public class CostAdjustment {
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
 
-        if (sa.isSpell() && !sa.getPipsToReduce().isEmpty()) {
+        if (sa.isSpell()) {
             for (String pip : sa.getPipsToReduce()) {
                 cost.decreaseShard(ManaCostShard.parseNonGeneric(pip), 1);
             }
@@ -241,6 +251,12 @@ public class CostAdjustment {
         }
 
         if (sa.isSpell()) {
+            if (sa.getHostCard().hasKeyword(Keyword.ASSIST)) {
+                if (!adjustCostByAssist(cost, sa, test)) {
+                    return false;
+                }
+            }
+
             if (sa.getHostCard().hasKeyword(Keyword.DELVE)) {
                 sa.getHostCard().clearDelved();
 
@@ -277,8 +293,33 @@ public class CostAdjustment {
             originalCard.setFaceDown(false);
             originalCard.setState(CardStateName.Original, false);
         }
+
+        return true;
     }
     // GetSpellCostChange
+
+    private static boolean adjustCostByAssist(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
+        // 702.132. Assist
+        // 702.132a Assist is a static ability that modifies the rules of paying for the spell with assist (see rules 601.2g-h).
+        // If the total cost to cast a spell with assist includes a generic mana component, before you activate mana abilities while casting it, you may choose another player.
+        // That player has a chance to activate mana abilities. Once that player chooses not to activate any more mana abilities, you have a chance to activate mana abilities.
+        // Before you begin to pay the total cost of the spell, the player you chose may pay for any amount of the generic mana in the spell’s total cost.
+        int genericLeft = cost.getUnpaidShards(ManaCostShard.GENERIC);
+        if (genericLeft == 0) {
+            return true;
+        }
+
+        Player activator = sa.getActivatingPlayer();
+        PlayerCollection otherPlayers = activator.getAllOtherPlayers();
+
+        Player assistant = activator.getController().choosePlayerToAssistPayment(otherPlayers, sa, "Choose a player to assist paying this spell", genericLeft);
+        if (assistant == null) {
+            return true;
+        }
+        int requestedAmount = genericLeft;
+        // TODO: Nice to have. Ask the player how much mana you are hoping someone will pay.
+        return assistant.getController().helpPayForAssistSpell(cost, sa, genericLeft, requestedAmount);
+    }
 
     private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
         sa.clearTappedForConvoke();
@@ -400,10 +441,6 @@ public class CostAdjustment {
         final Card hostCard = staticAbility.getHostCard();
         final Card card = sa.getHostCard();
         final String amount = staticAbility.getParam("Amount");
-
-        if (!checkRequirement(sa, staticAbility)) {
-            return 0;
-        }
 
         int value;
         if ("AffectedX".equals(amount)) {

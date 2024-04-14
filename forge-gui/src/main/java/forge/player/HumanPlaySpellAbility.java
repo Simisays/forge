@@ -71,7 +71,7 @@ public class HumanPlaySpellAbility {
             game.setTopLibsCast();
 
             if (ability.getApi() == ApiType.Charm) {
-                if ("X".equals(ability.getParam("CharmNum"))) {
+                if (ability.isAnnouncing("X")) {
                     // CR 601.4
                     if (!announceValuesLikeX()) {
                         game.clearTopLibsCast(ability);
@@ -97,11 +97,8 @@ public class HumanPlaySpellAbility {
         final Card c = ability.getHostCard();
         final CardPlayOption option = c.mayPlay(ability.getMayPlay());
 
-        boolean manaColorConversion = false;
-
         // freeze Stack. No abilities should go onto the stack while I'm filling requirements.
         boolean refreeze = game.getStack().isFrozen();
-        game.getStack().freezeStack();
 
         if (ability.isSpell() && !c.isCopiedSpell()) {
             fromZone = game.getZoneOf(c);
@@ -119,11 +116,12 @@ public class HumanPlaySpellAbility {
 
         ability = GameActionUtil.addExtraKeywordCost(ability);
 
-        final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmStaticApplication(c, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
-
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
+
+        final boolean playerManaConversion = human.hasManaConversion()
+                && human.getController().confirmStaticApplication(c, null, "Do you want to spend mana as though it were mana of any type to pay the cost?", null);
+        boolean manaColorConversion = false;
 
         if (!ability.isCopied()) {
             if (ability.isSpell()) { // Apply by Option
@@ -144,6 +142,11 @@ public class HumanPlaySpellAbility {
             if (StaticAbilityManaConvert.manaConvert(payment, human, ability.getHostCard(), ability)) {
                 manaColorConversion = true;
             }
+
+            if (ability.hasParam("ManaConversion")) {
+                AbilityUtils.applyManaColorConversion(manapool, ability.getParam("ManaConversion"));
+                manaColorConversion = true;
+            }
         }
 
         if (playerManaConversion) {
@@ -158,26 +161,40 @@ public class HumanPlaySpellAbility {
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         // because of Selective Snare do announceType first
-        final boolean prerequisitesMet = announceType()
-                && announceValuesLikeX()
-                && ability.checkRestrictions(human)
-                && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
-                && ability.canCastTiming(human)
-                && ability.isLegalAfterStack()
-                && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false)));
+
+        boolean preCostRequisites = announceType() && announceValuesLikeX() &&
+            ability.checkRestrictions(human) &&
+            (!mayChooseTargets || ability.setupTargets()) &&
+            ability.canCastTiming(human) &&
+            ability.isLegalAfterStack();
+
+        // Freeze the stack just before we start paying costs but after the ability is fully set up
+        game.getStack().freezeStack(ability);
+        final boolean prerequisitesMet = preCostRequisites && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, ability.isTrigger())));
 
         game.clearTopLibsCast(ability);
 
         if (!prerequisitesMet) {
+            // Would love to restore game state when undoing a trigger rather than just declining all costs.
+            // Is there a way to tell the difference?
+
             if (ability.isTrigger()) {
-                payment.refundPayment();
+                // Only roll back triggers if they were not paid for
+                if (game.EXPERIMENTAL_RESTORE_SNAPSHOT && preCostRequisites) {
+                    GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
+                } else {
+                    // If precost requsities failed, then there probably isn't anything to refund during experimental
+                    payment.refundPayment();
+                }
             } else {
                 GameActionUtil.rollbackAbility(ability, fromZone, zonePosition, payment, c);
             }
+
             if (!refreeze) {
                 game.getStack().unfreezeStack();
             }
 
+            // These restores may not need to happen if we're restoring from snapshot
             if (manaColorConversion) {
                 manapool.restoreColorReplacements();
             }

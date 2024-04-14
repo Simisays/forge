@@ -29,6 +29,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
@@ -65,15 +66,16 @@ public class HumanPlay {
     public final static boolean playSpellAbility(final PlayerControllerHuman controller, final Player p, SpellAbility sa) {
         FThreads.assertExecutedByEdt(false);
 
+        // Should I be storing state here? It should be the same as last stored state though?
+
         Card source = sa.getHostCard();
         sa.setActivatingPlayer(p);
 
         if (sa instanceof LandAbility) {
             if (sa.canPlay()) {
                 sa.resolve();
-                p.getGame().updateLastStateForCard(source);
             }
-            return false;
+            return true;
         }
 
         boolean isforetold = source.isForetold();
@@ -103,18 +105,21 @@ public class HumanPlay {
 
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
-            Card rollback = p.getGame().getCardState(source);
-            if (castFaceDown) {
-                rollback.setFaceDown(false);
-            } else if (flippedToCast) {
-                // need to get the changed card if able
-                rollback.turnFaceDown(true);
-                //need to set correct imagekey when forcing facedown
-                rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
-                if (rollback.isInZone(ZoneType.Exile)) {
-                    rollback.addMayLookTemp(p);
+            if (!controller.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                Card rollback = p.getGame().getCardState(source);
+                if (castFaceDown) {
+                    rollback.setFaceDown(false);
+                } else if (flippedToCast) {
+                    // need to get the changed card if able
+                    rollback.turnFaceDown(true);
+                    //need to set correct imagekey when forcing facedown
+                    rollback.setImageKey(ImageKeys.getTokenKey(isforetold ? ImageKeys.FORETELL_IMAGE : ImageKeys.HIDDEN_CARD));
+                    if (rollback.isInZone(ZoneType.Exile)) {
+                        rollback.addMayLookTemp(p);
+                    }
                 }
             }
+
             return false;
         }
         return true;
@@ -251,7 +256,8 @@ public class HumanPlay {
                     || part instanceof CostRemoveCounter
                     || part instanceof CostRemoveAnyCounter
                     || part instanceof CostMill
-                    || part instanceof CostSacrifice) {
+                    || part instanceof CostSacrifice
+                    || part instanceof CostCollectEvidence) {
                 PaymentDecision pd = part.accept(hcd);
 
                 if (pd == null) {
@@ -327,8 +333,7 @@ public class HumanPlay {
                         costExile.payAsDecided(p, PaymentDecision.card(newList), sourceAbility, hcd.isEffect());
                     }
                 }
-            }
-            else if (part instanceof CostPutCardToLib) {
+            } else if (part instanceof CostPutCardToLib) {
                 int amount = Integer.parseInt(part.getAmount());
                 final ZoneType from = ((CostPutCardToLib) part).getFrom();
                 final boolean sameZone = ((CostPutCardToLib) part).isSameZone();
@@ -422,7 +427,7 @@ public class HumanPlay {
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostTapType) {
-                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType(), p, source, sourceAbility);
+                CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source, sourceAbility);
                 list = CardLists.filter(list, Presets.CAN_TAP);
                 int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
@@ -486,7 +491,7 @@ public class HumanPlay {
         sourceAbility.clearManaPaid();
         boolean paid = p.getController().payManaCost(cost.getCostMana(), sourceAbility, prompt, null, hcd.isEffect());
         if (!paid) {
-            p.getManaPool().refundManaPaid(sourceAbility);
+            new ManaRefundService(sourceAbility).refundManaPaid();
         }
         return paid;
     }
@@ -512,9 +517,9 @@ public class HumanPlay {
     private static boolean handleOfferingConvokeAndDelve(final SpellAbility ability, CardCollection cardsToDelve, boolean manaInputCancelled) {
         final Card hostCard = ability.getHostCard();
         final Game game = hostCard.getGame();
-        final CardZoneTable table = new CardZoneTable();
+        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        params.put(AbilityKey.InternalTriggerTable, table);
+        AbilityKey.addCardZoneTableParams(params, table);
 
         if (!manaInputCancelled && !cardsToDelve.isEmpty()) {
             for (final Card c : cardsToDelve) {

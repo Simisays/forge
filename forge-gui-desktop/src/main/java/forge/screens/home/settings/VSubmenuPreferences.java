@@ -76,11 +76,13 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox(localizer.getMessage("cbWorkshopSyntax"));
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox(localizer.getMessage("cbEnforceDeckLegality"));
     private final JCheckBox cbSideboardForAI = new OptionsCheckBox(localizer.getMessage("cbSideboardForAI"));
+    private final JCheckBox cbExperimentalRestore = new OptionsCheckBox(localizer.getMessage("cbExperimentalRestore"));
     private final JCheckBox cbPerformanceMode = new OptionsCheckBox(localizer.getMessage("cbPerformanceMode"));
     private final JCheckBox cbSROptimize = new OptionsCheckBox(localizer.getMessage("cbSROptimize"));
     private final JCheckBox cbFilteredHands = new OptionsCheckBox(localizer.getMessage("cbFilteredHands"));
     private final JCheckBox cbImageFetcher = new OptionsCheckBox(localizer.getMessage("cbImageFetcher"));
     private final JCheckBox cbDisableCardImages = new OptionsCheckBox(localizer.getMessage("lblDisableCardImages"));
+    private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox(localizer.getMessage("cbLargeCardViewers"));
@@ -232,8 +234,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbSideboardForAI, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSideboardForAI")), descriptionConstraints);
 
+        pnlPrefs.add(cbExperimentalRestore, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalRestore")), descriptionConstraints);
+
         pnlPrefs.add(cbFilteredHands, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilteredHands")), descriptionConstraints);
+
+        pnlPrefs.add(cbCloneImgSource, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloneImgSource")), descriptionConstraints);
 
         pnlPrefs.add(cbPromptFreeBlocks, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPromptFreeBlocks")), descriptionConstraints);
@@ -837,9 +845,18 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbSideboardForAI;
     }
 
+    public JCheckBox getCbExperimentalRestore() {
+        return cbExperimentalRestore;
+    }
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbFilteredHands() {
         return cbFilteredHands;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbCloneImgSource() {
+        return cbCloneImgSource;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -4784,7 +4784,6 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 70,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -4875,7 +4874,8 @@
 		"Chandra",
 		"Fire",
 		"IdentityRed"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Chandra's Acolyte",
@@ -6917,7 +6917,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
-	"life": 19,
+	"life": 12,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -6959,7 +6959,7 @@
 	"difficulty": 0.1,
 	"speed": 16,
 	"scale": 0.7,
-	"life": 19,
+	"life": 30,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -9867,7 +9867,6 @@
 	"speed": 25,
 	"scale": 1.5,
 	"life": 100,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -9945,7 +9944,8 @@
 		"Eldrazi",
 		"Boss",
 		"IdentityColorless"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Esper Artificer",
@@ -12007,7 +12007,6 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -12063,7 +12062,8 @@
 		"Territorial",
 		"IdentityGreen",
 		"Ghalta"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Garruk",
@@ -12078,7 +12078,6 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 25,
-	"gamesPerMatch": 1,
 	"rewards": [
 		{
 			"type": "card",
@@ -13098,7 +13097,6 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -13154,7 +13152,8 @@
 		"Boss",
 		"IdentityBlack",
 		"Griselbrand"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Grolnok",
@@ -13169,7 +13168,6 @@
 	"speed": 15,
 	"scale": 0.5,
 	"life": 50,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -13257,7 +13255,8 @@
 		"IdentityGreen",
 		"Giant",
 		"IdentitySultai"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Gorilla",
@@ -13550,8 +13549,8 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4,
+			"count": 1,
+			"addMaxCount": 2,
 			"rarity": [
 				"common",
 				"uncommon"
@@ -13581,6 +13580,15 @@
 			],
 			"cardTypes": [
 				"land"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 6,
+			"cardTypes": [
+				"Artifact"
 			]
 		}
 	],
@@ -15476,7 +15484,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
-	"scale": 0.7,
+	"scale": 0.8,
 	"life": 17,
 	"rewards": [
 		{
@@ -15489,6 +15497,12 @@
 				"Mythic Rare",
 				"Rare",
 				"Uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Instant",
+				"Artifact",
+				"Enchantment"
 			]
 		},
 		{
@@ -16180,7 +16194,6 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 30,
-	"gamesPerMatch": 1,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -16666,7 +16679,6 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -16737,7 +16749,8 @@
 		"IdentityBlue",
 		"IdentityWhite",
 		"IdentityAzorius"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Jellyfish",
@@ -16990,7 +17003,6 @@
 	"speed": 31,
 	"scale": 0.35,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -17081,7 +17093,8 @@
 		"IdentityGreen",
 		"IdentityBlue",
 		"IdentitySimic"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Knight",
@@ -17893,7 +17906,6 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -17948,7 +17960,8 @@
 		"Huge",
 		"Boss",
 		"Lathliss"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Leonin Weaponmaster",
@@ -18173,7 +18186,6 @@
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 70,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -18264,7 +18276,8 @@
 		"Liliana",
 		"Death",
 		"IdentityBlack"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Liliana's Alchemist",
@@ -18500,7 +18513,6 @@
 	"speed": 1,
 	"scale": 1.5,
 	"life": 60,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -18554,7 +18566,8 @@
 		"Octopus",
 		"IdentityBlue",
 		"Lorthos"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Mageripper",
@@ -20259,7 +20272,6 @@
 	"speed": 20,
 	"scale": 2.5,
 	"life": 25,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -20298,7 +20310,8 @@
 		"Robot",
 		"Dungeon",
 		"Boss"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Naga Warrior",
@@ -21075,7 +21088,6 @@
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 50,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "item",
@@ -21161,7 +21173,8 @@
 		"IdentityGreen",
 		"IdentityBlack",
 		"IdentityGolgari"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Owl",
@@ -23336,7 +23349,7 @@
 	"spawnRate": 0.8,
 	"difficulty": 0.1,
 	"speed": 15,
-	"scale":1.1,
+	"scale": 1.1,
 	"life": 16,
 	"rewards": [
 		{
@@ -23885,7 +23898,6 @@
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -23942,7 +23954,8 @@
 		"Territorial",
 		"Leader",
 		"IdentityAll"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Scorpion",
@@ -24625,7 +24638,6 @@
 	"speed": 31,
 	"scale": 0.7,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -24707,7 +24719,8 @@
 		"IdentityBlack",
 		"IdentityGreen",
 		"IdentityGolgari"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Slivdrazi Experiment",
@@ -25081,7 +25094,6 @@
 	"speed": 15,
 	"scale": 0.75,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "Card",
@@ -25163,7 +25175,8 @@
 		"Boss",
 		"Loner",
 		"IdentityRed"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Sliver Queen",
@@ -25175,7 +25188,6 @@
 	"boss": true,
 	"speed": 1,
 	"life": 50,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -25219,7 +25231,8 @@
 		"Territorial",
 		"Nesting",
 		"IdentityAll"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Snake",
@@ -25837,7 +25850,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
-	"scale":1.5,
+	"scale": 1.5,
 	"life": 20,
 	"rewards": [
 		{
@@ -26181,7 +26194,6 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "gold",
@@ -26254,7 +26266,8 @@
 		"IdentityBlue",
 		"IdentityWhite",
 		"IdentityAzorius"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "The Cheff",
@@ -26271,7 +26284,6 @@
 	"speed": 15,
 	"scale": 0.6,
 	"life": 50,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26380,7 +26392,8 @@
 		"Cook",
 		"Human",
 		"Boss"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Tibalt",
@@ -26395,7 +26408,6 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -26484,7 +26496,8 @@
 		"Boss",
 		"Planeswalker",
 		"IdentityRed"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Tiger",
@@ -26554,13 +26567,11 @@
 		"decks/miniboss/torturer.dck"
 	],
 	"ai": "",
-	"flying": true,
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
 	"scale": 0.7,
 	"life": 30,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -26609,7 +26620,8 @@
 		"Aggressive",
 		"IdentityBlack",
 		"Evil"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Turtle",
@@ -26967,7 +26979,6 @@
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 80,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -27018,7 +27029,8 @@
 		"Humanoid",
 		"Unholy",
 		"IdentityBlack"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Vampire",
@@ -28489,7 +28501,6 @@
 	"speed": 31,
 	"scale": 0.5,
 	"life": 50,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -28577,7 +28588,8 @@
 		"IdentityGreen",
 		"IdentityRed",
 		"IdentityJund"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Yeti",
@@ -28676,7 +28688,6 @@
 	"speed": 30,
 	"scale": 0.5,
 	"life": 40,
-	"gamesPerMatch": 3,
 	"rewards": [
 		{
 			"type": "card",
@@ -28748,7 +28759,8 @@
 		"Illusionist",
 		"Leader",
 		"Large"
-	]
+	],
+	"gamesPerMatch": 3
 },
 {
 	"name": "Zombie",

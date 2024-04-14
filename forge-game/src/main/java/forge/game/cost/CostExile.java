@@ -99,7 +99,13 @@ public class CostExile extends CostPartWithList {
     }
 
     @Override
-    public int paymentOrder() { return 15; }
+    public int paymentOrder() {
+        if (this.from.contains(ZoneType.Library)) {
+            // In a world where costs are fully undoable, revealing unknown information should be done last.
+            return 20;
+        }
+        return 15;
+    }
 
     @Override
     public final String toString() {
@@ -152,7 +158,7 @@ public class CostExile extends CostPartWithList {
 
             if (this.getAmount().equals("X")) {
                 String x = chosenX > 0 ? Lang.getNumeral(chosenX) : "any number of";
-                return String.format ("Exile %s %s from your %s", x, desc, origin);
+                return String.format("Exile %s %s from your %s", x, desc, origin);
             }
 
             return String.format("Exile %s from your %s",
@@ -175,8 +181,8 @@ public class CostExile extends CostPartWithList {
             type = TextUtil.fastReplace(type, "FromTopGrave", "");
         }
 
-        CardCollection list = new CardCollection(zoneRestriction != 1 ? game.getCardsIn(this.from) :
-                payer.getCardsIn(this.from));
+        CardCollection list = CardLists.filter(zoneRestriction != 1 ? game.getCardsIn(this.from) :
+                payer.getCardsIn(this.from), CardPredicates.canExiledBy(ability, effect));
 
         if (this.payCostFromSource()) {
             return list.contains(source);
@@ -216,8 +222,6 @@ public class CostExile extends CostPartWithList {
         }
 
         if (totalCMC) {
-            int needed = Integer.parseInt(this.getAmount().split("\\+")[0]);
-            if (list.size() < needed) return false;
             if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
                 return true;
             }
@@ -257,12 +261,9 @@ public class CostExile extends CostPartWithList {
 
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        final Game game = targetCard.getGame();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-        moveParams.put(AbilityKey.InternalTriggerTable, table);
-        Card newCard = game.getAction().exile(targetCard, null, moveParams);
+        AbilityKey.addCardZoneTableParams(moveParams, table);
+        Card newCard = targetCard.getGame().getAction().exile(targetCard, null, moveParams);
         SpellAbilityEffect.handleExiledWith(newCard, ability);
         return newCard;
     }

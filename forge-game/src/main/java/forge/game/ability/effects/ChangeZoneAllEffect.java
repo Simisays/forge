@@ -10,14 +10,7 @@ import forge.game.GameActionUtil;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -43,21 +36,17 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final Card source = sa.getHostCard();
-
-        //if host is not on the battlefield don't apply
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !source.isInPlay()) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
             return;
         }
 
+        final Card source = sa.getHostCard();
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
         CardCollection cards;
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
-        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
-        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));
@@ -155,7 +144,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             CardLists.shuffle(cards);
         }
 
-        final CardZoneTable triggerList = getChangeZoneTable(sa, lastStateBattlefield, lastStateGraveyard);
+        final CardZoneTable triggerList = CardZoneTable.getSimultaneousInstance(sa);
+
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
 
@@ -167,18 +157,17 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (remLKI) {
-                source.addRemembered(CardUtil.getLKICopy(c));
+                source.addRemembered(CardCopyService.getLKICopy(c));
             }
 
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+            AbilityKey.addCardZoneTableParams(moveParams, triggerList);
 
             if (destination == ZoneType.Battlefield) {
                 moveParams.put(AbilityKey.SimultaneousETB, cards);
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                     // need LKI before Animate does apply
-                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                    moveParams.put(AbilityKey.CardLKI, CardCopyService.getLKICopy(c));
 
                     final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                     source.addRemembered(c);
@@ -199,6 +188,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
                 movedCard = game.getAction().moveToPlay(c, sa.getActivatingPlayer(), sa, moveParams);
             } else {
+                if (destination == ZoneType.Exile && !c.canExiledBy(sa, true)) {
+                    continue;
+                }
                 movedCard = game.getAction().moveTo(destination, c, libraryPos, sa, moveParams);
                 if (destination == ZoneType.Exile) {
                     handleExiledWith(movedCard, sa);
@@ -209,16 +201,14 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             }
 
             if (!movedCard.getZone().equals(originZone)) {
-                if (remember != null) {
-                    final Card newSource = game.getCardState(source);
-                    newSource.addRemembered(movedCard);
+                if (remember != null && (remember.equalsIgnoreCase("True") ||
+                        movedCard.isValid(remember, sa.getActivatingPlayer(), source, sa))) {
                     if (!source.isRemembered(movedCard)) {
                         source.addRemembered(movedCard);
                     }
                     if (c.getMeldedWith() != null) {
                         Card meld = game.getCardState(c.getMeldedWith(), null);
                         if (meld != null) {
-                            newSource.addRemembered(meld);
                             if (!source.isRemembered(meld)) {
                                 source.addRemembered(meld);
                             }
@@ -227,7 +217,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     if (c.hasMergedCard()) {
                         for (final Card card : c.getMergedCards()) {
                             if (card == c) continue;
-                            newSource.addRemembered(card);
                             if (!source.isRemembered(card)) {
                                 source.addRemembered(card);
                             }
@@ -235,10 +224,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     }
                 }
                 if (forget != null) {
-                    game.getCardState(source).removeRemembered(c);
+                    source.removeRemembered(c);
                 }
                 if (imprint != null) {
-                    game.getCardState(source).addImprintedCard(movedCard);
+                    source.addImprintedCard(movedCard);
                 }
             }
         }
@@ -249,13 +238,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
         }
 
-        // if Shuffle parameter exists, and any amount of cards were owned by
-        // that player, then shuffle that library
+        // CR 701.20d If an effect would cause a player to shuffle a set of objects into a library,
+        // that library is shuffled even if there are no objects in that set. 
         if (sa.hasParam("Shuffle")) {
-            for (Player p : game.getPlayers()) {
-                if (Iterables.any(cards, CardPredicates.isOwner(p))) {
-                    p.shuffle(sa);
-                }
+            for (Player p : tgtPlayers) {
+                p.shuffle(sa);
             }
         }
     }

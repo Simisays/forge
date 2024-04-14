@@ -24,6 +24,7 @@ Antelope:Antelopes
 Ape:Apes
 Archer:Archers
 Archon:Archons
+Armadillo:Armadillos
 Artificer:Artificers
 Army:Armies
 Assassin:Assassins
@@ -40,6 +41,7 @@ Basilisk:Basilisks
 Bat:Bats
 Bear:Bears
 Beast:Beasts
+Beaver:Beavers
 Beeble:Beebles
 Beholder:Beholders
 Berserker:Berserkers
@@ -67,6 +69,7 @@ Cockatrice:Cockatrices
 Construct:Constructs
 Cow:Cows
 Coward:Cowards
+Coyote:Coyotes
 Crab:Crabs
 Crocodile:Crocodiles
 Cyberman:Cybermen
@@ -181,6 +184,7 @@ Mongoose:Mongooses
 Monk:Monks
 Monkey:Monkeys
 Moonfolk:Moonfolks
+Mount:Mounts
 Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
@@ -218,6 +222,8 @@ Pilot:Pilots
 Pincher:Pinchers
 Pirate:Pirates
 Plant:Plants
+Porcupine:Porcupines
+Possum:Possums
 Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
@@ -255,6 +261,7 @@ Siren:Sirens
 Skeleton:Skeletons
 Slith:Sliths
 Sliver:Slivers
+Sloth:Sloths
 Slug:Slugs
 Snake:Snakes
 Soldier:Soldiers
@@ -273,6 +280,7 @@ Squid:Squids
 Squirrel:Squirrels
 Starfish:Starfish
 Surrakar:Surrakars
+Synth:Synths
 Survivor:Survivors
 Tentacle:Tentacles
 Tetravite:Tetravites
@@ -289,6 +297,7 @@ Turtle:Turtles
 Tyranid:Tyranids
 Unicorn:Unicorns
 Vampire:Vampires
+Varmint:Varmints
 Vedalken:Vedalkens
 Viashino:Viashinos
 Volver:Volvers
@@ -318,6 +327,7 @@ Trap
 Aura
 Background
 Cartouche
+Case
 Class
 Curse
 Role
@@ -433,6 +443,7 @@ Alara
 Alfava Metraxis
 Amonkhet
 Antausia
+Apalapucia
 Arcavios
 Arkhos
 Azgol

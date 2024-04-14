@@ -1231,7 +1231,7 @@ public class ComputerUtilCombat {
             }
 
             // Extra check for the Exalted trigger in case we're declaring more than one attacker
-            if (combat != null && trigger.getKeyword() != null && trigger.getKeyword().getKeyword() == Keyword.EXALTED) {
+            if (combat != null && trigger.isKeyword(Keyword.EXALTED)) {
                 if (!combat.getAttackers().isEmpty() && !combat.getAttackers().contains(attacker)) {
                     continue;
                 }
@@ -1316,6 +1316,10 @@ public class ComputerUtilCombat {
 
             if (ability.getApi() == ApiType.Pump) {
                 if (!ability.hasParam("NumAtt")) {
+                    continue;
+                }
+
+                if (ComputerUtilCost.isSacrificeSelfCost(ability.getPayCosts())) {
                     continue;
                 }
 
@@ -2327,7 +2331,7 @@ public class ComputerUtilCombat {
         if (original.isTransformable() && !original.isInAlternateState()) {
             for (SpellAbility sa : original.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.SetState && ComputerUtilCost.canPayCost(sa, original.getController(), false)) {
-                    Card transformed = CardUtil.getLKICopy(original);
+                    Card transformed = CardCopyService.getLKICopy(original);
                     transformed.getCurrentState().copyFrom(original.getAlternateState(), true);
                     transformed.updateStateForView();
                     return transformed;

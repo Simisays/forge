@@ -24,7 +24,6 @@ import com.google.common.eventbus.EventBus;
 import forge.GameCommand;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
-import forge.card.CardType.Supertype;
 import forge.game.ability.AbilityKey;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -50,6 +49,8 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
 import forge.util.collect.FCollection;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -89,6 +90,11 @@ public class Game {
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
 
+    public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
+    // While this is false here, its really set by the Match/Preferences
+
+    // If this merges with LKI In the future, it will need to change forms
+    private GameSnapshot previousGameState = null;
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
@@ -114,6 +120,8 @@ public class Game {
     private Direction turnOrder = Direction.getDefaultDirection();
 
     private Boolean daytime = null;
+
+    private int numPiledGuessedSA;
 
     private long timestamp = 0;
     public final GameAction action;
@@ -173,6 +181,24 @@ public class Game {
         return lastStateGraveyard;
     }
 
+    public void stashGameState() {
+        // Take a snapshot of the current state to restore to previous state
+        if (EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            previousGameState = new GameSnapshot(this);
+            previousGameState.makeCopy();
+        }
+    }
+
+    public boolean restoreGameState() {
+        // Restore game state snapshot
+        if (previousGameState == null || !EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            return false;
+        }
+
+        previousGameState.restoreGameState(this);
+        return true;
+    }
+
     public void copyLastState() {
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
@@ -213,7 +239,7 @@ public class Game {
         if (lookup != null) {
             lastStateBattlefield.remove(c);
             lastStateGraveyard.remove(c);
-            lookup.add(CardUtil.getLKICopy(c));
+            lookup.add(CardCopyService.getLKICopy(c));
         }
     }
 
@@ -221,23 +247,34 @@ public class Game {
     public Player getPlayer(PlayerView playerView) {
         return playerCache.get(playerView);
     }
+
+    public Player getPlayer(int id) {
+        for(Player p : allPlayers) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+
     public void addPlayer(int id, Player player) {
         playerCache.put(Integer.valueOf(id), player);
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
-    private final HashMap<Integer, Card> changeZoneLKIInfo = new HashMap<>();
+    private final Table<Integer, Long, Card> changeZoneLKIInfo = HashBasedTable.create();
     public final void addChangeZoneLKIInfo(Card lki) {
         if (lki == null) {
             return;
         }
-        changeZoneLKIInfo.put(lki.getId(), lki);
+        changeZoneLKIInfo.put(lki.getId(), lki.getGameTimestamp(), lki);
     }
     public final Card getChangeZoneLKIInfo(Card c) {
         if (c == null) {
             return null;
         }
-        return changeZoneLKIInfo.getOrDefault(c.getId(), c);
+        return ObjectUtils.defaultIfNull(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
@@ -360,6 +397,14 @@ public class Game {
         }
         final PlayerCollection players = new PlayerCollection(ingamePlayers);
         Collections.reverse(players);
+        return players;
+    }
+
+    public final PlayerCollection getPlayersInTurnOrder(Player p) {
+        final PlayerCollection players = new PlayerCollection(getPlayersInTurnOrder());
+
+        int i = players.indexOf(p);
+        Collections.rotate(players, -i);
         return players;
     }
 
@@ -496,6 +541,10 @@ public class Game {
     }
     public final long getTimestamp() {
         return timestamp;
+    }
+
+    public void dangerouslySetTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public final GameOutcome getOutcome() {
@@ -950,36 +999,6 @@ public class Game {
         activePlanes = activePlane0;
     }
 
-    public void archenemy904_10() {
-        //904.10. If a non-ongoing scheme card is face up in the
-        //command zone, and it isn't the source of a triggered ability
-        //that has triggered but not yet left the stack, that scheme card
-        //is turned face down and put on the bottom of its owner's scheme
-        //deck the next time a player would receive priority.
-        //(This is a state-based action. See rule 704.)
-
-        for (int i = 0; i < getCardsIn(ZoneType.Command).size(); i++) {
-            Card c = getCardsIn(ZoneType.Command).get(i);
-            if (c.isScheme() && !c.getType().hasSupertype(Supertype.Ongoing)) {
-                boolean foundonstack = false;
-                for (SpellAbilityStackInstance si : stack) {
-                    if (si.getSourceCard().equals(c)) {
-                        foundonstack = true;
-                        break;
-                    }
-                }
-                if (!foundonstack) {
-                    getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                    c.getController().getZone(ZoneType.Command).remove(c);
-                    i--;
-                    getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
-                    c.getController().getZone(ZoneType.SchemeDeck).add(c);
-                }
-            }
-        }
-    }
-
     public GameStage getAge() {
         return age;
     }
@@ -1134,7 +1153,18 @@ public class Game {
         return result;
     }
 
+    public void incPiledGuessedSA() {
+        numPiledGuessedSA++;
+    }
+    public int getNumPiledGuessedSA() {
+        return numPiledGuessedSA;
+    }
+    public void resetNumPiledGuessedSA() {
+        numPiledGuessedSA = 0;
+    }
+
     public void onCleanupPhase() {
+        resetNumPiledGuessedSA();
         clearLeftBattlefieldThisTurn();
         clearLeftGraveyardThisTurn();
         clearCounterAddedThisTurn();
@@ -1155,7 +1185,7 @@ public class Game {
             result = Lists.newArrayList();
             countersAddedThisTurn.put(cType, putter, result);
         }
-        result.add(Pair.of(CardUtil.getLKICopy(card), value));
+        result.add(Pair.of(CardCopyService.getLKICopy(card), value));
     }
 
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
@@ -1181,7 +1211,7 @@ public class Game {
         }
         for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(cType).values()) {
             for (Pair<Card, Integer> p : l) {
-                if (p.getKey().equalsWithTimestamp(card)) {
+                if (p.getKey().equalsWithGameTimestamp(card)) {
                     result += p.getValue();
                 }
             }
@@ -1194,7 +1224,7 @@ public class Game {
     }
 
     public void addCounterRemovedThisTurn(CounterType cType, Card card, Integer value) {
-        countersRemovedThisTurn.put(cType, Pair.of(CardUtil.getLKICopy(card), value));
+        countersRemovedThisTurn.put(cType, Pair.of(CardCopyService.getLKICopy(card), value));
     }
 
     public int getCounterRemovedThisTurn(CounterType cType, String validCard, Card source, Player sourceController, CardTraitBase ctb) {

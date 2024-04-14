@@ -30,6 +30,8 @@ import forge.item.PaperCard;
 import forge.util.CollectionSuppliers;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.lang.LangEnglish;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -275,7 +277,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public void loadCard(String cardName, String setCode, CardRules cr) {
         // @leriomaggio: This method is called when lazy-loading is set
-        System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
+        // OR if a card is trying to load from an edition its not from
+        //System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
         rulesByName.put(cardName, cr);
         boolean reIndexNecessary = false;
         CardEdition ed = editions.get(setCode);
@@ -370,6 +373,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private void buildRenamedCards() {
+        Lang lang = Lang.getInstance();
+        if (lang == null) {
+            // for some tests
+            lang = new LangEnglish();
+        }
         // for now just check Universes Within
         for (CardInSet cis : editions.get("SLX").getCards()) {
             String orgName = alternateName.get(cis.name);
@@ -381,7 +389,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 renamedMain.setName(renamedMain.getAltName());
                 renamedMain.setAltName(null);
                 // TODO this could mess up some "named ..." cardname literals but there's no printing like that currently
-                renamedMain.setOracleText(renamedMain.getOracleText().replace(orgName, renamedMain.getName()));
+                renamedMain.setOracleText(renamedMain.getOracleText()
+                        .replace(orgName, renamedMain.getName())
+                        .replace(lang.getNickName(orgName), lang.getNickName(renamedMain.getName()))
+                        );
                 facesByName.put(renamedMain.getName(), renamedMain);
                 CardFace renamedOther = null;
                 if (org.getOtherPart() != null) {
@@ -389,7 +400,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     orgName = renamedOther.getName();
                     renamedOther.setName(renamedOther.getAltName());
                     renamedOther.setAltName(null);
-                    renamedOther.setOracleText(renamedOther.getOracleText().replace(orgName, renamedOther.getName()));
+                    renamedOther.setOracleText(renamedOther.getOracleText()
+                            .replace(orgName, renamedOther.getName())
+                            .replace(lang.getNickName(orgName), lang.getNickName(renamedOther.getName()))
+                            );
                     facesByName.put(renamedOther.getName(), renamedOther);
                 }
 
@@ -418,6 +432,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (paperCard.getRules().getSplitType() == CardSplitType.Split) {
             //also include main part for split cards
             allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
+        } else if (paperCard.getRules().getSplitType() == CardSplitType.Specialize) {
+            //also include specialize faces
+            for (ICardFace face : paperCard.getRules().getSpecializeParts().values()) allCardsByName.put(face.getName(), paperCard);
         }
     }
 

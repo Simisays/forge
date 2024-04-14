@@ -86,6 +86,9 @@ public class CardState extends GameObject implements IHasSVars {
     private ReplacementEffect battleTypeRep;
     private ReplacementEffect sagaRep;
 
+    private SpellAbility manifestUp;
+    private SpellAbility cloakUp;
+
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
     }
@@ -308,6 +311,9 @@ public class CardState extends GameObject implements IHasSVars {
     }
     public final boolean removeIntrinsicKeyword(final KeywordInterface s) {
         return intrinsicKeywords.remove(s);
+    }
+    public final boolean removeIntrinsicKeyword(final Keyword k) {
+        return intrinsicKeywords.removeAll(k);
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
@@ -759,4 +765,16 @@ public class CardState extends GameObject implements IHasSVars {
         return n;
     }
 
+    public SpellAbility getManifestUp() {
+        if (this.manifestUp == null) {
+            manifestUp = CardFactoryUtil.abilityTurnFaceUp(this, "ManifestUp", "Unmanifest");
+        }
+        return manifestUp;
+    }
+    public SpellAbility getCloakUp() {
+        if (this.cloakUp == null) {
+            cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, "CloakUp", "Uncloak");
+        }
+        return cloakUp;
+    }
 }

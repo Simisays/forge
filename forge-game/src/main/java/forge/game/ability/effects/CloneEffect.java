@@ -52,6 +52,10 @@ public class CloneEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         List<Card> cloneTargets = new ArrayList<>();
@@ -127,20 +131,16 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         for (Card tgtCard : cloneTargets) {
-            game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
-            if (sa.hasParam("CloneZone")) {
-                if (!tgtCard.isInZone(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
-                    continue;
-                }
+            if (sa.hasParam("CloneZone") &&
+                    !tgtCard.isInZone(ZoneType.smartValueOf(sa.getParam("CloneZone")))) {
+                continue;
             }
 
             if (tgtCard.isPhasedOut()) {
                 continue;
             }
 
-            if ("UntilTargetedUntaps".equals(sa.getParam("Duration")) && !cardToCopy.isTapped()) {
-                continue;
-            }
+            game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
 
             final Long ts = game.getNextTimestamp();
             tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);

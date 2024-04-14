@@ -28,6 +28,7 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.IndividualCostPaymentInstance;
+import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -344,29 +345,48 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (hasParam("ResolvedLimit")) {
-            if (this.getOverridingAbility().getResolvedThisTurn() >= Integer.parseInt(getParam("ResolvedLimit"))) {
-                return false;
-            }
-        }
-
         // host controller will be null when adding card in a simulation game
         if (this.getHostCard().getController() == null || (game.getAge() != GameStage.Play && game.getAge() != GameStage.RestartedByKarn) || !meetsCommonRequirements(this.mapParams)) {
+            return false;
+        }
+
+        if (!checkResolvedLimit(getHostCard().getController())) {
             return false;
         }
 
         return true;
     }
 
+    public boolean checkResolvedLimit(Player activator) {
+        // CR 603.2i
+        if (hasParam("ResolvedLimit")) {
+            if (Collections.frequency(getHostCard().getAbilityResolvedThisTurnActivators(getOverridingAbility()), activator)
+                    >= Integer.parseInt(getParam("ResolvedLimit"))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkActivationLimit() {
+        if (hasParam("ActivationLimit") &&
+                getActivationsThisTurn() >= Integer.parseInt(getParam("ActivationLimit"))) {
+            return false;
+        }
+        if (hasParam("GameActivationLimit") && 
+            getActivationsThisGame() >= Integer.parseInt(getParam("GameActivationLimit"))) {
+                return false;
+        }
+        return true;
+    }
+
     public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {
-        if ("True".equals(getParam("EvolveCondition"))) {
+        String condition = getParam("Condition");
+
+        if (isKeyword(Keyword.EVOLVE) || "Evolve".equals(condition)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (moved == null) {
                 return false;
-                // final StringBuilder sb = new StringBuilder();
-                // sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
-                // sb.append(this.getHostCard().getName());
-                // throw new RuntimeException(sb.toString());
             }
             // CR 702.100c
             if (!moved.isCreature() || !this.getHostCard().isCreature()) {
@@ -378,7 +398,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        String condition = getParam("Condition");
         if ("AltCost".equals(condition)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
@@ -426,6 +445,11 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             if (attacked == null || !attacked.isValid("Player.withMostLife",
                     this.getHostCard().getController(), this.getHostCard(), null)) {
+                return false;
+            }
+        } else if ("AttackerHasUnattackedOpp".equals(condition)) {
+            Player attacker = (Player) runParams.get(AbilityKey.AttackingPlayer);
+            if (game.getCombat().getAttackersAndDefenders().values().containsAll(attacker.getOpponents())) {
                 return false;
             }
         }
@@ -559,6 +583,10 @@ public abstract class Trigger extends TriggerReplacementBase {
         return hostCard.getAbilityActivatedThisTurn(this.getOverridingAbility());
     }
 
+    public int getActivationsThisGame() {
+        return hostCard.getAbilityActivatedThisGame(this.getOverridingAbility());
+    }
+
     public void triggerRun() {
         if (this.getOverridingAbility() != null) {
             hostCard.addAbilityActivated(this.getOverridingAbility());
@@ -574,7 +602,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             throw new RuntimeException("Trigger : clone() error, " + ex);
         }
     }
-
 
     /* (non-Javadoc)
      * @see forge.game.CardTraitBase#changeText()
@@ -598,9 +625,6 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     @Override
     public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
-        if (!isIntrinsic()) {
-            return;
-        }
         super.changeTextIntrinsic(colorMap, typeMap);
 
         SpellAbility sa = ensureAbility();

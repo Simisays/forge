@@ -19,6 +19,7 @@ package forge.ai;
 
 import java.util.*;
 
+import forge.game.card.*;
 import forge.game.cost.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,16 +48,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
@@ -95,7 +87,6 @@ public class ComputerUtil {
         return handlePlayingSpellAbility(ai, sa, game, null);
     }
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
-        game.getStack().freezeStack();
         final Card source = sa.getHostCard();
         source.setSplitStateToPlayAbility(sa);
 
@@ -132,14 +123,16 @@ public class ComputerUtil {
                 return false;
             }
         }
-
+        // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
         // Remember the now-forgotten kicker cost? Why is this needed?
         sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
+        game.getStack().freezeStack(sa);
 
         // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {
+            // Is this fork even used for anything anymore?
             if (ComputerUtilMana.payManaCost(ai, sa, false)) {
                 game.getStack().addAndUnfreeze(sa);
                 return true;
@@ -665,7 +658,34 @@ public class ComputerUtil {
         return sacList;
     }
 
-    public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa) {
+    public static CardCollection chooseCollectEvidence(final Player ai, CostCollectEvidence cost, final Card activate, int amount, SpellAbility sa, final boolean effect) {
+        CardCollection typeList = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(sa, effect));
+
+        if (CardLists.getTotalCMC(typeList) < amount) return null;
+
+        // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
+        CardLists.sortByCmcDesc(typeList);
+        Collections.reverse(typeList);
+
+
+        // TODO AI needs some improvements here
+        // Whats the best way to choose evidence to collect?
+        // Probably want to filter out cards that have graveyard abilities/castable from graveyard
+        // Ideally we remove as few cards as possible "Don't overspend"
+
+        final CardCollection exileList = new CardCollection();
+        while(amount > 0) {
+            Card c = typeList.remove(0);
+
+            amount -= c.getCMC();
+
+            exileList.add(c);
+        }
+
+        return exileList;
+    }
+
+    public static CardCollection chooseExileFrom(final Player ai, CostExile cost, final Card activate, final int amount, SpellAbility sa, final boolean effect) {
         CardCollection typeList;
         if (cost.zoneRestriction != 1) {
             typeList = new CardCollection(ai.getGame().getCardsIn(cost.from));
@@ -673,6 +693,7 @@ public class ComputerUtil {
             typeList = new CardCollection(ai.getCardsIn(cost.from));
         }
         typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), activate.getController(), activate, sa);
+        typeList = CardLists.filter(typeList, CardPredicates.canExiledBy(sa, effect));
 
         // don't exile the card we're pumping
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
@@ -904,8 +925,8 @@ public class ComputerUtil {
         boolean exceptSelf = "ExceptSelf".equals(source.getParam("AILogic"));
         boolean removedSelf = false;
 
-        if (isOptional && (source.hasParam("Devour") || source.hasParam("Exploit"))) {
-            if (source.hasParam("Exploit")) {
+        if (isOptional && (source.isKeyword(Keyword.DEVOUR) || source.isKeyword(Keyword.EXPLOIT))) {
+            if (source.isKeyword(Keyword.EXPLOIT)) {
                 for (Trigger t : host.getTriggers()) {
                     if (t.getMode() == TriggerType.Exploited) {
                         final SpellAbility exSA = t.ensureAbility().copy(ai);
@@ -2739,8 +2760,8 @@ public class ComputerUtil {
             int tokenScore = ComputerUtilCard.evaluateCreature(token);
 
             // score check similar to Fabricate
-            Card sourceNumbers = CardUtil.getLKICopy(source);
-            Card sourceStrength = CardUtil.getLKICopy(source);
+            Card sourceNumbers = CardCopyService.getLKICopy(source);
+            Card sourceStrength = CardCopyService.getLKICopy(source);
 
             sourceNumbers.setCounters(p1p1Type, sourceNumbers.getCounters(p1p1Type) + numStrength);
             sourceNumbers.setZone(source.getZone());

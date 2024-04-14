@@ -82,14 +82,10 @@ public class AbilityManaPart implements java.io.Serializable {
 
     // Spells paid with this mana spell can't be countered.
 
-
     /**
      * <p>
      * Dev Mode Constructor for AbilityMana.
      * </p>
-     *
-     * @param sourceCard
-     *            a {@link forge.game.card.Card} object.
      */
     public AbilityManaPart(final SpellAbility sourceSA, final Map<String, String> params) {
         this(sourceSA.getHostCard(), params);
@@ -108,6 +104,20 @@ public class AbilityManaPart implements java.io.Serializable {
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
         this.persistentMana = null != params.get("PersistentMana") && "True".equalsIgnoreCase(params.get("PersistentMana"));
+    }
+
+    public AbilityManaPart(final Card newSource, AbilityManaPart oldMana) {
+        this.sourceCard = newSource;
+        this.origProduced = oldMana.origProduced;
+        this.manaRestrictions = oldMana.manaRestrictions;
+        this.cannotCounterSpell = oldMana.cannotCounterSpell;
+        this.addsKeywords = oldMana.addsKeywords;
+        this.addsKeywordsType = oldMana.addsKeywordsType;
+        this.addsKeywordsUntil = oldMana.addsKeywordsUntil;
+        this.addsCounters = oldMana.addsCounters;
+        this.triggersWhenSpent = oldMana.triggersWhenSpent;
+        this.persistentMana = oldMana.persistentMana;
+        // Do we need to copy over last mana produced somehow? Its kinda gross
     }
 
     /**
@@ -233,7 +243,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public void addNoCounterEffect(SpellAbility saBeingPaid) {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(sourceCard + "'s Effect");
         eff.setOwner(sourceCard.getController());
 
@@ -250,10 +260,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, null, null);
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, null);
     }
 
     /**
@@ -326,6 +333,10 @@ public class AbilityManaPart implements java.io.Serializable {
         handler.registerOneTrigger(trig);
     }
 
+    public SpellAbility getSourceSA() {
+        return sVarHolder instanceof SpellAbility ? (SpellAbility) sVarHolder : null;
+    }
+
     /**
      * <p>
      * getManaRestrictions.
@@ -371,7 +382,7 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.equals("CumulativeUpkeep")) {
-                if (sa.isCumulativeupkeep()) {
+                if (sa.isCumulativeUpkeep()) {
                     return true;
                 }
                 continue;
@@ -387,8 +398,9 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (restriction.equals("Disturb")) {
-                if (sa.isDisturb()) {
+            if (restriction.equals("FaceDownOrTurnFaceUp")) {
+                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
+                        || sa.isTurnFaceUp()) {
                     return true;
                 }
                 continue;
@@ -426,6 +438,7 @@ public class AbilityManaPart implements java.io.Serializable {
                 return !sa.isSpell() || sa.getHostCard().isArtifact();
             }
 
+            // TODO refactor to differ between ForCost and ForEffect
             // the payment is for a resolving SA, currently no other restrictions would allow that
             if (getSourceCard().getGame().getStack().getInstanceMatchingSpellAbilityID(sa.getRootAbility()) != null) {
                 return false;

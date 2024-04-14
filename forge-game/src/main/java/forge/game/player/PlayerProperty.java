@@ -1,6 +1,8 @@
 package forge.game.player;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -83,6 +85,8 @@ public class PlayerProperty {
             if (!(player.getDescended() > 0)) {
                 return false;
             }
+        } else if (property.equals("committedCrimeThisTurn")) {
+            if (player.getCommittedCrimeThisTurn() < 1) return false;
         } else if (property.equals("isMonarch")) {
             if (!player.isMonarch()) {
                 return false;
@@ -461,13 +465,17 @@ public class PlayerProperty {
             }
         } else if (property.equals("BeenAttackedThisCombat")) {
             for (Player p : game.getRegisteredPlayers()) {
-                if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
+                if (p.getAttackedPlayersMyCombat().contains(player)) {
                     return true;
                 }
             }
             return false;
         } else if (property.equals("VenturedThisTurn")) {
             if (player.getVenturedThisTurn() < 1) {
+                return false;
+            }
+        } else if (property.startsWith("Condition")) {
+            if (AbilityUtils.playerXCount(Lists.newArrayList(player), property, source, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("NotedFor")) {

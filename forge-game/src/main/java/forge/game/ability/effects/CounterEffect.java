@@ -53,8 +53,7 @@ public class CounterEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Game game = sa.getActivatingPlayer().getGame();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
-        CardZoneTable table = new CardZoneTable();
-        params.put(AbilityKey.InternalTriggerTable, table);
+        final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         for (final SpellAbility tgtSA : getTargetSpells(sa)) {
             final Card tgtSACard = tgtSA.getHostCard();
@@ -104,8 +103,8 @@ public class CounterEffect extends SpellAbilityEffect {
                 sa.getHostCard().addRemembered(tgtSACard);
             }
         }
-        table.triggerChangesZoneAll(game, sa);
-    } // end counterResolve
+        zoneMovements.triggerChangesZoneAll(game, sa);
+    }
 
     public static boolean checkForConditionWouldDestroy(SpellAbility sa, SpellAbility tgtSA) {
         List<SpellAbility> testChain = Lists.newArrayList();
@@ -203,7 +202,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue; // Should account for Protection/Hexproof/etc.
             }
 
-            Card toBeDestroyed = CardFactory.copyCard(aff, true);
+            Card toBeDestroyed = new CardCopyService(aff).copyCard(true);
 
             game.getTriggerHandler().setSuppressAllTriggers(true);
             boolean destroyed = game.getAction().destroy(toBeDestroyed, tgtSA, !noRegen, testParams);
@@ -240,10 +239,9 @@ public class CounterEffect extends SpellAbilityEffect {
         Card movedCard = null;
         final Card c = tgtSA.getHostCard();
 
-        // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
-        repParams.put(AbilityKey.SpellAbility, tgtSA);
         repParams.put(AbilityKey.Cause, srcSA);
+        repParams.put(AbilityKey.SpellAbility, tgtSA);
         if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
             return false;
         }
@@ -253,7 +251,6 @@ public class CounterEffect extends SpellAbilityEffect {
         c.unanimateBestow();
 
         params.put(AbilityKey.StackSa, tgtSA);
-        params.put(AbilityKey.StackSi, si);
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
         if (srcSA.hasParam("DestinationChoice")) { //Hinder
@@ -266,6 +263,9 @@ public class CounterEffect extends SpellAbilityEffect {
         } else if (destination.equals("Graveyard")) {
             movedCard = game.getAction().moveToGraveyard(c, srcSA, params);
         } else if (destination.equals("Exile")) {
+            if (!c.canExiledBy(srcSA, true)) {
+                return false;
+            }
             movedCard = game.getAction().exile(c, srcSA, params);
         } else if (destination.equals("Hand")) {
             movedCard = game.getAction().moveToHand(c, srcSA, params);
@@ -291,9 +291,8 @@ public class CounterEffect extends SpellAbilityEffect {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
                     + srcSA.getHostCard().getName());
         }
-        // Run triggers
+
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
-        runParams.put(AbilityKey.Player, tgtSA.getActivatingPlayer());
         runParams.put(AbilityKey.Cause, srcSA);
         runParams.put(AbilityKey.CounteredSA, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);

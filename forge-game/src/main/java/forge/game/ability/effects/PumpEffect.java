@@ -44,19 +44,9 @@ public class PumpEffect extends SpellAbilityEffect {
         final String duration = sa.getParam("Duration");
         final boolean perpetual = ("Perpetual").equals(duration);
 
-        //if host is not on the battlefield don't apply
-        // Suspend should does Affect the Stack
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
-                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
-            return;
-        }
-        if ("UntilLoseControlOfHost".equals(duration) && host.getController() != sa.getActivatingPlayer()) {
-            return;
-        }
-
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);
-        if (gameCard == null || !applyTo.equalsWithTimestamp(gameCard)) {
+        if (gameCard == null || !applyTo.equalsWithGameTimestamp(gameCard)) {
             return;
         }
         final List<String> kws = Lists.newArrayList();
@@ -126,6 +116,8 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
+                    host.removeGainControlTargets(gameCard);
+
                     gameCard.removePTBoost(timestamp, 0);
                     boolean updateText = gameCard.removeCanBlockAny(timestamp);
                     updateText |= gameCard.removeCanBlockAdditional(timestamp);
@@ -142,6 +134,9 @@ public class PumpEffect extends SpellAbilityEffect {
                     game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 }
             };
+            if ("UntilUntaps".equals(duration)) {
+                host.addGainControlTarget(gameCard);
+            }
             addUntilCommand(sa, untilEOT);
         }
         game.fireEvent(new GameEventCardStatsChanged(gameCard));
@@ -149,15 +144,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
     private static void applyPump(final SpellAbility sa, final Player p,
             final List<String> keywords, final long timestamp) {
-        final Card host = sa.getHostCard();
         final String duration = sa.getParam("Duration");
-
-        //if host is not on the battlefield don't apply
-        // Suspend should does Affect the Stack
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
-                && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
-            return;
-        }
 
         if (!keywords.isEmpty()) {
             p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
@@ -282,8 +269,13 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(" each combat");
             }
 
-            if (!"Permanent".equals(sa.getParam("Duration"))) {
-                sb.append(" until end of turn.");
+            String duration = sa.getParam("Duration");
+            if (!"Permanent".equals(duration)) {
+                if ("UntilUntaps".equals(duration)) {
+                    sb.append(" for as long as CARDNAME remains tapped.");
+                } else {
+                    sb.append(" until end of turn.");
+                }
             } else {
                 sb.append(".");
             }
@@ -294,6 +286,10 @@ public class PumpEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(final SpellAbility sa) {
+        if (!checkValidDuration(sa.getParam("Duration"), sa)) {
+            return;
+        }
+
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final Card host = sa.getHostCard();
@@ -391,7 +387,7 @@ public class PumpEffect extends SpellAbilityEffect {
             for (final Card c : AbilityUtils.getDefinedCards(host, landtype, sa)) {
                 for (String type : c.getType()) {
                     if (CardType.isALandType(type)) {
-                        keywords.add(type + "walk");
+                        keywords.add("Landwalk:" +type);
                     }
                 }
             }
@@ -441,7 +437,9 @@ public class PumpEffect extends SpellAbilityEffect {
         }
         if (sa.hasParam("ClearNotedCardsFor")) {
             for (Player p : tgtPlayers) {
-                p.clearNotesForName(sa.getParam("ClearNotedCardsFor"));
+                for (String s : sa.getParam("ClearNotedCardsFor").split(",")) {
+                    p.clearNotesForName(s);
+                }
             }
         }
 

@@ -31,6 +31,7 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.*;
@@ -181,6 +182,44 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
         return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional, params);
+    }
+
+    @Override
+    public boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested) {
+        int toPay = getAi().attemptToAssist(sa, max, requested);
+
+        if (toPay == 0) {
+            return true;
+        } else {
+            ManaCost manaCost = ManaCost.get(toPay);
+            ManaCostBeingPaid assistCost = new ManaCostBeingPaid(manaCost);
+            if (ComputerUtilMana.canPayManaCost(assistCost, sa, player, false)) {
+                ComputerUtilMana.payManaCost(assistCost, sa, player, false);
+                cost.decreaseGenericMana(toPay);
+                return true;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Player choosePlayerToAssistPayment(FCollectionView<Player> optionList, SpellAbility sa, String title, int max) {
+        //        if (optionList.size() == 1) {
+        //            return null;
+        //        }
+        //return optionList.getFirst();
+
+        // AI is dumb and will request assistance even if they can't afford with assistance.
+        // For now, just never try to use Assist.
+
+        // Ideally, it would do something like
+        // Verify we actually want to play this. Including: "Would play with assistance" and "would play without assistance"
+        // Find an ally/player that might be helpful to pay for an effect
+        // If noone seems likely, just return null
+        // If player fails to assist, don't try to request assistance until next turn
+        // If player fails to assist, maybe still cast it anyway?
+
+        return null;
     }
 
     @Override
@@ -543,15 +582,8 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
-        String [] splitUTypes = uType.split(",");
-        CardCollection cardsOfType = new CardCollection();
-        for (String part : splitUTypes) {
-            CardCollection partCards = CardLists.getType(hand, part);
-            if (!partCards.isEmpty()) {
-                cardsOfType.addAll(partCards);
-            }
-        }
-        if (!cardsOfType.isEmpty()) {
+        Iterable<Card> cardsOfType = Iterables.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+        if (!Iterables.isEmpty(cardsOfType)) {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, CardPredicates.Accessors.fnGetCmc);
             return new CardCollection(toDiscard);
         }
@@ -574,7 +606,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
+    public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer, boolean optional) {
         return ComputerUtil.vote(player, options, sa, votes, forPlayer);
     }
 
@@ -666,7 +698,6 @@ public class PlayerControllerAi extends PlayerController {
         if (sa instanceof LandAbility) {
             if (sa.canPlay()) {
                 sa.resolve();
-                getGame().updateLastStateForCard(sa.getHostCard());
             }
         } else {
             ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
@@ -782,8 +813,8 @@ public class PlayerControllerAi extends PlayerController {
                             }
                             break;
                         case "BetterTgtThanRemembered":
-                            if (source.hasRemembered()) {
-                                Card rem = (Card) source.getFirstRemembered();
+                            if (source.hasGainControlTarget()) {
+                                Card rem = source.getGainControlTargets().get(0);
                                 //  avoid pumping opponent creature
                                 if (!rem.isInPlay() || rem.getController().isOpponentOf(source.getController())) {
                                     return true;
@@ -1069,6 +1100,7 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
+        emptyAbility.setTargets(sa.getTargets().clone());
 
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
             boolean result = ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
@@ -1427,7 +1459,7 @@ public class PlayerControllerAi extends PlayerController {
             if (opt.getType() == OptionalCost.Kicker1 || opt.getType() == OptionalCost.Kicker2) {
                 SpellAbility kickedSaCopy = fullCostSa.copy();
                 kickedSaCopy.addOptionalCost(opt.getType());
-                Card copy = CardUtil.getLKICopy(chosen.getHostCard());
+                Card copy = CardCopyService.getLKICopy(chosen.getHostCard());
                 copy.setCastSA(kickedSaCopy);
                 if (ComputerUtilCard.checkNeedsToPlayReqs(copy, kickedSaCopy) != AiPlayDecision.WillPlay) {
                     continue; // don't choose kickers we don't want to play

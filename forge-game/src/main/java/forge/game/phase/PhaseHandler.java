@@ -17,7 +17,6 @@
  */
 package forge.game.phase;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -43,8 +42,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
-import forge.util.Lang;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -281,10 +278,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case MAIN1:
                     {
                         if (playerTurn.isArchenemy()) {
-                            playerTurn.setSchemeInMotion();
-                        }
-                        if (playerTurn.hasRadiationEffect()) {
-                            handleRadiation();
+                            playerTurn.setSchemeInMotion(null);
                         }
                         GameEntityCounterTable table = new GameEntityCounterTable();
                         // all Saga get Lore counter at the begin of pre combat
@@ -305,7 +299,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case COMBAT_DECLARE_ATTACKERS:
                     combat.initConstraints();
-                    game.getStack().freezeStack();
+                    game.getStack().freezeStack(null);
                     declareAttackersTurnBasedAction();
                     game.getStack().unfreezeStack();
 
@@ -314,7 +308,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case COMBAT_DECLARE_BLOCKERS:
                     combat.removeAbsentCombatants();
-                    game.getStack().freezeStack();
+                    game.getStack().freezeStack(null);
                     declareBlockersTurnBasedAction();
                     game.getStack().unfreezeStack();
                     break;
@@ -374,17 +368,16 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
-                        final CardZoneTable table = new CardZoneTable();
+                        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-                        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-                        moveParams.put(AbilityKey.InternalTriggerTable, table);
+                        AbilityKey.addCardZoneTableParams(moveParams, table);
 
                         final CardCollection discarded = new CardCollection();
-                        boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
+                        List<Card> discardedBefore = Lists.newArrayList(playerTurn.getDiscardedThisTurn());
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            if (playerTurn.discard(c, null, false, moveParams) != null) {
-                                discarded.add(c);
+                            Card moved = playerTurn.discard(c, null, false, moveParams);
+                            if (moved != null) {
+                                discarded.add(moved);
                             }
                         }
                         table.triggerChangesZoneAll(game, null);
@@ -393,7 +386,7 @@ public class PhaseHandler implements java.io.Serializable {
                             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                             runParams.put(AbilityKey.Cards, discarded);
                             runParams.put(AbilityKey.Cause, null);
-                            runParams.put(AbilityKey.FirstTime, firstDiscarded);
+                            runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
                             game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
                         }
                     }
@@ -529,36 +522,6 @@ public class PhaseHandler implements java.io.Serializable {
         }
     }
 
-    private void handleRadiation() {
-        int numRad = playerTurn.getCounters(CounterEnumType.RAD);
-        if (numRad == 0) playerTurn.removeRadiationEffect();
-        else {
-            final CardZoneTable table = new CardZoneTable();
-            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
-            moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
-            moveParams.put(AbilityKey.InternalTriggerTable, table);
-            final SpellAbility sa = new SpellAbility.EmptySa(playerTurn.getRadiationEffect(), playerTurn);
-            final CardCollectionView milled = playerTurn.mill(numRad, ZoneType.Graveyard, sa, moveParams);
-            game.getAction().reveal(milled, playerTurn, false,
-                    Localizer.getInstance().getMessage("lblMilledCards", playerTurn), false);
-            game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, playerTurn + " milled " +
-                    Lang.joinHomogenous(milled) + ".");
-            table.triggerChangesZoneAll(game, sa);
-            int n = CardLists.filter(milled, Predicates.not(CardPredicates.Presets.LANDS)).size();
-            final Map<Player, Integer> lossMap = Maps.newHashMap();
-            final int lost = playerTurn.loseLife(n, false, false);
-            if (lost > 0) {
-                lossMap.put(playerTurn, lost);
-            }
-            if (!lossMap.isEmpty()) { // Run triggers if any player actually lost life
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
-                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
-            }
-            playerTurn.removeRadCounters(n, playerTurn.getRadiationEffect());
-        }
-    }
-
     private void declareAttackersTurnBasedAction() {
         final Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost()
                 ? playerTurn
@@ -675,7 +638,6 @@ public class PhaseHandler implements java.io.Serializable {
             game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
         }
 
-        playerTurn.clearAttackedPlayersMyCombat();
         for (final Card c : combat.getAttackers()) {
             CombatUtil.checkDeclaredAttacker(game, c, combat, true);
         }
@@ -837,8 +799,8 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-                b.addBlockedThisTurn(CardUtil.getLKICopy(a, lkiCache));
-                a.addBlockedByThisTurn(CardUtil.getLKICopy(b, lkiCache));
+                b.addBlockedThisTurn(CardCopyService.getLKICopy(a, lkiCache));
+                a.addBlockedByThisTurn(CardCopyService.getLKICopy(b, lkiCache));
 
             	final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);
@@ -1071,6 +1033,7 @@ public class PhaseHandler implements java.io.Serializable {
                         // state-based effects check could lead to game over
                         return;
                     }
+                    game.stashGameState();
 
                     chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
 
@@ -1088,12 +1051,18 @@ public class PhaseHandler implements java.io.Serializable {
                     if (DEBUG_PHASES) {
                         System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
                     }
+
+                    boolean rollback = false;
                     for (SpellAbility sa : chosenSa) {
                         Card saHost = sa.getHostCard();
                         final Zone originZone = saHost.getZone();
 
                         if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
+                            // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
+                            // that player receives priority afterward.
                             pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
+                        } else if (game.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                            rollback = true;
                         }
 
                         saHost = game.getCardState(saHost);
@@ -1102,12 +1071,15 @@ public class PhaseHandler implements java.io.Serializable {
                         // Need to check if Zone did change
                         if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa instanceof LandAbility)) {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
-                            final CardZoneTable triggerList = new CardZoneTable();
+                            final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
                             triggerList.triggerChangesZoneAll(game, sa);
                         }
                     }
-                    game.copyLastState();
+                    // Don't copy last state if we're in the middle of rolling back a spell...
+                    if (!rollback) {
+                        game.copyLastState();
+                    }
                     loopCount++;
                 } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
 
@@ -1239,6 +1211,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final void endCombatPhaseByEffect() {
+        endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
         advanceToNextPhase();
@@ -1247,6 +1220,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final void endTurnByEffect() {
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
+        game.fireEvent(new GameEventTurnPhase(playerTurn, phase, ""));
         onPhaseBegin();
     }
 
@@ -1275,9 +1249,6 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
-        for (Player player : game.getPlayers()) {
-            player.resetCombatantsThisCombat();
-        }
         game.getEndOfCombat().executeUntil();
         game.getEndOfCombat().executeUntilEndOfPhase(playerTurn);
         if (inCombat()) {

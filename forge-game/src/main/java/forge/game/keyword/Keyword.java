@@ -61,6 +61,7 @@ public enum Keyword {
     DETHRONE("Dethrone", SimpleKeyword.class, false, "Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it."),
     DEVOUR("Devour", KeywordWithAmount.class, false, "As this creature enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with {%d:+1/+1 counter} on it for each creature sacrificed this way."),
     DEVOID("Devoid", SimpleKeyword.class, true, "This card has no color."),
+    DISGUISE("Disguise", KeywordWithCost.class, false, "You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost."),
     DISTURB("Disturb", KeywordWithCost.class, false, "You may cast this card from your graveyard transformed for its disturb cost."),
     DOCTORS_COMPANION("Doctor's companion", Partner.class, true, "You can have two commanders if the other is the Doctor."),
     DOUBLE_STRIKE("Double Strike", SimpleKeyword.class, true, "This creature deals both first-strike and regular combat damage."),
@@ -101,7 +102,7 @@ public enum Keyword {
     GRAVESTORM("Gravestorm", SimpleKeyword.class, false, "When you cast this spell, copy it for each permanent that was put into a graveyard from the battlefield this turn. If the spell has any targets, you may choose new targets for any of the copies."),
     HASTE("Haste", SimpleKeyword.class, true, "This creature can attack and {T} as soon as it comes under your control."),
     HAUNT("Haunt", SimpleKeyword.class, false, "When this is put into a graveyard, exile it haunting target creature."),
-    HEXPROOF("Hexproof", Hexproof.class, false, "This can't be the target of %s spells or abilities your opponents control."),
+    HEXPROOF("Hexproof", Hexproof.class, true, "This can't be the target of %s spells or abilities your opponents control."),
     HIDEAWAY("Hideaway", KeywordWithAmount.class, false, "When this permanent enters the battlefield, look at the top {%d:card} of your library, exile one face down, then put the rest on the bottom of your library."),
     HORSEMANSHIP("Horsemanship", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
     IMPROVISE("Improvise", SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),
@@ -111,7 +112,7 @@ public enum Keyword {
     INTIMIDATE("Intimidate", SimpleKeyword.class, true, "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."),
     KICKER("Kicker", Kicker.class, false, "You may pay an additional %s as you cast this spell."),
     JUMP_START("Jump-start", SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card."),
-    LANDWALK("Landwalk", KeywordWithType.class, false, "This creature is unblockable as long as defending player controls a %s."),
+    LANDWALK("Landwalk", KeywordWithType.class, true, "This creature is unblockable as long as defending player controls {1:%s}."),
     LEVEL_UP("Level up", KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_METAL("Living metal", SimpleKeyword.class, true, "As long as it's your turn, this Vehicle is also a creature."),
@@ -138,8 +139,9 @@ public enum Keyword {
     PARTNER("Partner", Partner.class, true, "You can have two commanders if both have partner."),
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
     PHASING("Phasing", SimpleKeyword.class, true, "This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist."),
+    PLOT("Plot", KeywordWithCost.class, false, "You may pay %s and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery."),
     POISONOUS("Poisonous", KeywordWithAmount.class, false, "Whenever this creature deals combat damage to a player, that player gets {%d:poison counter}."),
-    PROTECTION("Protection", Protection.class, false, "This creature can't be blocked, targeted, dealt damage, or equipped/enchanted by %s."),
+    PROTECTION("Protection", Protection.class, true, "This creature can't be blocked, targeted, dealt damage, or equipped/enchanted by %s."),
     PROTOTYPE("Prototype", KeywordWithCost.class, false, "You may cast this spell with different mana cost, color, and size. It keeps its abilities and types."),
     PROVOKE("Provoke", SimpleKeyword.class, false, "Whenever this creature attacks, you may have target creature defending player controls untap and block it if able."),
     PROWESS("Prowess", SimpleKeyword.class, false, "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."),
@@ -158,6 +160,7 @@ public enum Keyword {
     RETRACE("Retrace", SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a land card in addition to paying its other costs."),
     RIOT("Riot", SimpleKeyword.class, false, "This creature enters the battlefield with your choice of a +1/+1 counter or haste."),
     RIPPLE("Ripple", KeywordWithAmount.class, false, "When you cast this spell, you may reveal the top {%d:card} of your library. You may cast any of those cards with the same name as this spell without paying their mana costs. Put the rest on the bottom of your library in any order."),
+    SADDLE("Saddle", KeywordWithAmount.class, false, "Tap any number of other creatures you control with total power %1$d or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery."),
     SHADOW("Shadow", SimpleKeyword.class, true, "This creature can block or be blocked by only creatures with shadow."),
     SHROUD("Shroud", SimpleKeyword.class, true, "This can't be the target of spells or abilities."),
     SKULK("Skulk", SimpleKeyword.class, true, "This creature can't be blocked by creatures with greater power."),
@@ -169,6 +172,7 @@ public enum Keyword {
     SPECTACLE("Spectacle", KeywordWithCost.class, false, "You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn."),
     SPLICE("Splice", KeywordWithCostAndType.class, false, "As you cast an %2$s spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell."),
     SPLIT_SECOND("Split second", SimpleKeyword.class, true, "As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities."),
+    SPREE("Spree", SimpleKeyword.class, true, "Choose one or more additional costs."),
     SQUAD("Squad", KeywordWithCost.class, false, "As an additional cost to cast this spell, you may pay %s any number of times. When this creature enters the battlefield, create that many tokens that are copies of it."),
     STARTING_INTENSITY("Starting intensity", KeywordWithAmount.class, true, null),
     STORM("Storm", SimpleKeyword.class, false, "When you cast this spell, copy it for each other spell that was cast before it this turn. You may choose new targets for the copies."),
@@ -245,19 +249,11 @@ public enum Keyword {
             int idx = k.indexOf(' ');
             String enumName = k.replace(" ", "_").toUpperCase(Locale.ROOT);
             String firstWord = idx == -1 ? enumName : enumName.substring(0, idx);
-            if (firstWord.endsWith("WALK")) {
-                keyword = Keyword.LANDWALK;
-                details = firstWord.substring(0, firstWord.length() - 4);
-            }
-            else if (idx != -1) {
+            if (idx != -1) {
                 idx = k.indexOf(' ', idx + 1);
                 String secondWord = idx == -1 ? enumName.substring(firstWord.length() + 1) : enumName.substring(firstWord.length() + 1, idx);
                 if (secondWord.equalsIgnoreCase("OFFERING")) {
                     keyword = Keyword.OFFERING;
-                    details = firstWord;
-                }
-                else if (secondWord.equalsIgnoreCase("LANDWALK")) {
-                    keyword = Keyword.LANDWALK;
                     details = firstWord;
                 }
             }

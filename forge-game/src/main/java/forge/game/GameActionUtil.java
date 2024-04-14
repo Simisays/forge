@@ -48,7 +48,6 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -82,7 +81,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator) {
+    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
@@ -112,7 +111,7 @@ public final class GameActionUtil {
 
             for (CardPlayOption o : source.mayPlay(activator)) {
                 // do not appear if it can be cast with SorcerySpeed
-                if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.couldCastSorcery(sa)) {
+                if (o.getAbility().hasParam("MayPlayNotSorcerySpeed") && activator.canCastSorcery()) {
                     continue;
                 }
                 // non basic are only allowed if PayManaCost is yes
@@ -134,6 +133,9 @@ public final class GameActionUtil {
                     newSA.setBasicSpell(false);
                     changedManaCost = true;
                 } else {
+                    if (altCostOnly) {
+                        continue;
+                    }
                     newSA = sa.copy(activator);
                 }
 
@@ -234,7 +236,7 @@ public final class GameActionUtil {
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
-                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn() ||
+                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.enteredThisTurn() ||
                                 !activator.equals(source.getOwner())) {
                             continue;
                         }
@@ -257,7 +259,7 @@ public final class GameActionUtil {
 
                 // foretell by external source
                 if (source.isForetoldCostByEffect() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner())
-                        && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
+                        && source.isForetold() && !source.enteredThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
                     Integer reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
@@ -268,13 +270,21 @@ public final class GameActionUtil {
                     alternatives.add(foretold);
                 }
 
+                if (activator.canCastSorcery() && source.isPlotted() && source.isInZone(ZoneType.Exile) && activator.equals(source.getOwner()) && !source.enteredThisTurn()) {
+                    final SpellAbility plotted = sa.copyWithNoManaCost(activator);
+                    plotted.setAlternativeCost(AlternativeCost.Plotted);
+                    plotted.getRestrictions().setZone(ZoneType.Exile);
+                    plotted.putParam("AfterDescription", "(Plotted)");
+                    alternatives.add(plotted);
+                }
+
                 // some needs to check after ability was put on the stack
                 // Currently this is only checked for Toolbox and that only cares about creature spells
                 if (source.isCreature() && game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
                     Zone oldZone = source.getLastKnownZone();
                     Card blitzCopy = source;
                     if (!source.isLKI()) {
-                        blitzCopy = CardUtil.getLKICopy(source);
+                        blitzCopy = CardCopyService.getLKICopy(source);
                     }
                     blitzCopy.setLastKnownZone(game.getStackZone());
                     lkicheck = true;
@@ -717,7 +727,7 @@ public final class GameActionUtil {
     public static Card createETBCountersEffect(Card sourceCard, Card c, Player controller, String counter, String amount) {
         final Game game = sourceCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
-        eff.setTimestamp(game.getNextTimestamp());
+        eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(sourceCard + "'s Effect");
         eff.setOwner(controller);
 
@@ -754,10 +764,7 @@ public final class GameActionUtil {
 
         eff.updateStateForView();
 
-        // TODO: Add targeting to the effect so it knows who it's dealing with
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, null, null);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        game.getAction().moveToCommand(eff, sa);
 
         return eff;
     }
@@ -869,6 +876,13 @@ public final class GameActionUtil {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
 
+        if (game.restoreGameState()) {
+            // If we're able to restore the whole game state when rolling back an ability don't try to manually roll back
+            System.out.println("Restored state from snapshot! Rolled back: " + ability.getHostCard().getName() + " - " + ability.getActivatingPlayer());
+
+            return;
+        }
+
         if (fromZone != null) { // and not a copy
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
@@ -880,7 +894,7 @@ public final class GameActionUtil {
             oldCard.getZone().remove(oldCard);
             // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
             Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
-            fromZone.add(oldCard, newPosition);
+            fromZone.add(oldCard, newPosition, null, true);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);
             ability.setSpendPhyrexianMana(false);

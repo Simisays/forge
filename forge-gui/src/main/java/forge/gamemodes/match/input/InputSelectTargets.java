@@ -28,9 +28,7 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.util.Aggregates;
-import forge.util.ITriggerEvent;
-import forge.util.TextUtil;
+import forge.util.*;
 
 public final class InputSelectTargets extends InputSyncronizedBase {
     private final List<Card> choices;
@@ -122,9 +120,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
+        String name = CardTranslation.getTranslatedName(sa.getHostCard().getName());
         String message = TextUtil.fastReplace(TextUtil.fastReplace(sb.toString(),
-                "CARDNAME", sa.getHostCard().toString()),
-                "(Targeting ERROR)", "");
+                "CARDNAME", name), "(Targeting ERROR)", "");
+        message = TextUtil.fastReplace(message, "NICKNAME", Lang.getInstance().getNickName(name));
         showMessage(message, sa.getView());
 
         if (divisionValues != null && !divisionValues.isEmpty() && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
@@ -242,7 +241,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
 
         // If all cards must have different controllers
-        if (tgt.isDifferentControllers()) {
+        if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             final List<Player> targetedControllers = new ArrayList<>();
             for (final GameObject o : targets) {
                 if (o instanceof Card) {
@@ -261,11 +260,11 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             final List<Integer> tgtTs = new ArrayList<>();
             for (final GameObject o : targets) {
                 if (o instanceof Card) {
-                    final Integer cmc = ((Card) o).getCurrentToughness();
+                    final Integer cmc = ((Card) o).getNetToughness();
                     tgtTs.add(cmc);
                 }
             }
-            if (!tgtTs.isEmpty() && !tgtTs.contains(card.getCurrentToughness())) {
+            if (!tgtTs.isEmpty() && !tgtTs.contains(card.getNetToughness())) {
                 showMessage(sa.getHostCard() + " - Cannot target this card (must have equal toughness)");
                 return false;
             }

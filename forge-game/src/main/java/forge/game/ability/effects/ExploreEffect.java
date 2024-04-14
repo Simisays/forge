@@ -53,10 +53,6 @@ public class ExploreEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-
         CardCollectionView tgts = GameActionUtil.orderCardsByTheirOwners(game, getTargetCards(sa), ZoneType.Battlefield, sa);
 
         for (final Card c : tgts) {
@@ -68,8 +64,8 @@ public class ExploreEffect extends SpellAbilityEffect {
                 }
 
                 GameEntityCounterTable table = new GameEntityCounterTable();
-                final CardZoneTable triggerList = new CardZoneTable();
-                moveParams.put(AbilityKey.InternalTriggerTable, triggerList);
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                final CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
                 // revealed land card
                 boolean revealedLand = false;
@@ -94,7 +90,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                     // need to get newest game state to check if it is still on the battlefield
                     // and the timestamp didnt change
                     Card gamec = game.getCardState(c);
-                    if (gamec.isInPlay() && gamec.equalsWithTimestamp(c)) {
+                    if (gamec.isInPlay() && gamec.equalsWithGameTimestamp(c)) {
                         c.addCounter(CounterEnumType.P1P1, 1, pl, table);
                     }
                 }

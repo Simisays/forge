@@ -47,6 +47,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
@@ -865,7 +866,7 @@ public class AiController {
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
         if (getBooleanProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
-            if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyBackAbility() && !canPlaySpellWithoutBuyback(card, sa)) {
+            if (card.hasKeyword(Keyword.BUYBACK) && !sa.isBuyback() && !canPlaySpellWithoutBuyback(card, sa)) {
                 return AiPlayDecision.NeedsToPlayCriteriaNotMet;
             }
         }
@@ -924,7 +925,7 @@ public class AiController {
         }
         Card spellHost = card;
         if (sa.isSpell()) {
-            spellHost = CardUtil.getLKICopy(spellHost);
+            spellHost = CardCopyService.getLKICopy(spellHost);
             spellHost.setLKICMC(-1); // to reset the cmc
             spellHost.setLastKnownZone(game.getStackZone()); // need to add to stack to make check Restrictions respect stack cmc
             spellHost.setCastFrom(card.getZone());
@@ -1539,8 +1540,7 @@ public class AiController {
         boolean mustRespond = false;
         if (top != null) {
             mustRespond = top.hasParam("AIRespondsToOwnAbility"); // Forced combos (currently defined for Sensei's Divining Top)
-            mustRespond |= top.isTrigger() && top.getTrigger().getKeyword() != null
-                    && top.getTrigger().getKeyword().getKeyword() == Keyword.EVOKE; // Evoke sacrifice trigger
+            mustRespond |= top.isTrigger() && top.getTrigger().isKeyword(Keyword.EVOKE); // Evoke sacrifice trigger
         }
 
         if (topOwnedByAI) {
@@ -1860,6 +1860,8 @@ public class AiController {
                 maxCreatures = Math.max(maxCreatures, opp.getCreaturesInPlay().size());
             }
             return Math.min(choiceLimit, Math.max(minAllowedChoice, maxCreatures));
+        } else if ("Random".equals(logic)) {
+            return MyRandom.getRandom().nextInt((max - min) + 1) + min;
         }
         return max;
     }
@@ -1883,6 +1885,48 @@ public class AiController {
 
     public boolean confirmPayment(CostPart costPart) {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
+    }
+
+    public int attemptToAssist(SpellAbility sa, int max, int request) {
+        Player activator = sa.getActivatingPlayer();
+
+        if (game.getPlayers().size() == 2) {
+            // Never help your opponent in a 2 player game
+            return 0;
+        }
+
+        PlayerCollection allies = player.getAllies();
+
+        if (allies.isEmpty()) {
+            // AI only has opponents.
+            // TODO: Maybe help out someone if it seems good for us, but who knows how you calculate that.
+            // Probably needs some specific AI here.
+            // If the spell is a creature, probably don't help.
+            // If spell is a instant/sorcery, help based on the situation
+            return 0;
+        } else {
+            // AI has allies, don't help out anyone but allies.
+            if (!allies.contains(activator)) {
+                return 0;
+            }
+        }
+
+        // AI has decided to help. Now let's figure out how much they can help
+        int mana = ComputerUtilMana.getAvailableManaEstimate(player, true);
+
+        // TODO We should make a logical guess here, but for now just uh yknow randomly decide?
+        // What do I want to play next? Can I still pay for that and have mana left over to help?
+        // Is the spell I'm helping cast better for me than the thing I would cast?
+        if (MyRandom.percentTrue(80)) {
+            return 0;
+        }
+
+        int willingToPay = 0;
+        if (mana >= request) {
+            return request;
+        } else {
+            return mana;
+        }
     }
 
     public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional, Map<String, Object> params) {
@@ -2128,7 +2172,7 @@ public class AiController {
         List<SpellAbility> putCounter = filterListByApi(activePlayerSAs, ApiType.PutCounter);
         List<SpellAbility> putCounterAll = filterListByApi(activePlayerSAs, ApiType.PutCounterAll);
 
-        List<SpellAbility> evolve = filterList(putCounter, SpellAbilityPredicates.hasParam("Evolve"));
+        List<SpellAbility> evolve = filterList(putCounter, CardTraitPredicates.isKeyword(Keyword.EVOLVE));
 
         List<SpellAbility> token = filterListByApi(activePlayerSAs, ApiType.Token);
         List<SpellAbility> pump = filterListByApi(activePlayerSAs, ApiType.Pump);

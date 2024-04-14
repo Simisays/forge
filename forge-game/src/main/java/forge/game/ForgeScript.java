@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -104,6 +105,8 @@ public class ForgeScript {
                 default:
                     return false;
             }
+        } else if (property.equals("Outlaw")) {
+            return cardState.getTypeWithChanges().isOutlaw();
         } else if (property.startsWith("non")) {
             // ... Other Card types
             return !cardState.getTypeWithChanges().hasStringType(property.substring(3));
@@ -208,21 +211,27 @@ public class ForgeScript {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
         } else if (property.equals("Bargain")) {
-            return sa.isBargain();
+            return sa.isBargained();
         } else if (property.equals("Backup")) {
             return sa.isBackup();
         } else if (property.equals("Blitz")) {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
-            return sa.isBuyBackAbility();
+            return sa.isBuyback();
         } else if (property.equals("Craft")) {
             return sa.isCraft();
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
             return sa.isDash();
+        } else if (property.equals("Disturb")) {
+            return sa.isDisturb();
+        } else if (property.equals("Embalm")) {
+            return sa.isEmbalm();
+        } else if (property.equals("Eternalize")) {
+            return sa.isEternalize();
         } else if (property.equals("Flashback")) {
-            return sa.isFlashBackAbility();
+            return sa.isFlashback();
         } else if (property.equals("Jumpstart")) {
             return sa.isJumpstart();
         } else if (property.equals("Kicked")) {
@@ -235,8 +244,12 @@ public class ForgeScript {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
+        } else if (property.equals("ManifestUp")) {
+            return sa.isManifestUp();
+        } else if (property.equals("isCastFaceDown")) {
+            return sa.isCastFaceDown();
         } else if (property.equals("Modular")) {
-            return sa.hasParam("Modular");
+            return sa.isKeyword(Keyword.MODULAR);
         } else if (property.equals("Equip")) {
             return sa.isEquip();
         } else if (property.equals("Boast")) {
@@ -249,14 +262,20 @@ public class ForgeScript {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {
             return sa.isForetold();
+        } else if (property.equals("Plotting")) {
+            return sa.isPlotting();
+        } else if (property.equals("Outlast")) {
+            return sa.isOutlast();
+        } else if (property.equals("Modal")) {
+            return sa.getApi() == ApiType.Charm;
         } else if (property.equals("ClassLevelUp")) {
             return sa.getApi() == ApiType.ClassLevelUp;
         } else if (property.equals("Daybound")) {
-            return sa.hasParam("Daybound");
+            return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
-            return sa.hasParam("Nightbound");
-        } else if (property.equals("paidPhyrexianMana")) {
-            return sa.getSpendPhyrexianMana() > 0;
+            return sa.isKeyword(Keyword.NIGHTBOUND);
+        } else if (property.equals("CumulativeUpkeep")) {
+            return sa.isCumulativeUpkeep();
         } else if (property.equals("ChapterNotLore")) {
             if (!sa.isChapter()) {
                 return false;
@@ -266,6 +285,8 @@ public class ForgeScript {
             }
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
+        } else if (property.equals("paidPhyrexianMana")) {
+            return sa.getSpendPhyrexianMana() > 0;
         } else if (property.startsWith("ManaSpent")) {
             String[] k = property.split(" ", 2);
             String comparator = k[1].substring(0, 2);
@@ -321,9 +342,10 @@ public class ForgeScript {
             return Expressions.compare(targets.size(), comparator, y);
         } else if (property.startsWith("IsTargeting")) {
             String[] k = property.split(" ", 2);
+            String unescaped = k[1].replace("~", "+");
             boolean found = false;
-            for (GameObject o : AbilityUtils.getDefinedObjects(source, k[1], spellAbility)) {
-                if (sa.isTargeting(o)) {
+            for (GameObject o : AbilityUtils.getDefinedObjects(source, unescaped, spellAbility)) {
+                if (sa.getRootAbility().isTargeting(o)) {
                     found = true;
                     break;
                 }

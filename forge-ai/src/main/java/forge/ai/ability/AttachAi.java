@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.*;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.base.Predicate;
@@ -26,12 +27,6 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -64,7 +59,7 @@ public class AttachAi extends SpellAbilityAi {
 
         // TODO: improve this so that the AI can use a flash aura buff as a means of killing opposing creatures
         // and gaining card advantage
-        if (source.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
+        if (source.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
             return false;
         }
 
@@ -591,7 +586,7 @@ public class AttachAi extends SpellAbilityAi {
             final Card attachSource) {
         // AI For choosing a Card to Animate.
         final Player ai = sa.getActivatingPlayer();
-        final Card attachSourceLki = CardUtil.getLKICopy(attachSource);
+        final Card attachSourceLki = CardCopyService.getLKICopy(attachSource);
         attachSourceLki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
         // Suppress original attach Spell to replace it with another
         attachSourceLki.getFirstAttachSpell().setSuppressed(true);
@@ -601,7 +596,7 @@ public class AttachAi extends SpellAbilityAi {
         List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                final Card lki = CardUtil.getLKICopy(c);
+                final Card lki = CardCopyService.getLKICopy(c);
                 // need to fake it as if lki would be on the battlefield
                 lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
@@ -1579,7 +1574,7 @@ public class AttachAi extends SpellAbilityAi {
         final boolean evasive = keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
-                || keyword.endsWith("walk") || keyword.equals("All creatures able to block CARDNAME do so.");
+                || keyword.startsWith("Landwalk") || keyword.equals("All creatures able to block CARDNAME do so.");
         // give evasive keywords to creatures that can attack and deal damage
 
         boolean canBeBlocked = false;

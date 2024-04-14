@@ -80,6 +80,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostCollectEvidence cost) {
+        CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
+        final int total = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+        final InputSelectCardsFromList inp =
+                new InputSelectCardsFromList(controller, 0, list.size(), list, ability, total);
+        inp.setMessage(Localizer.getInstance().getMessage("lblCollectEvidence", total));
+        inp.setCancelAllowed(true);
+        inp.showAndWait();
+
+        if (inp.hasCancelled() || CardLists.getTotalCMC(inp.getSelected()) < total) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
+    }
+
+    @Override
     public PaymentDecision visit(final CostDiscard cost) {
         CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
         final String discardType = cost.getType();
@@ -223,6 +239,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostExile cost) {
         if (cost.payCostFromSource()) {
+            if (!source.canExiledBy(ability, isEffect())) {
+                return null;
+            }
             return source.getZone() == player.getZone(cost.from.get(0)) && confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
         }
 
@@ -258,6 +277,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(list);
         }
         list = CardLists.getValidCards(list, type.split(";"), player, source, ability);
+        list = CardLists.filter(list, CardPredicates.canExiledBy(ability, isEffect()));
 
         if (totalCMC) {
             int needed = Integer.parseInt(cost.getAmount().split("\\+")[0]);
@@ -606,7 +626,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         // for costs declared mandatory, this is only reachable with a valid amount
         if (player.canPayLife(c, isEffect(), ability) && confirmAction(cost, message)) {
             //force mandatory if paylife is paid.. todo add check if all can be paid
-            mandatory = true;
+            if (!player.getGame().EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                // If we can restore the game state, don't force the SA to be mandatory
+                mandatory = true;
+            }
             return PaymentDecision.number(c);
         }
         return null;
@@ -835,7 +858,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return PaymentDecision.number(0);
             }
             // player might not want to pay if from a trigger
-            if (!ability.hasSVar("IsCastFromPlayEffect") && hand.size() == num) {
+            if (!ability.isCastFromPlayEffect() && hand.size() == num) {
                 return PaymentDecision.card(hand);
             }
 
@@ -851,7 +874,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
-    public PaymentDecision visit(final CostRevealChosenPlayer cost) {
+    public PaymentDecision visit(final CostRevealChosen cost) {
         return PaymentDecision.number(1);
     }
 
@@ -1185,7 +1208,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (c > typeList.size()) {
-            controller.getGui().message(Localizer.getInstance().getMessage("lblEnoughValidCardNotToPayTheCost"), Localizer.getInstance().getMessage("lblCostPaymentInvalid"));
+            if (!isEffect()) {
+                controller.getGui().message(Localizer.getInstance().getMessage("lblEnoughValidCardNotToPayTheCost"), Localizer.getInstance().getMessage("lblCostPaymentInvalid"));
+            }
             return null; // not enough targets anymore (e.g. Crackleburr + Smokebraider tapped to get mana)
         }
 

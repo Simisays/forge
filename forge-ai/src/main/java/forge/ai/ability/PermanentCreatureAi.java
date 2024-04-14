@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import forge.game.card.CardCopyService;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -16,7 +17,6 @@ import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -63,7 +63,7 @@ public class PermanentCreatureAi extends PermanentAi {
                     //do not dash if creature can be played normally
                     return false;
                 }
-                Card dashed = CardUtil.getLKICopy(sa.getHostCard());
+                Card dashed = CardCopyService.getLKICopy(sa.getHostCard());
                 dashed.setSickness(false);
                 return ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, dashed);
             } else {
@@ -90,7 +90,7 @@ public class PermanentCreatureAi extends PermanentAi {
         if (ai.getController().isAI()) {
             advancedFlash = ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.FLASH_ENABLE_ADVANCED_LOGIC);
         }
-        if (card.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai))) {
+        if (card.hasKeyword(Keyword.FLASH) || (!ai.canCastSorcery() && sa.canCastTiming(ai) && !sa.isCastFromPlayEffect())) {
             if (advancedFlash) {
                 return doAdvancedFlashLogic(card, ai, sa);
             } else {
@@ -235,7 +235,7 @@ public class PermanentCreatureAi extends PermanentAi {
                 return true;
         }
 
-        final Card copy = CardUtil.getLKICopy(card);
+        final Card copy = CardCopyService.getLKICopy(card);
         ComputerUtilCard.applyStaticContPT(game, copy, null);
         if (copy.getNetToughness() > 0) {
             return true;
