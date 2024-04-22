@@ -2495,8 +2495,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk")
-                        || keyword.startsWith("Alternative Cost")) {
+                        || keyword.startsWith("Landwalk")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -2825,6 +2824,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 sAbility = sbSA.toString();
             } else if (sa.isSpell() && sa.isBasicSpell()) {
                 continue;
+            } else if (sa.hasParam("DescriptionFromChosenName") && !getNamedCard().isEmpty()) {
+                String name = getNamedCard();
+                ICardFace namedFace = StaticData.instance().getCommonCards().getFaceByName(name);
+                StringBuilder sbSA = new StringBuilder(sAbility);
+                sbSA.append(linebreak);
+                sbSA.append(Localizer.getInstance().getMessage("lblSpell"));
+                sbSA.append(" — ");
+                if(!namedFace.getManaCost().isNoCost()) {
+                    sbSA.append(namedFace.getManaCost().getSimpleString()).append(": ");
+                }
+                sbSA.append(namedFace.getName()).append("\r\n");
+                sbSA.append(namedFace.getType()).append("\r\n");
+                sbSA.append(namedFace.getOracleText().replaceAll("\\\\n", "\r\n"));
+                sbSA.append(linebreak);
+                sAbility = sbSA.toString();
             }
 
             if (sa.getManaPart() != null) {
@@ -6527,6 +6541,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final boolean canSpecialize() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Specialize;
+    }
+
+    public boolean canCrew() {
+        return canTap() && !StaticAbilityCantCrew.cantCrew(this);
     }
 
     public int getTimesCrewedThisTurn() {

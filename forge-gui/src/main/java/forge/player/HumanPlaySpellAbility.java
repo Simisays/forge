@@ -77,7 +77,6 @@ public class HumanPlaySpellAbility {
                         game.clearTopLibsCast(ability);
                         return false;
                     }
-                    needX = false;
                 }
                 if (!CharmEffect.makeChoices(ability)) {
                     game.clearTopLibsCast(ability);
@@ -236,7 +235,7 @@ public class HumanPlaySpellAbility {
         // Announcing Requirements like Choosing X or Multikicker
         // SA Params as comma delimited list
         final String announce = ability.getParam("Announce");
-        if (announce != null) {
+        if (announce != null && needX) {
             for (final String aVar : announce.split(",")) {
                 final String varName = aVar.trim();
 
@@ -264,7 +263,10 @@ public class HumanPlaySpellAbility {
         if (needX) {
             if (cost.hasXInAnyCostPart()) {
                 final String sVar = ability.getSVar("X"); //only prompt for new X value if card doesn't determine it another way
-                if ("Count$xPaid".equals(sVar) || sVar.isEmpty()) {
+                // check if X != 0 is even allowed or the X shard got removed
+                boolean replacedXshard = ability.isSpell() && ability.getHostCard().getManaCost().countX() > 0 &&
+                        (cost.hasNoManaCost() || cost.getCostMana().getAmountOfX() == 0);
+                if (("Count$xPaid".equals(sVar) && !replacedXshard) || sVar.isEmpty()) {
                     final Integer value = controller.announceRequirements(ability, "X");
                     if (value == null) {
                         return false;

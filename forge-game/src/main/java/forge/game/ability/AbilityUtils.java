@@ -599,21 +599,8 @@ public class AbilityUtils {
         // All the following only work for SpellAbilities
         else if (ability instanceof SpellAbility) {
             final SpellAbility sa = (SpellAbility) ability;
-            if (calcX[0].startsWith("Modes")) {
-                int chosenModes = 0;
-                SpellAbility sub = sa;
-                while(sub != null) {
-                    if (!sub.getSVar("CharmOrder").equals("")) {
-                        chosenModes++;
-                    }
-                    sub = sub.getSubAbility();
-                }
-                // Count Math
-                final String m = CardFactoryUtil.extractOperators(calcX[1]);
-                val = doXMath(chosenModes, m, card, ability);
-            }
             // Player attribute counting
-            else if (calcX[0].startsWith("TargetedPlayer")) {
+            if (calcX[0].startsWith("TargetedPlayer")) {
                 final List<Player> players = new ArrayList<>();
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (null != saTargeting) {
@@ -1415,77 +1402,12 @@ public class AbilityUtils {
         final boolean execSubsWhenNotPaid = "WhenNotPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
         final boolean isSwitched = sa.hasParam("UnlessSwitched");
 
-        // The cost
-        Cost cost;
         String unlessCost = sa.getParam("UnlessCost").trim();
-        if (unlessCost.equals("CardManaCost")) {
-            cost = new Cost(source.getManaCost(), true);
-        }
-        else if (unlessCost.equals("ChosenManaCost")) {
-            if (!source.hasChosenCard()) {
-                cost = new Cost(ManaCost.ZERO, true);
-            } else {
-                cost = new Cost(Iterables.getFirst(source.getChosenCards(), null).getManaCost(), true);
-            }
-        }
-        else if (unlessCost.equals("ChosenNumber")) {
-            cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
-        }
-        else if (unlessCost.startsWith("DefinedCost")) {
-            CardCollection definedCards = getDefinedCards(source, unlessCost.split("_")[1], sa);
-            if (definedCards.isEmpty()) {
-                sa.resolve();
-                resolveSubAbilities(sa, game);
-                return;
-            }
-            Card card = definedCards.getFirst();
-            ManaCostBeingPaid newCost = new ManaCostBeingPaid(card.getManaCost());
-            // Check if there's a third underscore for cost modifying
-            if (unlessCost.split("_").length == 3) {
-                String modifier = unlessCost.split("_")[2];
-                if (modifier.startsWith("Minus")) {
-                    int max = Integer.parseInt(modifier.substring(5));
-                    if (sa.hasParam("UnlessUpTo")) { // Flash
-                        max = allPayers.get(0).getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblChooseNumber"), 0, max);
-                    }
-                    newCost.decreaseGenericMana(max);
-                } else {
-                    newCost.increaseGenericMana(Integer.parseInt(modifier.substring(4)));
-                }
-            }
-            cost = new Cost(newCost.toManaCost(), true);
-        }
-        else if (unlessCost.startsWith("DefinedSACost")) {
-            FCollection<SpellAbility> definedSAs = getDefinedSpellAbilities(source, unlessCost.split("_")[1], sa);
-            if (definedSAs.isEmpty()) {
-                sa.resolve();
-                resolveSubAbilities(sa, game);
-                return;
-            }
-            Card host = definedSAs.getFirst().getHostCard();
-            if (host.getManaCost() == null) {
-                cost = new Cost(ManaCost.ZERO, true);
-            } else {
-                int xCount = host.getManaCost().countX();
-                int xPaid = host.getXManaCostPaid() * xCount;
-                ManaCostBeingPaid toPay = new ManaCostBeingPaid(host.getManaCost());
-                toPay.decreaseShard(ManaCostShard.X, xCount);
-                toPay.increaseGenericMana(xPaid);
-                cost = new Cost(toPay.toManaCost(), true);
-            }
-        }
-        else if (!StringUtils.isBlank(sa.getSVar(unlessCost)) || !StringUtils.isBlank(source.getSVar(unlessCost))) {
-            // check for X costs (stored in SVars
-            int xCost = calculateAmount(source, TextUtil.fastReplace(sa.getParam("UnlessCost"),
-                    " ", ""), sa);
-            //Check for XColor
-            ManaCostBeingPaid toPay = new ManaCostBeingPaid(ManaCost.ZERO);
-            byte xColor = ManaAtom.fromName(sa.getParamOrDefault("UnlessXColor", "1"));
-            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
-            cost = new Cost(toPay.toManaCost(), true);
-        }
-        else {
-            cost = new Cost(unlessCost, true);
+        Cost cost = calculateUnlessCost(sa, unlessCost, true);
+        if (cost == null) {
+            sa.resolve();
+            resolveSubAbilities(sa, game);
+            return;
         }
 
         boolean alreadyPaid = false;
@@ -1508,6 +1430,67 @@ public class AbilityUtils {
         if (alreadyPaid && execSubsWhenPaid || !alreadyPaid && execSubsWhenNotPaid) { // switched refers only to main ability!
             resolveSubAbilities(sa, game);
         }
+    }
+
+    public static Cost calculateUnlessCost(SpellAbility sa, String unlessCost, boolean beforePayment) {
+        final Card source = sa.getHostCard();
+        Cost cost;
+        if (unlessCost.equals("ChosenNumber")) {
+            cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
+        }
+        else if (unlessCost.startsWith("DefinedCost")) {
+            CardCollection definedCards = getDefinedCards(source, unlessCost.split("_")[1], sa);
+            if (definedCards.isEmpty()) {
+                return null;
+            }
+            Card card = definedCards.getFirst();
+            ManaCostBeingPaid newCost = new ManaCostBeingPaid(card.getManaCost());
+            // Check if there's a third underscore for cost modifying
+            if (unlessCost.split("_").length == 3) {
+                String modifier = unlessCost.split("_")[2];
+                if (modifier.startsWith("Minus")) {
+                    int max = Integer.parseInt(modifier.substring(5));
+                    if (sa.hasParam("UnlessUpTo") && beforePayment) { // Flash
+                        max = sa.getActivatingPlayer().getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblChooseNumber"), 0, max);
+                    }
+                    newCost.decreaseGenericMana(max);
+                } else {
+                    newCost.increaseGenericMana(Integer.parseInt(modifier.substring(4)));
+                }
+            }
+            cost = new Cost(newCost.toManaCost(), true);
+        }
+        else if (unlessCost.startsWith("DefinedSACost")) {
+            FCollection<SpellAbility> definedSAs = getDefinedSpellAbilities(source, unlessCost.split("_")[1], sa);
+            if (definedSAs.isEmpty()) {
+                return null;
+            }
+            Card host = definedSAs.getFirst().getHostCard();
+            if (host.getManaCost() == null) {
+                cost = new Cost(ManaCost.ZERO, true);
+            } else {
+                int xCount = host.getManaCost().countX();
+                int xPaid = host.getXManaCostPaid() * xCount;
+                ManaCostBeingPaid toPay = new ManaCostBeingPaid(host.getManaCost());
+                toPay.decreaseShard(ManaCostShard.X, xCount);
+                toPay.increaseGenericMana(xPaid);
+                cost = new Cost(toPay.toManaCost(), true);
+            }
+        }
+        else if (!StringUtils.isBlank(sa.getSVar(unlessCost)) && !unlessCost.equals("X")) {
+            // check for non-X costs (stored in SVars
+            int xCost = calculateAmount(source, TextUtil.fastReplace(sa.getParam("UnlessCost"),
+                    " ", ""), sa);
+            //Check for XColor
+            ManaCostBeingPaid toPay = new ManaCostBeingPaid(ManaCost.ZERO);
+            byte xColor = ManaAtom.fromName(sa.getParamOrDefault("UnlessColor", "1"));
+            toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
+            cost = new Cost(toPay.toManaCost(), true);
+        }
+        else {
+            cost = new Cost(unlessCost, true);
+        }
+        return cost;
     }
 
     /**
@@ -1743,14 +1726,11 @@ public class AbilityUtils {
                 }
                 // Count$NumTimesChoseMode
                 if (sq[0].startsWith("NumTimesChoseMode")) {
-                    final SpellAbility root = sa.getRootAbility();
+                    SpellAbility sub = sa.getRootAbility();
                     int amount = 0;
-                    if (root != null) {
-                        SpellAbility sub = root;
-                        while(sub != null) {
-                            if (!sub.getSVar("CharmOrder").equals("")) amount++;
-                            sub = sub.getSubAbility();
-                        }
+                    while (sub != null) {
+                        if (sub.getDirectSVars().containsKey("CharmOrder")) amount++;
+                        sub = sub.getSubAbility();
                     }
                     return doXMath(amount, expr, c, ctb);
                 }
@@ -2041,9 +2021,6 @@ public class AbilityUtils {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
 
-        if (sq[0].equals("CardNumTypes")) {
-            return doXMath(getNumberOfTypes(c), expr, c, ctb);
-        }
         if (sq[0].equals("CardNumNotedTypes")) {
             return doXMath(c.getNumNotedTypes(), expr, c, ctb);
         }
@@ -2655,21 +2632,6 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("PlanarDiceSpecialActionThisTurn")) {
             return game.getPhaseHandler().getPlanarDiceSpecialActionThisTurn();
-        }
-
-        if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(getDefinedCards(c, sq[1], ctb), false), expr, c, ctb);
-        }
-        if (sq[0].contains("CardControllerTypes")) {
-            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), false), expr, c, ctb);
-        }
-        if (sq[0].contains("CardControllerPermanentTypes")) {
-            return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1])), true), expr, c, ctb);
-        }
-        if (sq[0].startsWith("OppTypesInGrave")) {
-            final PlayerCollection opponents = player.getOpponents();
-            CardCollection oppCards = opponents.getCardsIn(ZoneType.Graveyard);
-            return doXMath(getCardTypesFromList(oppCards, false), expr, c, ctb);
         }
 
         if (sq[0].equals("TotalTurns")) {
@@ -3684,6 +3646,10 @@ public class AbilityUtils {
             return doXMath(num, splitString.length > 1 ? splitString[1] : null, source, ctb);
         }
 
+        if (string.startsWith("CardTypes")) {
+            return doXMath(getCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+        }
+
         String filteredString = string;
         Iterable<Card> filteredList = paidList;
         final String[] filter = filteredString.split("_");
@@ -3897,12 +3863,6 @@ public class AbilityUtils {
             }
         }
         return list;
-    }
-
-    public static int getNumberOfTypes(final Card card) {
-        EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
-        Iterables.addAll(types, card.getType().getCoreTypes());
-        return types.size();
     }
 
     public static int getCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
