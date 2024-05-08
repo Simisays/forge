@@ -4089,7 +4089,7 @@
 },
 {
 	"name": "Cathar",
-	"nameOverride": "Human Cathar",
+	"nameOverride": "Human Raider",
 	"sprite": "sprites/enemy/humanoid/human/soldier/cathar.atlas",
 	"deck": [
 		"decks/standard/cathar.dck"
@@ -9239,6 +9239,7 @@
 },
 {
 	"name": "Eldraine Faerie",
+	"nameOverride": "Faerie Trickster",
 	"sprite": "sprites/enemy/fey/pixie.atlas",
 	"deck": [
 		"decks/standard/eldraine_faerie.dck"
@@ -9324,6 +9325,7 @@
 },
 {
 	"name": "Eldraine Knight",
+	"nameOverride": "Fair Knight",
 	"sprite": "sprites/enemy/humanoid/paladin_2.atlas",
 	"deck": [
 		"decks/standard/eldraine_knight.dck"
@@ -12417,6 +12419,7 @@
 },
 {
 	"name": "Ghost",
+	"nameOverride": "Haunting Apparition",
 	"sprite": "sprites/enemy/undead/ghost_2.atlas",
 	"deck": [
 		"decks/standard/ghost.json"
@@ -12507,7 +12510,7 @@
 	],
 	"ai": "",
 	"flying": true,
-	"spawnRate": 0.8,
+	"spawnRate": 0.5,
 	"difficulty": 0.1,
 	"speed": 30,
 	"scale": 0.5,
@@ -12517,7 +12520,7 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
-			"addMaxCount": 4,
+			"addMaxCount": 2,
 			"rarity": [
 				"common",
 				"uncommon",
@@ -13157,7 +13160,7 @@
 },
 {
 	"name": "Grolnok",
-	"sprite": "sprites/enemy/aberration/frogboss.atlas",
+	"sprite": "sprites/enemy/aberration/gianttoad.atlas",
 	"deck": [
 		"decks/miniboss/frogboss.dck"
 	],
@@ -13257,6 +13260,65 @@
 		"IdentitySultai"
 	],
 	"gamesPerMatch": 3
+},
+{
+	"name": "Froghemoth",
+	"sprite": "sprites/enemy/aberration/froghemoth.atlas",
+	"deck": [
+		"decks/standard/froghemoth.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.8,
+	"speed": 18,
+	"scale": 0.55,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"rarity": [
+				"Rare",
+				"Mythic Rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 20,
+			"addMaxCount": 10
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 5,
+			"addMaxCount": 2,
+			"subTypes": [
+				"Frog"
+			]
+		}
+	],
+	"colors": "RG",
+	"questTags": [
+		"Humanoid",
+		"Simian",
+		"Territorial",
+		"Animal",
+		"Wild",
+		"IdentityGreen",
+		"IdentityRed",
+		"IdentityGruul"
+	]
 },
 {
 	"name": "Gorilla",
@@ -16302,7 +16364,7 @@
 	],
 	"ai": "",
 	"flying": true,
-	"spawnRate": 0.5,
+	"spawnRate": 0.3,
 	"difficulty": 0.1,
 	"speed": 25,
 	"scale": 1.3,
