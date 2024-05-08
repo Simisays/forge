@@ -1675,11 +1675,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     @Override
-    public final void subtractCounter(final CounterType counterName, final int n) {
-        subtractCounter(counterName, n, false);
+    public final void subtractCounter(final CounterType counterName, final int n, final Player remover) {
+        subtractCounter(counterName, n, remover, false);
     }
 
-    public final void subtractCounter(final CounterType counterName, final int n, final boolean isDamage) {
+    public final void subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {
         int oldValue = getCounters(counterName);
         int newValue = Math.max(oldValue - n, 0);
 
@@ -1731,6 +1731,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         int curCounters = oldValue;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
         runParams.put(AbilityKey.CounterType, counterName);
+        runParams.put(AbilityKey.Player, remover);
         for (int i = 0; i < delta && curCounters != 0; i++) {
             runParams.put(AbilityKey.NewCounterAmount, --curCounters);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, AbilityKey.newMap(runParams), false);
@@ -4631,11 +4632,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
     }
 
-    private int pseudoKickerMagnitude = 0;
-    public final void addPseudoMultiKickerMagnitude(final int n) { pseudoKickerMagnitude += n; }
-    public final void setPseudoMultiKickerMagnitude(final int n) { pseudoKickerMagnitude = n; }
-    public final int getPseudoKickerMagnitude() { return pseudoKickerMagnitude; }
-
     // for cards like Giant Growth, etc.
     public final int getTempPowerBoost() {
         int result = 0;
@@ -5454,7 +5450,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isBasicLand()  { return getType().isBasicLand(); }
     public final boolean isSnow()       { return getType().isSnow(); }
 
-    public final boolean isTribal()     { return getType().isTribal(); }
+    public final boolean isKindred()     { return getType().isKindred(); }
     public final boolean isSorcery()    { return getType().isSorcery(); }
     public final boolean isInstant()    { return getType().isInstant(); }
 
@@ -6227,10 +6223,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
-            subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn, true);
+            subtractCounter(CounterType.get(CounterEnumType.LOYALTY), damageIn, null, true);
         }
         if (isBattle()) {
-            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, true);
+            subtractCounter(CounterType.get(CounterEnumType.DEFENSE), damageIn, null, true);
         }
         if (isCreature()) {
             if (source.isWitherDamage()) { // 120.3d
@@ -7204,6 +7200,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
+        // can't sacrifice it for mana ability if it is already marked as sacrifice
+        if (source != null && source.isManaAbility() && isUsedToPay()) {
+            return false;
+        }
+
         final Card gameCard = game.getCardState(this, null);
         // gameCard is LKI in that case, the card is not in game anymore
         // or the timestamp did change
@@ -7781,19 +7782,28 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public ActivationTable getAbilityActivatedThisTurn() {
+        return numberTurnActivations;
+    }
+    public ActivationTable getAbilityActivatedThisGame() {
+        return numberGameActivations;
+    }
+    public ActivationTable getAbilityResolvedThisTurn() {
+        return numberAbilityResolved;
+    }
+
     public int getAbilityActivatedThisTurn(SpellAbility ability) {
         return numberTurnActivations.get(ability);
     }
-
     public int getAbilityActivatedThisGame(SpellAbility ability) {
         return numberGameActivations.get(ability);
+    }
+    public int getAbilityResolvedThisTurn(SpellAbility ability) {
+        return numberAbilityResolved.get(ability);
     }
 
     public void addAbilityResolved(SpellAbility ability) {
         numberAbilityResolved.add(ability);
-    }
-    public int getAbilityResolvedThisTurn(SpellAbility ability) {
-        return numberAbilityResolved.get(ability);
     }
     public List<Player> getAbilityResolvedThisTurnActivators(SpellAbility ability) {
         return numberAbilityResolved.getActivators(ability);
