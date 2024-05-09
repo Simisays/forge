@@ -5,19 +5,24 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="32385" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="42497" source="../../tileset/dungeon/dungeon_2.tsx"/>
+ <tileset firstgid="66833" source="../../tileset/dungeon/animatedtiles.tsx"/>
  <layer id="1" name="Background" width="50" height="60">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAOBvLuAAAQ==
+   eJzt0tENQEAQRVGKUjwlqUIDZrFr10TOJOeP5N2wLvO0BjJetLUk4+nIdTpyXYaOfbuWtePJzjvPjO442xRtzPg9zja1/kujOt7477/oGLF3REd0f+po0avj7Q2l/rvXu6Ompebdmg4AAAAAAAAAADgAOXxfkA==
   </data>
  </layer>
  <layer id="2" name="Ground" width="50" height="60">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAOBvLuAAAQ==
+   eJztzwEJAAAIwDDr28h4lhAU2RL8EQAAAAB/VW4XzPBxy5cPAAAAAAAAuKYBQAwFBQ==
   </data>
  </layer>
  <layer id="7" name="Mountain Walls" width="50" height="60">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAOBvLuAAAQ==
+   eJztmG1uwjAMhtOr7Ncu0BJ35wbEdrk1owHHdb7b5QMsWUKlhPeJHdutEELcxqEpD7XSOvdmK60tRn9pHXuxlNaQEwOt38XREmNLWm3xaPFM+xg4jpbYbHylNe3BUVrPq3L0cOZ74fBZaX052mvX7+Ow3Rf7u9S9e9vb3vaa1kuN6JmjxZpOdfbSm3pgwNYDwwiDOEHbHIrhKgdxke2yPBjg7tfKOGDRMwU4ZqiR4wymvmCvLLd8HJPSK+tncXH8McyDGOd6WT4ud3dpVGdA97yaWbRZNa76emLB903rvdPJdFcNGy11UK9Nv5+Jf8FzFvLNE6EsyoCyLJ+vn9v1tT5at/Ha+nu6L9i/5ZMF89iYbCzcXt/Az2DVD27dnP9A3HshWHMHu6pbxj1oD3G8XL0zhyGEI3Z+BSYPNEtoH03hoHUnl+XG6NC5HsMRwoev0V4Qw0Kvc7GwaQpmkkweS3NdvFchMeHeyWq3McRyGHstt2dPGa7vvpoT+2767MjrmFzCtZpjwPrY+sn0gT04UvPHxUBjQ1nYPpDCsaw7z3e3ziqEIVS3jcXIs4yYPHq46q3z9vpRDNiM+TyTBTM8/B8YNhwMS+yZ5zh0vqWcgWQOwpLDgOvx3rqphTxjpPDQnnK06XrDnsWIHunri0U5VpYJtm7js/X2o21k/peb2UJmTNd8crRxseB6sW9edjGU4nDNcBzL5GE4mgPnFJs7ARyhfqTFvvuMfk6D8hy5+0/j+QurnUBq
   </data>
  </layer>
  <layer id="3" name="Clutter" width="50" height="60">
@@ -25,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAOBvLuAAAQ==
+   eJzt2UlOw0AQBdCC7NI5R27BdASGPUTAUVgw3CEgwTqJBLbPkDOEA7Bg2AMS1YJSmiFggqu7Gv0n/Y3ljqtUcTqyiQDsGo+m2R4Q7XB6g/fHfawLa33k+p84z5n30S2mya2PUNiHuL4kuinT1dSkgyp1BQAAf7eU2d4CALPtton2fpn99ue1cixVD8sd/s/IOXX1MuFzVzqvtctaOZail7CHM1d/Xf9DX35t36XpZd4eviO9tBr6vJ9o9CAWXLyZ+Gtp9ODFmonMQvM6MhNNmrMQ8jugJcYstGne27GgBzti3Nfa/sN97flZLLq8+8B9AQAAsYTPc68KooJTcqpi9hrr1kuiDc4mZyvjd4i3XPsd557z8NZHjs/fDyuiI84x5wTvQhtzPiS6GNY/3+p3Z5XrWjNaWwpW52QZ9i5bvtq7coS9CwBgPi/Db53h
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
