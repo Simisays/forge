@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="77">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="81">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -34,6 +34,33 @@
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel/cave_16BR3U.tmx"/>
     <property name="teleportObjectId" value="77"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../obj/enemy.tx" x="320.91" y="167.928" visible="1">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Dralnu's Crusade&quot; ] }"/>
+    <property name="enemy" value="Goblin Zombie"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="pursueRange" type="float" value="60"/>
+    <property name="threatRange" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../obj/treasure.tx" x="334.933" y="218.922">
+   <properties>
+    <property name="reward">[
+	{
+		&quot;type&quot;: &quot;randomCard&quot;,
+		&quot;colors&quot;: [ &quot;Black&quot; ],
+		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
+		&quot;count&quot;: 5
+	},
+	{
+		&quot;type&quot;: &quot;item&quot;,
+		&quot;count&quot;: 1,
+		&quot;probability&quot;: 0.2,
+		&quot;itemName&quot;: &quot;Battle Standard&quot;
+	}
+]</property>
    </properties>
   </object>
  </objectgroup>

@@ -423,6 +423,21 @@
 	]
 },
 {
+	"name": "CaveLarge1"
+	"displayName": "Forgotten Cave",
+	"type": "cave",
+	"count": 1,
+	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+	"sprite": "Cave",
+	"map": "../common/maps/map/cave/cave_multilevel/cave_16.tmx",
+	"radiusFactor": 0.8,
+	"questTags": [
+		"Cave",
+		"Hostile",
+		"BiomeBlack",
+	]
+},
+{
 	"name": "CaveB1",
 	"displayName": "Cave",
 	"type": "cave",
@@ -1740,7 +1755,7 @@
 {
 	"name": "Forest Town Generic",
 	"type": "town",
-	"count": 30,
+	"count": 15,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "ForestTown",
 	"map": "../common/maps/map/towns/forest_town_generic.tmx",
@@ -1756,7 +1771,7 @@
 {
 	"name": "Forest Town Identity",
 	"type": "town",
-	"count": 35,
+	"count": 25,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "ForestTown",
 	"map": "../common/maps/map/towns/forest_town_identity.tmx",
@@ -1772,7 +1787,7 @@
 {
 	"name": "Forest Town Tribal",
 	"type": "town",
-	"count": 35,
+	"count": 25,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "ForestTown",
 	"map": "../common/maps/map/towns/forest_town_tribal.tmx",
@@ -1788,7 +1803,7 @@
 {
 	"name": "Forest Town",
 	"type": "town",
-	"count": 100,
+	"count": 50,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "ForestTown",
 	"map": "../common/maps/map/towns/forest_town.tmx",
@@ -2319,7 +2334,7 @@
 {
 	"name": "Island Town Generic",
 	"type": "town",
-	"count": 30,
+	"count": 20,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "IslandTown",
 	"map": "../common/maps/map/towns/island_town_generic.tmx",
@@ -2335,7 +2350,7 @@
 {
 	"name": "Island Town Identity",
 	"type": "town",
-	"count": 35,
+	"count": 20,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "IslandTown",
 	"map": "../common/maps/map/towns/island_town_identity.tmx",
@@ -2351,7 +2366,7 @@
 {
 	"name": "Island Town Tribal",
 	"type": "town",
-	"count": 35,
+	"count": 20,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "IslandTown",
 	"map": "../common/maps/map/towns/island_town_tribal.tmx",
@@ -2367,7 +2382,7 @@
 {
 	"name": "Island Town",
 	"type": "town",
-	"count": 100,
+	"count": 50,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "IslandTown",
 	"map": "../common/maps/map/towns/island_town.tmx",
@@ -3027,7 +3042,7 @@
 {
 	"name": "Mountain Town Generic",
 	"type": "town",
-	"count": 30,
+	"count": 20,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "MountainTown",
 	"map": "../common/maps/map/towns/mountain_town_generic.tmx",
@@ -3043,7 +3058,7 @@
 {
 	"name": "Mountain Town Identity",
 	"type": "town",
-	"count": 35,
+	"count": 25,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "MountainTown",
 	"map": "../common/maps/map/towns/mountain_town_identity.tmx",
@@ -3059,7 +3074,7 @@
 {
 	"name": "Mountain Town Tribal",
 	"type": "town",
-	"count": 35,
+	"count": 25,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "MountainTown",
 	"map": "../common/maps/map/towns/mountain_town_tribal.tmx",
@@ -3075,7 +3090,7 @@
 {
 	"name": "Mountain Town",
 	"type": "town",
-	"count": 100,
+	"count": 50,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "MountainTown",
 	"map": "../common/maps/map/towns/mountain_town.tmx",
@@ -3199,7 +3214,7 @@
 {
 	"name": "Plains Town Generic",
 	"type": "town",
-	"count": 30,
+	"count": 15,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "PlainsTown",
 	"map": "../common/maps/map/towns/plains_town_generic.tmx",
@@ -3215,7 +3230,7 @@
 {
 	"name": "Plains Town Identity",
 	"type": "town",
-	"count": 35,
+	"count": 25,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "PlainsTown",
 	"map": "../common/maps/map/towns/plains_town_identity.tmx",
@@ -3231,7 +3246,7 @@
 {
 	"name": "Plains Town Tribal",
 	"type": "town",
-	"count": 35,
+	"count": 25,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "PlainsTown",
 	"map": "../common/maps/map/towns/plains_town_tribal.tmx",
@@ -3247,7 +3262,7 @@
 {
 	"name": "Plains Town",
 	"type": "town",
-	"count": 100,
+	"count": 50,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "PlainsTown",
 	"map": "../common/maps/map/towns/plains_town.tmx",
@@ -3651,7 +3666,7 @@
 {
 	"name": "Swamp Town Generic",
 	"type": "town",
-	"count": 30,
+	"count": 20,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
 	"map": "../common/maps/map/towns/swamp_town_generic.tmx",
@@ -3667,7 +3682,7 @@
 {
 	"name": "Swamp Town Identity",
 	"type": "town",
-	"count": 35,
+	"count": 20,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
 	"map": "../common/maps/map/towns/swamp_town_identity.tmx",
@@ -3683,7 +3698,7 @@
 {
 	"name": "Swamp Town Tribal",
 	"type": "town",
-	"count": 35,
+	"count": 20,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
 	"map": "../common/maps/map/towns/swamp_town_tribal.tmx",
@@ -3699,7 +3714,7 @@
 {
 	"name": "Swamp Town",
 	"type": "town",
-	"count": 100,
+	"count": 50,
 	"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
 	"map": "../common/maps/map/towns/swamp_town.tmx",

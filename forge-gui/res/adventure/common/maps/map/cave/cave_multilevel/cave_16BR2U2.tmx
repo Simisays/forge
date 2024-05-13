@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="80">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="80">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFuMAeHgaGvTz0tzeKl4Ehmpf+9o6CUTBcwZ4ByMcgAMrLddz0t3cO/a0cBUMIAAAJ/AS1
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCAdrOJgYFgNxGs4yNA8hMBPfghmp7O9ogIQPFBg+sBZPQpoCMwY6Z+WRzIYiLCG5d05A2D3aNoaOgAAmLoGkQ==
+   eJxjYCAdrOJgYFgNxGs4yNA8hMBTTQhmp7O9jFoQPFBg+sBZPQpoCMwY6Z+WRzIYiLCG5d05A2D3aNoaOgAANzEGqQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -49,7 +49,7 @@
     <property name="enemy" value="Devil"/>
    </properties>
   </object>
-  <object id="79" template="../../../obj/enemy.tx" x="204" y="184.333">
+  <object id="79" template="../../../obj/enemy.tx" x="207.4" y="192.832">
    <properties>
     <property name="enemy" value="Devil"/>
    </properties>

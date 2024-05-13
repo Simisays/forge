@@ -6,32 +6,15 @@
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="22017" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="7" name="Background" width="60" height="45">
   <data encoding="base64" compression="zlib">
-   eJztz6ENACAMRUEEhsUYvzNhSUjqmgpOnKjqfzHHiEJ7vSr/ddPbv0mvXr16s9777t5U3ZvdAAAAAAAAAAD85QAVtJLZ
+   eJztzqENADAIADAEZo9xPjdxxgipqG9nRAMAp9T7fwAAAAAAAAAAYI8BzQKmzg==
   </data>
  </layer>
  <layer id="9" name="Foreground" width="60" height="45">
   <data encoding="base64" compression="zlib">
-   eJzt0kEKgCAQQFGPELTuUN3/MuEiiCBSSDTnPXDp4MdZl5TWxue0b6m71q3X3hFEas306i1pmrm3Zs5ovtrPp/8eTc2uls4pvdPDF633eSN729va9/+xd2bRe2cXrTeL1BupNYvUCgAAAAAAwLsDElMhPw==
-  </data>
- </layer>
- <layer id="8" name="Walls" width="60" height="45">
-  <data encoding="base64" compression="zlib">
-   eJztz7EJACAMAME04v4bOI1zWYiVYGmR3MEP8BH/jL6rwm9ufnPzm9d5rfBb9bXC82x3AAAAAAAAAAAvCzxPFEc=
-  </data>
- </layer>
- <layer id="6" name="Clutter" width="60" height="45">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJzt0cEJgDAMQNEc282Kiwo6lgiOoeLNq1AhfQ9CjuGTiH5ajZhqx4M/05ub3tz05rWUZx8D9N6tex2rdbtmLc9k1l4/nZP3AgAAAAAAAADfnXTUDaM=
-  </data>
- </layer>
- <layer id="10" name="Clutter 2" width="60" height="45">
-  <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAzwYqMAAB
+   eJzt00EKgDAMBdEsvIaH8uI9k2QRqCCI1Wj0z4MuAx3StsmsJZ+wzPa67Na+t4Ineis100svvduOv/fG3Jn5KrL3WqnVKfzZ3pX7H+25ojt2VbVtz5ff5gilVqfU6pRanUpnUGp1Sq0AAAAAAAAAAAAjVuI7Cxg=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../../../../../../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="60">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAMA6C+M1f/cipkkNBLqqqqqqqqqr446Chj1w==
@@ -24,19 +24,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../../../../../../obj/door_up.tx" x="216" y="958">
+  <object id="66" template="../../../obj/door_up.tx" x="216" y="958">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21.tmx"/>
     <property name="teleportObjectId" value="65"/>
    </properties>
   </object>
-  <object id="67" template="../../../../../../../../../obj/door_down.tx" x="223.333" y="17.3333">
+  <object id="67" template="../../../obj/door_down.tx" x="223.333" y="17.3333">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>
-  <object id="68" template="../../../../../../../../../obj/enemy.tx" x="58.75" y="505.5">
+  <object id="68" template="../../../obj/enemy.tx" x="58.75" y="505.5">
    <properties>
     <property name="enemy" value="Mimic"/>
    </properties>

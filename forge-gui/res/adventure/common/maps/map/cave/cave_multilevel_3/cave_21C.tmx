@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../../../../../../../tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="60">
   <data encoding="base64" compression="zlib">
    eJzt07EJwDAMRUFXgSzn7b1PijTGhdx9Q3LFtXpIoH631qEwrle6d7qb7Ke78/z0vlX7q/fe9U91//DXazvZndvpLgAAAABA5QG+x34j
@@ -24,49 +24,49 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="66" template="../../../../../../../../../obj/door_up.tx" x="303" y="958">
+  <object id="66" template="../../../obj/door_up.tx" x="303" y="958">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21B.tmx"/>
     <property name="teleportObjectId" value="67"/>
    </properties>
   </object>
-  <object id="67" template="../../../../../../../../../obj/door_down.tx" x="207.333" y="18.3333">
+  <object id="67" template="../../../obj/door_down.tx" x="207.333" y="18.3333">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21D.tmx"/>
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
-  <object id="68" template="../../../../../../../../../obj/door_right.tx" x="184.5" y="120">
+  <object id="68" template="../../../obj/door_right.tx" x="184.5" y="120">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>
-  <object id="69" template="../../../../../../../../../obj/door_right.tx" x="376.5" y="391.5">
+  <object id="69" template="../../../obj/door_right.tx" x="376.5" y="391.5">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="68"/>
    </properties>
   </object>
-  <object id="70" template="../../../../../../../../../obj/door_right.tx" x="344.5" y="535.5">
+  <object id="70" template="../../../obj/door_right.tx" x="344.5" y="535.5">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="68"/>
    </properties>
   </object>
-  <object id="71" template="../../../../../../../../../obj/door_right.tx" x="280" y="232.5">
+  <object id="71" template="../../../obj/door_right.tx" x="280" y="232.5">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="68"/>
    </properties>
   </object>
-  <object id="72" template="../../../../../../../../../obj/door_right.tx" x="231.5" y="168">
+  <object id="72" template="../../../obj/door_right.tx" x="231.5" y="168">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="68"/>
    </properties>
   </object>
-  <object id="73" template="../../../../../../../../../obj/door_right.tx" x="152" y="872.667">
+  <object id="73" template="../../../obj/door_right.tx" x="152" y="872.667">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="68"/>

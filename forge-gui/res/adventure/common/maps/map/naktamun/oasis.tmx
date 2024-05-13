@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="53">
  <tileset firstgid="1" name="autotiles" tilewidth="16" tileheight="16" tilecount="432" columns="12">
-  <image source="../../world/tilesets/autotiles.png" width="192" height="576"/>
+  <image source="../../../../Amonkhet/world/tilesets/autotiles.png" width="192" height="576"/>
  </tileset>
  <tileset firstgid="433" name="large_buildings" tilewidth="16" tileheight="16" tilecount="36" columns="6">
-  <image source="../tileset/large_buildings.png" width="96" height="96"/>
+  <image source="../../tileset/large_buildings.png" width="96" height="96"/>
   <tile id="0">
    <objectgroup draworder="index" id="2">
     <object id="1" x="1" y="14" width="15" height="2"/>
@@ -159,7 +159,7 @@
   </tile>
  </tileset>
  <tileset firstgid="469" name="main" tilewidth="16" tileheight="16" tilecount="10112" columns="158">
-  <image source="../tileset/main.png" width="2528" height="1024"/>
+  <image source="../../tileset/main.png" width="2528" height="1024"/>
   <tile id="366">
    <objectgroup draworder="index" id="2">
     <object id="2" x="14" y="13" width="2" height="1"/>
@@ -517,9 +517,8 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="10581" source="../tileset/buildings.tsx"/>
- <tileset firstgid="12373" source="../tileset/buildings.tsx"/>
- <tileset firstgid="14165" source="../tileset/main.tsx"/>
+ <tileset firstgid="10581" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="12373" source="../../tileset/main.tsx"/>
  <layer id="1" name="Ground" width="16" height="16">
   <data encoding="csv">
 74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,74,
@@ -605,20 +604,20 @@
  </layer>
  <layer id="19" name="Trees" width="16" height="16">
   <data encoding="csv">
-2469,2469,2469,2469,2469,18081,18082,18082,18083,2469,2469,2469,2469,2469,2469,2469,
-2469,2469,2469,18081,18082,18395,18398,18398,18396,18082,18082,18083,2469,2469,2469,2469,
-2469,18081,18082,18395,18398,18399,2469,2469,18397,18398,18398,18396,18083,2469,2469,2469,
-18081,18079,18238,18399,2469,2469,2469,2469,2469,2469,2469,18397,18396,18083,2469,2469,
-18242,18238,18399,2469,2469,2469,2469,2469,2469,2469,2469,2469,18242,18080,18083,2469,
-18079,18244,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,18397,18237,18244,2469,
-18243,18244,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,18397,18396,18083,
-18237,18244,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,18242,18080,
-18242,18080,18083,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,18242,18238,
-18397,18237,18080,18083,2469,2469,2469,2469,2469,2469,2469,2469,2469,18081,18079,18244,
-2469,18397,18398,18396,18082,18083,2469,2469,2469,2469,2469,2469,18081,18079,18238,18399,
-2469,2469,2469,18397,18398,18396,18082,18082,18082,18083,2469,18081,18079,18238,18399,2469,
-2469,2469,2469,2469,2469,18397,18398,18398,18398,18396,18082,18395,18398,18399,2469,2469,
-2469,2469,2469,2469,2469,2469,2469,2469,2469,18397,18398,18399,2469,2469,2469,2469,
+2469,2469,2469,2469,2469,16289,16290,16290,16291,2469,2469,2469,2469,2469,2469,2469,
+2469,2469,2469,16289,16290,16603,16606,16606,16604,16290,16290,16291,2469,2469,2469,2469,
+2469,16289,16290,16603,16606,16607,2469,2469,16605,16606,16606,16604,16291,2469,2469,2469,
+16289,16287,16446,16607,2469,2469,2469,2469,2469,2469,2469,16605,16604,16291,2469,2469,
+16450,16446,16607,2469,2469,2469,2469,2469,2469,2469,2469,2469,16450,16288,16291,2469,
+16287,16452,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,16605,16445,16452,2469,
+16451,16452,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,16605,16604,16291,
+16445,16452,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,16450,16288,
+16450,16288,16291,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,16450,16446,
+16605,16445,16288,16291,2469,2469,2469,2469,2469,2469,2469,2469,2469,16289,16287,16452,
+2469,16605,16606,16604,16290,16291,2469,2469,2469,2469,2469,2469,16289,16287,16446,16607,
+2469,2469,2469,16605,16606,16604,16290,16290,16290,16291,2469,16289,16287,16446,16607,2469,
+2469,2469,2469,2469,2469,16605,16606,16606,16606,16604,16290,16603,16606,16607,2469,2469,
+2469,2469,2469,2469,2469,2469,2469,2469,2469,16605,16606,16607,2469,2469,2469,2469,
 2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,
 2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469,2469
 </data>
@@ -647,15 +646,15 @@
 </data>
  </layer>
  <objectgroup id="7" name="Invisible">
-  <object id="4" template="../obj/exit.tx" name="Hekma" x="8" y="0" width="1016" height="1" visible="0"/>
-  <object id="7" template="../obj/exit.tx" name="Hekma" x="0" y="0" width="4" height="1016" visible="0"/>
-  <object id="47" template="../obj/entry_up.tx" x="120" y="256"/>
-  <object id="48" template="../obj/exit.tx" x="1" y="240" width="254" height="16"/>
-  <object id="49" template="../obj/exit.tx" x="240" y="144" width="16" height="112"/>
-  <object id="50" template="../obj/exit.tx" x="0" y="129" width="16" height="127"/>
+  <object id="4" template="../../obj/exit.tx" name="Hekma" x="8" y="0" width="1016" height="1" visible="0"/>
+  <object id="7" template="../../obj/exit.tx" name="Hekma" x="0" y="0" width="4" height="1016" visible="0"/>
+  <object id="47" template="../../obj/entry_up.tx" x="120" y="256"/>
+  <object id="48" template="../../obj/exit.tx" x="1" y="240" width="254" height="16"/>
+  <object id="49" template="../../obj/exit.tx" x="240" y="144" width="16" height="112"/>
+  <object id="50" template="../../obj/exit.tx" x="0" y="129" width="16" height="127"/>
  </objectgroup>
  <objectgroup id="15" name="Enemies">
-  <object id="51" template="../obj/enemy.tx" x="64" y="208">
+  <object id="51" template="../../obj/enemy.tx" x="64" y="208">
    <properties>
     <property name="enemy" value="Rogue"/>
    </properties>
