@@ -30,14 +30,18 @@
     <property name="teleportObjectId" value="76"/>
    </properties>
   </object>
-  <object id="72" template="../../../obj/enemy.tx" x="157" y="138">
+  <object id="72" template="../../../obj/enemy.tx" x="109.831" y="132.476">
    <properties>
-    <property name="enemy" value="Vampire"/>
+    <property name="enemy" value="Hulking Brute"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="73" template="../../../obj/enemy.tx" x="385.036" y="174.855">
+  <object id="73" template="../../../obj/enemy.tx" x="367.613" y="156.582">
    <properties>
-    <property name="enemy" value="High Vampire"/>
+    <property name="enemy" value="Hulking Brute"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="74" template="../../../obj/treasure.tx" x="440" y="170"/>

@@ -54,9 +54,9 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="70" template="../../obj/enemy.tx" x="209.103" y="111.495">
+  <object id="70" template="../../obj/enemy.tx" x="208.248" y="115.342">
    <properties>
-    <property name="enemy" value="Golem"/>
+    <property name="enemy" value="Blue Golem"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>

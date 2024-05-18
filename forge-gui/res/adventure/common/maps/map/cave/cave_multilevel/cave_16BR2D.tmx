@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="70">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFgxFI8wy0C0bBKBj6oI57YOzdNYjy71I62LEH6N9oXjpYNAqoAgAGsANM
@@ -35,9 +35,10 @@
     <property name="teleportObjectId" value="75"/>
    </properties>
   </object>
-  <object id="67" template="../../../obj/enemy.tx" x="208.5" y="184.75">
+  <object id="67" template="../../../obj/enemy.tx" x="204.225" y="182.613">
    <properties>
-    <property name="enemy" value="Djinn"/>
+    <property name="enemy" value="Master Blue Wizard"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="68" template="../../../obj/treasure.tx" x="207" y="252.25"/>

@@ -7381,19 +7381,12 @@
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.25,
+			"type": "card",
+			"probability": 1,
 			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+			"addMaxCount": 2,
+			"subTypes": [
+				"Spirit"
 			]
 		},
 		{
@@ -7411,7 +7404,10 @@
 			"type": "gold",
 			"probability": 0.3,
 			"count": 10,
-			"addMaxCount": 90
+			"addMaxCount": 90,
+			"subTypes": [
+				"Spirit"
+			]
 		}
 	],
 	"colors": "B",
@@ -12264,19 +12260,12 @@
 			]
 		},
 		{
-			"type": "deckCard",
-			"probability": 0.5,
+			"type": "card",
+			"probability": 1,
 			"count": 1,
 			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
+			"subTypes": [
+				"Spirit"
 			]
 		},
 		{
@@ -13033,6 +13022,7 @@
 	"deck": [
 		"decks/standard/zombie_greater.dck"
 	],
+	"ai": "",
 	"spawnRate": 1,
 	"difficulty": 0.2,
 	"speed": 15,
@@ -24631,15 +24621,19 @@
 	"life": 11,
 	"rewards": [
 		{
-			"type": "randomCard",
-			"count": 2,
-			"addMaxCount": 8
-		},
-		{
 			"type": "gold",
 			"probability": 0.6,
 			"count": 7,
 			"addMaxCount": 32
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"colors": [
+				"Black"
+			]
 		}
 	],
 	"colors": "B",
@@ -24665,15 +24659,19 @@
 	"life": 11,
 	"rewards": [
 		{
-			"type": "randomCard",
-			"count": 2,
-			"addMaxCount": 8
-		},
-		{
 			"type": "gold",
-			"probability": 0.6,
+			"probability": 1,
 			"count": 7,
 			"addMaxCount": 32
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"subTypes": [
+				"Skeleton"
+			]
 		}
 	],
 	"colors": "B",
@@ -24706,50 +24704,9 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"common",
-				"rare"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.5,
-			"count": 1,
-			"addMaxCount": 2,
-			"rarity": [
-				"uncommon"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.25,
-			"count": 1,
-			"addMaxCount": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Creature",
-				"Artifact",
-				"Enchantment",
-				"Instant",
-				"Sorcery"
-			]
-		},
-		{
-			"type": "deckCard",
-			"probability": 0.1,
-			"count": 1,
-			"rarity": [
-				"rare"
-			],
-			"cardTypes": [
-				"Land"
+				"rare",
+				"Mythic Rare",
+				"Uncommon"
 			]
 		},
 		{
@@ -24757,6 +24714,19 @@
 			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 10
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 4,
+			"cardText": "Skeleton"
 		}
 	],
 	"colors": "B",
@@ -29127,7 +29097,6 @@
 			"addMaxCount": 15
 		}
 	],
-	"colors": "GW",
 	"questTags": [
 		"Stone",
 		"Wall",
@@ -29135,6 +29104,1000 @@
 		"Artifact",
 		"Hidden",
 		"Juggernaut"
+	]
+},
+{
+	"name": "Bone Golem",
+	"sprite": "sprites/enemy/undead/bonegolem.atlas",
+	"deck": [
+		"decks/standard/bonegolem.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Black"
+			],
+			"subTypes": [
+				"Skeleton"
+			],
+			"cardTypes": [
+				"Creature"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "GW",
+	"questTags": [
+		"Skeleton",
+		"IdentityBlack",
+		"Golem",
+		"Undead",
+		"Zombie",
+		"Aberration",
+		"Monster",
+		"Evil"
+	]
+},
+{
+	"name": "Hulking Brute",
+	"sprite": "sprites/enemy/undead/hulkingbrute.atlas",
+	"deck": [
+		"decks/standard/hulkingbrute.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Zombie",
+		"Evil"
+	]
+},
+{
+	"name": "Unholy Knight",
+	"sprite": "sprites/enemy/undead/deathknightidle.atlas",
+	"deck": [
+		"decks/standard/unholyknight.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"uncommon",
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"BiomeBlack",
+		"Aberration",
+		"Aggressive",
+		"IdentityBlack",
+		"Hostile",
+		"Unholy"
+	]
+},
+{
+	"name": "Undead Goblin",
+	"sprite": "sprites/enemy/undead/goblinzombie.atlas",
+	"deck": [
+		"decks/standard/monobgoblins.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"scale": 0.8,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "RB",
+	"questTags": [
+		"Goblin",
+		"Zombie",
+		"Undead",
+		"Evil",
+		"Aberration",
+		"IdentityRakdos"
+	]
+},
+{
+	"name": "Graven Revenant",
+	"sprite": "sprites/enemy/undead/graverevenant.atlas",
+	"deck": [
+		"decks/standard/giralfgisa.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Blue",
+				"Black"
+			],
+			"rarity": [
+				"uncommon",
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Evil",
+		"Zombie",
+		"Necromancer",
+		"BiomeBlack",
+		"Inhuman",
+		"Wizard",
+		"IdentityDimir"
+	]
+},
+{
+	"name": "Plaguelord",
+	"sprite": "sprites/enemy/undead/zombiepoisoner.atlas",
+	"deck": [
+		"decks/standard/zombiepoisoner.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"cardText": "Infect"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"cardText": "Poison"
+		}
+	],
+	"colors": "UB",
+	"questTags": [
+		"Evil",
+		"Zombie",
+		"Necromancer",
+		"BiomeBlack",
+		"Inhuman",
+		"Wizard",
+		"IdentityDimir"
+	]
+},
+{
+	"name": "Royal Sentinel",
+	"sprite": "sprites/enemy/undead/royalsentinel.atlas",
+	"deck": [
+		"decks/standard/trap.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Blue",
+				"Black"
+			],
+			"rarity": [
+				"uncommon",
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "UB",
+	"questTags": [
+		"Evil",
+		"Zombie",
+		"Necromancer",
+		"BiomeBlack",
+		"Inhuman",
+		"Wizard",
+		"IdentityDimir",
+		"Guardian"
+	]
+},
+{
+	"name": "Lord Pestilence",
+	"sprite": "sprites/enemy/undead/pestilencelord.atlas",
+	"deck": [
+		"decks/standard/trap.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Blue",
+				"Black"
+			],
+			"rarity": [
+				"uncommon",
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Evil",
+		"Zombie",
+		"Necromancer",
+		"BiomeBlack",
+		"Inhuman",
+		"Wizard",
+		"IdentityDimir"
+	]
+},
+{
+	"name": "Sand Ghoul",
+	"sprite": "sprites/enemy/undead/sandghoul.atlas",
+	"deck": [
+		"decks/standard/sandghoul.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Blue",
+				"Black"
+			],
+			"rarity": [
+				"uncommon",
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Zombie",
+		"Giant",
+		"Golem",
+		"IdentityWhite",
+		"Aberration",
+		"Aggressive",
+		null
+	]
+},
+{
+	"name": "Tomb Guardian",
+	"sprite": "sprites/enemy/undead/tombguardian.atlas",
+	"deck": [
+		"decks/standard/tombguardian.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Blue",
+				"Black"
+			],
+			"rarity": [
+				"uncommon",
+				"Rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Evil",
+		"Zombie",
+		"Necromancer",
+		"BiomeBlack",
+		"Inhuman",
+		"Wizard",
+		"IdentityDimir"
+	]
+},
+{
+	"name": "Undead Roamer",
+	"sprite": "sprites/enemy/undead/undeadroamer.atlas",
+	"deck": [
+		"decks/standard/undeadroamer.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Evil",
+		"Zombie",
+		"BiomeBlack",
+		"IdentityBlack",
+		"Undead",
+		"Aberration",
+		null
+	]
+},
+{
+	"name": "Undead Shuffler",
+	"sprite": "sprites/enemy/undead/undeadshuffler.atlas",
+	"deck": [
+		"decks/standard/undeadshuffler.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"uncommon",
+				"Rare"
+			],
+			"subTypes": [
+				"Zombie"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "B",
+	"questTags": [
+		"Aberration",
+		"Aggressive",
+		"Undead",
+		"Unholy",
+		"IdentityBlack",
+		null,
+		null
+	]
+},
+{
+	"name": "Unholy Skull",
+	"sprite": "sprites/enemy/undead/unholyskull.atlas",
+	"deck": [
+		"decks/standard/unholyskull.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 2,
+			"colors": [
+				"Black"
+			],
+			"cardText": "Discard Opponent"
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "BU",
+	"questTags": [
+		"Evil",
+		"Zombie",
+		"BiomeBlack",
+		"Inhuman",
+		"Wizard",
+		"IdentityDimir",
+		"Skull"
+	]
+},
+{
+	"name": "Unraveling Crawler",
+	"sprite": "sprites/enemy/undead/unravelingcrawler.atlas",
+	"deck": [
+		"decks/standard/unravelingcrawler.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon",
+				"Rare"
+			]
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"cardText": "return graveyard hand"
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 15
+		}
+	],
+	"colors": "GB",
+	"questTags": [
+		"Evil",
+		"Aberration",
+		"Aerie",
+		"Monster",
+		"Undead",
+		"Crawling",
+		"BiomeBlack",
+		"Skeleton"
 	]
 },
 {
