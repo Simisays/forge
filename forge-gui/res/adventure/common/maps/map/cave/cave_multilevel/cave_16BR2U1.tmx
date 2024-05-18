@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="81">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="82">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -40,6 +40,23 @@
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel/cave_16BR3U.tmx"/>
     <property name="teleportObjectId" value="78"/>
+   </properties>
+  </object>
+  <object id="81" name="switch" type="dialog" gid="4426" x="95.3333" y="38" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds far away&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceQuestFlag&quot;:&quot;gateCave&quot;}],
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
    </properties>
   </object>
  </objectgroup>

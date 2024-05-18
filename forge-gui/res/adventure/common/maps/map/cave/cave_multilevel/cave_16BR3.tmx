@@ -39,13 +39,13 @@
   <object id="78" template="../../../obj/enemy.tx" x="320.91" y="167.928" visible="1">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Dralnu's Crusade&quot; ] }"/>
-    <property name="enemy" value="Goblin Zombie"/>
+    <property name="enemy" value="Undead Goblin"/>
     <property name="hidden" type="bool" value="true"/>
     <property name="pursueRange" type="float" value="60"/>
     <property name="threatRange" type="float" value="30"/>
    </properties>
   </object>
-  <object id="80" template="../../../obj/treasure.tx" x="334.933" y="218.922">
+  <object id="80" template="../../../obj/treasure.tx" x="348.106" y="204.899">
    <properties>
     <property name="reward">[
 	{
