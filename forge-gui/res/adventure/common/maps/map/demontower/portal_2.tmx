@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="83">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <layer id="10" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJyr5GRgqBzFo3gE4UZ+BoYmInEzP/XslRdgYFAgEisKUNfeTBH62AuyBxZ2Kkj2gmh0jG43JWGOzXxSMTl+H7WXPDxq76i91HIDJXaNZHtH8SgexaMYGQMALfO8Qg==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l1FOwzAMhlOe2r7Ae4HtEGi3yzZ6CMq5gHfGtoMQi1oxxk6cNcNSVK1t8tmO/TdzLm2frXPr3rltF8dj+P3VZiYuMIlJ2atKfODQdUaBdwzPz+1f/hIffFhn16W5wIEcAP8+XE/Ej0vyjzndJ7jAOs28hz6+N/TRB3rfGuuRzfOEx1m1jOcYbCAxvN/Yh9Uwx5yLtglrre9saz0ZubRX9v/IpbVDuc+3MW8fhAtXaaC9JXIOMUK/HZguUO5KWb9k0Ngxr9j/tP92V+LSvcT+B/NXjhf6gmrctvu9xzTeTUE/aCbFS7mDoDU1uahJNGbNanKHWetGFi//DtXmoqGOn2fWKGgkcKfmZ7w2dtZLE+dNyjxP6krTSPTBajm9whpDrqaRtbnYs7Cv3sCdlPzx+1puwST9SOU5FZM1F9pZrYRbahqTnzOkvqrN5LqM79U6I0tnQxhcHz15VoPtFW7Ov6XsS7m5moN9OSTqQcszX6O01vHbiv8buA85rsS0nptR71Hz0c9ULX8D5+C7Qg==
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzFVkFuAjEMDD33ktz6CqiEeEE/UwLfof0Tu1Rq+5iqB8RGYMWEsePdpq2liN2N8WQmdmLnbm3unXv0YELwXQfn3oz+mvXeFocw98PvNvwMs7b+NL+4jNaYWqykxcGffTbhbzCTxWGuM+5DDW+sZrEBzxRjE3TNPu7GjVa2YrGe7vNA70sD7ty4R6sRHCy4vYLL9fq8PB8fbv3Kb+8VXMpf/r5g59QYjpKV3HnNkPX+Op8RroWvhIvqFJ1RLfkiTKl2rbVi8YugTqXa/Y39tViJ+z2Mr3/AnWISrnZuvMzy8+tM9ittJ/jyXqI8N6Q+o8V5lbCeQ85jjind91NwSw78/un8NaZ0DybNy4HmED+kXwzZR7t7eW+D4qD9of5Awrb0g7U7WuJGPRGKjbjyO8LS00rc0DmlrZX3UKinseqK/OibtlbKe+LN+1ekXcmP1w7F4NpKevA1Ub7XejG0DvLn67D8t1PynWup5QLlL8WqWS3fI9AV7ek6ZN202pnaV/M94DEOPo+EewKpaqsU
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYIAASwbqgEtArMrKwKABxMfwYBC4RSU7YeAoATth9hIDSAkPatpLCjg8QPbC7FbBYecRGtkLS1vk2Imc1syYiLfTBKoWW1jTyp/oAGR3ChsEw+y8REP7LmFhE2sftrDlNYbQjjwQjEsMBkxIiB9kADML3TxCYndMIZhcgG4vsf6l1N6BALD4XSEKwcigDYgfazIwPNGEsHEBcuMXH/gPtJNBC7vcSlEIxgaILecX8BBWgwzqeDHFCNV3t0hwDyHgI0eePvT8i+4PbP5CB7SIX1oCUsL8pDADQ4ggde0npz4iFxDT5tJmp8wOcsFJLPbicy+18gs2e+kBRu1FAHL7AsToI+RfUtIQSWXFIAxnQgAAIjZaTw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="238.666" y="480.166">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/door_down.tx" x="232.5" y="235.5">
+   <properties>
+    <property name="teleport" value="maps/map/portal_2B.tmx"/>
+    <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
