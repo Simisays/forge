@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="60">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="65">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBjcQIZn1F56ADdO0sSpYT4hs8nRg009KExhmFj96OrIsRcZoMcrSB6GSTGHGvYSY+5Q9e9AxS8xZlAjPZNiNr70Ti17RwF9AXJZRgkAAMEHDNY=
@@ -36,15 +36,26 @@
  <objectgroup id="4" name="Objects">
   <object id="58" template="../../obj/door_right.tx" x="177.5" y="46.333">
    <properties>
-    <property name="teleport" value="maps/map/portal_2G.tmx"/>
+    <property name="teleport" value="../common/maps/map/demontower/portal_2G.tmx"/>
     <property name="teleportObjectId" value="63"/>
    </properties>
   </object>
   <object id="59" template="../../obj/door_down.tx" x="98" y="144">
    <properties>
-    <property name="teleport" value="maps/map/portal_2E.tmx"/>
+    <property name="teleport" value="../common/maps/map/demontower/portal_2E.tmx"/>
     <property name="teleportObjectId" value="56"/>
    </properties>
   </object>
+  <object id="60" template="../../obj/gold.tx" x="331.263" y="134.829"/>
+  <object id="61" template="../../obj/enemy.tx" x="313.625" y="134.138">
+   <properties>
+    <property name="enemy" value="Cosmic Horror"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="62,63,64,62,63"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/waypoint.tx" x="313.28" y="104.396"/>
+  <object id="63" template="../../obj/waypoint.tx" x="314.663" y="184.975"/>
+  <object id="64" template="../../obj/waypoint.tx" x="265.209" y="233.046"/>
  </objectgroup>
 </map>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="58">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="61">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9RGrHiQPw5SYQ469pKijpr308O9Axi890jMpZpMjPgpGBgAAySsKzg==
@@ -30,7 +30,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIKBATt5BtoFwxfUcg+0C2gLVBgH2gVDFwAAAAABcw==
+   eJxjYBgFowACVohCMDp7FFAP1PEOtAsGDwCFxU6egXYF9cFgieNa7oF2AW2BCuNAu2DoAgAvZgYI
   </data>
  </layer>
  <layer id="8" name="Over Sprites" width="30" height="17" tintcolor="#ffaa00">
@@ -41,20 +41,23 @@
  <objectgroup id="4" name="Objects">
   <object id="55" template="../../obj/door_left.tx" x="176.5" y="241">
    <properties>
-    <property name="teleport" value="maps/map/portal_2E.tmx"/>
+    <property name="teleport" value="../common/maps/map/demontower/portal_2E.tmx"/>
     <property name="teleportObjectId" value="58"/>
    </properties>
   </object>
   <object id="56" template="../../obj/door_up.tx" x="207.5" y="270.5">
    <properties>
-    <property name="teleport" value="maps/map/portal_2B.tmx"/>
+    <property name="teleport" value="../common/maps/map/demontower/portal_2B.tmx"/>
     <property name="teleportObjectId" value="71"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/enemy.tx" x="296.5" y="137">
+  <object id="57" template="../../obj/enemy.tx" x="247.046" y="135.271">
    <properties>
-    <property name="enemy" value="Devil"/>
+    <property name="enemy" value="Necromancer"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
+  <object id="59" template="../../obj/treasure.tx" x="225.784" y="96.4418"/>
+  <object id="60" template="../../obj/manashards.tx" x="85.0293" y="119.613"/>
  </objectgroup>
 </map>

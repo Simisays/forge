@@ -63,7 +63,7 @@
 			  "name": "Contact Sir Donovan (Requires 5 Mana Shards)"
 		  }
 		  ]
-	  }
+	  },
 	  "questItem": true
   },
   {
@@ -1218,6 +1218,21 @@
       "startBattleWithCard": [
         "Ooze Flux"
       ]
+}
+},
+{
+    "name": "Amulet of the Deceiver",
+    "equipmentSlot": "Head",
+    "iconName": "DarkAmulet",
+    "effect": {
+      "lifeModifier": -1,
+      "moveSpeed": 1.20,
+      "startBattleWithCard": [
+       "Bloodsprout Talisman" ],
+      "opponent": {
+        "startBattleWithCard": [
+          "Illusory Demon" ]
+         }
 }
 },
 {

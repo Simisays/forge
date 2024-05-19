@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="83">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="84">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="10" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJyr5GRgqBzFo3gE4UZ+BoYmInEzP/XslRdgYFAgEisKUNfeTBH62AuyBxZ2Kkj2gmh0jG43JWGOzXxSMTl+H7WXPDxq76i91HIDJXaNZHtH8SgexaMYGQMALfO8Qg==
@@ -26,7 +27,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYIAASwbqgEtArMrKwKABxMfwYBC4RSU7YeAoATth9hIDSAkPatpLCjg8QPbC7FbBYecRGtkLS1vk2Imc1syYiLfTBKoWW1jTyp/oAGR3ChsEw+y8REP7LmFhE2sftrDlNYbQjjwQjEsMBkxIiB9kADML3TxCYndMIZhcgG4vsf6l1N6BALD4XSEKwcigDYgfazIwPNGEsHEBcuMXH/gPtJNBC7vcSlEIxgaILecX8BBWgwzqeDHFCNV3t0hwDyHgI0eePvT8i+4PbP5CB7SIX1oCUsL8pDADQ4ggde0npz4iFxDT5tJmp8wOcsFJLPbicy+18gs2e+kBRu1FAHL7AsToI+RfUtIQSWXFIAxnQgAAIjZaTw==
+   eJzNljsKwkAQQAdBbZJCRLCyUhAs/YCd6S09gscQY+U5LPUcfsA2pdjpPTRhHQhhkp2ZJMQHQ747L/sPgGEOxRCEMagDDMO4ZUTEg5Fv5/LdV4sTvRwk7VGkV8K5Ii+6+ynOS0leHFsaZ3yszWp85+T3LtXWZdUzSeReN0ygM2CWlcwfJCDOo+OGkYtqW3dsjp5jIu0eMhH0TxzMlcxnu/ecmpDiu7SXW1+tt0qwf48dE3H2YbwWAO+FOU9D279ZfEInePSzU8cEBXedPzj2d+Jsibli2+8egu+xsezpyiXnb7IeeH3tpufI07++Yr3KUy5C0ub3NsCqpXdRaPYjLZx/rlEzn0PLnfBmfW9R84XyZsHZB8vwFsU/ejnjUlvOVl/JGBKtFX/Yzja+cQFfWA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -37,8 +38,20 @@
   </object>
   <object id="78" template="../../obj/door_down.tx" x="232.5" y="235.5">
    <properties>
-    <property name="teleport" value="maps/map/portal_2B.tmx"/>
+    <property name="teleport" value="../common/maps/map/demontower/portal_2B.tmx"/>
     <property name="teleportObjectId" value="69"/>
+   </properties>
+  </object>
+  <object id="83" template="../../obj/dialog.tx" type="dialog" gid="11530" x="258" y="288.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;The inscription reads: Congratulations Adventurer ! By just finding this place you have won a price !&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;You happily walk toward your price&quot; }
+]
+}
+]</property>
    </properties>
   </object>
  </objectgroup>
