@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="40" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+   eJzt07EJQCEQREFL8PdfpBUIBh/BwEQ44cBZmPwl22opDQAAAOBBEXu1L2r69GXp699P33nfbMvWt3Zl6tt1RbXd6Mv235O2AWz0WmU=
   </data>
  </layer>
  <layer id="2" name="Walls" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzNWFtuwjAQzCeReq3QipP0ZlDaWzV9HKOJYMR0tC8bKmrJQiSxPTM7u3ayHYdhu/TjZhjm5fdtc/n/eu64ds/+tPS1vY8nTB/n/7gWYQSXefwbPkfBg7Zfrr9sLhjn8bfGGKst49OrnWL7Xq5/jheMaFPCa227G+qnGIDNuw8tPWy3xqcaYn2O0eN4wv01nrpq2hLjY0feVTSMNNWm44GLdUcuVrGqhhjrjbd86+kXedXi4mnoxc6Klz6PfF9/D7RmhM2bu4JTsVq+5OeR76qF6gz8PHdLPrF/sTbP18KXtVNd4eFqfHU+9WDPnsJjJuO5tS5UtNPcqrRoXo6p6qZaVOLB9QLzwX9e3VN8vA8zT++51njg+Ulwa90D1koerHx4P/RilHmQ9avUvoo3JuEX1cuKBxkjN6vOe7HUccztWnwaP61RWLMlj7DutTVaz8+KNzsPeA3ee0z4eP6bR3vP9nBamnrrcU3J8Fm1ceuMacklr+leiDF7g1+0nqWJp2ErRu+MxmdJrdvPD369Z26VPTHDGHmlut/qGH6Ps/LF4gU+B+Ncwjhv8X7HPs405JrB9SvL+Sr3aD3ME80BLh4P9UzkzUq36rtV13V/92o/PGP5tJKDGT6PY4sHopi3aqg8tWaqbj0xYm6cNxUd1X+74J6Fv0eD1hhY70N6loTne78RWOv06Gc1/i7jceZvc14OKMYK1+h8Vompd0619FEtMq9k2ulZvXW81hM9z2QxtnyrukUxrWjPOC0umYZeblVyIeOHubx9ryWHeZ/fJbrpWO/7G69vcemtVa3118JqvZvz3m3dv3dHnP4brtb+AwnlX+Q=
-  </data>
- </layer>
- <layer id="3" name="Clutter" width="40" height="40">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
-  <data encoding="base64" compression="zlib">
-   eJztmEkOgCAMRd3gdP8bOB5TuyAaIwGE0kr7Epe0H/wFStMoUjDn1yWMH3MJEUjKumPh0tQWVeFnoxaARE8t4IHLDxy9K5ma/seUOd6cOV4Iei5ewFqsRLlD64Kqft7yLh/i7KlCIrCa7VllIsdxhWKfUP4Bd+9iATUuZe619hQlkOIRhSf3noGrF3PdgX39Ecy/5HsN5BsK5sOGqldReHAAlL8Iiw==
+   eJzFV1tuwjAQzCeWeq1AxUl6MyjtrZo+jtFEMGI62vWuE6OOZCGS2J6dfdn7Mgz7eVx2wzDNv++7+/+328Cz/xzP81jwUa6cPm//8azGEbZM5TH2XIQPcJqfv+7uHKfyV2PMVUT2rNVOuf3Mz7/KnSMwBnYtOHbUTzmAm/ceWnrcevNTDbE/++hQrry/y3Wopi0+vqzIu4yGNU0VOh+8WHfkYparaoi53nwrbj39arFq2eJp6PnO8pd+j3xffs+0Z42bt3aGp3K14pK/R76rFqoz+PPaLfnE8Yu9eb0We1k71RUxnPWvrqcxuKan8JzR+G6pCxntNLcyqK3LPlXdVIuMP7heYD3En1f3lB/3YbbT+67VH/h+FN5a98A1kweLPdwPPR9FMcj6ZWpfJjZGsa9WLzMxyBwZVp33fKnz2Lat/NR/WqOwZ0seYd+tNVrPz8o3Og94QOwdAnu8+JuK3bM9npam3n5cUyJ+Vm3cO3NacsmD9kLMORn21fazNPE0bOXondH4LKl1++XJr/dsW6YnRhxrsZLttzqH73FWvlh2wZ6zcS5hnj3udxzHkYZcM7h+RTmftb22H9aprQFbPDs0ZmqxmRlWfbfquvZ3r/YjZqw4zeRgxM+zMaplWbRqqHZqzbTORVvAeZPRUePvWHnXEy33N+s+pJqdVvZiD9n7TEYj2NoDrfe32vkMQEz2QHR3atFOz+q9EfnYqlEMPas/ApGGFkfopvHRGy05zH3+WOzzRm9E2tX6k/WuF7y7+9bRA4/g1ZNfZp9fwnUMQQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

@@ -1223,7 +1223,7 @@
 {
     "name": "Amulet of the Deceiver",
     "equipmentSlot": "Head",
-    "iconName": "DarkAmulet",
+    "iconName": "MoxJet",
     "effect": {
       "lifeModifier": -1,
       "moveSpeed": 1.20,

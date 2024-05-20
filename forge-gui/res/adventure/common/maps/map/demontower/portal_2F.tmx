@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBjcQIZn1F56ADdO0sSpYT4hs8nRg009KExhmFj96OrIsRcZoMcrSB6GSTGHGvYSY+5Q9e9AxS8xZlAjPZNiNr70Ti17RwF9AXJZRgkAAMEHDNY=
@@ -30,7 +31,7 @@
  </layer>
  <layer id="8" name="Over Sprites" width="30" height="17" tintcolor="#ffaa00">
   <data encoding="base64" compression="zlib">
-   eJxjYCAd3GQiQxMVwKi9o/aO2jt07R0Fo2AUDA4AAGT1B7Q=
+   eJxjYCAdRBqSoYkKYNRe+oCbTKP2jto7CkbBKBiuAABzcgZw
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

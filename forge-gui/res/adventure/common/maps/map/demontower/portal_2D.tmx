@@ -5,6 +5,7 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo4CBwY2TNHFqmE/IbHL0EFJPrH5y9RGrHiQPw5SYQ469pKijpr308O9Axi890jMpZpMjPgpGBgAAySsKzg==
@@ -12,7 +13,7 @@
  </layer>
  <layer id="7" name="Lava" width="30" height="17" tintcolor="#ff5500">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0Bs8Y0XgUXtHwSgYBfQEADbGCEQ=
+   eJxjYBgFo2AU0BuctEHgUXtHwSgYBfQEAOCsCS4=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17" tintcolor="#8a3440">
@@ -30,12 +31,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFowACVohCMDp7FFAP1PEOtAsGDwCFxU6egXYF9cFgieNa7oF2AW2BCuNAu2DoAgAvZgYI
+   eJxjYCAdRBqSoYkKYNRe2oIVohAMshfGpicYCeFcx0s/uwY7AIXFTp6BdgX1wWCJ41rugXYBbYEK40C7YOgCAC6fCc4=
   </data>
  </layer>
  <layer id="8" name="Over Sprites" width="30" height="17" tintcolor="#ffaa00">
   <data encoding="base64" compression="zlib">
-   eJxjYCAd3GQiQxMVwKi9o/aO2jt07R0Fo2AUDA4AAGT1B7Q=
+   eJxjYCAdRBqSoYkKYNTeUXuHk703mUaWvaNgFIyCwQEATRYFfQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

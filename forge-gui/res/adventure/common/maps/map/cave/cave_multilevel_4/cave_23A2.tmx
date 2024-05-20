@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="40" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+   eJzt1U0KgzAQBeBZdOUcpFa8aFPtrfxdeKZm6AxESLYZhSd8iHGRR16ix4PoAAC4iXdDtDFRiPdP45/HMgXNtfN/bIjPC/vnSjOlXhfIlstlVu3Y1lXU7HuK830z80mvMt7ymUffU2a+VfuWPKOauW42Ow8h07Gtn+w/uTz2Xqlb0cV3T/Y/H31hfuu3c8xXOruD7rXxAt++0tqF5P9R+5sCAAAAAAAAPn7MNBIs
   </data>
  </layer>
  <layer id="2" name="Walls" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztl31qQyEQxN+fT+i18kFP0pu1TXKrmFePUQcyZLOoIR/gtLgwyBOMP3d1NOswTeuhoaGhoX+t3TxNMbeHuT9Lie2U28/cJgGeEhviKJi/7ZmN8S7AZLVk/WR9z7r1xblAjVcCPKX8IXeKtaU2QYMPtdwbn8M3WvLh/MZw2wc57t65OcZ7LbnoI2TBN1sf6Oda7HqiGbefL/p4a7NxTAzXfhYr898btXUwWnzWw+AR3O+PRG18qR998CaoxcczSP/ynut/8+us0nzJnBcbKzcPmKxXgu8WYwrX91WJLRXWZRn8er1vL+E5D/dz1tj83iixpxfw1Bh9/Wp3A2vZ4+7w+7LF1+vt0qqP36u97w8v70tqbxfWXzF3VO/915Ldf+r1VXyb2voq8tn6Kp4P+w5QPB9LuPx3U80hRJ9WzCHz+FdyqM73Sp/5BeUEHBA=
+   eJztl19OwzAMxvPAQ7JyDyTENbYhTsJV+HcOBuMaE4IHLkEpPQb5tH6a5yWZ0CbFoFr6FDWVl19sx+lmwbnZqFGjRo3613r2zrVxfPH1WVJsX3F8jGNvgCfFBvs0GL/LgY12ZYBJqov6jnrydvOLc4EcTw3wpOKH2FnMLTUPNviQy6Xoc3jGSD6c3zbs74P0++3a9NG9llzsI2TBM0dtmOde5H5a4bf0G12fltno04btfiafbybO3U12WTD/1qTf6f3krMQnexh6BOtdM7xHhvMmPX8fx9cm75+axxx6E1Ti4xlk/5K8WP9WMSz8WvC5UGy9OC/SpmodMMleCb59jH3Yvq9gZ8P6DwNDr3xWzXqeDHq/um934bAezt+mcf3c3YBYf5zsvifHoTw5xoWql9zdMB/4atwdui5LfLW+XUr5Ya2CD6p9f2ix9lL1Z0HMv8XYUbXrryRZf9bza/HbVObXIp/Mr8XzwdhZPR9d2Px3g1mMIcTvMYsxZBz/Sgyt8x2zz/wAa384WA==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="40">

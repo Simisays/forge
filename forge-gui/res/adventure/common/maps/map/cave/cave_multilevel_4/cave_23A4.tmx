@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="69">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="72">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="40" height="40">
-  <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt0aENACAMAEEsy3V91kEjiiMFcuL8Jx+9tQAAOGgkqrte6MvabujbtenTV9l2e5+3//ZVtwEAsJppolCS
+   eJzt2DEOwyAMBVC2KpfLGXurLjlM1KFqhWL4mG9/WnXwECXBTzYCxLGVcojifitl395RP++O8eoY+RaJ2ofmY+Ufsb18Ub1j+CLn12d/rt7V/VP4rDzW/Mr29ezK+o3U1wqlD7GqXWxf1HrE9GUa1X3t+di1eBiBeFr7r9LXW59ZRsvW8qH7x6yvZbN8meeDWV/0+uzxZe5vq/qevenZ1PXz2P6+eR9ijPaNjMP2sffubzy/qD0r+1au31Vuhc/Ks4rPuntC5p7al3l++QVfnRu5Y8v0Rd//ee5as3zI+Gwb02f9g/7P8FlzGum113cCSMDRNA==
   </data>
  </layer>
  <layer id="7" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt00kOgCAQRNHedt8JQW9lHE5qPIsSIU64toz1klr7AyJCREREX1fpPkSTlocCue+pDa0vrGsA+2rd1plIa+dGJC6939Hw+tylC6Evft8rZlvu6+3eFtL/+LZSU34nCI59M8B5leS+eM9DmgdtJSIiIvqzBS0IN+U=
+   eJzt070NgCAAhFEaC2h0IQVdxhmMP5MaZ1EiBFGsLDzNveRqv4AIQURERF9XyTBEs0wPBXLfXRtan9nWAPbVcl+vhOhU3IikdO93Unh95akLoc9+X0vMNt83qGubcf/j21JN/p0gOPYtAOeV4vvsPY9uGrSViP6vzcMQZUU8NOh9RPTMCgFhOe8=
   </data>
  </layer>
  <layer id="2" name="Walls" width="40" height="40">
@@ -30,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgF9AbsJKjlwiPHAcSsRJqzhIA8seaQ4nZK9AxXMNjDYhmd7SM1PAilY3IBJxqfVvmBjUT1o4A6YPFAO4AAILdcoFV+QAccZOobLOUdyB3Elm0Hkdi1vMSZPQoQ4BYLA8NtFgg7a2CdQhDMHmgHIIF6Xvq4h1ploS6VzKEWQE5rxORbeoJDA+0AAgCU7mD59iRUTGUgHUQA1A9g/ILqkeFc5lOzrURuu2GoAnL7T9j6G6A0tpyAPjYG0tIiNrUrSNA/CgY3oEd+G+x9KUJg6UA7gAAYHVMYnABUtqOHNTXbAcO5TTFYAQAe2BVp
+   eJxjYBgFgxlw4ZHjAGJWejkECtjppGe4gsEeFssG2gEEwJKBdgCFgG2gHTAKRsEowAsOIrFreQmrH+xlOr3BLRYGhtssEHbWwDqFIJg90A5AAvW89HHPYiqZo0slc6gFkNMaMfmWnuDQQDuAAAClO1i+PQkVUxlIBxEA9QMYv6A28miZPwpGwSgYbIBjoB0wBMDSgXYAAUBq3TI6pjA8wGibgv4AAI9TDn0=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -46,19 +41,42 @@
     <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
-  <object id="63" template="../../../obj/enemy.tx" x="343.667" y="230.333">
+  <object id="63" template="../../../obj/enemy.tx" x="370" y="241.666">
    <properties>
+    <property name="displayNameOverride" value="Cave Faerie"/>
     <property name="enemy" value="Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="64" template="../../../obj/enemy.tx" x="342.667" y="213.333">
+  <object id="64" template="../../../obj/enemy.tx" x="256.334" y="228.666">
    <properties>
-    <property name="enemy" value="Faerie"/>
+    <property name="displayNameOverride" value="Cave Faerie"/>
+    <property name="enemy" value="Dimir Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="65" template="../../../obj/treasure.tx" x="311.667" y="276.667"/>
   <object id="66" template="../../../obj/treasure.tx" x="326.333" y="396"/>
   <object id="67" template="../../../obj/gold.tx" x="395" y="255"/>
   <object id="68" template="../../../obj/gold.tx" x="279.333" y="376.333"/>
+  <object id="69" template="../../../obj/enemy.tx" x="338.667" y="127.333">
+   <properties>
+    <property name="displayNameOverride" value="Cave Faerie"/>
+    <property name="enemy" value="Eldraine Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../obj/enemy.tx" x="42.3333" y="144.667">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../obj/enemy.tx" x="494.667" y="167.667">
+   <properties>
+    <property name="displayNameOverride" value="Cave Faerie"/>
+    <property name="enemy" value="Eldraine Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -5,14 +5,15 @@
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/buildings-nocollide.tsx"/>
  <layer id="6" name="Collision" width="60" height="60">
   <data encoding="base64" compression="zlib">
    eJztlltuAzEIRfNbqUvoerL/JVX9iGS1MOZxwKQJ0kiTxFzu8RAz94/b7f6+/sT6vXSfrZPxJmlQmpZ9ILSjfqx6lHaFbiXvRN0KX2RU7B/pieZd9SmdSXtXrU2fKxVBn39T/FTrT+uTK11iDj0jb6QGPb+7569Xm/JGvvN5NT26Ow3LPeXPk2+tId1nNTO83XWz9aRn5em1LKtXe7fW+r1WJ+orw6npWtZGIuqRZJX0LOszdTK5JKs3p6OWln+CN9OXJ6Oj/iTWbl7iTO0+QyK1J/A+tKJ5Hefc7/xX4V01iH2rrn3Sq6QTrR19P4wEdc539PQ03swz9qydwLtqeWp637vJOUyERUvj3eVqa6P9QTNrmiSvh7uK1+KP5tU0MvW6eDUPVbzWvqB4pbXdvNacCOtuz7TfNB1LZHqN7NErf1eeMzGN9Se+Put4JT1Lf3s0KvzRelHNDlZKd9WmvFE6FaxrnSkaHbyExjPwkmcB5WV6Lz90KC9vXi7+G++aI93TszybT/Fa36Vov6RXT/76WVpDhHVvLQzRtRMiwhxZNz00n5Fe8NbNBrm/1XOJOltJLzveU36r9n7HfOoZdbJKsybqOTMvqYjMs6jnSH70vyU9J83Lq13fuixhjw==
   </data>
  </layer>
- <layer id="1" name="Lava" width="60" height="60" tintcolor="#ff5500">
+ <layer id="1" name="Lava" width="60" height="60" opacity="0.81" tintcolor="#ff5500">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7A+8++yOupjJJBeUlVVVVVVVVVVVVVVVVX11QFiAell
+   eJztwwEJAAAMA6AleK/1L7QeR8FeUlVVVVVVVVVVVVVVVVX11QERZset
   </data>
  </layer>
  <layer id="2" name="Islands" width="60" height="60" tintcolor="#a15055">
@@ -25,11 +26,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmzFuwzAMRb1m6N4jJN2aKzQ3aZb2EikQJDfL3gukQJuMuUC7JPJgRBBU2xJJibL+2ylRBkWRX3LTAAC4eFs0zfsi3v7V2K4J9j6WM97xbHbG1z3B342x/WBer8uL7PCDrDLPv33I7IAgn3P6GL7v8xM4hi/GvmOcGeDCsF6X1s/Q9bpMOcZaqN8n1Zxurjma3PolnF818WvW+qdkvbnzPgAATInctbzLM6G3mnrNxEHJ34hS/+eoN0EYlPouRJOR0ITG4upZKeLSpwnF7KUYX//Ts8aeO9w1fyl5IGeM5ph7rG4p0QP65tbaa3b7puRzvBS0xsAQEjqpVtx9IHk3AwAAAOSihrpPmyYJysWu4am9/+Exzs5+U8GpP2jdJxJvKmrIe31o6WskemLJfrX2uAFlU6oGxUkpmj24w5F3KW8BJOn2ZE06qwZS3kvZc43JP3YtfjJ2Z6Kf7Xi+eympXEj5b+Da2j2F2Wiqy1L2UTjPQR83XjZABg==
+   eJztmztuwzAMhrV26J4jxFucKyQ3aZf2Eg0QJDfLngukQB9jL9AuqTwYEQTFtkTSouz/2ymSBkWRlGwMAICLl8qY1ypd/snKPhPkQ6wfeNdzOVhbjwR736zsjtlfn43s8r1sM+vfP2Y2QJDzkr5G6Pt8Rq4RirGPFGN6+GHw16exM9ZfnynHWAP1+4yl0881F5tb34XzqyZ+ra9/SvzNnfcBAGBK5K7lfWpCbzX1momDkr8Rpf7PUW+COCj1XcxMRmImNBR/njVGXIZmQil7KcXWe/OsoecOd81fSh7IGaM5dA+dW0r0gCHdWnvNdt+UfI6XgtYY6ENiTqoVfx9I3s0AAAAAuZhD3adtJgnKxa3hqb3/aZEm576p4Jw/aN0nEm8q5pD3utDS10j0xJL96tzjBpRNqTMoTkqZ2YMbHHmX8hZAknZPzmnOqoEx76VcXUPyj1uLf62M+V7R9Dfrhe6lpHIh5b+Ba+NrHSejqS4bs4/CeQ66+AfHUkAi
   </data>
  </layer>
  <objectgroup id="7" name="Objectlaag 1">
-  <object id="115" template="../../obj/door_right.tx" x="585.403" y="391.713">
+  <object id="115" template="../../obj/door_right.tx" x="573.296" y="403.82" width="38.5996" height="33.7569">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2C.tmx"/>
     <property name="teleportObjectId" value="76"/>
@@ -41,13 +42,14 @@
     <property name="teleportObjectId" value="78"/>
    </properties>
   </object>
-  <object id="117" template="../../obj/door_up.tx" x="520.403" y="76.7126">
+  <object id="117" template="../../obj/door_up.tx" x="513.946" y="83.1696" width="34.564" height="30.5283">
    <properties>
+    <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/demontower/portal_2C2.tmx"/>
     <property name="teleportObjectId" value="70"/>
    </properties>
   </object>
-  <object id="118" template="../../obj/door_down.tx" x="520.403" y="188.713">
+  <object id="118" template="../../obj/door_down.tx" x="516.367" y="191.942" width="24.8784" height="25.6856">
    <properties>
     <property name="teleport" value="../common/maps/map/demontower/portal_2D.tmx"/>
     <property name="teleportObjectId" value="56"/>
@@ -56,14 +58,14 @@
   <object id="119" template="../../obj/enemy.tx" x="230.859" y="872.781">
    <properties>
     <property name="enemy" value="Harpy"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="120" template="../../obj/enemy.tx" x="781.711" y="662.873">
    <properties>
-    <property name="enemy" value="Magma Elemental"/>
+    <property name="enemy" value="Magma Fire Elemental"/>
     <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="112,98,113"/>
+    <property name="waypoints" value="143,156,157"/>
    </properties>
   </object>
   <object id="121" template="../../obj/enemy.tx" x="795.283" y="136.842">
@@ -76,7 +78,7 @@
   <object id="122" template="../../obj/enemy.tx" x="121.544" y="697.337">
    <properties>
     <property name="enemy" value="Hellhound"/>
-    <property name="waypoints" value="106,96,105"/>
+    <property name="waypoints" value="141,150,149"/>
    </properties>
   </object>
   <object id="123" template="../../obj/enemy.tx" x="135.265" y="388.207">
@@ -84,7 +86,7 @@
     <property name="enemy" value="Harpy 2"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="50"/>
-    <property name="waypoints" value="104,103,94"/>
+    <property name="waypoints" value="148,147,139"/>
    </properties>
   </object>
   <object id="124" template="../../obj/manashards.tx" x="426.639" y="292.965"/>
@@ -154,16 +156,16 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="152" template="../../obj/enemy.tx" x="722.855" y="873.291">
+  <object id="152" template="../../obj/enemy.tx" x="719.626" y="870.87">
    <properties>
     <property name="enemy" value="Magma Elemental"/>
    </properties>
   </object>
   <object id="153" template="../../obj/enemy.tx" x="889.124" y="365.607">
    <properties>
-    <property name="enemy" value="Magma Elemental"/>
+    <property name="enemy" value="Volcano Elemental"/>
     <property name="threatRange" type="int" value="20"/>
-    <property name="waypoints" value="99,110,111,100"/>
+    <property name="waypoints" value="144,154,155,145"/>
    </properties>
   </object>
   <object id="154" template="../../obj/waypoint.tx" x="850.382" y="490.712"/>

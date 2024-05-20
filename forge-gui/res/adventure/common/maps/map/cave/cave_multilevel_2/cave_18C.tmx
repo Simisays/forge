@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="64">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="68">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
@@ -58,5 +58,15 @@
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
+  <object id="64" template="../../../obj/enemy.tx" x="180" y="151">
+   <properties>
+    <property name="enemy" value="Red Beast"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="67,65,66,65"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../obj/waypoint.tx" x="243" y="160"/>
+  <object id="66" template="../../../obj/waypoint.tx" x="299" y="214"/>
+  <object id="67" template="../../../obj/waypoint.tx" x="132" y="140"/>
  </objectgroup>
 </map>

@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="63">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="69">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFuEAd90C7gLZgFw+E3gOk9/IgxKN46WM/yJ5oJLt28tDPblIAqW4ChesuHsLqkAF6HIAANcMDl3vQ42CgADb/0wMMFv+TCkhNX/jAaNiPPAAACvERDg==
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybycnAMHMUj+JRPIpH8SgexSMCAwCsCkLM
@@ -30,39 +25,23 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFuICzICqfFYiX0MAeVjQaHUSj2RuDx6xfRNoJMk9NCMJW5QOy+RByl4HsK0h8bP7+Q6Q9+IAj0A4nJHveA9kf+BDuQ3YrMjuaSPNZcbCJAUuQ9KCHByGgKMDAoCSA3Uxc/PNA8y+g2YEcHoQAyK22QDvtBCDmIrsfBCoEsafd10Dz32Cxg9x0DtOHLcxW4DH3NFDtGRx+/Y3Hvp9ofOQwIyb+nwPVviAhbmEAV/okZF+VIG49pAB3Qfz2wAAx9swF4nkUuodYu5CBNSMDgw0jFSweAECLeoCeAADYGCw0
+   eJxjYBgFuIC+NiqfFYiX0MAeVjQaHUSj2RuDx6xfRNoJMk9IB8IW1ACyNRBy+4HsA0h8bP7+Q6Q9+IAu0A49JHtuA9l3NBDuQ3YrMjuaSPNZcbCJAUuQ9KCHByHAq8XAwKeF3Uxc/N1A8/eg2YEcHoQAyK2aQDu1tCDmIrsfBFK0safd60Dzb2Cxg9x0DtOHLcxW4DF3O1DtDhx+/Y3Hvp9ofOQwIyb+LwPVXiEhbmEAV/okZF+aNm49pABjbfz2wAAx9swF4nkUuodYu5CBNSMDgw0jFSweAECLeoCeAABB6iz6
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../obj/entry_up.tx" x="194" y="273.333"/>
-  <object id="49" template="../../../obj/enemy.tx" x="96.333" y="146.167">
+  <object id="53" template="../../../obj/enemy.tx" x="425.167" y="165.166">
    <properties>
-    <property name="enemy" value="Goblin"/>
+    <property name="displayNameOverride" value="Lizard Shaman"/>
+    <property name="enemy" value="Shaman of Zedruu"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="51" template="../../../obj/enemy.tx" x="336.149" y="37.3715">
+  <object id="56" template="../../../obj/enemy.tx" x="181.167" y="116">
    <properties>
-    <property name="enemy" value="Goblin Chief"/>
-   </properties>
-  </object>
-  <object id="53" template="../../../obj/enemy.tx" x="192.167" y="208.166">
-   <properties>
-    <property name="enemy" value="Goblin Warrior"/>
-   </properties>
-  </object>
-  <object id="56" template="../../../obj/enemy.tx" x="346.167" y="57.5">
-   <properties>
-    <property name="enemy" value="Goblin"/>
-   </properties>
-  </object>
-  <object id="57" template="../../../obj/enemy.tx" x="325.833" y="57.834">
-   <properties>
-    <property name="enemy" value="Goblin"/>
-   </properties>
-  </object>
-  <object id="58" template="../../../obj/enemy.tx" x="336.333" y="50.5">
-   <properties>
-    <property name="enemy" value="Goblin"/>
+    <property name="enemy" value="Basilisk"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="65,66,67,66"/>
    </properties>
   </object>
   <object id="59" template="../../../obj/door_down.tx" x="336.5" y="16.5">
@@ -71,10 +50,30 @@
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
-  <object id="60" template="../../../obj/enemy.tx" x="424" y="188.333">
+  <object id="60" template="../../../obj/enemy.tx" x="327" y="82.833">
    <properties>
-    <property name="enemy" value="Goblin"/>
+    <property name="enemy" value="Dark Enchanter"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
+  <object id="63" template="../../../obj/enemy.tx" x="95" y="148.5">
+   <properties>
+    <property name="displayNameOverride" value="Lizard Shaman"/>
+    <property name="enemy" value="Shaman of Zedruu"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../obj/enemy.tx" x="310" y="145">
+   <properties>
+    <property name="displayNameOverride" value="Lizard Shaman"/>
+    <property name="enemy" value="Shaman of Zedruu"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../obj/waypoint.tx" x="84" y="113.5"/>
+  <object id="66" template="../../../obj/waypoint.tx" x="306" y="112.5"/>
+  <object id="67" template="../../../obj/waypoint.tx" x="239" y="58.5"/>
+  <object id="68" template="../../../obj/manashards.tx" x="423.5" y="191"/>
  </objectgroup>
 </map>

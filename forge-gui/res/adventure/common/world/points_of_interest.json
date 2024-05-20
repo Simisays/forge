@@ -441,7 +441,82 @@
 			"Hostile",
 			"BiomeBlack",
 			"Sidequest"
-		]
+	]
+	},
+	{
+		"name": "CaveZombie",
+		"displayName": "Cave",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../common/maps/map/cave/cave_zombie.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"BiomeBlack"
+	]
+	},
+	{
+		"name": "CaveKobold",
+		"displayName": "Cave",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../common/maps/map/cave/cave_kobold.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"BiomeBlack"
+	]
+	},
+	{
+		"name": "CaveDragon",
+		"displayName": "Cave",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../common/maps/map/cave/cave_multilevel_4/cave_23.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"BiomeRed"
+	]
+	},
+	{
+		"name": "CaveReptile",
+		"displayName": "Cave",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../common/maps/map/cave/cave_multilevel_2/cave_18.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"BiomeGreen"
+	]
+	},
+	{
+		"name": "CaveTroll",
+		"displayName": "Cave",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../common/maps/map/cave/cave_multilevel_3/cave_21.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Cave",
+			"Hostile",
+			"BiomeColorless"
+	]
 	},
 	{
 		"name": "CaveLarge1",

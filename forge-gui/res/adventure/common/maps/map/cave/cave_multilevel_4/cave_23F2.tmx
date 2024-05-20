@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="63">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
@@ -39,6 +39,13 @@
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23G2.tmx"/>
     <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../obj/enemy.tx" x="297.095" y="353.056">
+   <properties>
+    <property name="enemy" value="Cerodon"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="80,77,78"/>
    </properties>
   </object>
  </objectgroup>
