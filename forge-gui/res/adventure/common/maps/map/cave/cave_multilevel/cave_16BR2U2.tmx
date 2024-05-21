@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="81">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="82">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFuMAeHgaGvTz0tzeKl4Ehmpf+9o6CUTBcwZ4ByMcgAMrLddz0t3cO/a0cBUMIAAAJ/AS1
-  </data>
- </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUjwi8gGHg3TCKR/EoHlgMADJSrZw=
@@ -35,39 +30,37 @@
     <property name="teleportObjectId" value="79"/>
    </properties>
   </object>
-  <object id="73" template="../../../obj/treasure.tx" x="224.667" y="27.6667"/>
+  <object id="73" template="../../../obj/treasure.tx" x="211.919" y="40.8401"/>
   <object id="74" template="../../../obj/gold.tx" x="245.667" y="153.333"/>
   <object id="75" template="../../../obj/gold.tx" x="232.333" y="140"/>
   <object id="76" template="../../../obj/gold.tx" x="235" y="43"/>
-  <object id="77" template="../../../obj/enemy.tx" x="198.667" y="104.667">
+  <object id="77" template="../../../obj/enemy.tx" x="202.067" y="83.4196">
    <properties>
     <property name="enemy" value="Demon"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="78" template="../../../obj/enemy.tx" x="222" y="153.667">
+  <object id="78" template="../../../obj/enemy.tx" x="191.404" y="152.392">
    <properties>
     <property name="enemy" value="Devil"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
   <object id="79" template="../../../obj/enemy.tx" x="207.4" y="192.832">
    <properties>
     <property name="enemy" value="Devil"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
-  <object id="80" name="switch" type="dialog" gid="4426" x="188.751" y="37.4694" width="16" height="16">
+  <object id="81" template="../../../obj/treasure.tx" x="231.246" y="25.5709">
    <properties>
-    <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
-    &quot;options&quot;:[ 
-	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds far away&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceQuestFlag&quot;:&quot;gateCave&quot;}],
-	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
-	] 
-	} 
-	
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;probability&quot;: 1,
+    &quot;itemName&quot;: &quot;Second Shard&quot;
+  }
 ]</property>
    </properties>
   </object>

@@ -23392,6 +23392,7 @@
 },
 {
 	"name": "Red Beast",
+    "nameOverride": "Giant Red Basilisk",
 	"sprite": "sprites/enemy/monstrosity/basilisk_2.atlas",
 	"deck": [
 		"decks/standard/beast_red.json"

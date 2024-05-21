@@ -51,22 +51,5 @@
   <object id="78" template="../../../obj/waypoint.tx" x="205.749" y="51.0678"/>
   <object id="79" template="../../../obj/waypoint.tx" x="209.148" y="168.353"/>
   <object id="80" template="../../../obj/manashards.tx" x="178.127" y="56.5921"/>
-  <object id="81" name="switch" type="dialog" gid="4426" x="212.548" y="23.4462" width="16" height="16">
-   <properties>
-    <property name="dialog">[
-  { 
-    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
-    &quot;options&quot;:[ 
-	{ 
-		&quot;text&quot;:&quot;You hear some loud sounds far away&quot;,
-		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceQuestFlag&quot;:&quot;gateCave&quot;}],
-	},
-	{ &quot;name&quot;:&quot;go away&quot; } 	
-	] 
-	} 
-	
-]</property>
-   </properties>
-  </object>
  </objectgroup>
 </map>

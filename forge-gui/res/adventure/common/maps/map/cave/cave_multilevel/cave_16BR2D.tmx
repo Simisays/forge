@@ -35,7 +35,7 @@
     <property name="teleportObjectId" value="75"/>
    </properties>
   </object>
-  <object id="67" template="../../../obj/enemy.tx" x="204.225" y="182.613">
+  <object id="67" template="../../../obj/enemy.tx" x="197.813" y="162.522">
    <properties>
     <property name="enemy" value="Master Blue Wizard"/>
     <property name="threatRange" type="int" value="50"/>

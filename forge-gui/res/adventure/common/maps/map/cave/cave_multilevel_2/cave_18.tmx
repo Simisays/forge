@@ -39,7 +39,8 @@
   </object>
   <object id="56" template="../../../obj/enemy.tx" x="181.167" y="116">
    <properties>
-    <property name="enemy" value="Basilisk"/>
+    <property name="displayNameOverride" value=""/>
+    <property name="enemy" value="Green Beast"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value="65,66,67,66"/>
    </properties>

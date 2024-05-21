@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="84">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="88">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/main-nocollide.tsx"/>
  <layer id="6" name="SubLevel" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2BkAz9O/PJX2RB4pNk7UHZTGxCydxSMgpEEAGZKC/g=
@@ -12,7 +13,7 @@
  </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzz42Rg8BvFo3iE4r8ihNU08jMwNAFxMz/17LUVY2BYLMrAwCyKW428AAODAhArClDXzyAAsh+X3XuB9u0D4v1Uthdmt6UY/eN5lwT97RzFo3iwYgCg569L
+   eJzz42Rg8BvFo3iE4r8ihNU08jMwNAFxMz/17LUVYwADZlHcauQFGBgUgFhRgLp+BgGQ/bjs3gu0bx8Q76eyvTC7LcXoH8+7JOhv5ygexYMVAwBnr66T
   </data>
  </layer>
  <layer id="2" name="Walls" width="30" height="17">
@@ -28,6 +29,11 @@
    eJxjYBgFQxGsEIVgeoJGcfrahw5W0tm/o2BgwO+BdsAoGAXDHAAA8t8DzA==
   </data>
  </layer>
+ <layer id="7" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDARQdhloF4yCUTAKRiIAANWnAGg=
+  </data>
+ </layer>
  <objectgroup id="4" name="Objects">
   <object id="77" template="../../../obj/door_up.tx" x="208.638" y="270.629">
    <properties>
@@ -41,7 +47,7 @@
     <property name="teleportObjectId" value="80"/>
    </properties>
   </object>
-  <object id="79" template="../../../obj/treasure.tx" x="372.688" y="94.5228">
+  <object id="79" template="../../../obj/treasure.tx" x="247.726" y="78.6608">
    <properties>
     <property name="reward">[
   {
@@ -125,11 +131,11 @@
 ]</property>
    </properties>
   </object>
-  <object id="82" template="../../../obj/enemy.tx" x="349.089" y="118.896" visible="1">
+  <object id="82" template="../../../obj/enemy.tx" x="348.702" y="123.925" visible="1">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bontu's Monument&quot; ] }"/>
     <property name="enemy" value="Unholy Knight"/>
-    <property name="hidden" type="bool" value="true"/>
+    <property name="hidden" type="bool" value="false"/>
     <property name="pursueRange" type="float" value="60"/>
     <property name="threatRange" type="float" value="30"/>
    </properties>
@@ -137,31 +143,51 @@
   <object id="83" template="../../../obj/gate.tx" x="207.878" y="136.693">
    <properties>
     <property name="dialog">[
-	{
-		&quot;text&quot;: &quot;A gate is blocking the path. I looks like it is open elsewhere&quot;,
-		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;continue&quot; }
-		]
-	},
-	{
-		&quot;name&quot;: &quot;The lock seems to have dissapeared&quot;,
-		&quot;options&quot;: [
-			{
-				&quot;condition&quot;: [
-					{
-						&quot;getQuestFlag&quot;: {
-							&quot;key&quot;: &quot;gateCave&quot;,
-							&quot;op&quot;: &quot;&gt;=&quot;,
-							&quot;val&quot;: 3
-						}
-					}
-				],
-				&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 } ],
-				&quot;name&quot;: &quot;Push the gate open&quot;
-			}
-		]
-	}
+  {
+    &quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see an imposing figure in the room beyond. (you need all five shards from this dungeon to open this gate)&quot;,
+    &quot;options&quot;: [
+      { &quot;name&quot;: &quot;go away&quot; },
+      {
+        &quot;name&quot;: &quot;unlock with the five shards&quot;,
+        &quot;condition&quot;: [
+          { &quot;item&quot;: &quot;First Shard&quot; },
+          { &quot;item&quot;: &quot;Second Shard&quot; },
+          { &quot;item&quot;: &quot;Third Shard&quot; },
+          { &quot;item&quot;: &quot;Fourth Shard&quot; },
+          { &quot;item&quot;: &quot;Fifth Shard&quot; }
+        ],
+        &quot;text&quot;: &quot;The gate is unlocked&quot;,
+        &quot;options&quot;: [
+          {
+            &quot;name&quot;: &quot;continue&quot;,
+            &quot;action&quot;: [
+              { &quot;deleteMapObject&quot;: -1 },
+              { &quot;removeItem&quot;: &quot;First Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Second Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Third Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Fourth Shard&quot; },
+              { &quot;removeItem&quot;: &quot;Fifth Shard&quot; }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ]</property>
+   </properties>
+  </object>
+  <object id="84" template="../../../obj/manashards.tx" x="188.921" y="58.93"/>
+  <object id="87" template="../../../obj/treasure.tx" x="363.79" y="94.1359">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;count&quot;: 1,
+    &quot;probability&quot;: 1,
+    &quot;itemName&quot;: &quot;Lightbringers Boots'&quot;
+  }
+]</property>
+    <property name="spawn.Easy" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>

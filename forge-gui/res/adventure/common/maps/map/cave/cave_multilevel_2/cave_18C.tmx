@@ -52,7 +52,7 @@
     <property name="teleportObjectId" value="60"/>
    </properties>
   </object>
-  <object id="63" template="../../../obj/door_right.tx" x="0.333333" y="64.3333">
+  <object id="63" template="../../../obj/door_right.tx" x="0.333333" y="76.3333" width="27" height="28">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_2/cave_18W.tmx"/>
     <property name="teleportObjectId" value="60"/>

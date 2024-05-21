@@ -114,6 +114,9 @@ MoxJet
 MoxRuby
   xy: 320, 32
   size: 16, 16
+LightBoots
+  xy: 144, 464
+  size: 16, 16
 MoxSapphire
   xy: 320, 48
   size: 16, 16
