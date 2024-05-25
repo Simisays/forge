@@ -1,0 +1,16 @@
+Name:Garruk's Boss Effect Phase One
+ManaCost:no cost
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ YourLife | SVarCompare$ GE40 | Execute$ TrigSeek | TriggerDescription$ As long as Sorin's life total is 40 or more,  Sorin seeks two nonland cards every upkeep and can't lose the game and his opponents can't win the game. 
+SVar:TrigSeek:DB$ Seek | Num$ 2 | Type$ Card.nonLand
+S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | CheckSVar$ YourLife | EffectZone$ Command | SVarCompare$ GE40 | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
+S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Secondary$ True | EffectZone$ Command | CheckSVar$ YourLife | Secondary$ True | SVarCompare$ GE40 | Description$ You can't lose the game and your opponents can't win the game.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ YourLifeCompare | SVarCompare$ GE40 | Execute$ TrigConjure | TriggerDescription$ As long as Sorin's life total is between 20 and 40, at Sorin's upkeep, conjure a card from Sorin's Spellbook into exile with 2 time counters on it, it gains suspend. 
+
+
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Vampire.YouCtrl | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ YourLife | SVarCompare$ LT20 | AddKeyword$ Lifelink | Description$ As long as Sorin's life total is lower than 20, Sorin's Vampires get +2/+2  and have lifelink. 
+
+
+SVar:YourLifeCompare:SVar$Wins/LimitMax.
+SVar:YourLife:Count$YourLifeTotal
+Oracle:As long as Sorin's life total is 40 or more,  Sorin seeks two nonland cards every upkeep and can't lose the game and his opponents can't win the game. \nAs long as Sorin's life total is between 20 and 40, at Sorin's upkeep, conjure a card from Sorin's Spellbook into exile with 2 time counters on it, it gains suspend. \nAs long as Sorin's life total is lower than 20, Sorin's Vampires get +2/+2  and have lifelink. 
