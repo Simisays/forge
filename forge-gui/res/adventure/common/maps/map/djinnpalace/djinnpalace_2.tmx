@@ -114,7 +114,7 @@
   <object id="75" template="../../obj/manashards.tx" x="120.96" y="55.0013"/>
   <object id="76" template="../../obj/entry_up.tx" x="204.017" y="51.835" width="25.4153" height="17.3026">
    <properties>
-    <property name="direction" value="up"/>
+    <property name="direction" value="down"/>
     <property name="teleport" value="../common/maps/map/djinnpalace/djinnpalace_2B.tmx"/>
    </properties>
   </object>
