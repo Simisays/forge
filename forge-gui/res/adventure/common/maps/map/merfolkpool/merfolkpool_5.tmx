@@ -39,7 +39,7 @@
   </object>
   <object id="56" template="../../obj/enemy.tx" x="418.842" y="127.051">
    <properties>
-    <property name="enemy" value="Sandwurm"/>
+    <property name="enemy" value="Hellion"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value="70,69,68"/>
    </properties>

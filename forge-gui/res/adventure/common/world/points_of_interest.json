@@ -1951,6 +1951,22 @@
 		]
 	},
 	{
+		"name": "FortMultilevel",
+		"displayName": "Cultists' Outpost",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "Fort",
+		"map": "../common/maps/map/fort/fort_colorless_7_multilevel.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"Dungeon",
+			"Fort",
+			"Sidequest"
+	]
+	},
+	{
 		"name": "Fort3",
 		"displayName": "Mercenary Barracks",
 		"type": "dungeon",
@@ -2497,7 +2513,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "Jace",
-		"map": "../common/maps/map/jacehold.tmx",
+		"map": "../common/maps/map/jacetower/jacehold.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Boss",
@@ -2999,7 +3015,21 @@
 			"MerfolkPool",
 			"Hostile",
 			"Sidequest"
-		]
+	]
+	},
+	{
+		"name": "MerfolkPool5",
+		"displayName": "Homarid Island",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "MerfolkPool",
+		"map": "../common/maps/map/merfolkpool/merfolkpool_6.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"MerfolkPool",
+			"Hostile"
+	]
 	},
 	{
 		"name": "MerfolkPool1",
@@ -4004,7 +4034,23 @@
 			"BiomeBlack",
 			"Dungeon",
 			"Sidequest"
-		]
+	]
+	},
+	{
+		"name": "VampireCastle3",
+		"displayName": "Vampire Dungeon",
+		"type": "dungeon",
+		"count": 2,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "VampireCastle",
+		"map": "../common/maps/map/vampirecastle/vampirecastle_4.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"VampireCastle",
+			"Hostile",
+			"BiomeBlack",
+			"Dungeon"
+	]
 	},
 	{
 		"name": "Waste Town Generic",

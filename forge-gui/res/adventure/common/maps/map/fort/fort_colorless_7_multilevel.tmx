@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="61">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="65">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="50" height="50">
-  <data encoding="base64" compression="zlib">
-   eJzt12EKgjAYxvF9DfUE1nU6RN0lz1Wru2XEQ0NsOAt6tP8PXhTZYA/zlRkCAAAAXG3rsnKktR2bEC51vg6NZxataTdhXV3zvLZm+1KSYcglyycZxCHLsB/GeiP2dX7TJxqvfvlljnQvHvd6/3M0RnNbg/0Y5ihBju/K5dhvxivlmiOuZD+6qmy+a45//V7FBeSY0ufikCPNspYzVmkOlwwy57zolkG0pltfp+pVkj67mmaQ3L/rUv5rAQAAAADLcgdmxjOS
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJzt1zEOwjAMQNEMWRATt2XmFj2E71ghFBFZaSkkdnH0hycxoJKvxBCWS0oLAAAAYOh+Telx0PO9Z6+3t+EfWm75RfL79S8NdUt53h6rjhENumWvx7qjt6HQDfpzInXoPYneoefPukMMO3RL9A6ZoKNuiTof+mxF7pjlXHnMuRjvh8f3br3fo+8lrbuJRUfrzjDintiaCa/56G3RDWf9DuqOb/9HfWrw7pC8va6y7tZ53Fq7x30XAAAAADCHFdhctmw=
+   eJzt1z0OwjAMQOEMWSombstVuvQGviNCKCKy0vKT2MXRGz6JAZU8JYawLimtAAAAgKHbJaVt+czjvWevt7fhH1qu+Uny6/UvDXVLed4Rq44RDbrlqMe6o7eh0A36cyJ16D2J3qHnz7pDDDt0S/QOmaCjbok6H/psRe6Y5Vx5zLkY74fH926936PvJa27iUVH684w4p7Ymgmv+eht0Q1n/Q7qjm//R71r8O6QvL+usu7Wedxbu8d9FwAAAAAwhzseddN4
   </data>
  </layer>
  <layer id="8" name="Ground" width="50" height="50">
@@ -35,32 +30,40 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmsGNAjEMReGC9ro90AAUuQ1ALzTFlTsKaFZRZCf+jj32IJ7EBYbJj+fbjhG7Hc31h/mA4bzHrrfiQui8ItcO9imJA3XfLdPGrxcDq71ftN8zjj3nHY6Tk++5+7bvI/tHc5qjXRONmRYk1mtpsgB5hlupNXU/0PjOK6+iqZ9fHZeo/hlNiUHE3qX9xivfovNYsn9Ko1T3p+Yvuq/bwUcHQrTXZtCeC7VwvUoaw4x1vGjq9eDlrNS9RumhP/CaIxE/y3nuU8mW41Z5O6q391/65bVeTdQc9L9esmfuyVqxResVheU8l+UcNTvPtXBzEId1nn95s/b5yoJsva6QUZME7Tw3qktUTi9reZ6R23UznscLM37ZqtcKvXoTfZ6h5qDo/iv1Mxo7baw5PVv2ZEYs4jnr55EGjUZpH4moBdHznIRHtIAArHq4h59HtD62zL9oan3oPLewlp8zzTmon6HfE7Bbv0D0eNTlGZ9b6uF0ROVhb90ZP1P/75md5xA9mevaE0+0U9Y=
+   eJztmsGNAjEMReGCtpC9cYIitwHohVZohDsKaFZRZCf+jj32IJ7EBYbJj+fbjhG7Hc31h/mA4bzHrrfiQui8ItcO9imJA3XfLdPGrxcDq71ftN8zjj3nHY6Tk++5+7bvI/tHc5qjXRONmRYk1mtpsgB5hlupNXU/0PjOK6+iqZ9fHZeo/hlNiUHE3qX9xivfovNYsn9Ko1T3p+Yvuq/bwUcHQrTXZtCeC7VwvUoaw4x1vGjq9eDlrNS9RumhP/CaXyJ+lvPcp5Itx63ydlRv70f65bVeTdQc9L9esmfuyVqxResVheU8l+UcNTvPtXBzEId1nn95s/b5yoJsva6QUZME7Tw3qktUTi9reZ6R23UznscLM37ZqtcKvXoTfZ6h5qDo/iv1Mxo7baw5PVv2ZEYs4jnr55EGjUZpH4moBdHznIRHtIAArHq4h59HtD62zL9oan3oPLewlp8zzTmon6HfE7Bbv0D0eNTlGZ9b6uF0ROVhb90ZP1P/75md5xA9mevaEwXmVB4=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="391.632" y="511.303"/>
+  <object id="38" template="../../obj/entry_up.tx" x="383.965" y="511.303" width="31.6667" height="16"/>
   <object id="49" template="../../obj/entry_down.tx" x="513.654" y="304.89">
    <properties>
-    <property name="teleport" value="maps/map/fort_11B.tmx"/>
+    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel2.tmx"/>
+    <property name="teleportObjectId" value="79"/>
    </properties>
   </object>
   <object id="56" template="../../obj/enemy.tx" x="391.848" y="282.871">
    <properties>
-    <property name="enemy" value="Death Knight"/>
+    <property name="enemy" value="Corrupted Red Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/enemy.tx" x="297.833" y="378.371">
+  <object id="57" template="../../obj/enemy.tx" x="383.166" y="385.704">
    <properties>
-    <property name="enemy" value="Dark Knight"/>
+    <property name="enemy" value="Corrupted Blue Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,63,64,63"/>
    </properties>
   </object>
-  <object id="58" template="../../obj/treasure.tx" x="337" y="243.333"/>
-  <object id="59" template="../../obj/gold.tx" x="275.167" y="295.667"/>
-  <object id="60" template="../../obj/enemy.tx" x="390.75" y="470.75">
+  <object id="59" template="../../obj/gold.tx" x="275.167" y="296.667"/>
+  <object id="60" template="../../obj/enemy.tx" x="515.083" y="355.083">
    <properties>
-    <property name="enemy" value="Skeleton Soldier"/>
+    <property name="enemy" value="Corrupted Red Wizard"/>
+    <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
+  <object id="61" template="../../obj/manashards.tx" x="328" y="234"/>
+  <object id="62" template="../../obj/waypoint.tx" x="474" y="380.667"/>
+  <object id="63" template="../../obj/waypoint.tx" x="267.667" y="381"/>
+  <object id="64" template="../../obj/waypoint.tx" x="271.333" y="319.333"/>
  </objectgroup>
 </map>
