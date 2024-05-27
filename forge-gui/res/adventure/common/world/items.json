@@ -434,6 +434,11 @@
     "questItem": true
   },
   {
+    "name": "Sorin's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
     "name": "Tibalt's Key",
     "iconName": "StrangeKey",
     "questItem": true
@@ -554,7 +559,18 @@
       "startBattleWithCard": [
         "g_0_1_plant"
       ]
-    }
+  }
+  },
+  {
+   "name": "Sorin's Amulet",
+    "equipmentSlot": "Neck",
+    "iconName": "SorinAmulet",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCardInCommandZone": [
+        "Sorin's Amulet"
+      ]
+  }
   },
   {
     "name": "Dagger",

@@ -306,6 +306,9 @@ TravelersAmulet
 RelicAmulet
   xy: 144, 800
   size: 16, 16
+SorinAmulet
+  xy: 96, 800
+  size: 16, 16
 AmuletofKroog
   xy: 128, 864
   size: 16, 16

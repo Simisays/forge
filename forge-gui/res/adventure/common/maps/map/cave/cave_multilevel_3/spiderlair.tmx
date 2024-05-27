@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="88">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="91">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -103,9 +103,7 @@
   <object id="58" template="../../../obj/waypoint.tx" x="221.473" y="109.515"/>
   <object id="59" template="../../../obj/waypoint.tx" x="311.197" y="52.0811"/>
   <object id="60" template="../../../obj/waypoint.tx" x="588.667" y="46"/>
-  <object id="61" template="../../../obj/waypoint.tx" x="595.324" y="441.12"/>
   <object id="62" template="../../../obj/waypoint.tx" x="297.169" y="176.478"/>
-  <object id="63" template="../../../obj/waypoint.tx" x="323.039" y="602.384"/>
   <object id="64" template="../../../obj/waypoint.tx" x="6.30587" y="316.464"/>
   <object id="65" template="../../../obj/waypoint.tx" x="68.7555" y="109.78"/>
   <object id="66" template="../../../obj/manashards.tx" x="25.0843" y="99.9871"/>
@@ -184,6 +182,23 @@
     <property name="enemy" value="Giant Spider"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value="86,65"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../obj/entry_up.tx" x="320.478" y="638" width="27.0445" height="18.6667">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="89" template="../../../obj/entry_up.tx" x="593.144" y="486.667" width="27.0445" height="18">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../obj/entry_up.tx" x="486.478" y="48.6667" width="30.3778" height="26.6667">
+   <properties>
+    <property name="direction" value="right"/>
    </properties>
   </object>
  </objectgroup>
