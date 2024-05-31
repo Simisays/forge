@@ -45,7 +45,24 @@
 			"BarbarianCamp",
 			"BiomeRed",
 			"Sidequest"
-		]
+	]
+	},
+	{
+		"name": "KorEncampment",
+		"displayName": "Kor Outpost",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
+		"sprite": "BarbarianCamp",
+		"map": "../common/maps/map/barbariancamp/kor_encampment.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Hostile",
+			"BarbarianCamp",
+			"BiomeRed",
+			"BiomeWhite",
+			"Sidequest"
+	]
 	},
 	{
 		"name": "BarbarianCamp2",
@@ -471,21 +488,6 @@
 			"Cave",
 			"Hostile",
 			"BiomeBlack"
-	]
-	},
-	{
-		"name": "CaveDragon",
-		"displayName": "Cave",
-		"type": "cave",
-		"count": 1,
-		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
-		"sprite": "Cave",
-		"map": "../common/maps/map/cave/cave_multilevel_4/cave_23.tmx",
-		"radiusFactor": 0.8,
-		"questTags": [
-			"Cave",
-			"Hostile",
-			"BiomeRed"
 	]
 	},
 	{

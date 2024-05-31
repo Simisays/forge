@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="66">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="67">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="60">
   <data encoding="base64" compression="zlib">
    eJztwzENAAAMA6C+M1f/cipkkNBLqqqqqqqqqr446Chj1w==
@@ -32,6 +32,12 @@
   <object id="65" template="../../../obj/door_down.tx" x="224.166" y="17">
    <properties>
     <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21B.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="66" template="../../../obj/door_down.tx" x="218" y="866">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
     <property name="teleportObjectId" value="66"/>
    </properties>
   </object>

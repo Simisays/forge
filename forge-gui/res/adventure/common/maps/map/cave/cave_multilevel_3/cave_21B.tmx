@@ -51,6 +51,8 @@
   <object id="72" template="../../../obj/enemy.tx" x="230.667" y="398.667">
    <properties>
     <property name="enemy" value="Gorgon"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="73,74,73,76"/>
    </properties>
   </object>
   <object id="73" template="../../../obj/waypoint.tx" x="206" y="346.667"/>
