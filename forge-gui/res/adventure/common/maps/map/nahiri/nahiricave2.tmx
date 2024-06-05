@@ -7,14 +7,15 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/main-nocollide.tsx"/>
  <tileset firstgid="22017" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="38401" source="../../tileset/dungeon/dungeon_2.tsx"/>
  <layer id="7" name="Background" width="60" height="45">
   <data encoding="base64" compression="zlib">
-   eJztzqENADAIADAEZo9xPjdxxgipqG9nRAMAp9T7fwAAAAAAAAAAYI8BzQKmzg==
+   eJzt1DEOgCAQRUFaLuZRvJyHxN6oSGHILlNMQ8XLJ7SjlAYApLLV+XcAAAAAAIBo9npv9r3+ah05j+jLhtF7R97paq1ZeldpvW6c9Y9acddeY/TOXmuWxrfeTFs+tWZqPAHdWE8X
   </data>
  </layer>
  <layer id="9" name="Foreground" width="60" height="45">
   <data encoding="base64" compression="zlib">
-   eJzt00EKgDAMBdEsvIaH8uI9k2QRqCCI1Wj0z4MuAx3StsmsJZ+wzPa67Na+t4Ineis100svvduOv/fG3Jn5KrL3WqnVKfzZ3pX7H+25ojt2VbVtz5ff5gilVqfU6pRanUpnUGp1Sq0AAAAAAAAAAAAjVuI7Cxg=
+   eJztllsOgjAQRfks3QIG3aiPsB0XBYL7wE5gYqlFQfpAuSYn8krpuTOtttckaQEAAPwd9Ik9h1COW3DdUl0BAAAAAAAAAAAAAAAgNKVIkkqxlx36sY1KPKHzm4jvMNWROKg5n9LvyeVrXnzOx6EyMd9VOnJ8R63G36nxm/77LrpMOA+f7mb+Pj1t9dazpRzY3Zezb7e5ObB77qnXqaeaPtfYvra+13u9cuAdso+n+JlrmuZVa9eW1npNteUeJqdMDr3pWqGeOafLa8xjM7EzuKTDuem1drWXlcbvY8z+5vXKXnqt+f5S50yub++yebt0Zo4RHWtL5mP/D1w5F5Frqu9Xn/pNX+u/WN+xPh7znrtfPwBkYg1B
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

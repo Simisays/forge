@@ -22,7 +22,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmFEKwjAQRFehphY9UY8i3sS7KFTFc3kMv+zQBGJB8tPOlKQPSjYQ2HSbnd3UbGWJ3NUbKIBNa7Zt+X6vvc+bwG/gSfZXRzYr5q/RXB1zsBP5rdNLJgO65bxdan4Bl14yG6rawdaVGGW8V/IF56pkHWNTqTdABlqt1E026EUUWj1n73Xuny6as/Ti48cQT5ZenGyIp7LmKnKmIftT5QpQ3VUUhBiXoMPMuyCI7yI59+isd0Nevg+DzTyvqm8Hvw+iv70f2XniRnb3b+FEXI6/86X8b2bGPe7TQm1nnPNUn8asvUFDkGPM2OdcC3LiC0d2HNU=
+   eJztmFEKwjAQRKOgqYIn6lHEm3gXhap4Rr/sYBbWQslPO1OSPihNILDtNDu7aQgrS+ShfoAK2LQhbFt+3Fsf8y6Ia7zI8Ro3Zmn+HszVmoO9KG6TXzIZ8K2YxrXmF4j5JbOhqh1sX/Eo9V4pF+yrmn2MzU79AGTg1UrfZINeROHVc/Zel/7q3JzlF590Nz1ZfnEOPz2VNVeRM0dyPFWuANVZRYFpXIMPM8+CwJ9FSu7RWe/m85K5X1XfDnGfxHiHdGfnSRyMu7GFE3E9/c+X8r+Zqbvv06y2M/Z5rk9j1l7zEOQYU/uSa0FJfAFOwBvn
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -38,48 +38,13 @@
     <property name="teleportObjectId" value="83"/>
    </properties>
   </object>
-  <object id="68" template="../../../obj/door_right.tx" x="184.5" y="120">
-   <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/spiderlair.tmx"/>
-    <property name="teleportObjectId" value="61"/>
-   </properties>
-  </object>
-  <object id="69" template="../../../obj/door_right.tx" x="376.5" y="391.5">
-   <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/spiderlair.tmx"/>
-    <property name="teleportObjectId" value="60"/>
-   </properties>
-  </object>
-  <object id="70" template="../../../obj/door_right.tx" x="344.5" y="535.5">
-   <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/spiderlair.tmx"/>
-    <property name="teleportObjectId" value="68"/>
-   </properties>
-  </object>
-  <object id="71" template="../../../obj/door_right.tx" x="280" y="232.5">
-   <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/spiderlair.tmx"/>
-    <property name="teleportObjectId" value="61"/>
-   </properties>
-  </object>
-  <object id="72" template="../../../obj/door_right.tx" x="231.5" y="168">
-   <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/spiderlair.tmx"/>
-    <property name="teleportObjectId" value="61"/>
-   </properties>
-  </object>
-  <object id="73" template="../../../obj/door_right.tx" x="152" y="872.667">
-   <properties>
-    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/spiderlair.tmx"/>
-    <property name="teleportObjectId" value="109"/>
-   </properties>
-  </object>
-  <object id="75" template="../../../obj/enemy.tx" x="249" y="700">
+  <object id="75" template="../../../obj/enemy.tx" x="142" y="762">
    <properties>
     <property name="enemy" value="Gorgon 2"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="76" template="../../../obj/enemy.tx" x="332" y="288">
+  <object id="76" template="../../../obj/enemy.tx" x="324" y="266">
    <properties>
     <property name="enemy" value="Gorgon 2"/>
     <property name="speedModifier" type="float" value="12"/>
@@ -111,13 +76,6 @@
   }
 ]
 </property>
-   </properties>
-  </object>
-  <object id="83" template="../../../obj/portal.tx" x="146" y="751">
-   <properties>
-    <property name="direction" value="up"/>
-    <property name="teleport" value=""/>
-    <property name="teleportObjectId" value=""/>
    </properties>
   </object>
  </objectgroup>
