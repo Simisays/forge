@@ -1,0 +1,9 @@
+Name:Tunnel of Love
+ManaCost:no cost
+Types:Artifact Attraction
+Variant:A:Lights:2 6
+Variant:B:Lights:3 6
+K:Visit:TrigChoose
+
+Oracle:Visit — Choose an opponent. They choose a creature they control, then you choose a creature you control. You may exile the chosen creatures. If you do, return them to the battlefield under their owners’ control at the beginning of the next end step. Otherwise, the chosen creatures fight each other.
+

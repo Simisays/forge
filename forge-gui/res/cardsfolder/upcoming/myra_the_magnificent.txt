@@ -1,0 +1,15 @@
+Name:Myra the Magnificent
+ManaCost:2 U R
+Types:Legendary Creature Human Performer
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigOpenAttraction | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+A:AB$ ChooseCard | Cost$ X T ExileFromGrave<1/Instant.cmcEQX,Sorcery.cmcEQX> | Defined$ Exiled | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of that card. Activate only as a sorcery.
+
+
+{X}, {T}: Exile target instant or sorcery card with mana value X from your graveyard and choose an Attraction you control that doesn’t have a midway counter on it. Put a midway counter on it. For as long as that Attraction is on the battlefield, whenever you visit it, copy the exiled card. You may cast the copy without paying its mana cost.
+
+Oracle:
+Whenever you cast an instant or sorcery spell from your hand, open an Attraction.
+
+{X}, {T}: Exile target instant or sorcery card with mana value X from your graveyard and choose an Attraction you control that doesn't have a midway counter on it. Put a midway counter on it. For as long as that Attraction is on the battlefield, whenever you visit it, copy the exiled card. You may cast the copy without paying its mana cost.

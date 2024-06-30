@@ -1,0 +1,17 @@
+Name:"Lifetime" Pass Holder
+ManaCost:R
+Types:Creature Zombie Guest
+PT:2/1
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME dies, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+Whenever you roll to visit your Attractions, if you roll a 6, you may return CARDNAME from your graveyard to the battlefield.
+
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+
+Oracle:
+"Lifetime" Pass Holder enters the battlefield tapped.
+
+When CARDNAME dies, open an Attraction.
+
+Whenever you roll to visit your Attractions, if you roll a 6, you may return "Lifetime" Pass Holder from your graveyard to the battlefield.
