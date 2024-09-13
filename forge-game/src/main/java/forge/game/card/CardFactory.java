@@ -17,7 +17,6 @@
  */
 package forge.game.card;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.ImageKeys;
@@ -44,9 +43,7 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -106,11 +103,11 @@ public class CardFactory {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
 
-        copy.setCopiedSpell(true);
+        copy.setGamePieceType(GamePieceType.COPIED_SPELL);
         copy.setCopiedPermanent(original);
 
         copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
-        copy.setKickerMagnitude(original.getKickerMagnitude());
+        copy.setPromisedGift(original.getPromisedGift());
 
         if (targetSA.isBestow()) {
             copy.animateBestow();
@@ -188,7 +185,11 @@ public class CardFactory {
         // Would like to move this away from in-game entities
         String originalPicture = cp.getImageKey(false);
         c.setImageKey(originalPicture);
-        c.setToken(cp.isToken());
+
+        if(cp.isToken())
+            c.setGamePieceType(GamePieceType.TOKEN);
+        else
+            c.setGamePieceType(c.getRules().getType().getGamePieceType());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
@@ -346,17 +347,32 @@ public class CardFactory {
             card.setColor(combinedColor);
             card.setType(new CardType(rules.getType()));
 
-            // Combined text based on Oracle text - might not be necessary, temporarily disabled.
-            //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
-            //card.setText(combinedText);
+            // Combined text based on Oracle text -  might not be necessary
+            String combinedText = String.format("(%s) %s\r\n\r\n(%s) %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
+            card.getState(CardStateName.Original).setOracleText(combinedText);
         }
         return card;
     }
 
     private static void readCardFace(Card c, ICardFace face) {
+        String variantName = null;
+        //If it's a functional variant card, switch to that first.
+        if(face.hasFunctionalVariants()) {
+            variantName = c.getPaperCard().getFunctionalVariant();
+            if (!IPaperCard.NO_FUNCTIONAL_VARIANT.equals(variantName)) {
+                ICardFace variant = face.getFunctionalVariant(variantName);
+                if (variant != null) {
+                    face = variant;
+                    c.getCurrentState().setFunctionalVariantName(variantName);
+                }
+                else
+                    System.err.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", face.getName(), variantName);
+            }
+        }
+
         // Build English oracle and translated oracle mapping
         if (c.getId() >= 0) {
-            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText());
+            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
         }
 
         // Name first so Senty has the Card name
@@ -380,7 +396,7 @@ public class CardFactory {
         c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
         c.getCurrentState().setBaseDefense(face.getDefense());
 
-        c.setOracleText(face.getOracleText());
+        c.getCurrentState().setOracleText(face.getOracleText());
 
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
@@ -396,19 +412,20 @@ public class CardFactory {
             c.setBaseToughnessString(face.getToughness());
         }
 
+        c.setAttractionLights(face.getAttractionLights());
+
         // SpellPermanent only for Original State
         if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
-            // this is the "default" spell for permanents like creatures and artifacts
-            if (c.isPermanent() && !c.isAura() && !c.isLand()) {
+            if (c.isLand()) {
+                SpellAbility sa = new LandAbility(c);
+                sa.setCardState(c.getCurrentState());
+                c.addSpellAbility(sa);
+            } else if (c.isPermanent() && !c.isAura()) {
+                // this is the "default" spell for permanents like creatures and artifacts
                 SpellAbility sa = new SpellPermanent(c);
-
-                // Currently only for Modal, might react different when state is always set
-                //if (c.getCurrentStateName() == CardStateName.Modal) {
-                    sa.setCardState(c.getCurrentState());
-                //}
+                sa.setCardState(c.getCurrentState());
                 c.addSpellAbility(sa);
             }
-            // TODO add LandAbility there when refactor MayPlay
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
@@ -428,12 +445,7 @@ public class CardFactory {
             to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki, keepTextChanges));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
-            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
-                @Override
-                public AbilitySub apply(AbilitySub input) {
-                    return (AbilitySub) input.copy(host, p, lki, keepTextChanges);
-                }
-            }));
+            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), input -> (AbilitySub) input.copy(host, p, lki, keepTextChanges)));
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());
@@ -735,6 +747,15 @@ public class CardFactory {
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
+            if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "_" + set));
+            }
+
+            
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());

@@ -1,6 +1,5 @@
 package forge.game.card;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import forge.ImageKeys;
@@ -217,6 +216,14 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Tapped, c.isTapped());
     }
 
+    public GamePieceType getGamePieceType() {
+        return get(TrackableProperty.GamePieceType);
+    }
+    void updateGamePieceType(Card c) {
+        set(TrackableProperty.GamePieceType, c.getGamePieceType());
+    }
+
+    //Tracked separately from GamePieceType; a token card or a merged permanent with a token as the top is also considered a "token"
     public boolean isToken() {
         return get(TrackableProperty.Token);
     }
@@ -225,10 +232,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isImmutable() {
-        return get(TrackableProperty.IsImmutable);
-    }
-    public void updateImmutable(Card c) {
-        set(TrackableProperty.IsImmutable, c.isImmutable());
+        return get(TrackableProperty.GamePieceType) == GamePieceType.EFFECT;
     }
 
     public boolean isEmblem() {
@@ -326,8 +330,28 @@ public class CardView extends GameEntityView {
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
         updateLethalDamage(c);
-        //update CrackOverlay (currently 16 overlays)
-        set(TrackableProperty.CrackOverlay, c.getDamage() > 0 ? MyRandom.getRandom().nextInt(16) : 0);
+        //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
+        int randCrackLevel = 0;
+        if (c.getDamage() > 0) {
+            switch (c.getDamage()) {
+                case 1:
+                case 2:
+                    randCrackLevel = 0;
+                    break;
+                case 3:
+                case 4:
+                    randCrackLevel = 1;
+                    break;
+                case 5:
+                case 6:
+                    randCrackLevel = 2;
+                    break;
+                default:
+                    randCrackLevel = 3;
+                    break;
+            }
+        }
+        set(TrackableProperty.CrackOverlay, randCrackLevel);
     }
 
     public int getAssignedDamage() {
@@ -410,6 +434,12 @@ public class CardView extends GameEntityView {
     }
     void updateChosenPlayer(Card c) {
         set(TrackableProperty.ChosenPlayer, PlayerView.get(c.getChosenPlayer()));
+    }
+    public PlayerView getPromisedGift() {
+        return get(TrackableProperty.PromisedGift);
+    }
+    void updatePromisedGift(Card c) {
+        set(TrackableProperty.PromisedGift, PlayerView.get(c.getPromisedGift()));
     }
     public PlayerView getProtectingPlayer() {
         return get(TrackableProperty.ProtectingPlayer);
@@ -541,12 +571,7 @@ public class CardView extends GameEntityView {
     public boolean canBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, new Predicate<PlayerView>() {
-            @Override
-            public final boolean apply(final PlayerView input) {
-                return canBeShownTo(input);
-            }
-        });
+        return Iterables.any(viewers, this::canBeShownTo);
     }
 
     public boolean canBeShownTo(final PlayerView viewer) {
@@ -563,6 +588,7 @@ public class CardView extends GameEntityView {
         case Graveyard:
         case Flashback:
         case Stack:
+        case Junkyard:
             //cards in these zones are visible to all
             return true;
         case Exile:
@@ -585,6 +611,7 @@ public class CardView extends GameEntityView {
             return true;
         case Library:
         case PlanarDeck:
+        case AttractionDeck:
             //cards in these zones are hidden to all unless they specify otherwise
             break;
         case SchemeDeck:
@@ -610,12 +637,7 @@ public class CardView extends GameEntityView {
     public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, new Predicate<PlayerView>() {
-            @Override
-            public final boolean apply(final PlayerView input) {
-                return canFaceDownBeShownTo(input);
-            }
-        });
+        return Iterables.any(viewers, this::canFaceDownBeShownTo);
     }
 
     public boolean canFaceDownBeShownTo(final PlayerView viewer) {
@@ -786,6 +808,12 @@ public class CardView extends GameEntityView {
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
+        }
+
+        Set<Integer> attractionLights = get(TrackableProperty.AttractionLights);
+        if (attractionLights != null && !attractionLights.isEmpty()) {
+            sb.append("\r\n\r\nLights: ");
+            sb.append(StringUtils.join(attractionLights, ", "));
         }
 
         sb.append(getRemembered());
@@ -1003,6 +1031,8 @@ public class CardView extends GameEntityView {
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
         currentState.getView().setOriginalColors(c); //set original Colors
 
+        currentStateView.updateAttractionLights(currentState);
+
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
         if (isSplitCard && isFaceDown()) {
@@ -1042,7 +1072,7 @@ public class CardView extends GameEntityView {
         if (hiddenId == null) {
             return getId();
         }
-        return hiddenId.intValue();
+        return hiddenId;
     }
     void updateHiddenId(final int hiddenId) {
         set(TrackableProperty.HiddenId, hiddenId);
@@ -1132,7 +1162,7 @@ public class CardView extends GameEntityView {
         return (zone + ' ' + CardTranslation.getTranslatedName(name) + " (" + getId() + ")").trim();
     }
 
-    public class CardStateView extends TrackableObject {
+    public class CardStateView extends TrackableObject implements ITranslatable {
         private static final long serialVersionUID = 6673944200513430607L;
 
         private final CardStateName state;
@@ -1281,8 +1311,15 @@ public class CardView extends GameEntityView {
         public String getOracleText() {
             return get(TrackableProperty.OracleText);
         }
-        void updateOracleText(Card c) {
-            set(TrackableProperty.OracleText, c.getOracleText().replace("\\n", "\r\n\r\n").trim());
+        void setOracleText(String oracleText) {
+            set(TrackableProperty.OracleText, oracleText.replace("\\n", "\r\n\r\n").trim());
+        }
+
+        public String getFunctionalVariantName() {
+            return get(TrackableProperty.FunctionalVariant);
+        }
+        void setFunctionalVariantName(String functionalVariant) {
+            set(TrackableProperty.FunctionalVariant, functionalVariant);
         }
 
         public String getRulesText() {
@@ -1412,6 +1449,13 @@ public class CardView extends GameEntityView {
             updateDefense("0");
         }
 
+        public Set<Integer> getAttractionLights() {
+            return get(TrackableProperty.AttractionLights);
+        }
+        void updateAttractionLights(CardState c) {
+            set(TrackableProperty.AttractionLights, c.getAttractionLights());
+        }
+
         public String getSetCode() {
             return get(TrackableProperty.SetCode);
         }
@@ -1449,6 +1493,7 @@ public class CardView extends GameEntityView {
         public String getKeywordKey() { return get(TrackableProperty.KeywordKey); }
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
+        public boolean hasAnnihilator() { return get(TrackableProperty.HasAnnihilator); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
         public boolean hasToxic() { return get(TrackableProperty.HasToxic); }
         public boolean hasDevoid() { return get(TrackableProperty.HasDevoid); }
@@ -1456,6 +1501,7 @@ public class CardView extends GameEntityView {
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
         public boolean hasDoubleTeam() { return get(TrackableProperty.HasDoubleTeam); }
+        public boolean hasExalted() { return get(TrackableProperty.HasExalted); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
         public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
         public boolean hasFear() { return get(TrackableProperty.HasFear); }
@@ -1525,6 +1571,7 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
+            set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state));
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
             set(TrackableProperty.HasToxic, c.hasKeyword(Keyword.TOXIC, state));
             set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
@@ -1532,6 +1579,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasDivideDamage, c.hasKeyword("You may assign CARDNAME's combat damage divided as " +
                     "you choose among defending player and/or any number of creatures they control."));
             set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
+            set(TrackableProperty.HasExalted, c.hasKeyword(Keyword.EXALTED, state));
             set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));
             set(TrackableProperty.HasFlying, c.hasKeyword(Keyword.FLYING, state));
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
@@ -1693,6 +1741,28 @@ public class CardView extends GameEntityView {
             if (!getType().isEnchantment() || getType().getCoreTypes() == null)
                 return false;
             return Iterables.size(getType().getCoreTypes()) > 1;
+        }
+        public boolean isAttraction() {
+            return getType().isAttraction();
+        }
+
+        @Override
+        public String getTranslationKey() {
+            String key = getName();
+            String variant = getFunctionalVariantName();
+            if(StringUtils.isNotEmpty(variant))
+                key = key + " $" + variant;
+            return key;
+        }
+
+        @Override
+        public String getUntranslatedType() {
+            return getType().toString();
+        }
+
+        @Override
+        public String getUntranslatedOracle() {
+            return getOracleText();
         }
     }
 

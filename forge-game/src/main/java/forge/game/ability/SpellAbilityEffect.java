@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import forge.GameCommand;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -63,6 +64,11 @@ public abstract class SpellAbilityEffect {
             // prelude for when this is root ability
             if (!(sa instanceof AbilitySub)) {
                 sb.append(sa.getHostCard()).append(" -");
+                if (sa.getHostCard().hasPromisedGift()) {
+                    sb.append(" Gift ").
+                    append(sa.getAdditionalAbility("GiftAbility").getParam("GiftDescription")).
+                    append(" to ").append(sa.getHostCard().getPromisedGift()).append(". ");
+                }
             }
             sb.append(" ");
         }
@@ -81,12 +87,13 @@ public abstract class SpellAbilityEffect {
                 if (params.containsKey("SpellDescription")) {
                     if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replaceAll(",,,,,,", " ");
                     if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replaceAll(",,,", " ");
-                    String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc,
-                            sa.getHostCard().getName());
+                    String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc, sa.getHostCard());
 
-                    int idx = spellDesc.indexOf("(");
-                    if (idx > 0) { //trim reminder text from StackDesc
-                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                    //trim reminder text from StackDesc
+                    int idxL = spellDesc.indexOf(" (");
+                    int idxR = spellDesc.indexOf(")");
+                    if (idxL > 0 && idxR > idxL) {
+                        spellDesc = spellDesc.replace(spellDesc.substring(idxL, idxR + 1), "");
                     }
 
                     if (reps != null) {
@@ -110,7 +117,7 @@ public abstract class SpellAbilityEffect {
         } else {
             final String condDesc = sa.getParam("ConditionDescription");
             final String afterDesc = sa.getParam("AfterDescription");
-            final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard().getName());
+            final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard());
             if (condDesc != null) {
                 sb.append(condDesc).append(" ");
             }
@@ -242,6 +249,15 @@ public abstract class SpellAbilityEffect {
                     resultDuplicate.addAll(defResult);
                 }
             }
+        }
+        if (resultUnique == null)
+            return null;
+        if (sa.hasParam("IncludeAllComponentCards")) {
+            CardCollection components = new CardCollection();
+            for (Card c : resultUnique) {
+                components.addAll(c.getAllComponentCards(false));
+            }
+            resultUnique.addAll(components);
         }
         return resultUnique;
     }
@@ -428,7 +444,7 @@ public abstract class SpellAbilityEffect {
     	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
     	     "| TriggerDescription$ At the beginning of" + whose + "end step, " + location.toLowerCase()
                 + " CARDNAME.";
-        if (!player.equals("")) {
+        if (!player.isEmpty()) {
             trigStr += " | Player$ " + player;
         }
 
@@ -447,6 +463,11 @@ public abstract class SpellAbilityEffect {
         card.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "AtEOT"), card.getGame().getNextTimestamp(), 0);
     }
 
+    protected static SpellAbility getExileSpellAbility(final Card card) {
+        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+        return AbilityFactory.getAbility(effect, card);
+    }
+
     protected static SpellAbility getForgetSpellAbility(final Card card) {
         String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
         String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
@@ -460,6 +481,7 @@ public abstract class SpellAbilityEffect {
 
     public static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack,Exile | Destination$ Any | TriggerZones$ Command | Static$ True";
+        // CR 400.8 Exiled card becomes new object when it's exiled
         String trig2 = "Mode$ Exiled | ValidCard$ Card.IsRemembered | ValidCause$ SpellAbility.!EffectSource | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
@@ -481,20 +503,16 @@ public abstract class SpellAbilityEffect {
 
     protected static void addExileOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
-        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addExileOnCounteredTrigger(final Card card) {
         String trig = "Mode$ Countered | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
-        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addForgetOnPhasedInTrigger(final Card card) {
@@ -502,6 +520,13 @@ public abstract class SpellAbilityEffect {
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
+    }
+
+    protected static void addExileCounterTrigger(final Card card, final String counterType) {
+        String trig = "Mode$ CounterRemoved | TriggerZones$ Command | ValidCard$ Card.EffectSource | CounterType$ " + counterType + " | NewCounterAmount$ 0 | Static$ True";
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
         card.addTrigger(parsedTrigger);
     }
 
@@ -517,6 +542,13 @@ public abstract class SpellAbilityEffect {
         parsedTrigger2.setOverridingAbility(forgetSA);
         card.addTrigger(parsedTrigger);
         card.addTrigger(parsedTrigger2);
+    }
+
+    protected static void addExileOnLostTrigger(final Card card) {
+        String trig = "Mode$ LosesGame | ValidPlayer$ You | TriggerController$ Player | TriggerZones$ Command | Static$ True";
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
@@ -577,7 +609,7 @@ public abstract class SpellAbilityEffect {
 
         eff.setImageKey(image);
 
-        eff.setImmutable(true);
+        eff.setGamePieceType(GamePieceType.EFFECT);
         eff.setEffectSource(sa);
 
         return eff;
@@ -659,6 +691,7 @@ public abstract class SpellAbilityEffect {
         boolean combatChanged = false;
         final Combat combat = game.getCombat();
 
+        // CR 506.3b
         if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(c.getController())) {
             String attacking = sa.getParam(attackingParam);
 
@@ -688,7 +721,7 @@ public abstract class SpellAbilityEffect {
         }
         if (sa.hasParam(blockingParam)) {
             final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa), null);
-            if (attacker != null) {
+            if (attacker != null && combat.getDefenderPlayerByAttacker(attacker).equals(c.getController())) {
                 final boolean wasBlocked = combat.isBlocked(attacker);
                 combat.addBlocker(attacker, c);
                 combat.orderAttackersForDamageAssignment(c);
@@ -854,6 +887,8 @@ public abstract class SpellAbilityEffect {
             } else {
                 game.getUpkeep().addUntilEnd(controller, until);
             }
+        } else if ("UntilNextEndStep".equals(duration)) {
+            game.getEndOfTurn().addAt(until);
         } else if ("UntilYourNextEndStep".equals(duration)) {
             game.getEndOfTurn().addUntil(controller, until);
         } else if ("UntilYourNextTurn".equals(duration)) {
@@ -889,6 +924,9 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilHostLeavesPlayOrEOT".equals(duration)) {
             host.addLeavesPlayCommand(until);
             game.getEndOfTurn().addUntil(until);
+        } else if ("UntilHostLeavesPlayOrEndOfCombat".equals(duration)) {
+            host.addLeavesPlayCommand(until);
+            game.getEndOfCombat().addUntil(until);
         } else if ("UntilLoseControlOfHost".equals(duration)) {
             host.addLeavesPlayCommand(until);
             host.addChangeControllerCommand(until);

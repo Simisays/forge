@@ -43,6 +43,7 @@ public enum AbilityKey {
     CounteredSA("CounteredSA"),
     CounterNum("CounterNum"),
     CounterMap("CounterMap"),
+    CounterTable("CounterTable"),
     CounterType("CounterType"),
     Crew("Crew"),
     CumulativeUpkeepPaid("CumulativeUpkeepPaid"),
@@ -87,6 +88,7 @@ public enum AbilityKey {
     LastStateGraveyard("LastStateGraveyard"),
     LifeAmount("LifeAmount"), //TODO confirm that this and LifeGained can be merged
     LifeGained("LifeGained"),
+    LoseReason("LoseReason"),
     Map("Map"),
     Mana("Mana"),
     MergedCards("MergedCards"),
@@ -117,6 +119,7 @@ public enum AbilityKey {
     ReplacementResult("ReplacementResult"),
     ReplacementResultMap("ReplacementResultMap"),
     Result("Result"),
+    RolledToVisitAttractions("RolledToVisitAttractions"),
     RoomName("RoomName"),
     Scheme("Scheme"),
     ScryBottom("ScryBottom"),

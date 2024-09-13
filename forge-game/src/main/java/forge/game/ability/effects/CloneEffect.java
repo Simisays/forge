@@ -142,7 +142,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
             game.getTriggerHandler().clearActiveTriggers(tgtCard, null);
 
-            final Long ts = game.getNextTimestamp();
+            final long ts = game.getNextTimestamp();
             tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
 
             // set ETB tapped of clone
@@ -151,7 +151,7 @@ public class CloneEffect extends SpellAbilityEffect {
             }
 
             if (!pumpKeywords.isEmpty()) {
-                tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, ts, 0);
+                tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, ts, null);
                 TokenEffectBase.addPumpUntil(sa, tgtCard, ts);
             }
 

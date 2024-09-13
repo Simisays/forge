@@ -149,7 +149,7 @@ public class EffectEffect extends SpellAbilityEffect {
             image = ImageKeys.getTokenKey(
             TextUtil.fastReplace(
                 TextUtil.fastReplace(
-                    TextUtil.fastReplace(name.toLowerCase(), " - ", "_"),
+                    TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
                         ",", ""),
                     " ", "_").toLowerCase());
         } else { // use host image
@@ -245,6 +245,14 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("ForgetOnCast")) {
                 addForgetOnCastTrigger(eff, sa.getParam("ForgetOnCast"));
+            }
+
+            if (sa.hasParam("ExileOnLost")) {
+                addExileOnLostTrigger(eff);
+            }
+
+            if (sa.hasParam("ExileOnCounter")) {
+                addExileCounterTrigger(eff, sa.getParam("ExileOnCounter"));
             }
 
             // Set Imprinted

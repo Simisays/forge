@@ -17,10 +17,7 @@
  */
 package forge.game.phase;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
@@ -35,7 +32,7 @@ import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -45,6 +42,8 @@ import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
@@ -82,10 +81,8 @@ public class PhaseHandler implements java.io.Serializable {
     private transient Player pPlayerPriority = null;
     private transient Player pFirstPriority = null;
     private transient Combat combat = null;
+    private boolean skipDamageSteps = false;
     private boolean bRepeatCleanup = false;
-
-    private transient Player playerDeclaresBlockers = null;
-    private transient Player playerDeclaresAttackers = null;
 
     /** The need to next phase. */
     private boolean givePriorityToPlayer = false;
@@ -99,7 +96,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final PhaseType getPhase() {
         return phase;
     }
-    private final void setPhase(final PhaseType phase0) {
+    private void setPhase(final PhaseType phase0) {
         if (phase == phase0) { return; }
         phase = phase0;
         game.updatePhaseForView();
@@ -226,20 +223,18 @@ public class PhaseHandler implements java.io.Serializable {
                 return playerTurn.isSkippingCombat();
 
             case COMBAT_DECLARE_BLOCKERS:
-                if (inCombat() && combat.getAttackers().isEmpty()) {
-                    endCombat();
-                }
+                skipDamageSteps = !inCombat() || combat.getAttackers().isEmpty();
                 //$FALL-THROUGH$
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
-                return !inCombat();
+                return skipDamageSteps;
 
             default:
                 return false;
         }
     }
 
-    private final void onPhaseBegin() {
+    private void onPhaseBegin() {
         boolean skipped = false;
 
         game.getTriggerHandler().resetActiveTriggers();
@@ -267,12 +262,6 @@ public class PhaseHandler implements java.io.Serializable {
                         p.resetNumDrawnThisDrawStep();
                     }
                     playerTurn.drawCard();
-                    for (Player p : game.getPlayers()) {
-                        if (p.isOpponentOf(playerTurn) &&
-                                p.hasKeyword("You draw a card during each opponent's draw step.")) {
-                            p.drawCard();
-                        }
-                    }
                     break;
 
                 case MAIN1:
@@ -281,11 +270,15 @@ public class PhaseHandler implements java.io.Serializable {
                             playerTurn.setSchemeInMotion(null);
                         }
                         GameEntityCounterTable table = new GameEntityCounterTable();
-                        // all Saga get Lore counter at the begin of pre combat
+                        // all Sagas get a Lore counter at the beginning of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
                             if (c.isSaga()) {
                                 c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                             }
+                        }
+                        // roll for attractions if we have any
+                        if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), Presets.ATTRACTIONS)) {
+                            playerTurn.rollToVisitAttractions();
                         }
                         table.replaceCounterEffect(game, null, false);
                     }
@@ -510,6 +503,8 @@ public class PhaseHandler implements java.io.Serializable {
                     // done this after check state effects, so it only has effect next check
                     game.getCleanup().executeUntil(playerTurn);
 
+                    handleMultiplayerEffects();
+
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                     game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
@@ -523,9 +518,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private void declareAttackersTurnBasedAction() {
-        final Player whoDeclares = playerDeclaresAttackers == null || playerDeclaresAttackers.hasLost()
-                ? playerTurn
-                : playerDeclaresAttackers;
+        final Player whoDeclares = ObjectUtils.firstNonNull(playerTurn.getDeclaresAttackers(), playerTurn);
 
         if (CombatUtil.canAttack(playerTurn)) {
             boolean success = false;
@@ -653,10 +646,7 @@ public class PhaseHandler implements java.io.Serializable {
         do {
             p = game.getNextPlayerAfter(p);
             // Apply Odric's effect here
-            Player whoDeclaresBlockers = playerDeclaresBlockers == null || playerDeclaresBlockers.hasLost() ? p : playerDeclaresBlockers;
-            if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.attackerChoosesBlockers)) {
-                whoDeclaresBlockers = combat.getAttackingPlayer();
-            }
+            Player whoDeclaresBlockers = ObjectUtils.firstNonNull(p.getDeclaresBlockers(), p);
             if (combat.isPlayerAttacked(p)) {
                 if (CombatUtil.canBlock(p, combat)) {
                     // Replacement effects (for Camouflage)
@@ -988,6 +978,10 @@ public class PhaseHandler implements java.io.Serializable {
         return nMain2sThisTurn == 0;
     }
 
+    public final boolean skippedDeclareBlockers() {
+        return skipDamageSteps;
+    }
+
     private final static boolean DEBUG_PHASES = false;
 
     public void startFirstTurn(Player goesFirst) {
@@ -1064,7 +1058,7 @@ public class PhaseHandler implements java.io.Serializable {
                         final Zone currentZone = saHost.getZone();
 
                         // Need to check if Zone did change
-                        if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa instanceof LandAbility)) {
+                        if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa.isLandAbility())) {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
                             final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
@@ -1235,14 +1229,6 @@ public class PhaseHandler implements java.io.Serializable {
         givePriorityToPlayer = true;
     }
 
-    public final void setPlayerDeclaresAttackers(Player player) {
-        playerDeclaresAttackers = player;
-    }
-
-    public final void setPlayerDeclaresBlockers(Player player) {
-        playerDeclaresBlockers = player;
-    }
-
     public void endCombat() {
         game.getEndOfCombat().executeUntil();
         game.getEndOfCombat().executeUntilEndOfPhase(playerTurn);
@@ -1276,5 +1262,34 @@ public class PhaseHandler implements java.io.Serializable {
             count += 1;
         }
         return count;
+    }
+
+    private void handleMultiplayerEffects() {
+        // CR 800.4m When a player leaves the game, any continuous effects with durations that last until that
+        // player’s next turn or until a specific point in that turn will last until that turn would have begun
+        int oldPlayerIdx = game.getRegisteredPlayers().indexOf(playerPreviousTurn);
+        final int playerIdx = game.getRegisteredPlayers().indexOf(playerTurn);
+        final int direction = game.getTurnOrder().getShift();
+        while (oldPlayerIdx != playerIdx) {
+            oldPlayerIdx += direction;
+            if (oldPlayerIdx < 0) {
+                oldPlayerIdx = game.getRegisteredPlayers().size() - 1;
+            } else if (oldPlayerIdx > game.getRegisteredPlayers().size() - 1) {
+                oldPlayerIdx = 0;
+            }
+            Player p = game.getRegisteredPlayers().get(oldPlayerIdx);
+            if (p.hasLost()) {
+                // CR 702.26n
+                Untap.doPhasing(p);
+
+                game.getUntap().executeUntil(p);
+                game.getUpkeep().executeUntil(p);
+                game.getUpkeep().executeUntilEndOfPhase(p);
+                game.getEndOfCombat().executeUntilEndOfPhase(p);
+                game.getEndOfTurn().executeUntil(p);
+                game.getEndOfTurn().executeUntilEndOfPhase(p);
+                game.getCleanup().executeUntil(p);
+            }
+        }
     }
 }

@@ -48,7 +48,8 @@
     "Fastbond",
     "Mishra's Workshop",
     "Yawgmoth's Bargain",
-    "Gaea's Cradle"
+    "Gaea's Cradle",
+    "Commander's Sphere"
   ],
   "restrictedEditions": [
     "HTR",
@@ -60,11 +61,19 @@
     "DS0",
     "HHO",
     "CMB1",
-    "UNF",
+    "UST",
     "UGL",
-    "UNH",
+    "UNH", 
+    "PPC1",
     "UND",
-    "PUST"
+    "PUST",
+    "UEPHI23",
+    "UEMIN23",
+    "UELAS23",
+    "UEIND23",
+    "UEBAR23",
+    "MB2",
+    "UNF"
   ],
   "difficulties": [
     {

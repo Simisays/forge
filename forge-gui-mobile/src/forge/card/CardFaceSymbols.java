@@ -18,6 +18,7 @@
 package forge.card;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import forge.Forge;
@@ -75,10 +76,12 @@ public class CardFaceSymbols {
 
         Forge.getAssets().manaImages().put("commander", FSkinImage.IMG_ABILITY_COMMANDER);
         Forge.getAssets().manaImages().put("ringbearer", FSkinImage.IMG_ABILITY_RINGBEARER);
+        Forge.getAssets().manaImages().put("annihilator", FSkinImage.IMG_ABILITY_ANNIHILATOR);
         Forge.getAssets().manaImages().put("toxic", FSkinImage.IMG_ABILITY_TOXIC);
         Forge.getAssets().manaImages().put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
         Forge.getAssets().manaImages().put("defender", FSkinImage.IMG_ABILITY_DEFENDER);
         Forge.getAssets().manaImages().put("doublestrike", FSkinImage.IMG_ABILITY_DOUBLE_STRIKE);
+        Forge.getAssets().manaImages().put("exalted", FSkinImage.IMG_ABILITY_EXALTED);
         Forge.getAssets().manaImages().put("firststrike", FSkinImage.IMG_ABILITY_FIRST_STRIKE);
         Forge.getAssets().manaImages().put("fear", FSkinImage.IMG_ABILITY_FEAR);
         Forge.getAssets().manaImages().put("flash", FSkinImage.IMG_ABILITY_FLASH);
@@ -127,6 +130,18 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("protectU", FSkinImage.IMG_ABILITY_PROTECT_U);
         Forge.getAssets().manaImages().put("protectUW", FSkinImage.IMG_ABILITY_PROTECT_UW);
         Forge.getAssets().manaImages().put("protectW", FSkinImage.IMG_ABILITY_PROTECT_W);
+
+        // symbol lookup for text render
+        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
+            Forge.getAssets().symbolLookup().put(e.getKey(), Forge.getAssets().images().get(e.getValue()));
+        }
+
+        Forge.getAssets().symbolLookup().put("E", FSkinImage.ENERGY);
+        Forge.getAssets().symbolLookup().put("TK", FSkinImage.TICKET);
+        Forge.getAssets().symbolLookup().put("AE", FSkinImage.AETHER_SHARD);
+        Forge.getAssets().symbolLookup().put("PW", FSkinImage.PW_BADGE_COMMON);
+        Forge.getAssets().symbolLookup().put("CR", FSkinImage.QUEST_COINSTACK);
+        Forge.getAssets().symbolLookup().put("M", FSkinImage.MANASHARD);
     }
 
     public static void drawManaCost(Graphics g, ManaCost manaCost, float x, float y, final float imageSize) {
@@ -177,6 +192,16 @@ public class CardFaceSymbols {
                 x += dx;
             else
                 y += dx;
+        }
+    }
+
+    public static void drawAttractionLights(Graphics g, Set<Integer> lights, float x, float y, final float imageSize, boolean vertical) {
+        for(int i = 1; i <= 6; i++) {
+            drawSymbol("AL" + i + (lights.contains(i) ? "ON" : "OFF"), g, x, y, imageSize, imageSize);
+            if (!vertical)
+                x += imageSize;
+            else
+                y += imageSize;
         }
     }
 

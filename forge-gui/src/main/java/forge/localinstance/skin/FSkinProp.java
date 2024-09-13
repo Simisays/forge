@@ -177,6 +177,23 @@ public enum FSkinProp {
     IMG_CMC_MID_HIGH (new int[] {2, 166, 160, 160}, PropType.MANAICONS),
     IMG_CMC_HIGH     (new int[] {2, 248, 160, 160}, PropType.MANAICONS),
 
+    //attraction lights
+    IMG_ATTR_1_ON  (new int[] {0, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_2_ON  (new int[] {210, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_3_ON  (new int[] {420, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_4_ON  (new int[] {630, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_5_ON  (new int[] {840, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_6_ON  (new int[] {1050, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_1_OFF (new int[] {0, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_2_OFF (new int[] {210, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_3_OFF (new int[] {420, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_4_OFF (new int[] {630, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_5_OFF (new int[] {840, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_6_OFF (new int[] {1050, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+
+    //PAWPRINT
+    IMG_PAWPRINT     (new int[] {2, 902, 80, 80}, PropType.MANAICONS),
+
     //gameplay images
     IMG_TAP             (new int[] {166, 412, 80, 80}, PropType.MANAICONS),
     IMG_UNTAP           (new int[] {248, 412, 80, 80}, PropType.MANAICONS),
@@ -504,12 +521,15 @@ public enum FSkinProp {
     //COMMANDER
     IMG_ABILITY_COMMANDER  (new int[] {330, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_RINGBEARER (new int[] {410, 822, 80, 80}, PropType.MANAICONS),
+    //ANNIHILATOR
+    IMG_ABILITY_ANNIHILATOR(new int[] {166, 658, 80, 80}, PropType.ABILITY),
     //TOXIC
-    IMG_ABILITY_TOXIC      (new int[] {630, 1536, 46, 46}, PropType.ICON),
+    IMG_ABILITY_TOXIC      (new int[] {248, 658, 80, 80}, PropType.ABILITY),
     //Ability Icons
     IMG_ABILITY_DEATHTOUCH     (new int[] {2, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DEFENDER       (new int[] {84, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_EXALTED        (new int[] {330, 658, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FIRST_STRIKE   (new int[] {248, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FEAR           (new int[] {84, 412, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FLASH          (new int[] {166, 576, 80, 80}, PropType.ABILITY),
@@ -647,12 +667,27 @@ public enum FSkinProp {
             MANA_IMG.put(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
         }
 
-        MANA_IMG.put("P", FSkinProp.IMG_MANA_PHRYX);
+        MANA_IMG.put("H", FSkinProp.IMG_MANA_PHRYX);
         MANA_IMG.put("Y", FSkinProp.IMG_MANA_Y);
         MANA_IMG.put("Z", FSkinProp.IMG_MANA_Z);
         MANA_IMG.put("CHAOS", FSkinProp.IMG_CHAOS);
         MANA_IMG.put("Q", FSkinProp.IMG_UNTAP);
         MANA_IMG.put("T", FSkinProp.IMG_TAP);
+        MANA_IMG.put("P", FSkinProp.IMG_PAWPRINT);
+
+        //Attraction lights. Not really mana icons but they're loaded into the card symbols in all the same places.
+        MANA_IMG.put("AL1ON", FSkinProp.IMG_ATTR_1_ON);
+        MANA_IMG.put("AL2ON", FSkinProp.IMG_ATTR_2_ON);
+        MANA_IMG.put("AL3ON", FSkinProp.IMG_ATTR_3_ON);
+        MANA_IMG.put("AL4ON", FSkinProp.IMG_ATTR_4_ON);
+        MANA_IMG.put("AL5ON", FSkinProp.IMG_ATTR_5_ON);
+        MANA_IMG.put("AL6ON", FSkinProp.IMG_ATTR_6_ON);
+        MANA_IMG.put("AL1OFF", FSkinProp.IMG_ATTR_1_OFF);
+        MANA_IMG.put("AL2OFF", FSkinProp.IMG_ATTR_2_OFF);
+        MANA_IMG.put("AL3OFF", FSkinProp.IMG_ATTR_3_OFF);
+        MANA_IMG.put("AL4OFF", FSkinProp.IMG_ATTR_4_OFF);
+        MANA_IMG.put("AL5OFF", FSkinProp.IMG_ATTR_5_OFF);
+        MANA_IMG.put("AL6OFF", FSkinProp.IMG_ATTR_6_OFF);
     }
 
     public enum PropType {
@@ -671,6 +706,7 @@ public enum FSkinProp {
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         PHYREXIAN(ForgeConstants.SPRITE_PHYREXIAN_FILE),
         COLORLESS_HYBRID(ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE),
+        ATTRACTION_LIGHTS(ForgeConstants.SPRITE_ATTRACTION_LIGHTS_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE),
         ADVENTURE(ForgeConstants.SPRITE_ADVENTURE_FILE),
         DECKBOX(ForgeConstants.SPRITE_DECKBOX_FILE),

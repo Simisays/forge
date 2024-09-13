@@ -50,7 +50,6 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
 import forge.util.collect.FCollection;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -260,7 +259,7 @@ public class Game {
 
 
     public void addPlayer(int id, Player player) {
-        playerCache.put(Integer.valueOf(id), player);
+        playerCache.put(id, player);
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
@@ -327,7 +326,9 @@ public class Game {
         int plId = 0;
         for (RegisteredPlayer psc : players0) {
             IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
-            Player pl = factory.createIngamePlayer(this, plId++);
+            // If the Registered Player already has a pre-assigned ID, use that. Otherwise, assign a new one.
+            Integer id = psc.getId();
+            Player pl = factory.createIngamePlayer(this, id == null ? plId++ : id);
             allPlayers.add(pl);
             ingamePlayers.add(pl);
 
@@ -503,17 +504,14 @@ public class Game {
     }
 
     public CardCollectionView getCardsPlayerCanActivateInStack() {
-        return CardLists.filter(stackZone.getCards(), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                for (final SpellAbility sa : c.getSpellAbilities()) {
-                    final ZoneType restrictZone = sa.getRestrictions().getZone();
-                    if (ZoneType.Stack == restrictZone) {
-                        return true;
-                    }
+        return CardLists.filter(stackZone.getCards(), c -> {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                final ZoneType restrictZone = sa.getRestrictions().getZone();
+                if (ZoneType.Stack == restrictZone) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -877,17 +875,23 @@ public class Game {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    for (Card cc : cards) {
-                        cc.removeImprintedCard(c);
-                        cc.removeEncodedCard(c);
-                        cc.removeRemembered(c);
-                        cc.removeAttachedTo(c);
-                        cc.removeAttachedCard(c);
+                    if (c.getEffectSource() != null && !c.isEmblem()) {
+                        // move effect to another player so they continue to work
+                        c.getZone().remove(c);
+                        getNextPlayerAfter(p).getZone(ZoneType.Command).add(c);
+                    } else {
+                        for (Card cc : cards) {
+                            cc.removeImprintedCard(c);
+                            cc.removeEncodedCard(c);
+                            cc.removeRemembered(c);
+                            cc.removeAttachedTo(c);
+                            cc.removeAttachedCard(c);
+                        }
+                        triggerList.put(c.getZone().getZoneType(), null, c);
+                        getAction().ceaseToExist(c, false);
+                        // CR 603.2f owner of trigger source lost game
+                        getTriggerHandler().clearDelayedTrigger(c);
                     }
-                    triggerList.put(c.getZone().getZoneType(), null, c);
-                    getAction().ceaseToExist(c, false);
-                    // CR 603.2f owner of trigger source lost game
-                    getTriggerHandler().clearDelayedTrigger(c);
                 } else {
                     // return stolen permanents
                     if (c.isInPlay() && (c.getController().equals(p) || c.getZone().getPlayer().equals(p))) {
@@ -1319,7 +1323,7 @@ public class Game {
         }
     }
     public void addFacedownWhileCasting(Card c, int numDrawn) {
-        facedownWhileCasting.put(c, Integer.valueOf(numDrawn));
+        facedownWhileCasting.put(c, numDrawn);
     }
 
     public boolean isDay() {
