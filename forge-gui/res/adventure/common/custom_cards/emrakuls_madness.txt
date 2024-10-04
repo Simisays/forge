@@ -1,12 +1,44 @@
-Name:Garruk's Boss Effect Phase One
+Name:Emrakul's Madness
 ManaCost:no cost
 Types:Enchantment
-S:Mode$ ReduceCost | ValidCard$ Beast,Garruk | EffectZone$ Command | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Beast and Garruk spells you cast cost {1} less.
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever an opponent casts a noncreature spell, put an prey counter on CARDNAME.
-SVar:TrigPutCounter:DB$ PutCounter | CounterType$ Prey
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.Self+counters_GE5_PREY | PresentZone$ Command | Execute$ TrigConjure | TriggerDescription$ At the beginning of your upkeep, if there are 5 or more Prey counters on CARDNAME, conjure one of Garruk's beasts onto the battlefield under your control.
-SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Zone$ Battlefield | AtRandom$ True | Spellbook$ Garruk's Companion,Garruk's Gorehorn,Garruk's Harbinger,Garruk's Horde,Garruk's Packleader,Garruk's Warsteed,Briarpack Alpha,Mist Leopard,Predatory Wurm,Primal Huntbeast
-R:Event$ GameLoss | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ ExileSetLife | Description$ If Garruk would be defeated, instead exile CARDNAME and Garruk's life total becomes 40. Activate Phase 2.
-SVar:ExileSetLife:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self | SubAbility$ DBSetLife
-SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 40
-Oracle:Beast and Garruk spells you cast cost {1} less.\nWhenever an opponent casts a noncreature spell, put an prey counter on Garruk Boss Effect, Phase One.\nAt the beginning of your upkeep, if there are 5 or more Prey counters on Garuk Boss Effect, Phase One, conjure one of Garruk's beasts onto the battlefield under your control.\nIf Garruk would be defeated, instead exile Garruk Boss Effect, Phase One and Garruk's life total becomes 40. Activate Phase 2.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.
+SVar:TrigChoice:DB$ GenericChoice | ChoicePrompt$ Choose one of Emrakul's Offers | NumRandomChoices$ 3 | Choices$ Draw3,Conjure,Return2,ReturnBig,EmblemBuff,EmblemReduceCost,EmblemDavrielPW,EmblemDrawGain | SubAbility$ DBCondition | StackDescription$ SpellDescription | SpellDescription$ Accept one of NICKNAME's offers, then accept one of NICKNAME's conditions.
+SVar:Draw3:DB$ Draw | NumCards$ 3 | SubAbility$ DBAddDraw3 | SpellDescription$ Draw three cards, add 6 madness counters to Emrakul's Madness
+SVar:AddCounter:DB$ PutCounter | Defined$ Self | CounterType$ MADNESS | CounterNum$ 6
+
+SVar:Conjure:DB$ MakeCard | Conjure$ True | Name$ Manor Guardian | Zone$ Hand | SpellDescription$ Conjure a Manor Guardian card into your hand.
+SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBEffect | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1.
+SVar:DBEffect:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:ReturnBig:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.cmcEQV | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | SpellDescription$ Return a random creature card with the highest mana value from among cards in your graveyard to the battlefield.
+SVar:V:Count$ValidGraveyard Creature.YouOwn$GreatestCMC
+SVar:EmblemBuff:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 5) | StaticAbilities$ YoursP2Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +2/+0."
+SVar:YoursP2Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield | Description$ Creatures you control get +2/+0.
+SVar:EmblemReduceCost:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 6) | StaticAbilities$ CostBLess | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} less to cast."
+SVar:CostBLess:Mode$ ReduceCost | ValidCard$ Card | Activator$ You | Type$ Spell | Amount$ 1 | Color$ B | Description$ Spells you cast cost {B} less to cast.
+SVar:EmblemDavrielPW:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 7) | StaticAbilities$ AddP2Ab | Duration$ Permanent | SpellDescription$ You get an emblem with "Davriel planeswalkers you control have '[+2]: Draw a card.'"
+SVar:AddP2Ab:Mode$ Continuous | Affected$ Planeswalker.Davriel+YouCtrl | AddAbility$ ABDraw | Description$ Davriel planeswalkers you control have "[+2]: Draw a card."
+SVar:ABDraw:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:EmblemDrawGain:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 8) | Triggers$ DrawGainTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you draw a card, you gain 2 life."
+SVar:DrawGainTrig:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever you draw a card, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBCondition:DB$ GenericChoice | ChoicePrompt$ Choose a condition | NumRandomChoices$ 3 | Choices$ Lose6,Exile2,Sac2,PerpetualBuffTheirs,EmblemDebuff,EmblemRaiseCost,EmblemDrawExile,EmblemUpkeepLose | StackDescription$ None
+SVar:Lose6:DB$ LoseLife | Defined$ You | LifeAmount$ 6 | SpellDescription$ You lose 6 life.
+SVar:Exile2:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | SubAbility$ DBDraw | SpellDescription$ Exile two cards from your hand. If fewer than two cards were exiled this way, each opponent draws cards equal to the difference.
+SVar:DBDraw:DB$ Draw | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | NumCards$ Y | SubAbility$ DBCleanup
+
+
+
+
+
+Oracle:
+
+At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.
+
+As long as Emrakul's Madness has 10 or more madness counters on it, draw an additional card at the beginning of your upkeep, then each opponent conjures 3 Wastes into their deck.
+
+As long as Emrakul's Madness has 25 or more madness counters on it, conjure a  card from Emrakul's Spellbook into exile with 3 suspend counters, the card perpetually gains suspend.
+
+As long as Emrakul's Madness has 30 or more madness counters on it , spells your opponets cast cost {1} more to cast.
+
+As long as Emrakul's Madness has 50 or more madness counters on it, your opponents can't cast more than 1 spell each turn.
+
