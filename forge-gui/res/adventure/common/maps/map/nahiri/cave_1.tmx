@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="72">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,17 +7,17 @@
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt2DEOwyAMBVC2KpfLGXurLjlM1KFqhWL4mG9/WnXwECXBTzYCxLGVcojifitl395RP++O8eoY+RaJ2ofmY+Ufsb18Ub1j+CLn12d/rt7V/VP4rDzW/Mr29ezK+o3U1wqlD7GqXWxf1HrE9GUa1X3t+di1eBiBeFr7r9LXW59ZRsvW8qH7x6yvZbN8meeDWV/0+uzxZe5vq/qevenZ1PXz2P6+eR9ijPaNjMP2sffubzy/qD0r+1au31Vuhc/Ks4rPuntC5p7al3l++QVfnRu5Y8v0Rd//ee5as3zI+Gwb02f9g/7P8FlzGum113cCSMDRNA==
+   eJzd2EsOgzAMBNDsKi7HGXurbjgM6qJqZXUSx4w9EQsvEB8/2SGEHFtrhyiej9b27Rv2eA88z8bMtZ6wPm8+Vv4Z28eX1TuGL3N8/fbn3znbP4UP5UHjq9o3sivrN1NfFEqfx6p2sX1Z8xHTV2lU93XkY9fiBQJ5RkZ2vyK+0fzMMiJbz+f9flz19WzIV7k+uOrLnp8jvsrv26q+d29GNnX9IrY7+JRjr2dkuTw+dq7Zd0OZXxWrrKs86xe1sWdT+jy1q/ChPKv40N6TzZ09R0d8leuXO/jQv49qf8j6svf/InutVT7P89k2pg/d472f4UNj2tPrqO8Er+feNA==
   </data>
  </layer>
  <layer id="7" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt070NgCAAhFEaC2h0IQVdxhmMP5MaZ1EiBFGsLDzNveRqv4AIQURERF9XyTBEs0wPBXLfXRtan9nWAPbVcl+vhOhU3IikdO93Unh95akLoc9+X0vMNt83qGubcf/j21JN/p0gOPYtAOeV4vvsPY9uGrSViP6vzcMQZUU8NOh9RPTMCgFhOe8=
+   eJztk00KwjAUhLMRTDZ6odoq2Kt4BvHnOopeSdyo2GP4gnk01RYkKo4wHwxkkZCPeYkxhBBCCPl3RrYOIgfbHhSQ/brc0PwKyQTQb2zvWThj5q7piEQW/u/a4fllD14Ifv7+3GK6qd/SPbsV4T3+mjYn/ScpbPrf8zsm9OV9rnJu+2GvGPXzc16F5C+6TmVfCfAOujiJ2z50p11qkPBuVeiyBOs0dtvJ+hx1ioCfsTpdgHoj6cwGdRDpDZtBA92PEPIeN6rCTPA=
   </data>
  </layer>
  <layer id="2" name="Walls" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzVWEFuwzAMy7EG9q11XV6ynw3L+qu2aZ6xBoMAQiElxetlBnyooto0TUm2j20Yjv+sT4dh+IZ+PsT2bBzv58eJxmK+t4cd26XFduvX9tttrlPjfn6ctY1ijSfi+/kY407s+O3rwL/jXLPwszFwHIVvbtv/LfDt7rr6hjguwOFMfBCL8aPwVXymgk48V2ysNzJPDz6vSdSL1xJiPiV+N4LF+F0K+GxfvCYzzY1tiy9qEVdZjIzu94ot0xzDF63JcxvlqQl4Nyw4z+sOXfh1qvjYwycb0+vo2ra5jeHDGGFzmr/ndi8+WzNbL4s9n0/W/0X4PA/4/wo+H1tZ7mL2CJ/hyfjOcgLWXZ8b0MbsOJbnlnEY1Q+lW1Z3VawuxB5pooovyhvYfO1DrZvNc6q43Ysvw8vyOxtX5edK/onqh8+HlbMZq4mMO4YPOc86ntvU2axSSxV3TJtqLz9etra/tgxfli8zfCwu8PzouWC6rOytyi8Zvkzzc9MxksUFwxHt8YovwliJdXZWfRa+LG5ZjYjuTpgjWGNxWqm52R5lmmLcoA4iPah6Wj0DqjqlYqN3jzIdZJpQ9ZXpMOJgEtroOQMqfFF+xlb1w7l675fVu05Ps/1gMVnB5+8kUf6unHmy+1RWjy0/sPtl9S5did+esx/77yx0q957stxgPs/Cp/Ko0mTlTWEszlHFxzjcEzOMI9PAEszRE8Psrs3ONxm+KF9nNd/82H5W7y7s/UppVtXyiDtr/t5WjQeWL+YWv2V6/wq+rCm8im/EuOftVOUuXG8lF1e0tn57b1t9e1ulI17Gu1+PP/OwNy8fu8rm+w8qa1yC
+   eJzVWFtOwzAQzGcscS1KyUm4GSJwq7ZpjkEjtGI0mX249AdLltrNxh6Pd2ftHNowHP5Zn8dh+IT+Ncb2bBz243GisZTv5WbHdmqx3fq5/XSb69i0H4+ztclZ41H4vt/GuAo7PvsY9XOca3H8bAwcx8O3tP17Kzy7UveeIY4TcLgIH8Ri/Hj4Kj5zIU6YKzXWi5jnHnwckxgvHEuI+Zj4XQQW43ct4LN94ZjMYm5qe3xRi7jKcmSi/xu2LOYUvmhNzG2kUzPwblhwnueOuOB1evnRw6cak+Po3PbapvBhjqg5zZ+57cVna1brVbnHerK9F+FjHvD9Cj7OrUy7lD3CZ3gyvjNNwLrL2oA2ZcexmFvFYVQ/vLhVddfL1VXYo5io4ot0AxvXPox1szGnHre9+DK8St/VuJ4+V/Qnqh+sh5WzmaqJijuFDznPOp7bvLNZpZZ63KnY9Pby7Wlv+2vL8GV6meFTeYHnR+ZCxWVlbz19yfBlMb80P0eyvFA4oj3e8EUYK7muzqqPwqfmwt+qRkR3J9QI1VSeVmruPP6eQ9UeZTGluKloJs9jusD3V6uPF8GdV6e83KhomNojbHaGU8+8mPDqq4rDSMdnJzai8zXqXgVfpM/MQ8UP5+J9quZt9a5zT7P9UDlZwcd3kki/K2ee7D6V1WPTB3W/rN6lK/l7z9lPvbuItbJ29dwPzedR+Dwd9WKy8k1hKs5Rxac47MkZxZHFwBrMUcXnYeYY68EX6XVW881P7Wf17qK+X3kx69XyiDtrfG+r5oPSi6XF3zLZv4Ivax5ej2/E2PPt1NMuXG9Fiyuxtj17bfv4ZlulI17FO6+Hzzzqmxfnrmfj/g3fwl6l
   </data>
  </layer>
  <layer id="3" name="Clutter" width="40" height="40">
@@ -76,6 +76,12 @@
     <property name="displayNameOverride" value="Cave Faerie"/>
     <property name="enemy" value="Eldraine Faerie"/>
     <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/door_up.tx" x="624.726" y="409.345">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23B4.tmx"/>
+    <property name="teleportObjectId" value="61"/>
    </properties>
   </object>
  </objectgroup>
