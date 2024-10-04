@@ -188,7 +188,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean foughtThisTurn = false;
-    private boolean becameTargetThisTurn = false;
+    private boolean becameTargetThisTurn, valiant = false;
     private boolean enlistedThisCombat = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
@@ -2482,8 +2482,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.equals("Gift")) {
                     sbLong.append(keyword);
-                    if (inst.getHostCard() != null && inst.getHostCard().getFirstSpellAbility().hasAdditionalAbility("GiftAbility")) {
-                        sbLong.append(" ").append(inst.getHostCard().getFirstSpellAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
+                    Trigger trig = inst.getTriggers().stream().findFirst().orElse(null);
+                    if (trig != null && trig.getCardState().getFirstSpellAbility().hasAdditionalAbility("GiftAbility")) {
+                        sbLong.append(" ").append(trig.getCardState().getFirstSpellAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
                     }
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Starting intensity")) {
@@ -3701,6 +3702,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public void setBecameTargetThisTurn(boolean becameTargetThisTurn0) {
         becameTargetThisTurn = becameTargetThisTurn0;
+    }
+    public boolean isValiant() {
+        return valiant;
+    }
+    public void setValiant(boolean v) {
+        valiant = v;
     }
 
     public boolean hasStartedTheTurnUntapped() {
@@ -7200,6 +7207,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         setRegeneratedThisTurn(0);
         resetShieldCount();
         setBecameTargetThisTurn(false);
+        setValiant(false);
         setFoughtThisTurn(false);
         turnedFaceUpThisTurn = false;
         clearMustBlockCards();
