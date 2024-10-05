@@ -1,44 +1,21 @@
 Name:Emrakul's Madness
 ManaCost:no cost
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.
-SVar:TrigChoice:DB$ GenericChoice | ChoicePrompt$ Choose one of Emrakul's Offers | NumRandomChoices$ 3 | Choices$ Draw3,Conjure,Return2,ReturnBig,EmblemBuff,EmblemReduceCost,EmblemDavrielPW,EmblemDrawGain | SubAbility$ DBCondition | StackDescription$ SpellDescription | SpellDescription$ Accept one of NICKNAME's offers, then accept one of NICKNAME's conditions.
-SVar:Draw3:DB$ Draw | NumCards$ 3 | SubAbility$ DBAddDraw3 | SpellDescription$ Draw three cards, add 6 madness counters to Emrakul's Madness
-SVar:AddCounter:DB$ PutCounter | Defined$ Self | CounterType$ MADNESS | CounterNum$ 6
-
-SVar:Conjure:DB$ MakeCard | Conjure$ True | Name$ Manor Guardian | Zone$ Hand | SpellDescription$ Conjure a Manor Guardian card into your hand.
-SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBEffect | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1.
-SVar:DBEffect:DB$ Pump | PumpZone$ Hand | Defined$ Remembered | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
-SVar:ReturnBig:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.cmcEQV | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | SpellDescription$ Return a random creature card with the highest mana value from among cards in your graveyard to the battlefield.
-SVar:V:Count$ValidGraveyard Creature.YouOwn$GreatestCMC
-SVar:EmblemBuff:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 5) | StaticAbilities$ YoursP2Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +2/+0."
-SVar:YoursP2Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield | Description$ Creatures you control get +2/+0.
-SVar:EmblemReduceCost:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 6) | StaticAbilities$ CostBLess | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} less to cast."
-SVar:CostBLess:Mode$ ReduceCost | ValidCard$ Card | Activator$ You | Type$ Spell | Amount$ 1 | Color$ B | Description$ Spells you cast cost {B} less to cast.
-SVar:EmblemDavrielPW:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 7) | StaticAbilities$ AddP2Ab | Duration$ Permanent | SpellDescription$ You get an emblem with "Davriel planeswalkers you control have '[+2]: Draw a card.'"
-SVar:AddP2Ab:Mode$ Continuous | Affected$ Planeswalker.Davriel+YouCtrl | AddAbility$ ABDraw | Description$ Davriel planeswalkers you control have "[+2]: Draw a card."
-SVar:ABDraw:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:EmblemDrawGain:DB$ Effect | Name$ Emblem — Davriel, Soul Broker (Offer 8) | Triggers$ DrawGainTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you draw a card, you gain 2 life."
-SVar:DrawGainTrig:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever you draw a card, you gain 2 life.
-SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-SVar:DBCondition:DB$ GenericChoice | ChoicePrompt$ Choose a condition | NumRandomChoices$ 3 | Choices$ Lose6,Exile2,Sac2,PerpetualBuffTheirs,EmblemDebuff,EmblemRaiseCost,EmblemDrawExile,EmblemUpkeepLose | StackDescription$ None
-SVar:Lose6:DB$ LoseLife | Defined$ You | LifeAmount$ 6 | SpellDescription$ You lose 6 life.
-SVar:Exile2:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | SubAbility$ DBDraw | SpellDescription$ Exile two cards from your hand. If fewer than two cards were exiled this way, each opponent draws cards equal to the difference.
-SVar:DBDraw:DB$ Draw | Defined$ Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | NumCards$ Y | SubAbility$ DBCleanup
-
-
-
-
-
-Oracle:
-
-At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.
-
-As long as Emrakul's Madness has 10 or more madness counters on it, draw an additional card at the beginning of your upkeep, then each opponent conjures 3 Wastes into their deck.
-
-As long as Emrakul's Madness has 25 or more madness counters on it, conjure a  card from Emrakul's Spellbook into exile with 3 suspend counters, the card perpetually gains suspend.
-
-As long as Emrakul's Madness has 30 or more madness counters on it , spells your opponets cast cost {1} more to cast.
-
-As long as Emrakul's Madness has 50 or more madness counters on it, your opponents can't cast more than 1 spell each turn.
-
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChoice | TriggerDescription$ At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.
+SVar:TrigChoice:DB$ GenericChoice | Defined$ Opponent | ChoicePrompt$ Choose one of Emrakul's Offers | NumRandomChoices$ 3 | Choices$ Draw3,ConjureWaste,Return2
+SVar:Draw3:DB$ Draw | NumCards$ 3 | Defined$ Opponent | SubAbility$ DBAddDraw3 | SpellDescription$ Draw three cards, add 6 madness counters to Emrakul's Madness
+SVar:DBAddDraw3:DB$ PutCounter | Defined$ Self | CounterType$ MADNESS | CounterNum$ 6
+SVar:ConjureWaste:DB$ MakeCard | Defined$ Opponent | Conjure$ True | Name$ Wastes | Zone$ Library | Amount$ 6 | SubAbility$ DBremove10 | SpellDescription$ Conjure 6 Waste cards into your deck, remove 10 madness counters from CARDNAME.
+SVar:DBremove10:DB$ RemoveCounter | Defined$ Self | CounterType$ MADNESS | CounterNum$ 10
+SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBAddDraw3 | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1, add 6 madness counters to Emrakul's Madness.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE20_MADNESS | PresentZone$ Command | TriggerZones$ Command | Execute$ TrigConjure | TriggerDescription$ As long as Emrakul's Madness has 20 or more madness counters on it, at the beginning of your upkeep, each opponent conjures 5 Waste cards into their deck
+SVar:TrigConjure:DB$ MakeCard | Defined$ Opponent | Name$ Wastes | Zone$ Library | Amount$ 6 | Conjure$ True
+S:Mode$ RaiseCost | Activator$ Opponent | ValidCard$ Card | IsPresent$ Card.Self+counters_GE30_MADNESS | PresentZone$ Command | EffectZone$ Command | Description$ As long as Emrakul's Madness has 30 or more madness counters on it , spells your opponents cast cost {1} more to cast.
+S:Mode$ CantBeCast | ValidCard$ Card | IsPresent$ Card.Self+counters_GE50_MADNESS | PresentZone$ Command | Caster$ Opponent | EffectZone$ Command | NumLimitEachTurn$ 1 | Description$ As long as Emrakul's Madness has 50 or more madness counters on it, your opponents can't cast more than 1 spell each turn.
+R:Event$ GameLoss | ActiveZones$ Command |ValidPlayer$ You | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE10
+R:Event$ GameWin | ActiveZones$ Command | ValidPlayer$ Opponent | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE10
+SVar:X:Count$CardCounters.MADNESS
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep and whenever an opponent cast a spell put a madness counter on "Emrakul's Corruption"
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ValidCard$ Card | TriggerZones$ Command | Execute$ TrigPutCounter | Secondary$ True | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep and whenever an opponent cast a spell put a madness counter on "Emrakul's Corruption"
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ MADNESS | CounterNum$ 1 | Defined$ Self
+Oracle:At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.\nAs long as Emrakul's Madness has 20 or more madness counters on it, at the beginning of your upkeep, each opponent conjures 5 Waste cards into their deck\nAs long as Emrakul's Madness has 30 or more madness counters on it , spells your opponents cast cost {1} more to cast.\nAs long as Emrakul's Madness has 50 or more madness counters on it, your opponents can't cast more than 1 spell each turn. 

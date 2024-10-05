@@ -9864,7 +9864,7 @@
 	"boss": true,
 	"flying": true,
 	"speed": 25,
-	"scale": 1.5,
+	"scale": 2.5,
 	"life": 100,
 	"rewards": [
 		{

@@ -1,0 +1,5 @@
+Name:Emrakul's Boss Effect
+ManaCost:no cost
+Types:Enchantment
+S:Mode$ ManaConvert | EffectZone$ Command | ValidPlayer$ You | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color.
+Oracle:You may spend mana as though it were mana of any color.\nAt the beginning of your upkeep and whenever an opponent cast a spell put a madness counter on "Emrakul's Corruption"\nAs long as Emakul's Corrupion has 10 or more madness counters, you can't lose the game and your opponents can't win the game 

@@ -264,6 +264,8 @@ public enum CounterEnumType {
     M2M1("-2/-1", "-2/-1", 255, 110, 106),
 
     M2M2("-2/-2", "-2/-2", 255, 110, 106),
+   
+    MADNESS("MAD", 133, 28, 156), ///adventure only
 
     MAGNET("MAGNT", 198, 197, 210),
 
