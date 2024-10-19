@@ -923,6 +923,10 @@ public class AiController {
         if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
         }
+        // TODO maybe other location for this?
+        if (!sa.isLegalAfterStack()) {
+            return AiPlayDecision.AnotherTime;
+        }
         Card spellHost = card;
         if (sa.isSpell()) {
             spellHost = CardCopyService.getLKICopy(spellHost);
@@ -930,15 +934,8 @@ public class AiController {
             spellHost.setLastKnownZone(game.getStackZone()); // need to add to stack to make check Restrictions respect stack cmc
             spellHost.setCastFrom(card.getZone());
         }
-        // TODO maybe other location for this?
-        if (!sa.isLegalAfterStack()) {
-            return AiPlayDecision.AnotherTime;
-        }
         if (!sa.checkRestrictions(spellHost, player)) {
             return AiPlayDecision.AnotherTime;
-        }
-        if (sa instanceof SpellPermanent) {
-            return canPlayFromEffectAI((SpellPermanent) sa, false, true);
         }
         if (sa.usesTargeting()) {
             if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
@@ -949,6 +946,9 @@ public class AiController {
             }
         }
         if (sa instanceof Spell) {
+            if (sa.getApi() == ApiType.PermanentCreature || sa.getApi() == ApiType.PermanentNoncreature) {
+                return canPlayFromEffectAI((Spell) sa, false, true);
+            }
             if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife() &&
                     ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife()) {
                 return AiPlayDecision.CurseEffects;
@@ -1279,7 +1279,7 @@ public class AiController {
                 return AiPlayDecision.WillPlay;
             }
 
-            if (spell instanceof SpellPermanent) {
+            if (card.isPermanent()) {
                 if (!checkETBEffects(card, spell, null)) {
                     return AiPlayDecision.BadEtbEffects;
                 }
