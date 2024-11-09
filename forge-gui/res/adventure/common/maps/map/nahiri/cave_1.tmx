@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzd2EsOgzAMBNDsKi7HGXurbjgM6qJqZXUSx4w9EQsvEB8/2SGEHFtrhyiej9b27Rv2eA88z8bMtZ6wPm8+Vv4Z28eX1TuGL3N8/fbn3znbP4UP5UHjq9o3sivrN1NfFEqfx6p2sX1Z8xHTV2lU93XkY9fiBQJ5RkZ2vyK+0fzMMiJbz+f9flz19WzIV7k+uOrLnp8jvsrv26q+d29GNnX9IrY7+JRjr2dkuTw+dq7Zd0OZXxWrrKs86xe1sWdT+jy1q/ChPKv40N6TzZ09R0d8leuXO/jQv49qf8j6svf/InutVT7P89k2pg/d472f4UNj2tPrqO8Er+feNA==
+  </data>
+ </layer>
+ <layer id="7" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztk00KwjAUhLMRTDZ6odoq2Kt4BvHnOopeSdyo2GP4gnk01RYkKo4wHwxkkZCPeYkxhBBCCPl3RrYOIgfbHhSQ/brc0PwKyQTQb2zvWThj5q7piEQW/u/a4fllD14Ifv7+3GK6qd/SPbsV4T3+mjYn/ScpbPrf8zsm9OV9rnJu+2GvGPXzc16F5C+6TmVfCfAOujiJ2z50p11qkPBuVeiyBOs0dtvJ+hx1ioCfsTpdgHoj6cwGdRDpDZtBA92PEPIeN6rCTPA=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzVWFtOwzAQzGcscS1KyUm4GSJwq7ZpjkEjtGI0mX249AdLltrNxh6Pd2ftHNowHP5Zn8dh+IT+Ncb2bBz243GisZTv5WbHdmqx3fq5/XSb69i0H4+ztclZ41H4vt/GuAo7PvsY9XOca3H8bAwcx8O3tP17Kzy7UveeIY4TcLgIH8Ri/Hj4Kj5zIU6YKzXWi5jnHnwckxgvHEuI+Zj4XQQW43ct4LN94ZjMYm5qe3xRi7jKcmSi/xu2LOYUvmhNzG2kUzPwblhwnueOuOB1evnRw6cak+Po3PbapvBhjqg5zZ+57cVna1brVbnHerK9F+FjHvD9Cj7OrUy7lD3CZ3gyvjNNwLrL2oA2ZcexmFvFYVQ/vLhVddfL1VXYo5io4ot0AxvXPox1szGnHre9+DK8St/VuJ4+V/Qnqh+sh5WzmaqJijuFDznPOp7bvLNZpZZ63KnY9Pby7Wlv+2vL8GV6meFTeYHnR+ZCxWVlbz19yfBlMb80P0eyvFA4oj3e8EUYK7muzqqPwqfmwt+qRkR3J9QI1VSeVmruPP6eQ9UeZTGluKloJs9jusD3V6uPF8GdV6e83KhomNojbHaGU8+8mPDqq4rDSMdnJzai8zXqXgVfpM/MQ8UP5+J9quZt9a5zT7P9UDlZwcd3kki/K2ee7D6V1WPTB3W/rN6lK/l7z9lPvbuItbJ29dwPzedR+Dwd9WKy8k1hKs5Rxac47MkZxZHFwBrMUcXnYeYY68EX6XVW881P7Wf17qK+X3kx69XyiDtrfG+r5oPSi6XF3zLZv4Ivax5ej2/E2PPt1NMuXG9Fiyuxtj17bfv4ZlulI17FO6+Hzzzqmxfnrmfj/g3fwl6l
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxlw4ZHjAGJWejkECtjppGe4gsEeFssG2gEEwJKBdgCFgG2gHTAKRsEowAsOIrFreQmrH+xlOr3BLRYGhtssEHbWwDqFIJg90A5AAvW89HHPYiqZo0slc6gFkNMaMfmWnuDQQDuAAAClO1i+PQkVUxlIBxEA9QMYv6A28miZPwpGwSgYbIBjoB0wBMDSgXYAAUBq3TI6pjA8wGibgv4AAI9TDn0=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="59" template="../../obj/door_right.tx" x="-0.33333" y="320.333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23A3.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/door_up.tx" x="321.94" y="639.409">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23B4.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="370" y="241.666">
+   <properties>
+    <property name="displayNameOverride" value="Cave Faerie"/>
+    <property name="enemy" value="Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/enemy.tx" x="256.334" y="228.666">
+   <properties>
+    <property name="displayNameOverride" value="Cave Faerie"/>
+    <property name="enemy" value="Dimir Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/treasure.tx" x="311.667" y="276.667"/>
+  <object id="66" template="../../obj/treasure.tx" x="326.333" y="396"/>
+  <object id="67" template="../../obj/gold.tx" x="395" y="255"/>
+  <object id="68" template="../../obj/gold.tx" x="279.333" y="376.333"/>
+  <object id="69" template="../../obj/enemy.tx" x="338.667" y="127.333">
+   <properties>
+    <property name="displayNameOverride" value="Cave Faerie"/>
+    <property name="enemy" value="Eldraine Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="42.3333" y="144.667">
+   <properties>
+    <property name="enemy" value="Dimir Faerie"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="494.667" y="167.667">
+   <properties>
+    <property name="displayNameOverride" value="Cave Faerie"/>
+    <property name="enemy" value="Eldraine Faerie"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/door_up.tx" x="624.726" y="409.345">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23B4.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

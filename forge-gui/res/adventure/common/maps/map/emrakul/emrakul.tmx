@@ -26,8 +26,10 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="50" template="../../obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
+  <object id="50" template="../../obj/enemy.tx" x="200.561" y="413.537" width="64" height="64">
    <properties>
+    <property name="effect">{ &quot;startBattleWithCardInCommandZone&quot;: [ &quot;Emrakul's Boss Effect&quot;,&quot;Emrakul's Madness&quot; ]
+}</property>
     <property name="enemy" value="Emrakul"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>

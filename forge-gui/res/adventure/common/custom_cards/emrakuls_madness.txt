@@ -1,0 +1,21 @@
+Name:Emrakul's Madness
+ManaCost:no cost
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigChoice | TriggerDescription$ At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.
+SVar:TrigChoice:DB$ GenericChoice | Defined$ Opponent | ChoicePrompt$ Choose one of Emrakul's Offers | NumRandomChoices$ 3 | Choices$ Draw3,ConjureWaste,Return2
+SVar:Draw3:DB$ Draw | NumCards$ 3 | Defined$ Opponent | SubAbility$ DBAddDraw3 | SpellDescription$ Draw three cards, add 6 madness counters to Emrakul's Madness
+SVar:DBAddDraw3:DB$ PutCounter | Defined$ Self | CounterType$ MADNESS | CounterNum$ 6
+SVar:ConjureWaste:DB$ MakeCard | Defined$ Opponent | Conjure$ True | Name$ Wastes | Zone$ Library | Amount$ 6 | SubAbility$ DBremove10 | SpellDescription$ Conjure 6 Waste cards into your deck, remove 10 madness counters from CARDNAME.
+SVar:DBremove10:DB$ RemoveCounter | Defined$ Self | CounterType$ MADNESS | CounterNum$ 10
+SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBAddDraw3 | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1, add 6 madness counters to Emrakul's Madness.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE20_MADNESS | PresentZone$ Command | TriggerZones$ Command | Execute$ TrigConjure | TriggerDescription$ As long as Emrakul's Madness has 20 or more madness counters on it, at the beginning of your upkeep, each opponent conjures 5 Waste cards into their deck
+SVar:TrigConjure:DB$ MakeCard | Defined$ Opponent | Name$ Wastes | Zone$ Library | Amount$ 6 | Conjure$ True
+S:Mode$ RaiseCost | Activator$ Opponent | ValidCard$ Card | IsPresent$ Card.Self+counters_GE30_MADNESS | PresentZone$ Command | EffectZone$ Command | Description$ As long as Emrakul's Madness has 30 or more madness counters on it , spells your opponents cast cost {1} more to cast.
+S:Mode$ CantBeCast | ValidCard$ Card | IsPresent$ Card.Self+counters_GE50_MADNESS | PresentZone$ Command | Caster$ Opponent | EffectZone$ Command | NumLimitEachTurn$ 1 | Description$ As long as Emrakul's Madness has 50 or more madness counters on it, your opponents can't cast more than 1 spell each turn.
+R:Event$ GameLoss | ActiveZones$ Command |ValidPlayer$ You | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE10
+R:Event$ GameWin | ActiveZones$ Command | ValidPlayer$ Opponent | Layer$ CantHappen | CheckSVar$ X | SVarCompare$ GE10
+SVar:X:Count$CardCounters.MADNESS
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep and whenever an opponent cast a spell put a madness counter on "Emrakul's Corruption"
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ValidCard$ Card | TriggerZones$ Command | Execute$ TrigPutCounter | Secondary$ True | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep and whenever an opponent cast a spell put a madness counter on "Emrakul's Corruption"
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ MADNESS | CounterNum$ 1 | Defined$ Self
+Oracle:At the beginning of your upkeep, an opponent accepts one of Emrakul's offers.\nAs long as Emrakul's Madness has 20 or more madness counters on it, at the beginning of your upkeep, each opponent conjures 5 Waste cards into their deck\nAs long as Emrakul's Madness has 30 or more madness counters on it , spells your opponents cast cost {1} more to cast.\nAs long as Emrakul's Madness has 50 or more madness counters on it, your opponents can't cast more than 1 spell each turn. 
