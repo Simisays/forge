@@ -188,7 +188,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         CHECK_SNAPSHOT_AT_STARTUP("true"),
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
-        MATCHPREF_PROMPT_FREE_BLOCKS("false"),
 
         NEW_GAME_SCREEN("Constructed"),
         LOAD_GAME_SCREEN("BoosterDraft"),
@@ -205,6 +204,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         MATCH_AI_SIDEBOARDING_MODE("Human For AI"),
         MATCH_EXPERIMENTAL_RESTORE("false"),
+        MATCH_AI_TIMEOUT("5"),
         ENFORCE_DECK_LEGALITY ("true"),
         PERFORMANCE_MODE ("false"),
         FILTERED_HANDS ("false"),

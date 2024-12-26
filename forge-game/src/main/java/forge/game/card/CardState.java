@@ -17,20 +17,10 @@
  */
 package forge.game.card;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.CardTypeView;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
@@ -49,11 +39,16 @@ import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.ITranslatable;
+import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private String name = "";
@@ -216,7 +211,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
         view.setFunctionalVariantName(functionalVariantName);
     }
 
-
     public final int getBasePower() {
         return basePower;
     }
@@ -268,7 +262,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public Set<Integer> getAttractionLights() {
         return this.attractionLights;
     }
-
     public final void setAttractionLights(Set<Integer> attractionLights) {
         this.attractionLights = attractionLights;
         view.updateAttractionLights(this);
@@ -368,7 +361,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
-        return Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
+        return IterableUtil.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
     }
 
     public final SpellAbility getFirstAbility() {
@@ -495,14 +488,6 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
     public final void clearStaticAbilities() {
         staticAbilities.clear();
-    }
-
-    public final String getImageKey() {
-        return imageKey;
-    }
-    public final void setImageKey(final String imageFilename0) {
-        imageKey = imageFilename0;
-        view.updateImageKey(this);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
@@ -755,6 +740,14 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     public void setSetCode(String setCode0) {
         setCode = setCode0;
         view.updateSetCode(this);
+    }
+
+    public final String getImageKey() {
+        return imageKey;
+    }
+    public final void setImageKey(final String imageFilename0) {
+        imageKey = imageFilename0;
+        view.updateImageKey(this);
     }
 
     /* (non-Javadoc)

@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -36,8 +35,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * A prototype for player controller class
@@ -48,10 +50,7 @@ public abstract class PlayerController {
 
     public enum ManaPaymentPurpose {
         DeclareAttacker,
-        DeclareBlocker,
-        Echo,
-        Multikicker,
-        CumulativeUpkeep,
+        DeclareBlocker
     }
 
     public enum BinaryChoiceType {
@@ -60,10 +59,21 @@ public abstract class PlayerController {
         PlayOrDraw,
         OddsOrEvens,
         UntapOrLeaveTapped,
-        UntapTimeVault,
         LeftOrRight,
-        AddOrRemove,
+        AddOrRemove
     }
+
+    public enum FullControlFlag {
+        ChooseCostOrder,
+        ChooseCostReductionOrderAndVariableAmount,
+        //ChooseManaPoolShard, // select shard with special properties
+        NoPaymentFromManaAbility,
+        NoFreeCombatCostHandling,
+        AllowPaymentStartWithMissingResources,
+        //AdditionalLayerTimestampOrder // tokens etc.
+    }
+
+    private Set<FullControlFlag> fullControls = EnumSet.noneOf(FullControlFlag.class);
 
     protected final GameView gameView;
 
@@ -193,9 +203,9 @@ public abstract class PlayerController {
     public abstract PlayerZone chooseStartingHand(List<PlayerZone> zones);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
 
-    public abstract String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional);
-    public final String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes) {
-        return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
+    public abstract String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, boolean isOptional);
+    public final String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes) {
+        return chooseSomeType(kindOfType, sa, validTypes, false);
     }
 
     public abstract String chooseSector(Card assignee, String ai, List<String> sectors);
@@ -291,10 +301,12 @@ public abstract class PlayerController {
 
     public abstract List<Card> chooseCardsForZoneChange(ZoneType destination, List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, int min, int max, DelayedReveal delayedReveal, String selectPrompt, Player decider);
 
-    public boolean isFullControl() {
-        return false;
+    public Set<FullControlFlag> getFullControl() {
+        return fullControls;
     }
-    public void setFullControl(boolean full) {}
+    public boolean isFullControl(FullControlFlag f) {
+        return fullControls.contains(f);
+    }
 
     public abstract void autoPassCancel();
 
@@ -324,5 +336,7 @@ public abstract class PlayerController {
 
     public abstract CardCollection chooseCardsForEffectMultiple(Map<String, CardCollection> validMap,
             SpellAbility sa, String title, boolean isOptional);
+
+    public abstract List<CostPart> orderCosts(List<CostPart> costs);
 
 }

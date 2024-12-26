@@ -17,7 +17,6 @@
  */
 package forge.game.player;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ImageKeys;
 import forge.LobbyPlayer;
@@ -31,7 +30,6 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
 import forge.game.keyword.*;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
@@ -65,7 +63,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * <p>
@@ -81,59 +78,57 @@ public class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.Junkyard,
             ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
 
-    private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
-
     private int life = 20;
     private int startingLife = 20;
     private int lifeStartedThisTurnWith = startingLife;
-    private int spellsCastThisTurn;
-    private int spellsCastThisGame;
-    private int spellsCastLastTurn;
-    private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
-    private int landsPlayedThisTurn;
-    private int landsPlayedLastTurn;
-    private int investigatedThisTurn;
-    private int surveilThisTurn;
     private int lifeLostThisTurn;
     private int lifeLostLastTurn;
     private int lifeGainedThisTurn;
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
-    private int committedCrimeThisTurn;
-    private int expentThisTurn;
-    private int numManaShards;
-    private int numPowerSurgeLands;
-    private int numLibrarySearchedOwn; //The number of times this player has searched his library
-    private int numDrawnThisTurn;
-    private int numDrawnLastTurn;
-    private int numDrawnThisDrawStep;
-    private int numRollsThisTurn;
-    private int numExploredThisTurn;
-    private int numTokenCreatedThisTurn;
-    private int numForetoldThisTurn;
-    private int numCardsInHandStartedThisTurnWith;
-    private int venturedThisTurn;
     private int maxHandSize = 7;
     private int startingHandSize = 7;
     private boolean unlimitedHandSize = false;
     private Card lastDrawnCard;
+    private int numDrawnThisTurn;
+    private int numDrawnLastTurn;
+    private int numDrawnThisDrawStep;
+    private int numCardsInHandStartedThisTurnWith;
+    private int numExploredThisTurn;
+    private int numTokenCreatedThisTurn;
+    private int numForetoldThisTurn;
+    private int landsPlayedThisTurn;
+    private int landsPlayedLastTurn;
+    private int numPowerSurgeLands;
+    private int spellsCastThisTurn;
+    private int spellsCastThisGame;
+    private int spellsCastLastTurn;
+    private List<Card> spellsCastSinceBeginningOfLastTurn = Lists.newArrayList();
+    private int investigatedThisTurn;
+    private int surveilThisTurn;
+    private int committedCrimeThisTurn;
+    private int numRollsThisTurn;
+    private List<Integer> diceRollsThisTurn = Lists.newArrayList();
+    private int expentThisTurn;
+    private int numLibrarySearchedOwn; //The number of times this player has searched his library
+    private int venturedThisTurn;
+    private int descended = 0;
+    private boolean revolt = false;
+    private int numRingTemptedYou = 0;
     private Card ringBearer, theRing;
-    private String namedCard = "";
+
+    private List<Card> discardedThisTurn = new ArrayList<>();
+    private List<Card> sacrificedThisTurn = new ArrayList<>();
 
     private int simultaneousDamage = 0;
 
     private int lastTurnNr = 0;
-    private int numRingTemptedYou = 0;
+
+    private String namedCard = "";
 
     private final Map<String, FCollection<String>> notes = Maps.newHashMap();
     private final Map<String, Integer> notedNum = Maps.newHashMap();
     private final Map<String, String> draftNotes = Maps.newHashMap();
-
-    private boolean revolt = false;
-    private int descended = 0;
-
-    private List<Card> sacrificedThisTurn = new ArrayList<>();
-    private List<Card> discardedThisTurn = new ArrayList<>();
 
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
@@ -143,11 +138,10 @@ public class Player extends GameEntity implements Comparable<Player> {
     private KeywordCollection keywords = new KeywordCollection();
     // stores the keywords created by static abilities
     private final Table<Long, String, KeywordInterface> storedKeywords = TreeBasedTable.create();
+    private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
 
     private Map<Card, DetachedCardEffect> staticAbilities = Maps.newHashMap();
 
-    private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
-    private ManaPool manaPool = new ManaPool(this);
     private Map<GameEntity, List<Card>> attackedThisTurn = new HashMap<>();
     private List<Player> attackedPlayersLastTurn = new ArrayList<>();
     private List<Player> attackedPlayersThisCombat = new ArrayList<>();
@@ -155,7 +149,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean beenDealtCombatDamageSinceLastTurn = false;
 
     private boolean tappedLandForManaThisTurn = false;
-    private List<Card> completedDungeons = new ArrayList<>();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
     private List<PlayerZone> extraZones = null;
@@ -167,30 +160,37 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection currentPlanes = new CardCollection();
     private CardCollection planeswalkedToThisTurn = new CardCollection();
 
-    private PlayerStatistics stats = new PlayerStatistics();
-    private PlayerController controller;
+    private Card activeScheme = null;
 
     private NavigableMap<Long, Pair<Player, PlayerController>> controlledBy = Maps.newTreeMap();
-
     private NavigableMap<Long, Player> controlledWhileSearching = Maps.newTreeMap();
 
+    private int numManaShards;
+
     private int teamNumber = -1;
-    private Card activeScheme = null;
-    private final CardCollection commanders = new CardCollection();
-    private final Map<Card, Integer> commanderCast = Maps.newHashMap();
-    private DetachedCardEffect commanderEffect = null;
+
+    private PlayerController controller;
     private final Game game;
+
     private boolean triedToDrawFromEmptyLibrary = false;
     private CardCollection lostOwnership = new CardCollection();
     private CardCollection gainedOwnership = new CardCollection();
+
+    private ManaPool manaPool = new ManaPool(this);
     private int numManaConversion = 0;
     // The SA currently being paid for
     private Deque<SpellAbility> paidForStack = new ArrayDeque<>();
 
+    private List<Card> completedDungeons = new ArrayList<>();
+
+    private final CardCollection commanders = new CardCollection();
+    private final Map<Card, Integer> commanderCast = Maps.newHashMap();
+    private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
+    private DetachedCardEffect commanderEffect = null;
+
     private Card monarchEffect;
     private Card initiativeEffect;
     private Card blessingEffect;
-
     private Card radiationEffect;
     private Card keywordEffect;
 
@@ -201,6 +201,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private NavigableMap<Long, Player> declaresAttackers = Maps.newTreeMap();
     private NavigableMap<Long, Player> declaresBlockers = Maps.newTreeMap();
+
+    private PlayerStatistics stats = new PlayerStatistics();
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -280,7 +282,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
 
-        // Replacement effects
         if (game.getReplacementHandler().run(ReplacementType.SetInMotion, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
             return;
         }
@@ -356,7 +357,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Should keep player relations somewhere in the match structure
      */
     public final PlayerCollection getAllies() {
-        return getAllOtherPlayers().filter(Predicates.not(PlayerPredicates.isOpponentOf(this)));
+        return getAllOtherPlayers().filter(PlayerPredicates.isOpponentOf(this).negate());
     }
 
     public final PlayerCollection getTeamMates(final boolean inclThis) {
@@ -482,7 +483,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 p.addLifeGainedByTeamThisTurn(lifeGain);
             }
 
-            // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
             runParams.put(AbilityKey.LifeAmount, lifeGain);
             runParams.put(AbilityKey.Source, source);
@@ -548,7 +548,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         lifeLostThisTurn += toLose;
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, toLose);
         runParams.put(AbilityKey.FirstTime, firstLost);
@@ -604,12 +603,11 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         default:
             break;
-        };
+        }
 
         final int lost = loseLife(lifePayment, false, false);
         cause.setPaidLife(lifePayment);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.LifeAmount, lifePayment);
         game.getTriggerHandler().runTrigger(TriggerType.PayLife, runParams, false);
@@ -735,6 +733,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     // not change the game state)
     // 2012/01/02: No longer used in calculating the finalized damage, but
     // retained for damageprediction. -Hellfish
+    // TODO make this more generic in looking at the ReplacementEffects
     @Override
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
         int restDamage = damage;
@@ -1206,19 +1205,20 @@ public class Player extends GameEntity implements Comparable<Player> {
             return drawn;
         }
 
-        // Replacement effects
-        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
-        repRunParams.put(AbilityKey.Number, n);
-        if (params != null) {
-            repRunParams.putAll(params);
-        }
-
-        if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
-            return drawn;
-        }
-
         // always allow drawing cards before the game actually starts (e.g. Maralen of the Mornsong Avatar)
         final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+
+        if (gameStarted) {
+            final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
+            repRunParams.put(AbilityKey.Number, n);
+            if (params != null) {
+                repRunParams.putAll(params);
+            }
+            if (game.getReplacementHandler().run(ReplacementType.DrawCards, repRunParams) != ReplacementResult.NotReplaced) {
+                return drawn;
+            }
+        }
+
         final Map<Player, CardCollection> toReveal = Maps.newHashMap();
 
         for (int i = 0; i < n; i++) {
@@ -1249,14 +1249,17 @@ public class Player extends GameEntity implements Comparable<Player> {
             cause = (SpellAbility) cause.getReplacingObject(AbilityKey.Cause);
         }
 
-        // Replacement effects
-        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.Cause, cause);
-        if (params != null) {
-            repParams.putAll(params);
-        }
-        if (game.getReplacementHandler().run(ReplacementType.Draw, repParams) != ReplacementResult.NotReplaced) {
-            return drawn;
+        final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+
+        if (gameStarted) {
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+            repParams.put(AbilityKey.Cause, cause);
+            if (params != null) {
+                repParams.putAll(params);
+            }
+            if (game.getReplacementHandler().run(ReplacementType.Draw, repParams) != ReplacementResult.NotReplaced) {
+                return drawn;
+            }
         }
 
         if (!library.isEmpty()) {
@@ -1291,7 +1294,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 revealed.get(p).add(c);
             }
 
-            final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
             if (gameStarted) {
                 setLastDrawnCard(c);
                 c.setDrawnThisTurn(true);
@@ -1624,7 +1626,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Iterable<Card> milledView = getCardsIn(ZoneType.Library);
         // 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
-            milledView = Iterables.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
+            milledView = IterableUtil.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }
         CardCollectionView milled = new CardCollection(Iterables.limit(milledView, n));
 
@@ -1906,7 +1908,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Iterable<Player> getAttackedPlayersMyTurn() {
-        return Iterables.filter(attackedThisTurn.keySet(), Player.class);
+        return IterableUtil.filter(attackedThisTurn.keySet(), Player.class);
     }
     public final List<Player> getAttackedPlayersMyLastTurn() {
         return attackedPlayersLastTurn;
@@ -1916,7 +1918,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setAttackedPlayersMyLastTurn(Iterable<Player> players) {
         attackedPlayersLastTurn.clear();
-        Iterables.addAll(attackedPlayersLastTurn, players);
+        players.forEach(attackedPlayersLastTurn::add);
     }
 
     public final List<Player> getAttackedPlayersMyCombat() {
@@ -2078,13 +2080,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasMetalcraft() {
-        return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS) >= 3;
+        return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS) >= 3;
     }
 
     public final boolean hasDesert() {
-        return Iterables.any(
-                getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)),
-                CardPredicates.isType("Desert"));
+        return getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)).anyMatch(CardPredicates.isType("Desert"));
     }
 
     public final boolean hasThreshold() {
@@ -2117,7 +2117,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasLandfall() {
-        return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.Presets.LANDS);
+        return getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null).stream()
+                .anyMatch(CardPredicates.LANDS);
     }
 
     public boolean hasFerocious() {
@@ -2289,7 +2290,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         sacrificedThisTurn.add(cpy);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         // use a copy that preserves last known information about the card (e.g. for Savra, Queen of the Golgari + Painter's Servant)
         runParams.put(AbilityKey.Card, cpy);
@@ -2433,29 +2433,29 @@ public class Player extends GameEntity implements Comparable<Player> {
      * use to get a list of creatures in play for a given player.
      */
     public CardCollection getCreaturesInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
     }
 
     public CardCollection getPlaneswalkersInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.PLANESWALKERS);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.PLANESWALKERS);
     }
 
     public CardCollection getBattlesInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.BATTLES);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
     }
 
     /**
      * use to get a list of tokens in play for a given player.
      */
     public CardCollection getTokensInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.TOKEN);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.TOKEN);
     }
 
     /**
      * use to get a list of all lands a given player has on the battlefield.
      */
     public CardCollection getLandsInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS);
     }
 
     public boolean isCardInPlay(final String cardName) {
@@ -2517,6 +2517,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumManaConversion(0);
 
         setCommitedCrimeThisTurn(0);
+        diceRollsThisTurn = Lists.newArrayList();
         setExpentThisTurn(0);
 
         damageReceivedThisTurn.clear();
@@ -2754,32 +2755,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public List<Card> getCommanders() {
         return commanders;
-    }
-    public void setCommanders(List<Card> commanders) {
-        boolean needsUpdate = false;
-        //Remove any existing commanders not in the new list.
-        for(Card oldCommander : this.commanders) {
-            if(commanders.contains(oldCommander))
-                continue;
-            needsUpdate = true;
-            this.commanders.remove(oldCommander);
-            oldCommander.setCommander(false);
-        }
-        if(this.commanderEffect == null && !commanders.isEmpty())
-            this.createCommanderEffect();
-        //Add any new commanders that aren't in the existing list.
-        for(Card newCommander : commanders) {
-            assert(this.equals(newCommander.getOwner()));
-            if(this.commanders.contains(newCommander))
-                continue;
-
-            needsUpdate = true;
-            this.commanders.add(newCommander);
-            newCommander.setCommander(true);
-        }
-        if(needsUpdate) {
-            view.updateCommander(this);
-        }
     }
 
     public void copyCommandersToSnapshot(Player toPlayer, Function<Card, Card> mapper) {
@@ -3682,7 +3657,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean isCursed() {
-        return CardLists.count(getAttachedCards(), CardPredicates.Presets.CURSE) > 0;
+        return CardLists.count(getAttachedCards(), CardPredicates.CURSE) > 0;
     }
 
     public boolean canDiscardBy(SpellAbility sa, final boolean effect) {
@@ -3836,9 +3811,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean hasUrzaLands() {
         final CardCollectionView landsControlled = getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
+        return landsControlled.anyMatch(CardPredicates.isType("Urza's").and(CardPredicates.isType("Mine")))
+                && landsControlled.anyMatch(CardPredicates.isType("Urza's").and(CardPredicates.isType("Power-Plant")))
+                && landsControlled.anyMatch(CardPredicates.isType("Urza's").and(CardPredicates.isType("Tower")));
     }
 
     public void revealFaceDownCards() {
@@ -3914,7 +3889,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         //boolean firstTime = this.commitedCrimeThisTurn == 0;
         committedCrimeThisTurn++;
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         game.getTriggerHandler().runTrigger(TriggerType.CommitCrime, runParams, false);
 
@@ -3925,6 +3899,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public List<Integer> getDiceRollsThisTurn() {
+        return diceRollsThisTurn;
+    }
+    public void addDieRollThisTurn(List<Integer> rolls) {
+        diceRollsThisTurn.addAll(rolls);
     }
 
     public int getExpentThisTurn() {
@@ -3971,7 +3952,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public List<String> getUnlockedDoors() {
-        return StreamSupport.stream(getCardsIn(ZoneType.Battlefield).spliterator(), false)
+        return StreamUtil.stream(getCardsIn(ZoneType.Battlefield))
                 .filter(Card::isRoom)
                 .map(Card::getUnlockedRoomNames)
                 .flatMap(Collection::stream)

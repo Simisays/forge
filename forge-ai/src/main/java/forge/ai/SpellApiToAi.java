@@ -1,13 +1,12 @@
 package forge.ai;
 
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import forge.ai.ability.*;
 import forge.game.ability.ApiType;
 import forge.util.ReflectionUtil;
+
+import java.util.Map;
 
 public enum SpellApiToAi {
     Converter;
@@ -54,7 +53,7 @@ public enum SpellApiToAi {
             .put(ApiType.ChooseSource, ChooseSourceAi.class)
             .put(ApiType.ChooseType, ChooseTypeAi.class)
             .put(ApiType.Clash, ClashAi.class)
-            .put(ApiType.ClassLevelUp, AlwaysPlayAi.class)
+            .put(ApiType.ClassLevelUp, ClassLevelUpAi.class)
             .put(ApiType.Cleanup, AlwaysPlayAi.class)
             .put(ApiType.Cloak, CloakAi.class)
             .put(ApiType.Clone, CloneAi.class)

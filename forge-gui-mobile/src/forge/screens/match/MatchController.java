@@ -4,19 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
+import forge.game.player.PlayerController.FullControlFlag;
 import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.Forge;
@@ -49,6 +50,9 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
+import forge.menu.FCheckBoxMenuItem;
+import forge.menu.FMenuItem;
+import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
@@ -64,6 +68,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
@@ -680,7 +685,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public GameEntityView chooseSingleEntityForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
-        if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
+        if (delayedReveal == null || delayedReveal.getCards().isEmpty()) {
             if (isOptional) {
                 return SGuiChoose.oneOrNone(title, optionList);
             }
@@ -737,5 +742,39 @@ public class MatchController extends AbstractGuiGame {
 
     public static HostedMatch getHostedMatch() {
         return hostedMatch;
+    }
+
+    public void showFullControl(PlayerView selected, float x, float y) {
+        if (selected.isAI()) {
+            return;
+        }
+        Set<FullControlFlag> controlFlags = getGameView().getGame().getPlayer(selected).getController().getFullControl();
+        FPopupMenu menu = new FPopupMenu() {
+            @Override
+            protected void buildMenu() {
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblFullControl"),
+                        e -> {
+                            FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblFullControlDetails"), "Full Control details");
+                        }));
+                addItem(getFullControlMenuEntry("lblChooseCostOrder", FullControlFlag.ChooseCostOrder, controlFlags));
+                addItem(getFullControlMenuEntry("lblChooseCostReductionOrder", FullControlFlag.ChooseCostReductionOrderAndVariableAmount, controlFlags));
+                addItem(getFullControlMenuEntry("lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags));
+                addItem(getFullControlMenuEntry("lblNoFreeCombatCostHandling", FullControlFlag.NoFreeCombatCostHandling, controlFlags));
+                addItem(getFullControlMenuEntry("lblAllowPaymentStartWithMissingResources", FullControlFlag.AllowPaymentStartWithMissingResources, controlFlags));
+            }
+        };
+
+       menu.show(getView(), getView().getPlayerPanel(selected).localToScreenX(x), getView().getPlayerPanel(selected).localToScreenY(y));        
+    }
+
+    private FCheckBoxMenuItem getFullControlMenuEntry(String label, FullControlFlag flag, Set<FullControlFlag> controlFlags) {
+        return new FCheckBoxMenuItem(Forge.getLocalizer().getMessage(label), controlFlags.contains(flag),
+                e -> {
+                    if (controlFlags.contains(flag)) {
+                        controlFlags.remove(flag);
+                    } else {
+                        controlFlags.add(flag);
+                    }
+                });
     }
 }
