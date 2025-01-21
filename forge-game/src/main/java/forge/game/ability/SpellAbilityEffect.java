@@ -80,8 +80,8 @@ public abstract class SpellAbilityEffect {
             }
             // by typing "SpellDescription" they want to bypass the Effect's string builder
             if ("SpellDescription".equalsIgnoreCase(stackDesc)) {
-                String rawSDesc = params.get("SpellDescription");
                 if (params.containsKey("SpellDescription")) {
+                    String rawSDesc = params.get("SpellDescription");
                     if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replaceAll(",,,,,,", " ");
                     if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replaceAll(",,,", " ");
                     String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc, sa.getHostCard());
@@ -586,7 +586,7 @@ public abstract class SpellAbilityEffect {
     }
 
     // create a basic template for Effect to be used somewhere else
-    protected static Card createEffect(final SpellAbility sa, final Player controller, final String name,
+    public static Card createEffect(final SpellAbility sa, final Player controller, final String name,
             final String image) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
@@ -607,7 +607,9 @@ public abstract class SpellAbilityEffect {
         eff.setOwner(controller);
         eff.setSVars(sa.getSVars());
 
-        eff.setImageKey(image);
+        if (image != null) {
+            eff.setImageKey(image);
+        }
 
         eff.setGamePieceType(GamePieceType.EFFECT);
         eff.setEffectSource(sa);
@@ -972,7 +974,7 @@ public abstract class SpellAbilityEffect {
         if (("AsLongAsControl".equals(duration) || "AsLongAsInPlay".equals(duration)) && hostCard.isPhasedOut()) {
             return false;
         }
-        if (("UntilLoseControlOfHost".equals(duration) || "ForAsLongAsControl".equals(duration)) && hostCard.getController() != sa.getActivatingPlayer()) {
+        if (("UntilLoseControlOfHost".equals(duration) || "AsLongAsControl".equals(duration)) && hostCard.getController() != sa.getActivatingPlayer()) {
             return false;
         }
         if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {

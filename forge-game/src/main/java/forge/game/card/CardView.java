@@ -65,7 +65,7 @@ public class CardView extends GameEntityView {
         }
         TrackableCollection<CardView> collection = new TrackableCollection<>();
         for (Card c : cards) {
-            if (c.getCardForUi() == c) { //only add cards that match their card for UI
+            if (c.getRenderForUI()) { //only add cards that match their card for UI
                 collection.add(c.getView());
             }
         }
@@ -551,6 +551,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Sector, c.getSector());
     }
 
+    public int getSprocket() {
+        return get(TrackableProperty.Sprocket);
+    }
+    void updateSprocket(Card c) {
+        set(TrackableProperty.Sprocket, c.getSprocket());
+    }
+
     public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
     void updateDraftAction(Card c) {
         set(TrackableProperty.DraftAction, c.getDraftActions());
@@ -630,6 +637,7 @@ public class CardView extends GameEntityView {
         case Library:
         case PlanarDeck:
         case AttractionDeck:
+        case ContraptionDeck:
             //cards in these zones are hidden to all unless they specify otherwise
             break;
         case SchemeDeck:
@@ -1595,7 +1603,7 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
-            set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state));
+            set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.ANNIHILATOR)));
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
             set(TrackableProperty.HasToxic, c.hasKeyword(Keyword.TOXIC, state));
             set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
@@ -1609,7 +1617,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
             set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
             set(TrackableProperty.HasHorsemanship, c.hasKeyword(Keyword.HORSEMANSHIP, state));
-            set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state));
+            set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.WARD)));
             set(TrackableProperty.HasWither, c.hasKeyword(Keyword.WITHER, state));
             set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
             set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));
@@ -1768,6 +1776,9 @@ public class CardView extends GameEntityView {
         }
         public boolean isAttraction() {
             return getType().isAttraction();
+        }
+        public boolean isContraption() {
+            return getType().isContraption();
         }
 
         @Override

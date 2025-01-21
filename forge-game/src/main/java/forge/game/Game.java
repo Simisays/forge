@@ -116,8 +116,8 @@ public class Game {
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
-    private Player monarch;
     private Player initiative;
+    private Player monarch;
     private Player monarchBeginTurn;
     private Player startingPlayer;
 
@@ -593,7 +593,7 @@ public class Game {
     }
 
     public Zone getZoneOf(final Card card) {
-        return card.getLastKnownZone();
+        return card == null ? null : card.getLastKnownZone();
     }
 
     public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
@@ -979,13 +979,13 @@ public class Game {
         // Remove leftover items from
         getStack().removeInstancesControlledBy(p);
 
-        getTriggerHandler().onPlayerLost(p);
-
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
+
+        getTriggerHandler().onPlayerLost(p);
     }
 
     /**

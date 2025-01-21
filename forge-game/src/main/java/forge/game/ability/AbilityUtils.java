@@ -1366,7 +1366,7 @@ public class AbilityUtils {
             }
         }
 
-        if (source.hasKeyword(Keyword.GIFT) && sa.isOptionalCostPaid(OptionalCost.PromiseGift)) {
+        if (source.hasKeyword(Keyword.GIFT) && sa.isGiftPromised()) {
             game.getAction().checkStaticAbilities();
             // Is AdditionalAbility available from anything here?
             AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
@@ -1938,8 +1938,8 @@ public class AbilityUtils {
                             colorOccurrences++;
                         }
                     }
-                    colorOccurrences += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
                 }
+                colorOccurrences += player.getDevotionMod();
                 return doXMath(colorOccurrences, expr, c, ctb);
             }
         } // end ctb != null
@@ -2058,6 +2058,9 @@ public class AbilityUtils {
 
         if (sq[0].startsWith("Kicked")) { // fallback for not spellAbility
             return doXMath(calculateAmount(c, sq[!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0 ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].startsWith("PromisedGift")) {
+            return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isGiftPromised() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].startsWith("Escaped")) {
             return doXMath(calculateAmount(c, sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2], ctb), expr, c, ctb);
@@ -2291,10 +2294,6 @@ public class AbilityUtils {
         }
         if (sq[0].equals("ExtraTurn")) {
             return doXMath(calculateAmount(c, sq[game.getPhaseHandler().getPlayerTurn().isExtraTurn() ? 1 : 2], ctb), expr, c, ctb);
-        }
-        if (sq[0].equals("Averna")) {
-            String str = "As you cascade, you may put a land card from among the exiled cards onto the battlefield tapped.";
-            return doXMath(player.getKeywords().getAmount(str), expr, c, ctb);
         }
         if (sq[0].equals("YourStartingLife")) {
             return doXMath(player.getStartingLife(), expr, c, ctb);

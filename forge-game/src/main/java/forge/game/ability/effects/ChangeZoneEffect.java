@@ -11,6 +11,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
+import forge.game.keyword.Keyword;
 import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
@@ -675,10 +676,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (movedCard.getZone().equals(originZone)) {
                     continue;
                 }
-                if (sa.hasParam("Unearth") && movedCard.isInPlay()) {
+                if (sa.isKeyword(Keyword.UNEARTH) && movedCard.isInPlay()) {
                     movedCard.setUnearthed(true);
-                    movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false,
-                            game.getNextTimestamp(), null, true);
+                    movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false, game.getNextTimestamp(), null);
                     registerDelayedTrigger(sa, "Exile", Lists.newArrayList(movedCard));
                     addLeaveBattlefieldReplacement(movedCard, sa, "Exile");
                 }
@@ -908,12 +908,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 decider = player;
             }
 
-            if (sa.usesTargeting()) {
-                final List<Player> players = Lists.newArrayList(sa.getTargets().getTargetPlayers());
-                player = sa.hasParam("DefinedPlayer") ? player : players.get(0);
-                if (players.contains(player) && !player.canBeTargetedBy(sa)) {
-                    return;
-                }
+            if (sa.usesTargeting() && !sa.hasParam("DefinedPlayer")) {
+                player = sa.getTargets().getFirstTargetedPlayer();
             }
 
             List<ZoneType> origin = Lists.newArrayList();

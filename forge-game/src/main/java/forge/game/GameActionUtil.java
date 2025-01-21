@@ -121,7 +121,7 @@ public final class GameActionUtil {
 
             // need to be done there before static abilities does reset the card
             // These Keywords depend on the Mana Cost of for Split Cards
-            if (sa.isBasicSpell()) {
+            if (sa.isBasicSpell() && !sa.isLandAbility()) {
                 for (final KeywordInterface inst : source.getKeywords()) {
                     final String keyword = inst.getOriginal();
 
@@ -338,7 +338,7 @@ public final class GameActionUtil {
             newSA.setMayPlay(o);
 
             final StringBuilder sb = new StringBuilder(sa.getDescription());
-            if (!source.equals(host) && host.getCardForUi() != null) {
+            if (!source.equals(host) && host.getRenderForUI()) {
                 sb.append(" by ");
                 if (host.isImmutable() && host.getEffectSource() != null) {
                     sb.append(host.getEffectSource());
