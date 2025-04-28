@@ -303,7 +303,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
             if (inp.hasCancelled() || 
-                !Expressions.compare(CardFactoryUtil.getCardTypesFromList(list), "GE", nTypes)) {
+                !Expressions.compare(AbilityUtils.countCardTypesFromList(list, false), "GE", nTypes)) {
                     return null;
             }
             return PaymentDecision.card(inp.getSelected());
@@ -846,24 +846,24 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 final CardView view = CardView.get(card);
                 return confirmAction(cost, Localizer.getInstance().getMessage("lblReturnCardToHandConfirm", CardTranslation.getTranslatedName(view.getName()))) ? PaymentDecision.card(card) : null;
             }
-        } else {
-            final CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
-                    cost.getType().split(";"), player, source, ability);
-
-            if (validCards.size() < c) {
-                return null;
-            }
-
-            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards, ability);
-            inp.setCancelAllowed(!mandatory);
-            inp.setMessage(Localizer.getInstance().getMessage("lblNTypeCardsToHand", "%d", cost.getDescriptiveType()));
-            inp.showAndWait();
-            if (inp.hasCancelled()) {
-                return null;
-            }
-            return PaymentDecision.card(inp.getSelected());
+            return null;
         }
-        return null;
+
+        final CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
+                cost.getType().split(";"), player, source, ability);
+
+        if (validCards.size() < c) {
+            return null;
+        }
+
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, validCards, ability);
+        inp.setCancelAllowed(!mandatory);
+        inp.setMessage(Localizer.getInstance().getMessage("lblNTypeCardsToHand", "%d", cost.getDescriptiveType()));
+        inp.showAndWait();
+        if (inp.hasCancelled()) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
     }
 
     @Override
@@ -923,6 +923,27 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp = new InputSelectCardsFromList(controller, num, num, hand, ability);
             inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTypeCardsTpReveal", "%d", cost.getDescriptiveType()));
         }
+        inp.setCancelAllowed(!mandatory);
+        inp.showAndWait();
+        if (inp.hasCancelled()) {
+            return null;
+        }
+        return PaymentDecision.card(inp.getSelected());
+    }
+
+    @Override
+    public PaymentDecision visit(final CostBehold cost) {
+        int num = cost.getAbilityAmount(ability);
+
+        CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
+        hand = CardLists.getValidCards(hand, cost.getType().split(";"), player, source, ability);
+
+        if (hand.size() < num) {
+            return null;
+        }
+
+        InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, num, num, hand, ability);
+        inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTypeCardsTpReveal", "%d", cost.getDescriptiveType()));
         inp.setCancelAllowed(!mandatory);
         inp.showAndWait();
         if (inp.hasCancelled()) {
@@ -1288,7 +1309,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), true, ability.isCrew()) < i) {
+            if (inp.hasCancelled() || CardLists.getTotalPower(inp.getSelected(), ability) < i) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());

@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
@@ -252,8 +253,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("DividedRandomly")) {
             CardCollection targets = new CardCollection();
             for (final GameEntity obj : tgtObjects) { // check if each target is still OK
-                if (obj instanceof Card) {
-                    Card tgtCard = (Card) obj;
+                if (obj instanceof Card tgtCard) {
                     Card gameCard = game.getCardState(tgtCard, null);
                     if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                         tgtObjects.remove(obj);
@@ -284,8 +284,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             for (final GameEntity obj : tgtObjects) {
                 // check if the object is still in game or if it was moved
                 Card gameCard = null;
-                if (obj instanceof Card) {
-                    Card tgtCard = (Card) obj;
+                if (obj instanceof Card tgtCard) {
                     gameCard = game.getCardState(tgtCard, null);
                     // gameCard is LKI in that case, the card is not in game anymore
                     // or the timestamp did change
@@ -572,9 +571,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     if (sa.isDividedAsYouChoose() && !sa.usesTargeting()) {
                         counterRemain = counterRemain - counterAmount;
                     }
-                } else if (obj instanceof Player) {
+                } else if (obj instanceof Player pl) {
                     // Add Counters to players!
-                    Player pl = (Player) obj;
                     pl.addCounter(counterType, counterAmount, placer, table);
                 }
             }
@@ -634,7 +632,19 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     return;
                 }
             }
-            resolvePerType(sa, placer, counterType, counterAmount, table, true);
+            if (sa.hasParam("ForColor")) {
+                Iterable<String> oldColors = card.getChosenColors();
+                for (String color : MagicColor.Constant.ONLY_COLORS) {
+                    card.setChosenColors(Lists.newArrayList(color));
+                    if (sa.getOriginalParam("ChoiceTitle") != null) {
+                        sa.getMapParams().put("ChoiceTitle", sa.getOriginalParam("ChoiceTitle").replace("chosenColor", color));
+                    }
+                    resolvePerType(sa, placer, counterType, counterAmount, table, true);
+                }
+                card.setChosenColors(Lists.newArrayList(oldColors));
+            } else {
+                resolvePerType(sa, placer, counterType, counterAmount, table, true);
+            }
         }
 
         table.replaceCounterEffect(game, sa, true);

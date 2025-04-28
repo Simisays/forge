@@ -206,7 +206,8 @@ public class TokenAi extends SpellAbilityAi {
                 && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)
                 && game.getCombat() != null
                 && !game.getCombat().getAttackers().isEmpty()
-                && alwaysOnOppAttack) {
+                && alwaysOnOppAttack
+                && actualToken.isCreature()) {
             for (Card attacker : game.getCombat().getAttackers()) {
                 if (CombatUtil.canBlock(attacker, actualToken)) {
                     return true;
@@ -366,8 +367,7 @@ public class TokenAi extends SpellAbilityAi {
     }
 
     private boolean tgtRoleAura(final Player ai, final SpellAbility sa, final Card tok, final boolean mandatory) {
-        boolean isCurse = "Curse".equals(sa.getParam("AILogic")) ||
-                tok.getFirstAttachSpell().getParamOrDefault("AILogic", "").equals("Curse");
+        boolean isCurse = "Curse".equals(sa.getParam("AILogic")) || "Curse".equals(tok.getSVar("AttachAILogic"));
         List<Card> tgts = CardUtil.getValidCardsToTarget(sa);
 
         // look for card without role from ai

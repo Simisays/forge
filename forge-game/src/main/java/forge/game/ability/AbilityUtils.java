@@ -14,6 +14,7 @@ import forge.game.*;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.card.*;
 import forge.game.cost.Cost;
+import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -535,6 +536,10 @@ public class AbilityUtils {
             val = handlePaid(card.getConvoked(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Emerged")) {
             val = handlePaid(card.getEmerged(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("Crewed")) {
+            val = handlePaid(card.getCrewedByThisTurn(), calcX[1], card, ability);
+        } else if (calcX[0].startsWith("ChosenCard")) {
+            val = handlePaid(card.getChosenCards(), calcX[1], card, ability);
         } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
@@ -1360,10 +1365,8 @@ public class AbilityUtils {
         }
 
         // do blessing there before condition checks
-        if (source.hasKeyword(Keyword.ASCEND)) {
-            if (controller.getZone(ZoneType.Battlefield).size() >= 10) {
-                controller.setBlessing(true);
-            }
+        if (source.hasKeyword(Keyword.ASCEND) && controller.getZone(ZoneType.Battlefield).size() >= 10) {
+            controller.setBlessing(true);
         }
 
         if (source.hasKeyword(Keyword.GIFT) && sa.isGiftPromised()) {
@@ -1783,11 +1786,10 @@ public class AbilityUtils {
                 }
                 // Count$NumTimesChoseMode
                 if (sq[0].startsWith("NumTimesChoseMode")) {
-                    SpellAbility sub = sa.getRootAbility();
                     int amount = 0;
-                    while (sub != null) {
-                        if (sub.getDirectSVars().containsKey("CharmOrder")) amount++;
-                        sub = sub.getSubAbility();
+                    SpellAbility tail = sa.getTailAbility();
+                    if (tail.hasSVar("CharmOrder")) {
+                        amount = tail.getSVarInt("CharmOrder");
                     }
                     return doXMath(amount, expr, c, ctb);
                 }
@@ -1851,6 +1853,10 @@ public class AbilityUtils {
                     }
                     list = CardLists.getValidCards(list, k[1], player, c, sa);
                     return doXMath(list.size(), expr, c, ctb);
+                }
+
+                if (sq[0].equals("ActivatedThisGame")) {
+                    return doXMath(sa.getActivationsThisGame(), expr, c, ctb);
                 }
 
                 if (sq[0].equals("ResolvedThisTurn")) {
@@ -2265,6 +2271,9 @@ public class AbilityUtils {
         if (sq[0].equals("Delirium")) {
             return doXMath(calculateAmount(c, sq[player.hasDelirium() ? 1 : 2], ctb), expr, c, ctb);
         }
+        if (sq[0].equals("MaxSpeed")) {
+            return doXMath(calculateAmount(c, sq[player.maxSpeed() ? 1 : 2], ctb), expr, c, ctb);
+        }
         if (sq[0].equals("FatefulHour")) {
             return doXMath(calculateAmount(c, sq[player.getLife() <= 5 ? 1 : 2], ctb), expr, c, ctb);
         }
@@ -2333,6 +2342,10 @@ public class AbilityUtils {
 
         if (sq[0].equals("YouCastThisGame")) {
             return doXMath(player.getSpellsCastThisGame(), expr, c, ctb);
+        }
+
+        if (sq[0].equals("YourSpeed")) {
+            return doXMath(player.getSpeed(), expr, c, ctb);
         }
 
         if (sq[0].equals("Night")) {
@@ -2692,24 +2705,6 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[res.size() > 0 ? 1 : 2], ctb), expr, c, ctb);
         }
 
-        if (sq[0].startsWith("CreatureType")) {
-            String[] sqparts = l[0].split(" ", 2);
-            final String[] rest = sqparts[1].split(",");
-
-            final CardCollectionView cardsInZones = sqparts[0].length() > 12
-                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final Set<String> creatTypes = Sets.newHashSet();
-
-            for (Card card : cards) {
-                creatTypes.addAll(card.getType().getCreatureTypes());
-            }
-            // filter out fun types?
-            return doXMath(creatTypes.size(), expr, c, ctb);
-        }
-
         // Count$Chroma.<color name>
         if (sq[0].startsWith("Chroma")) {
             final CardCollectionView cards;
@@ -2833,7 +2828,13 @@ public class AbilityUtils {
             final String[] workingCopy = paidparts[0].split("_");
             final String validFilter = workingCopy[1];
             // use objectXCount ?
-            return CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
+            int activated = CardUtil.getThisTurnActivated(validFilter, c, ctb, player).size();
+            for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+                if (i.getPayment().getAbility().isValid(validFilter, player, c, ctb)) {
+                    activated++;
+                }
+            }
+            return activated;
         }
 
         // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
@@ -3585,6 +3586,10 @@ public class AbilityUtils {
             return doXMath(player.getLifeStartedThisTurnWith(), m, source, ctb);
         }
 
+        if (value.contains("Speed")) {
+            return doXMath(player.getSpeed(), m, source, ctb);
+        }
+
         if (value.contains("SVarAmount")) {
             return doXMath(calculateAmount(source, ctb.getSVar(player.toString()), ctb), m, source, ctb);
         }
@@ -3687,6 +3692,10 @@ public class AbilityUtils {
                 }
             }
             return doXMath(amount, m, source, ctb);
+        }
+
+        if (value.equals("AttractionsVisitedThisTurn")) {
+            return doXMath(player.getAttractionsVisitedThisTurn(), m, source, ctb);
         }
 
         if (value.startsWith("PlaneswalkedToThisTurn")) {
@@ -3798,6 +3807,15 @@ public class AbilityUtils {
 
         if (string.startsWith("CardTypes")) {
             return doXMath(countCardTypesFromList(paidList, string.startsWith("CardTypesPermanent")), CardFactoryUtil.extractOperators(string), source, ctb);
+        }
+
+        if (string.startsWith("CreatureType")) {
+            final Set<String> creatTypes = Sets.newHashSet();
+            for (Card card : paidList) {
+                creatTypes.addAll(card.getType().getCreatureTypes());
+            }
+            // filter out fun types?
+            return doXMath(creatTypes.size(), CardFactoryUtil.extractOperators(string), source, ctb);
         }
 
         String filteredString = string;

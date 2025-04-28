@@ -128,14 +128,10 @@ public class CostAdjustment {
         } else if (st.hasParam("Amount")) {
             String amount = st.getParam("Amount");
             if ("Escalate".equals(amount)) {
-                SpellAbility sub = sa;
-                while (sub != null) {
-                    if (sub.getDirectSVars().containsKey("CharmOrder")) {
-                        count++;
-                    }
-                    sub = sub.getSubAbility();
+                SpellAbility tail = sa.getTailAbility();
+                if (tail.hasSVar("CharmOrder")) {
+                    count = tail.getSVarInt("CharmOrder") - 1;
                 }
-                --count;
             } else if ("Strive".equals(amount)) {
                 for (TargetChoices tc : sa.getAllTargetChoices()) {
                     count += tc.size();
@@ -546,18 +542,6 @@ public class CostAdjustment {
                 case "Ability" -> {
                     if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
                         return false;
-                    }
-                    if (st.hasParam("OnlyFirstActivation")) {
-                        int times = 0;
-                        for (IndividualCostPaymentInstance i : game.costPaymentStack) {
-                            SpellAbility paymentSa = i.getPayment().getAbility();
-                            if (paymentSa.isActivatedAbility() && st.matchesValidParam("ValidCard", paymentSa.getHostCard())) {
-                                times++;
-                                if (times > 1) {
-                                    return false;
-                                }
-                            }
-                        }
                     }
                 }
                 case "Foretell" -> {

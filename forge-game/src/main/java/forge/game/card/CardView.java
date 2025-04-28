@@ -161,8 +161,8 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.DoubleFaced);
     }
 
-    public boolean isAdventureCard() {
-        return get(TrackableProperty.Adventure);
+    public boolean hasSecondaryState() {
+        return get(TrackableProperty.Secondary);
     }
 
     public boolean isModalCard() {
@@ -433,11 +433,11 @@ public class CardView extends GameEntityView {
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
-    public Set<String> getChosenColorID() {
-        return get(TrackableProperty.ChosenColorID);
+    public ColorSet getMarkedColors() {
+        return get(TrackableProperty.MarkedColors);
     }
-    void updateChosenColorID(Card c) {
-        set(TrackableProperty.ChosenColorID, c.getChosenColorID());
+    void updateMarkedColors(Card c) {
+        set(TrackableProperty.MarkedColors, c.getMarkedColors());
     }
     public FCollectionView<CardView> getMergedCardsCollection() {
         return get(TrackableProperty.MergedCardsCollection);
@@ -491,6 +491,7 @@ public class CardView extends GameEntityView {
     }
     void updateCurrentRoom(Card c) {
         set(TrackableProperty.CurrentRoom, c.getCurrentRoom());
+        updateMarkerText(c);
     }
 
     public int getIntensity() {
@@ -514,6 +515,7 @@ public class CardView extends GameEntityView {
     }
     void updateClassLevel(Card c) {
         set(TrackableProperty.ClassLevel, c.getClassLevel());
+        updateMarkerText(c);
     }
 
     public int getRingLevel() {
@@ -523,6 +525,41 @@ public class CardView extends GameEntityView {
         Player p = c.getController();
         if (p != null && p.getTheRing() == c)
             set(TrackableProperty.RingLevel, p.getNumRingTemptedYou());
+    }
+
+    public String getOverlayText() {
+        return get(TrackableProperty.OverlayText);
+    }
+    public List<String> getMarkerText() {
+        return get(TrackableProperty.MarkerText);
+    }
+    void updateMarkerText(Card c) {
+        List<String> markerItems = new ArrayList<>();
+        if(c.getCurrentRoom() != null && !c.getCurrentRoom().isEmpty()) {
+            markerItems.add("In Room:");
+            markerItems.add(c.getCurrentRoom());
+        }
+        if(c.isClassCard() && c.isInZone(ZoneType.Battlefield)) {
+            markerItems.add("CL:" + c.getClassLevel());
+        }
+        if(getRingLevel() > 0) {
+            markerItems.add("RL:" + getRingLevel());
+        }
+
+        if(StringUtils.isNotEmpty(c.getOverlayText())) {
+            set(TrackableProperty.OverlayText, c.getOverlayText());
+            markerItems.add(c.getOverlayText());
+        }
+        else {
+            //Overlay text is any custom string. It gets mixed in with the other marker lines, but it also needs its
+            //own property so that it can display in the card detail text.
+            set(TrackableProperty.OverlayText, null);
+        }
+
+        if(markerItems.isEmpty())
+            set(TrackableProperty.MarkerText, null);
+        else
+            set(TrackableProperty.MarkerText, markerItems);
     }
 
     private String getRemembered() {
@@ -974,6 +1011,7 @@ public class CardView extends GameEntityView {
         updateDamage(c);
         updateSpecialize(c);
         updateRingLevel(c);
+        updateMarkerText(c);
 
         if (c.getIntensity(false) > 0) {
             updateIntensity(c);
@@ -991,7 +1029,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Foretold, c.isForetold());
         set(TrackableProperty.Manifested, c.isManifested());
         set(TrackableProperty.Cloaked, c.isCloaked());
-        set(TrackableProperty.Adventure, c.isAdventureCard());
+        set(TrackableProperty.Secondary, c.hasState(CardStateName.Secondary));
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());
         set(TrackableProperty.Room, c.isRoom());
@@ -1603,7 +1641,9 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
+            // deeper check for Idris
             set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.ANNIHILATOR)));
+            set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.WARD)));
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
             set(TrackableProperty.HasToxic, c.hasKeyword(Keyword.TOXIC, state));
             set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
@@ -1617,7 +1657,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
             set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
             set(TrackableProperty.HasHorsemanship, c.hasKeyword(Keyword.HORSEMANSHIP, state));
-            set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.WARD)));
             set(TrackableProperty.HasWither, c.hasKeyword(Keyword.WITHER, state));
             set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
             set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));

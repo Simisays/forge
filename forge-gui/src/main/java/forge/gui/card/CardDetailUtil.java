@@ -129,7 +129,7 @@ public class CardDetailUtil {
     }
 
     public static String getCurrentColors(final CardStateView c) {
-        return c.getColors().toEnumSet().stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining());
+        return c.getColors().stream().map(MagicColor.Color::getSymbol).collect(Collectors.joining());
     }
 
     public static DetailColors getRarityColor(final CardRarity rarity) {
@@ -315,19 +315,18 @@ public class CardDetailUtil {
 
         // LEVEL [0-9]+-[0-9]+
         String regex = "LEVEL [0-9]+-[0-9]+ \\[[0-99]+/[0-99]]+ ";
-        text = text.replaceAll(regex, "$0\r\n");
+        text = text.replaceAll(regex, "$0\n");
 
         // LEVEL [0-9]+\+
         regex = "LEVEL [0-9]+\\+ \\[[0-99]+/[0-99]]+ ";
-        text = text.replaceAll(regex, "$0\r\n");
+        text = text.replaceAll(regex, "$0\n");
 
         // ",,," becomes a line break
-        regex = ",,,";
-        text = text.replaceAll(regex, "\r\n");
+        text = text.replace(",,,", "\n");
 
         // displays keywords that have dots in them a little better:
         regex = "\\., ";
-        text = text.replaceAll(regex, ".\r\n");
+        text = text.replaceAll(regex, ".\n");
 
         area.append(text);
 
@@ -451,10 +450,10 @@ public class CardDetailUtil {
         }
 
         // chosen spire
-        if (card.getChosenColorID() != null && !card.getChosenColorID().isEmpty()) {
+        if (card.getMarkedColors() != null && !card.getMarkedColors().isColorless()) {
             area.append("\n");
             area.append("(").append(Localizer.getInstance().getMessage("lblSelected")).append(": ");
-            area.append(Lang.joinHomogenous(card.getChosenColorID().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
+            area.append(Lang.joinHomogenous(card.getMarkedColors().stream().map(MagicColor.Color::getLocalizedName).collect(Collectors.toList())));
             area.append(")");
         }
 
@@ -520,13 +519,19 @@ public class CardDetailUtil {
         // class level
         if (card.getId() >= 0 && card.getCurrentState().getType().hasStringType("Class") && card.getZone() == ZoneType.Battlefield) {
             area.append("\n\n");
-            area.append("(Class Level:").append(card.getClassLevel()).append(")");
+            area.append("(Class Level: ").append(card.getClassLevel()).append(")");
         }
 
         //ring level
         if (card.getRingLevel() > 0 && card.getZone() == ZoneType.Command) {
             area.append("\n\n");
-            area.append("(Ring Level:").append(card.getRingLevel()).append(")");
+            area.append("(Ring Level: ").append(card.getRingLevel()).append(")");
+        }
+
+        // Text on gameplay trackers (e.g. Speed)
+        if (StringUtils.isNotEmpty(card.getOverlayText())) {
+            area.append("\n\n");
+            area.append(String.format("(%s)", card.getOverlayText()));
         }
 
         // sector

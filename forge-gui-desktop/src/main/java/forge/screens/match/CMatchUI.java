@@ -24,7 +24,6 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -104,6 +103,7 @@ import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.controllers.CAntes;
 import forge.screens.match.controllers.CCombat;
+import forge.screens.match.controllers.CDependencies;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.match.controllers.CDev;
 import forge.screens.match.controllers.CDock;
@@ -167,6 +167,7 @@ public final class CMatchUI
 
     private final CAntes cAntes = new CAntes(this);
     private final CCombat cCombat = new CCombat();
+    private final CDependencies cDependencies = new CDependencies(this);
     private final CDetailPicture cDetailPicture = new CDetailPicture(this);
     private final CDev cDev = new CDev(this);
     private final CDock cDock = new CDock(this);
@@ -190,6 +191,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_MESSAGE, getCPrompt().getView());
         this.myDocs.put(EDocID.REPORT_STACK, getCStack().getView());
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
+        this.myDocs.put(EDocID.REPORT_DEPENDENCIES, cDependencies.getView());
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
@@ -409,6 +411,11 @@ public final class CMatchUI
         cCombat.setModel(combat);
         cCombat.update();
     } // showCombat(CombatView)
+
+    @Override
+    public void updateDependencies() {
+        cDependencies.update();
+    }
 
     @Override
     public void updateDayTime(String daytime) {
@@ -1064,7 +1071,7 @@ public final class CMatchUI
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final T selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final Function<T, String> display) {
         /*if ((choices != null && !choices.isEmpty() && choices.iterator().next() instanceof GameObject) || selected instanceof GameObject) {
             System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
@@ -1516,6 +1523,7 @@ public final class CMatchUI
         addFullControlEntry(menu, "lblNoPaymentFromManaAbility", FullControlFlag.NoPaymentFromManaAbility, controlFlags);
         addFullControlEntry(menu, "lblNoFreeCombatCostHandling", FullControlFlag.NoFreeCombatCostHandling, controlFlags);
         addFullControlEntry(menu, "lblAllowPaymentStartWithMissingResources", FullControlFlag.AllowPaymentStartWithMissingResources, controlFlags);
+        addFullControlEntry(menu, "lblLayerTimestampOrder", FullControlFlag.LayerTimestampOrder, controlFlags);
 
         menu.show(view.getControl().getFieldViewFor(pv).getAvatarArea(), e.getX(), e.getY());
     }

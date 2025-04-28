@@ -25,7 +25,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /**
      * Preference identifiers and their default values.
      */
-    public enum FPref {
+    public enum FPref implements PreferencesStore.IPref {
         PLAYER_NAME (""),
         CONSTRUCTED_P1_DECK_STATE(""),
         CONSTRUCTED_P2_DECK_STATE(""),
@@ -83,7 +83,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OVERLAY_CARD_ID ("true"),
         UI_OVERLAY_ABILITY_ICONS("true"),
         UI_OVERLAY_DRAFT_RANKING("true"),
-        UI_ENABLE_ONLINE_IMAGE_FETCHER ("false"),
+        UI_ENABLE_ONLINE_IMAGE_FETCHER ("true"),
         UI_PREFERRED_ART("LATEST_ART_ALL_EDITIONS"),
         UI_SMART_CARD_ART("false"),
         UI_AUTO_AIDECK_SELECTION("true"),
@@ -290,6 +290,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
             this.strDefaultVal = s0;
         }
 
+        @Override
         public String getDefault() {
             return strDefaultVal;
         }

@@ -118,16 +118,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             }
             boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
-                // Get all lands,
-                List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS);
-                String eachBasic = sa.getParam("EachBasicType");
-                if (eachBasic.equals("Controlled")) {
-                    land = CardLists.filterControlledBy(land, p);
-                }
-
                 // Choose one of each BasicLand given special place
                 for (final String type : CardType.getBasicTypes()) {
-                    final CardCollectionView cl = CardLists.getType(land, type);
+                    final CardCollectionView cl = CardLists.getType(pChoices, type);
                     if (!cl.isEmpty()) {
                         final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " + Lang.nounWithAmount(1, type);
                         Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false, null);
@@ -138,7 +131,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("ChooseEach")) {
                 final String s = sa.getParam("ChooseEach");
-                final String[] types = s.equals("Party") ? new String[]{"Cleric","Thief","Warrior","Wizard"}
+                final String[] types = s.equals("Party") ? new String[]{"Cleric","Rogue","Warrior","Wizard"}
                      : s.split(" & ");
                 for (final String type : types) {
                     CardCollection valids = CardLists.filter(pChoices, CardPredicates.isType(type));
@@ -291,11 +284,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             allChosen.addAll(chosen);
         }
         if (sa.hasParam("Reveal") && sa.hasParam("Secretly")) {
-            for (final Player p : tgtPlayers) {
-                game.getAction().reveal(allChosen, p, true, revealTitle ?
-                        sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ", 
-                        !revealTitle);
-            }
+            game.getAction().revealTo(allChosen, game.getPlayers(), revealTitle ?
+                    sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ", 
+                    !revealTitle);
         }
         host.setChosenCards(allChosen);
         if (sa.hasParam("ForgetOtherRemembered")) {

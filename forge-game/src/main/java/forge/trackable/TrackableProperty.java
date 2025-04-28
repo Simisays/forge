@@ -36,7 +36,7 @@ public enum TrackableProperty {
     Manifested(TrackableTypes.BooleanType),
     Cloaked(TrackableTypes.BooleanType),
     Modal(TrackableTypes.BooleanType),
-    Adventure(TrackableTypes.BooleanType),
+    Secondary(TrackableTypes.BooleanType),
     DoubleFaced(TrackableTypes.BooleanType),
 
     //TODO?
@@ -67,7 +67,6 @@ public enum TrackableProperty {
     ChosenType2(TrackableTypes.StringType),
     NotedTypes(TrackableTypes.StringListType),
     ChosenColors(TrackableTypes.StringListType),
-    ChosenColorID(TrackableTypes.StringSetType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenNumber(TrackableTypes.StringType),
     StoredRolls(TrackableTypes.StringListType),
@@ -85,6 +84,8 @@ public enum TrackableProperty {
     RingLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
+    OverlayText(TrackableTypes.StringType),
+    MarkerText(TrackableTypes.StringListType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringListType),
     PlayerMayLook(TrackableTypes.PlayerViewCollectionType, FreezeMode.IgnoresFreeze),
@@ -100,6 +101,7 @@ public enum TrackableProperty {
     NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+    MarkedColors(TrackableTypes.ColorSetType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     ExiledCards(TrackableTypes.CardViewCollectionType),
@@ -299,7 +301,8 @@ public enum TrackableProperty {
     GameLog(TrackableTypes.StringType),
     NeedsPhaseRedrawn(TrackableTypes.BooleanType),
     PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
-    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze);
+    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
+    Dependencies(TrackableTypes.StringType);
 
     public enum FreezeMode {
         IgnoresFreeze,

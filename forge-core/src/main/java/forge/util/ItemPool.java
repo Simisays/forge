@@ -269,13 +269,20 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         // need not set out-of-sync: either remove did set, or nothing was removed
     }
 
+    public void removeIf(Predicate<T> test) {
+        for (final T item : items.keySet()) {
+            if (test.test(item))
+                remove(item);
+        }
+    }
+
     public void clear() {
         items.clear();
     }
 
     @Override
     public boolean equals(final Object obj) {
-        return (obj instanceof ItemPool) &&
-                (this.items.equals(((ItemPool)obj).items));
+        return (obj instanceof ItemPool ip) &&
+                (this.items.equals(ip.items));
     }
 }

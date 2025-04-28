@@ -253,7 +253,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             case Meld:
             case Modal:
                 return true;
-            case Adventure:
+            case Secondary:
                 if (cv.isFaceDown()) {
                     return getCurrentPlayer() == null || cv.canFaceDownBeShownToAny(getLocalPlayers());
                 }
@@ -845,6 +845,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             awaitNextInputTimer = null;
         }
         daytime = null;
+    }
+
+    public void updateDependencies() {        
     }
     // End of Choice code
 }

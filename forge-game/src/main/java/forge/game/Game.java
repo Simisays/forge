@@ -22,6 +22,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 import forge.GameCommand;
@@ -260,7 +261,6 @@ public class Game {
         }
         return null;
     }
-
 
     public void addPlayer(int id, Player player) {
         playerCache.put(id, player);
@@ -523,7 +523,7 @@ public class Game {
      * The Direction in which the turn order of this Game currently proceeds.
      */
     public final Direction getTurnOrder() {
-        if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().getAmountOfKeyword("The turn order is reversed.") % 2 == 1) {
+        if (phaseHandler.getPlayerTurn() != null && phaseHandler.getPlayerTurn().isTurnOrderReversed()) {
             return turnOrder.getOtherDirection();
         }
     	return turnOrder;
@@ -1185,6 +1185,12 @@ public class Game {
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
         }
+        for (final Card c : getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+            c.onCleanupPhase(getPhaseHandler().getPlayerTurn());
+        }
+        for (final Card card : getCardsInGame()) {
+            card.resetActivationsPerTurn();
+        }
     }
 
     public void addCounterAddedThisTurn(Player putter, CounterType cType, Card card, Integer value) {
@@ -1217,13 +1223,20 @@ public class Game {
     }
     public int getCounterAddedThisTurn(CounterType cType, Card card) {
         int result = 0;
-        if (!countersAddedThisTurn.containsRow(cType)) {
+        Set<CounterType> types = null;
+        if (cType == null) {
+            types = countersAddedThisTurn.rowKeySet();
+        } else if (!countersAddedThisTurn.containsRow(cType)) {
             return result;
+        } else {
+            types = Sets.newHashSet(cType);
         }
-        for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(cType).values()) {
-            for (Pair<Card, Integer> p : l) {
-                if (p.getKey().equalsWithGameTimestamp(card)) {
-                    result += p.getValue();
+        for (CounterType type : types) {
+            for (List<Pair<Card, Integer>> l : countersAddedThisTurn.row(type).values()) {
+                for (Pair<Card, Integer> p : l) {
+                    if (p.getKey().equalsWithGameTimestamp(card)) {
+                        result += p.getValue();
+                    }
                 }
             }
         }

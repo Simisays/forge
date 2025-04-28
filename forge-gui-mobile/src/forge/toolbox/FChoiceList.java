@@ -3,6 +3,7 @@ package forge.toolbox;
 import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -271,6 +272,14 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         setSelectedIndex(getIndexOf(choice));
     }
 
+    public void setSelectedItems(Collection<T> items) {
+        selectedIndices.clear();
+        items.stream().mapToInt(this::getIndexOf).filter(i -> i >= 0).forEach(selectedIndices::add);
+        if(!items.isEmpty())
+            scrollIntoView(getIndexOf(items.iterator().next()));
+        onSelectionChange();
+    }
+
     protected String getChoiceText(T choice) {
         return choice.toString();
     }
@@ -441,7 +450,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         if (cardView.hasAlternateState()) {
             if (cardView.hasBackSide())
                 showAlt = value.contains(cardView.getBackSideName()) || cardView.getAlternateState().getAbilityText().contains(value);
-            else if (cardView.isAdventureCard())
+            else if (cardView.hasSecondaryState())
                 showAlt = value.equals(cardView.getAlternateState().getAbilityText());
             else if (cardView.isSplitCard()) {
                 //special case if aftermath cards can be cast from graveyard like yawgmoths will, you will have choices

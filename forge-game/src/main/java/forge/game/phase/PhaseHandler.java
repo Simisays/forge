@@ -36,6 +36,7 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityNoCleanupDamage;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -141,7 +142,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     private void advanceToNextPhase() {
         PhaseType oldPhase = phase;
-        boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
+        boolean isTopsy = playerTurn.isPhasesReversed();
         boolean turnEnded = false;
 
         game.getStack().clearUndoStack(); //can't undo action from previous phase
@@ -180,15 +181,12 @@ public class PhaseHandler implements java.io.Serializable {
                 }
                 playerTurn.incrementTurn();
 
-                game.getAction().resetActivationsPerTurn();
-
                 final int lands = CardLists.count(playerTurn.getLandsInPlay(), CardPredicates.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands);
             }
 
-            // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
-            repRunParams.put(AbilityKey.Phase, phase.nameForScripts);
+            repRunParams.put(AbilityKey.Phase, phase);
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.BeginPhase, repRunParams);
             if (repres != ReplacementResult.NotReplaced) {
                 // Currently there is no effect to skip entire beginning phase
@@ -395,7 +393,10 @@ public class PhaseHandler implements java.io.Serializable {
                     // Rule 514.2
                     // Reset Damage received map
                     for (final Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-                        c.onCleanupPhase(playerTurn);
+                        if (!StaticAbilityNoCleanupDamage.damageNotRemoved(c)) {
+                            c.setDamage(0);
+                        }
+                        c.setHasBeenDealtDeathtouchDamage(false);
                     }
 
                     game.getEndOfTurn().executeUntil();
@@ -430,7 +431,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (!skipped) {
             // Run triggers if phase isn't being skipped
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
-            runParams.put(AbilityKey.Phase, phase.nameForScripts);
+            //runParams.put(AbilityKey.Phase, phase.nameForScripts);
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
 
@@ -479,6 +480,9 @@ public class PhaseHandler implements java.io.Serializable {
                 game.getUpkeep().executeUntilEndOfPhase(playerTurn);
                 game.getUpkeep().registerUntilEndCommand(playerTurn);
                 break;
+
+            case UNTAP:
+                game.getUntap().executeUntilEndOfPhase(playerTurn);
 
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
@@ -1163,7 +1167,7 @@ public class PhaseHandler implements java.io.Serializable {
         return devAdvanceToPhase(targetPhase, null);
     }
     public final boolean devAdvanceToPhase(PhaseType targetPhase, Runnable resolver) {
-        boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
+        boolean isTopsy = playerTurn.isPhasesReversed();
         while (phase.isBefore(targetPhase, isTopsy)) {
             if (checkStateBasedEffects()) {
                 return false;
