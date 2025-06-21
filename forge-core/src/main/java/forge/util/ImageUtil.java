@@ -193,13 +193,18 @@ public class ImageUtil {
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         }
+        if (cp.getRules().getSplitType() == CardSplitType.Meld) {
+            cardCollectorNumber += face.equals("back") ? "b" : "a";
+        }
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
                 langCode, versionParam, faceParam);
     }
 
-    public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode) {
+    public static String getScryfallTokenDownloadUrl(String collectorNumber, String setCode, String langCode, String faceParam) {
         String versionParam = "normal";
-        String faceParam = "";
+        if (!faceParam.isEmpty()) {
+            faceParam = (faceParam.equals("back") ? "&face=back" : "&face=front");
+        }
         return String.format("%s/%s/%s?format=image&version=%s%s", setCode, collectorNumber,
                 langCode, versionParam, faceParam);
     }

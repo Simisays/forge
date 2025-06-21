@@ -747,8 +747,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("ForetoldCost")) {
                         movedCard.setForetoldCostByEffect(true);
                     }
-                    // look at the exiled card
-                    movedCard.addMayLookTemp(activator);
+                }
+                // look at the exiled card
+                if (sa.hasParam("WithMayLook") || sa.hasParam("Foretold")) {
+                    movedCard.addMayLookFaceDownExile(activator);
                 }
 
                 // CR 400.7k
@@ -1037,6 +1039,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     decider.incLibrarySearched();
 
                     handleCastWhileSearching(fetchList, decider);
+                }
+                if (sa.hasParam("RememberSearched")) {
+                    source.addRemembered(player);
                 }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, player);
@@ -1377,8 +1382,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (sa.hasParam("ForetoldCost")) {
                             movedCard.setForetoldCostByEffect(true);
                         }
-                        // look at the exiled card
-                        movedCard.addMayLookTemp(sa.getActivatingPlayer());
+                    }
+
+                    // look at the exiled card
+                    if (sa.hasParam("WithMayLook") || sa.hasParam("Foretold")) {
+                        movedCard.addMayLookFaceDownExile(sa.getActivatingPlayer());
                     }
                 }
                 else {

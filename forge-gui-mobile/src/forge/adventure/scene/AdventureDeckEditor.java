@@ -389,7 +389,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
     @Override
     public void onActivate() {
         decksUsingMyCards = new ItemPool<>(InventoryItem.class);
-        for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
+        for (int i = 0; i < AdventurePlayer.current().getDeckCount(); i++) {
             final Deck deck = AdventurePlayer.current().getDeck(i);
             CardPool main = deck.getMain();
             for (final Map.Entry<PaperCard, Integer> e : main) {
@@ -629,7 +629,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
         if (currentEvent != null) {
             //suggest a random set from the ones used in the limited card pool that have all basic lands
-
             for (PaperCard p : currentEvent.registeredDeck.getAllCardsInASinglePool().toFlatList()) {
                 availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
             }
@@ -644,6 +643,31 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
         List<CardEdition> unlockedEditions = new ArrayList<>();
         unlockedEditions.add(defaultLandSet);
+
+        // Loop through Landscapes and add them to unlockedEditions
+        if (currentEvent == null) {
+            Map<String, CardEdition> editionsByName = new HashMap<>();
+            for (CardEdition e : FModel.getMagicDb().getEditions()) {
+                editionsByName.put(e.getName().toLowerCase(), e);
+                editionsByName.put(e.getName().replace(":", "").toLowerCase(), e);
+            }
+
+            String sketchbookPrefix = "landscape sketchbook - ";
+            for (String itemName : AdventurePlayer.current().getItems()) {
+                if (!itemName.toLowerCase().startsWith(sketchbookPrefix)) {
+                    continue;
+                }
+
+                // Extract the set name after the prefix
+                String setName = itemName.substring(sketchbookPrefix.length()).trim();
+                CardEdition edition = editionsByName.get(setName.toLowerCase());
+
+                // Add the edition if found and it has basic lands
+                if (edition != null && edition.hasBasicLands()) {
+                    unlockedEditions.add(edition);
+                }
+            }
+        }
 
         AddBasicLandsDialog dialog = new AddBasicLandsDialog(getDeck(), defaultLandSet, new Callback<CardPool>() {
             @Override
@@ -1587,6 +1611,14 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             }
         }
         return true;
+    }
+
+    @Override
+    public boolean keyUp(int keyCode) {
+        if (keyCode == Input.Keys.ESCAPE) {
+            return this.tabHeader.btnBack.trigger();
+        }
+        return super.keyUp(keyCode);
     }
 }
 

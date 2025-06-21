@@ -216,6 +216,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     WorldSave.getCurrentSave().autoSave();
                     loadPOI(point.getPointOfInterest());
                     point.getMapSprite().checkOut();
+                    WorldSave.getCurrentSave().getPointOfInterestChanges(point.getPointOfInterest().getID()).visit();
                     return true;
                 } else {
                     if (point == collidingPoint) {
@@ -365,7 +366,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         super.draw();
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
             MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n" +
-                    "Enemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.",
+                            "Enemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.",
                     WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
@@ -514,6 +515,17 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 if (nearestValidPOI != null) {
                     navDirection = new Vector2(nearestValidPOI.getPosition()).sub(player.pos());
                     break;
+                }
+
+                if(adq.getTargetEnemySprite() == null
+                        && adq.getActiveStages().size() > 0
+                        && adq.qualifiesForDetachedQuest(adq.getActiveStages().get(0))) {
+                    AdventureQuestStage brokenStage = adq.getActiveStages().get(0);
+                    adq.fixOrphanedHuntQuest(brokenStage);
+                    AdventureQuestController.instance().addQuestSprites(brokenStage);
+                    // When we first load, we will not do this in time to actually spawn the sprite
+                    // until the next loop, but as soon as the player moves, if the On the Hunt quest
+                    // is tracked, we will immediately point to that sprite
                 }
 
                 if (adq.getTargetEnemySprite() != null) {

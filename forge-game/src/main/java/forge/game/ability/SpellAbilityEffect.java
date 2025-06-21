@@ -356,6 +356,7 @@ public abstract class SpellAbilityEffect {
         boolean intrinsic = sa.isIntrinsic();
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
+        boolean upkeep = location.endsWith("Upkeep");
 
         String desc = sa.getParamOrDefault("AtEOTDesc", "");
 
@@ -365,11 +366,16 @@ public abstract class SpellAbilityEffect {
         if (combat) {
             location = location.substring(0, location.length() - "Combat".length());
         }
+        if (upkeep) {
+            location = location.substring(0, location.length() - "Upkeep".length());
+        }
 
         if (desc.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             if (location.equals("Hand")) {
                 sb.append("Return ");
+            } else if (location.equals("Library")) {
+                sb.append("Shuffle ");
             } else if (location.equals("SacrificeCtrl")) {
                 sb.append("Its controller sacrifices ");
             } else {
@@ -378,6 +384,8 @@ public abstract class SpellAbilityEffect {
             sb.append(Lang.joinHomogenous(crds));
             if (location.equals("Hand")) {
                 sb.append(" to your hand");
+            } else if (location.equals("Library")) {
+                sb.append(" into your library");
             }
             sb.append(" at the ");
             if (combat) {
@@ -385,14 +393,18 @@ public abstract class SpellAbilityEffect {
             } else {
                 sb.append("beginning of ");
                 sb.append(your ? "your" : "the");
-                sb.append(" next end step.");
+                if (upkeep) {
+                    sb.append(" next upkeep.");
+                } else {
+                    sb.append(" next end step.");
+                }
             }
             desc = sb.toString();
         }
 
         StringBuilder delTrig = new StringBuilder();
         delTrig.append("Mode$ Phase | Phase$ ");
-        delTrig.append(combat ? "EndCombat "  : "End Of Turn ");
+        delTrig.append(combat ? "EndCombat " : upkeep ? "Upkeep" : "End Of Turn ");
 
         if (your) {
             delTrig.append("| ValidPlayer$ You ");
@@ -410,6 +422,8 @@ public abstract class SpellAbilityEffect {
         String trigSA = "";
         if (location.equals("Hand")) {
             trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand";
+        } else if (location.equals("Library")) {
+            trigSA = "DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Library | Shuffle$ True";
         } else if (location.equals("SacrificeCtrl")) {
             trigSA = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
         } else if (location.equals("Sacrifice")) {
@@ -1010,8 +1024,9 @@ public abstract class SpellAbilityEffect {
         return true;
     }
 
-    public static Player getNewChooser(final SpellAbility sa, final Player activator, final Player loser) {
+    public static Player getNewChooser(final SpellAbility sa, final Player loser) {
         // CR 800.4g
+        final Player activator = sa.getActivatingPlayer();
         final PlayerCollection options;
         if (loser.isOpponentOf(activator)) {
             options = activator.getOpponents();

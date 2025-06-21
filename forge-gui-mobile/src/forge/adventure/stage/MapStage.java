@@ -61,6 +61,7 @@ public class MapStage extends GameStage {
     private EnemySprite currentMob;
     Queue<Vector2> positions = new LinkedList<>();
     private boolean isLoadingMatch = false;
+    private boolean isPlayerLeavingDungeon = false;
     //private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
 
 
@@ -758,6 +759,8 @@ public class MapStage extends GameStage {
         if (defeated)
             WorldStage.getInstance().resetPlayerLocation();
         Forge.switchScene(GameScene.instance());
+        isPlayerLeavingDungeon = false;
+        dialogOnlyInput = false;
         return true;
     }
 
@@ -934,8 +937,9 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
-        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls)
+        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls || isPlayerLeavingDungeon)
             return;
+
         Iterator<EnemySprite> it = enemies.iterator();
 
         if (freezeAllEnemyBehaviors) {
@@ -1110,6 +1114,10 @@ public class MapStage extends GameStage {
         return isInMap;
     }
 
+    public void onBeginLeavingDungeon() {
+        isPlayerLeavingDungeon = true;
+    }
+
     @Override
     public void showDialog() {
         if (dialogStage == null){
@@ -1124,8 +1132,10 @@ public class MapStage extends GameStage {
         dialog.show(dialogStage, Actions.show());
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
-        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+
+        if (Forge.hasExternalInput() && !dialogButtonMap.isEmpty()) {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
+        }
     }
 
 
