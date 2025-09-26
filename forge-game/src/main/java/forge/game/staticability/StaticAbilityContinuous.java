@@ -43,6 +43,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 /**
@@ -273,7 +274,7 @@ public final class StaticAbilityContinuous {
                     if (hostCard.hasChosenPlayer()) {
                         Player cp = hostCard.getChosenPlayer();
                         input = input.replaceAll("ChosenPlayerUID", String.valueOf(cp.getId()));
-                        input = input.replaceAll("ChosenPlayerName", cp.getName());
+                        input = input.replaceAll("ChosenPlayerName", Matcher.quoteReplacement(cp.getName()));
                     }
                     if (hostCard.hasNamedCard()) {
                         final String chosenName = hostCard.getNamedCard().replace(",", ";");
@@ -465,9 +466,11 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("MayLookAt")) {
                 String look = params.get("MayLookAt");
                 if ("True".equals(look)) {
-                    look = "You";
+                    // shortcut when combined with MayPlay
+                    mayLookAt = new PlayerCollection();
+                } else {
+                    mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, stAb);
                 }
-                mayLookAt = AbilityUtils.getDefinedPlayers(hostCard, look, stAb);
             }
             if (params.containsKey("MayPlay")) {
                 controllerMayPlay = true;
@@ -869,10 +872,6 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (mayLookAt != null && (!affectedCard.getOwner().getTopXCardsFromLibrary(1).contains(affectedCard) || game.getTopLibForPlayer(affectedCard.getOwner()) == null || game.getTopLibForPlayer(affectedCard.getOwner()) == affectedCard)) {
-                affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
-            }
-
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
                 String mayPlayAltCost = mayPlayAltManaCost;
 
@@ -890,6 +889,10 @@ public final class StaticAbilityContinuous {
                         mayPlayAltCost != null ? new Cost(mayPlayAltCost, false, affectedCard.equals(hostCard)) : null, mayPlayWithFlash,
                         mayPlayGrantZonePermissions, stAb);
 
+                if (mayLookAt != null && mayLookAt.isEmpty()) {
+                    mayLookAt.add(mayPlayController);
+                }
+
                 // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
                 if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
                     for (final Player p : game.getPlayers()) {
@@ -900,6 +903,10 @@ public final class StaticAbilityContinuous {
                         }
                     }
                 }
+            }
+
+            if (mayLookAt != null && (!affectedCard.getOwner().getTopXCardsFromLibrary(1).contains(affectedCard) || game.getTopLibForPlayer(affectedCard.getOwner()) == null || game.getTopLibForPlayer(affectedCard.getOwner()) == affectedCard)) {
+                affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
         }
 

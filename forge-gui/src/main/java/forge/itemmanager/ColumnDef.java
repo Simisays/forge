@@ -237,7 +237,12 @@ public enum ColumnDef {
                 }
                 return CardPreferences.getPrefs(card).getStarCount();
             },
-            from -> toCard(from.getKey())),
+            from -> {
+                IPaperCard card = toCard(from.getKey());
+                if (card == null)
+                    return 0;
+                return CardPreferences.getPrefs(card).getStarCount();
+            }),
     /**
      * The favorite deck flag column.
      */
@@ -372,7 +377,7 @@ public enum ColumnDef {
     }
 
     private static ColorSet toColor(final InventoryItem i) {
-        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.NO_COLORS;
     }
 
     private static Integer toPower(final InventoryItem i) {
