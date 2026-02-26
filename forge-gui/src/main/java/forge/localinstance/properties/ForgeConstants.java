@@ -37,10 +37,10 @@ public final class ForgeConstants {
     public static final String PROFILE_FILE                     = ASSETS_DIR + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE            = PROFILE_FILE + ".example";
     public static final Integer DEFAULT_SERVER_CONNECTION_PORT  = 36743;
-
     public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
     public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;
     public static final String ADVENTURE_COMMON_DIR         = ADVENTURE_DIR + "common" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_WORLD_DIR   = ADVENTURE_COMMON_DIR  + "world" + PATH_SEPARATOR;
     public static final String LISTS_DIR                    = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String SETLOOKUP_DIR                = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
@@ -73,13 +73,14 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
+    public static final String ADVENTURE_CARD_PRICE_FILE             = ADVENTURE_COMMON_WORLD_DIR + "adventure-card-price.txt";
+    public static final String ADVENTURE_BOOSTER_PRICE_FILE          = ADVENTURE_COMMON_WORLD_DIR + "adventure-booster-price.txt";
 
 
     public static final String CHANGES_FILE                 = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE      = ASSETS_DIR + "CHANGES.txt";
     public static final String LICENSE_FILE                 = ASSETS_DIR + "LICENSE.txt";
     public static final String HOWTO_FILE                   = RES_DIR + "howto.txt";
-
     public static final String DRAFT_DIR                    = RES_DIR + "draft" + PATH_SEPARATOR;
     public static final String DRAFT_RANKINGS_FILE          = DRAFT_DIR + "rankings.txt";
     public static final String DRAFT_RANKINGS_FOLDER          = DRAFT_DIR + "rankings/";

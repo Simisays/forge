@@ -22,10 +22,10 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
-import forge.gamemodes.quest.io.ReadPriceList;
 import forge.card.MagicColor;
 import java.util.HashMap;
 import java.util.List;
@@ -333,50 +333,33 @@ public class CardUtil {
         }
         return result;
     }
-    private Map<String, Integer> priceMap;
-    public final Map<String, Integer> getPriceList() {
-        return this.priceMap;
-    }
     private static Map<String, Integer> mapPrices;
     public static int getCardPrice(PaperCard card) {
-    	 String ns, nsArt;
+         PaperCard pc = card;
          int value = 0;
-         PaperCard pc = null;
-         int artIndex = 0;
-
-         if (card instanceof PaperCard) {
-             pc = (PaperCard) card;
-             artIndex = pc.getArtIndex();
-
-             ns = card.getName() + "|" + pc.getEdition();
-             nsArt = card.getName() + " (" + artIndex + ")|" + pc.getEdition();
-
-         } else {
-             ns = card.getName();
-             nsArt = ns;
-         }
-        if (mapPrices == null) { 
-            mapPrices = new ReadPriceList().getPriceList();
+         int artIndex = pc.getArtIndex();
+         String ns = card.getName() + "|" + pc.getEdition();
+         String nsArt = card.getName() + " (" + artIndex + ")|" + pc.getEdition();
+         
+        if (mapPrices == null ) {           
+        	mapPrices = new AdventureReadPriceList().getAdventurePriceList();
         }
-        if (mapPrices.containsKey(ns)) {							  // disabled if you unchecked the option to use pricelist values
+        if (mapPrices.containsKey(ns) && (Config.instance().getSettingData().usePriceListPrices)) {	  // If enabled, Gets the price of the card from the list
             value = mapPrices.get(ns);
         }
-        if (mapPrices.containsKey(nsArt)) {						       //  disabled if you unchecked the option to use pricelist values
+        if (mapPrices.containsKey(nsArt) && (Config.instance().getSettingData().usePriceListPrices)) {	  //  Gets the price while looking for edition, this is disabled if you unchecked the option to use pricelist values
             value = mapPrices.get(nsArt);
         }
-        else if (card instanceof PaperCard && value == 0) {           // if a price value coudn't be found in the pricelist if will fall back to these defaults)
-        switch (card.getRarity()) {
-            case BasicLand -> value = 5;
-            case Common -> value = 50;
-            case Uncommon -> value = 150;
-            case Rare -> value = 300;
-            case MythicRare -> value = 500;
-            default -> value = 600;
-        };
-        }
-        if (value > 7000) {                              // prevents inflation from ABU cards etc
-            value = 7000;
-        }
+        else if ( value == 0) {           // Fallback if no price could be found in the pricelist or if pricelist is disabled
+            switch (card.getRarity()) {
+                case BasicLand -> value = 5;
+                case Common -> value = 50;
+                case Uncommon -> value = 150;
+                case Rare -> value = 300;
+                case MythicRare -> value = 500;
+                default -> value = 600;
+            };
+            }
         if ((card.getRarity()== CardRarity.Common) && (value < 50)) {   // Doubles the price of commons if the price is below 20 and set minimum at 30
             value = Math.max((value * 2) , 35);
         }
@@ -388,6 +371,9 @@ public class CardUtil {
         }
         if ((card.getRarity()== CardRarity.MythicRare) && (value < 250)) {   // Doubles the price of Mythics if the price is below 250 and set minimum at 250
             value = Math.max((value * 2) , 250);
+        }
+        if (value > 7000) {                              // prevents inflation from ABU cards etc
+            value = 7000;
         }
         return value;
     }

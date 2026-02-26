@@ -11,6 +11,8 @@ public class Paths {
     public static final String POINTS_OF_INTEREST = "world/points_of_interest.json";
     public static final String ITEMS = "world/items.json";
     public static final String QUESTS = "world/quests.json";
+    public static final String ADVENTURE_BOOSTER_PRICE_FILE = "world/adventure_booster_price.txt";
+    public static final String ADVENTURE_CARD_PRICE_FILE = "world/adventure_card_price.txt";
     public static final String SKIN = "skin/ui_skin.json";
     public static final String ITEMS_EQUIP = "skin/equip.png";
     public static final String ITEMS_UNUSABLE = "skin/unusable.png";
@@ -20,8 +22,6 @@ public class Paths {
     public static final String COLOR_FRAME_ATLAS = "ui/color_frames.atlas";
     public static final String ARENA_ATLAS = "ui/arena.atlas";
     public static final String MAP_MARKER = "sprites/map_marker.atlas";
-
-
     public static final String EFFECT_HEAL = "particle_effects/heal.p";
     public static final String EFFECT_KILL = "particle_effects/killed.p";
     public static final String TRIGGER_KILL = "particle_effects/kill.p";
