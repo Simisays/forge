@@ -76,7 +76,6 @@ public final class ForgeConstants {
     public static final String ADVENTURE_CARD_PRICE_FILE             = ADVENTURE_COMMON_WORLD_DIR + "adventure-card-price.txt";
     public static final String ADVENTURE_BOOSTER_PRICE_FILE          = ADVENTURE_COMMON_WORLD_DIR + "adventure-booster-price.txt";
 
-
     public static final String CHANGES_FILE                 = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE      = ASSETS_DIR + "CHANGES.txt";
     public static final String LICENSE_FILE                 = ASSETS_DIR + "LICENSE.txt";
