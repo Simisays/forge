@@ -5503,7 +5503,25 @@
 		}]
 	}]
 },
-  {
+{
+  "name":"ubwarhammer40K",
+  "description":"Warhammer 40K",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"UBShop",
+  "rewards": [
+    {
+      "count":8,
+      "type":"Union",
+      "cardUnion":[
+		{
+			"sourceDeck":"decks/shop/ubwarhammer40K.dck"
+		},
+		{
+			"count":1
+		}]
+	}]
+},
+{
     "name": "BoosterPackShop",
     "description":"Pack To Basics",
     "spriteAtlas":"maps/tileset/buildings.atlas",

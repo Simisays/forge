@@ -22,7 +22,6 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
-import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
@@ -30,7 +29,6 @@ import forge.card.MagicColor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
