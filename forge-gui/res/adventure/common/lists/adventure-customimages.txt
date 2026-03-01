@@ -1,0 +1,68 @@
+#custom card images for adventure will be pulled from Github Forge Extras
+
+Akroma's Presence.fullborder.jpg                    https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/‎adventure/common/custom_card_pics/akromas_presence.fullborder.jpg
+Automatic Fidget Spinner.fullborder.png				https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/automatic_fidget_spinner.fullborder.png
+Chandra’s Tome.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/chandra’s_tome.fullborder.jpg‎
+Chef's Boss Effect.fullborder.jpg                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/chefs_boss_effect.fullborder.jpg
+Coin-Operated Pony.fullborder.png                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/coin-operated_pony.fullborder.png‎
+Cursed Treasure.fullborder.jpg                      https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/cursed_treasure.fullborder.jpg‎
+Death Ring.fullborder.jpg                           https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/death_Ring.fullborder.jpg‎
+Demonic Contract.fullborder.jpg                     https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/demonic_contract.fullborder.jpg‎
+Emrakul's Awakening.fullborder.jpg                  https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/emrakuls_awakening.fullborder.jpg‎
+Emrakul's Presence.fullborder.jpg                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/emrakuls_presence.fullborder.jpg
+Farmer's Tools.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/farmers_tools.fullborder.jpg
+Fifth Head of the Hydra.fullborder.jpg              https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/fifth_head_of_the_hydra.fullborder.jpg‎
+Fire of Kaladesh.fullborder.jpg                     https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/fire_of_kaladesh.fullborder.jpg‎
+First Head of the Hydra.fullborder.jpg              https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/first_head_of_the_hydra.fullborder.jpg
+Flame Sword.fullborder.jpg                          https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/flame_sword.fullborder.jpg
+Fourth Head of the Hydra.fullborder.jpg             https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/fourth_head_of_the_hydra.fullborder.jpg‎
+Fungus of Slimefoot's Boss Effect.fullborder.jpg    https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/fungus_of_slimefoots_boss_effect.fullborder.jpg
+Garruk's Boss Effect Phase One.fullborder.jpg       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/garruks_boss_effect_phase_one.fullborder.jpg
+Garruk's Boss Effect Phase Two.fullborder.jpg       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/garruks_boss_effect_phase_two.fullborder.jpg
+Garruk's Mighty Axe.fullborder.jpg                  https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/garruks_mighty_axe.fullborder.jpg
+Ghalta's Presence.fullborder.jpg                    https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/ghaltas_presence.fullborder.jpg
+Giant Scythe.fullborder.jpg                         https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/giant_scythe.fullborder.jpg
+Griselbrand's Presence.fullborder.jpg               https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/griselbrands_presence.fullborder.jpg‎
+Grolnok's Boss Effect.fullborder.jpg                https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/grolnoks_boss_effect.fullborder.jpg
+Grolnok's Skin.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/grolnoks_skin.fullborder.jpg
+Hall of Flame.fullborder.jpg                        https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/hall_of_flame.fullborder.jpg
+Hallowed Sigil.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/hallowed_sigil.fullborder.jpg
+Hill Giant Club.fullborder.jpg                      https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/hill_giant_club.fullborder.jpg
+Jace Boss Effect.fullborder.jpg                     https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/jace_boss_effect.fullborder.jpg
+Jace's Signature Hoodie.fullborder.jpg              https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/jaces_signature_hoodie.fullborder.jpg
+Kiora's Bident.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/kioras_bident.fullborder.jpg
+Kiora's Boss Effect.fullborder.jpg                  https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/kioras_boss_effect.fullborder.jpg
+Lathliss' Presence (Hard Mode).fullborder.jpg       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/lathliss_presence.fullborder.jpg
+Lathliss' Presence.fullborder.jpg                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/lathliss_presence_hard_mode.fullborder.jpg
+Lorthos' Presence.fullborder.jpg                    https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/lorthos_presence.fullborder.jpg‎
+Mantle of Ancient Lore.fullborder.jpg               https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/mantle_of_ancient_lore.fullborder.jpg‎
+Nahiri Boss Effect.fullborder.jpg                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/nahiri_boss_effect.fullborder.jpg‎
+Nahiri's Armory.fullborder.jpg                      https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/nahiris_armory.fullborder.jpg
+Pack Alpha.fullborder.jpg                           https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/pack_alpha.fullborder.jpg‎
+Phoenix Charm.fullborder.jpg                        https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/phoenix_charm.fullborder.jpg‎
+Piper's Charm.fullborder.jpg                        https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/pipers_charm.fullborder.jpg‎
+Power of Valyx.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/power_of_valyx.fullborder.jpg
+Presence of the Hydra.fullborder.jpg                https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/presence_of_the_hydra.fullborder.jpg
+Scarecrow Totem.fullborder.jpg                      https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/scarecrow_totem.fullborder.jpg
+Second Head of the Hydra.fullborder.jpg             https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/second_head_of_the_hydra.fullborder.jpg‎
+Sigil of Torment.fullborder.jpg                     https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/sigil_of_torment.fullborder.jpg
+Sixth Head of the Hydra.fullborder.jpg              https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/sixth_head_of_the_hydra.fullborder.jpg
+Sleep Wand.fullborder.jpg                           https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/sleep_wand.fullborder.jpg‎
+Slimefoot's Slimy Staff.fullborder.jpg              https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/slimefoots_slimy_staff.fullborder.jpg
+Sliver Queen's Boss Effect.fullborder.jpg           https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/sliver_queens_boss_effect.fullborder.jpg‎
+Slobad's Boss Effect.fullborder.jpg                 https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/slobads_boss_effect.fullborder.jpg
+Slobad's Iron Boots.fullborder.jpg                  https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/slobads_iron_boots.fullborder.jpg‎
+Sorin's Amulet.jpg                                  https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/sorins_amulet.jpg‎
+Sorin's Boss Effect.jpg                             https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/sorins_boss_effect.jpg
+Teferi's Boss Effect.fullborder.jpg                 https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/teferis_boss_effect.fullborder.jpg‎
+Teferi's Staff.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/teferis_staff.fullborder.jpg‎
+The Hydra of Shandalar.fullborder.jpg               https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/the_hydra_of_shandalar.fullborder.jpg
+The Mother Slime.fullborder.jpg                     https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/the_mother_slime.fullborder.jpg
+Third Head of the Hydra.fullborder.jpg              https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/third_head_of_the_hydra.fullborder.jpg‎‎
+Tibalt's Bag of Tricks.fullborder.jpg               https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/tibalts_bag_of_tricks.fullborder.jpg‎
+Tibalt's Boss Effect.fullborder.jpg                 https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/tibalts_boss_effect.fullborder.jpg‎
+Waker of the Dead.fullborder.jpg                    https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/waker_of_the_dead.fullborder.jpg‎
+Xira's Boss Effect.fullborder.jpg                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/xiras_boss_effect.fullborder.jpg
+Xira's Hive.fullborder.jpg                          https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/xiras_hive.fullborder.jpg‎
+Zedruu's Boss Effect.fullborder.jpg                 https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/zedruus_boss_effect.fullborder.jpg‎
+Zedruu's Lantern.fullborder.jpg                     https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/zedruus_lantern.fullborder.jpg

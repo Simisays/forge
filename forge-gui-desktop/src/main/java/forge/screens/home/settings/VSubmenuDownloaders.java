@@ -66,6 +66,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
     private final FLabel btnImportPictures            = _makeButton(localizer.getMessage("btnImportPictures"));
     private final FLabel btnHowToPlay                 = _makeButton(localizer.getMessage("btnHowToPlay"));
     private final FLabel btnDownloadPrices            = _makeButton(localizer.getMessage("btnDownloadPrices"));
+    private final FLabel btnDownloadAdventureCards    = _makeButton(localizer.getMessage("btnDownloadAdventureCards"));
+    private final FLabel btnDownloadAdventureMusic    = _makeButton(localizer.getMessage("btnDownloadAdventureMusic"));
     private final FLabel btnDownloadSkins             = _makeButton(localizer.getMessage("btnDownloadSkins"));
     private final FLabel btnLicensing                 = _makeButton(localizer.getMessage("btnLicensing"));
 
@@ -106,7 +108,12 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
 //        pnlContent.add(btnDownloadSkins, constraintsBTN);
 //        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadSkins")), constraintsLBL);
-
+        pnlContent.add(btnDownloadAdventureCards, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAdventureCards")), constraintsLBL);
+        
+        pnlContent.add(btnDownloadAdventureMusic, constraintsBTN);
+        pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadAdventureMusic")), constraintsLBL);
+        
         pnlContent.add(btnListImageData, constraintsBTN);
         pnlContent.add(_makeLabel(localizer.getMessage("lblListImageData")), constraintsLBL);
 

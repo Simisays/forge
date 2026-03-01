@@ -148,6 +148,20 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 return new GuiDownloadPrices();
             }
         }, 2);
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAdventureCards"),
+                Forge.getLocalizer().getMessage("lblDownloadAdventureCards")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadAdventureImages();
+            }
+        }, 2);
+        lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAdventureMusic"),
+                Forge.getLocalizer().getMessage("lblDownloadAdventureMusic")) {
+            @Override
+            protected GuiDownloadService createService() {
+                return new GuiDownloadAdventureImages();
+            }
+        }, 2);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSkins"),
                 Forge.getLocalizer().getMessage("lblDownloadSkins")) {
             @Override

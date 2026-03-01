@@ -414,4 +414,9 @@ public abstract class GuiDownloadService implements Runnable {
 
         return existingSets;
     }
+
+	protected void onDownloadComplete() {
+		// TODO Auto-generated method stub
+		
+	}
 }

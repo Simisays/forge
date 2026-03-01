@@ -39,8 +39,6 @@ public final class ForgeConstants {
     public static final Integer DEFAULT_SERVER_CONNECTION_PORT  = 36743;
 
     public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
-    public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;
-    public static final String ADVENTURE_COMMON_DIR         = ADVENTURE_DIR + "common" + PATH_SEPARATOR;
     public static final String LISTS_DIR                    = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String SETLOOKUP_DIR                = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
@@ -94,7 +92,6 @@ public final class ForgeConstants {
     public static final String SOUND_DIR                    = "sound" + PATH_SEPARATOR;
     public static final String MUSIC_DIR                    = "music" + PATH_SEPARATOR;
     public static final String SKIN_DIR                     = "skin" + PATH_SEPARATOR;
-    public static final String ADVENTURE_COMMON_MUSIC_DIR   = ADVENTURE_COMMON_DIR + "music" + PATH_SEPARATOR;
     public static final String LANG_DIR                     = RES_DIR + "languages" + PATH_SEPARATOR;
     public static final String EFFECTS_DIR                  = RES_DIR + "effects" + PATH_SEPARATOR;
     public static final String PUZZLE_DIR                   = RES_DIR + "puzzle" + PATH_SEPARATOR;
@@ -111,6 +108,15 @@ public final class ForgeConstants {
     public static final String DEFAULT_DUELS_DIR            = QUEST_DIR + "duels";
     public static final String DEFAULT_CHALLENGES_DIR       = QUEST_DIR + "challenges";
     public static final String THEMES_DIR                   = QUEST_DIR + "themes";
+    
+    //adventure
+    public static final String ADVENTURE_DIR                           = RES_DIR + "adventure" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_DIR                    = ADVENTURE_DIR + "common" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_LISTS_DIR              = ADVENTURE_COMMON_DIR + "lists" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_MUSIC_DIR              = ADVENTURE_COMMON_DIR + "music" + PATH_SEPARATOR;
+    public static final String ADVENTURE_COMMON_CUSTOM_CARD_PICS_DIR   = ADVENTURE_COMMON_DIR + "custom_card_pics" + PATH_SEPARATOR;
+	public static final String ADVENTURE_CUSTOMIMAGES_FILE             = ADVENTURE_COMMON_LISTS_DIR + "adventure-customimages.txt";
+	public static final String ADVENTURE_CUSTOMMUSIC_FILE             = ADVENTURE_COMMON_MUSIC_DIR + "adventure-custommusic.txt";
 
     private static final String CONQUEST_DIR                = RES_DIR + "conquest" + PATH_SEPARATOR;
     public static final String CONQUEST_PLANES_DIR          = CONQUEST_DIR + "planes" + PATH_SEPARATOR;
@@ -169,6 +175,7 @@ public final class ForgeConstants {
     public static final String ADV_BG_CAVE_FILE             = "adv_bg_cave.jpg";
     public static final String ADV_BG_DUNGEON_FILE          = "adv_bg_dungeon.jpg";
     public static final String ADV_BG_CASTLE_FILE           = "adv_bg_castle.jpg";
+
 
     //CARD BG
     public static final String IMG_CARDBG_A           = "IMG_CARDBG_A.png";
