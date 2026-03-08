@@ -159,7 +159,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("lblDownloadAdventureMusic")) {
             @Override
             protected GuiDownloadService createService() {
-                return new GuiDownloadAdventureImages();
+                return new GuiDownloadAdventureMusic();
             }
         }, 2);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSkins"),

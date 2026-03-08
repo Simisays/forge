@@ -1,9 +1,9 @@
 #custom card images for adventure will be pulled from Github Forge Extras
 
-Akroma's Presence.fullborder.jpg                    https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/‎adventure/common/custom_card_pics/akromas_presence.fullborder.jpg
-Automatic Fidget Spinner.fullborder.png				https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/automatic_fidget_spinner.fullborder.png
-Chandra’s Tome.fullborder.jpg                       https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/chandra’s_tome.fullborder.jpg‎
-Chef's Boss Effect.fullborder.jpg                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/chefs_boss_effect.fullborder.jpg
+AkromasPresence.fullborder.jpg  | https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/akromas_presence.fullborder.jpg
+Automatic_Fidget_Spinner.fullborder.png https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/automatic_fidget_spinner.fullborder.png
+https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/chandras_tome.fullborder.jpg‎
+https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/chefs_boss_effect.fullborder.jpg
 Coin-Operated Pony.fullborder.png                   https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/coin-operated_pony.fullborder.png‎
 Cursed Treasure.fullborder.jpg                      https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/cursed_treasure.fullborder.jpg‎
 Death Ring.fullborder.jpg                           https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/adventure/common/custom_card_pics/death_Ring.fullborder.jpg‎
