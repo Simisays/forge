@@ -25,7 +25,10 @@ import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
-
+import forge.card.MagicColor;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
@@ -328,19 +331,49 @@ public class CardUtil {
         }
         return result;
     }
-
+    private static Map<String, Integer> mapPrices;
     public static int getCardPrice(PaperCard card) {
-        if (card == null)
-            return 0;
-
-        return switch (card.getRarity()) {
-            case BasicLand -> 5;
-            case Common -> 50;
-            case Uncommon -> 150;
-            case Rare -> 300;
-            case MythicRare -> 500;
-            default -> 600;
-        };
+         PaperCard pc = card;
+         int value = 0;
+         int artIndex = pc.getArtIndex();
+         String ns = card.getName() + "|" + pc.getEdition();
+         String nsArt = card.getName() + " (" + artIndex + ")|" + pc.getEdition();
+         
+        if (mapPrices == null ) {           
+        	mapPrices = new AdventureReadPriceList().getAdventurePriceList();
+        }
+        if (mapPrices.containsKey(ns) && (Config.instance().getSettingData().usePriceListPrices)) {	  // If enabled, Gets the price of the card from the list
+            value = mapPrices.get(ns);
+        }
+        if (mapPrices.containsKey(nsArt) && (Config.instance().getSettingData().usePriceListPrices)) {	  //  Gets the price while looking for edition, this is disabled if you unchecked the option to use pricelist values
+            value = mapPrices.get(nsArt);
+        }
+        else if ( value == 0) {           // Fallback if no price could be found in the pricelist or if pricelist is disabled
+            switch (card.getRarity()) {
+                case BasicLand -> value = 5;
+                case Common -> value = 50;
+                case Uncommon -> value = 150;
+                case Rare -> value = 300;
+                case MythicRare -> value = 500;
+                default -> value = 600;
+            };
+            }
+        if ((card.getRarity()== CardRarity.Common) && (value < 50)) {   // Doubles the price of commons if the price is below 20 and set minimum at 30
+            value = Math.max((value * 2) , 35);
+        }
+        if ((card.getRarity()== CardRarity.Uncommon) && (value < 150)) {   // Doubles the price of uncommons if the price is below 20 and set minimum at 75
+            value = Math.max((value * 2) , 75);
+        }
+        if ((card.getRarity()== CardRarity.Rare) && (value < 150)) {   // Doubles the price of rares if the price is below 150 and set minimum at 150
+            value = Math.max((value * 2) , 150);
+        }
+        if ((card.getRarity()== CardRarity.MythicRare) && (value < 250)) {   // Doubles the price of Mythics if the price is below 250 and set minimum at 250
+            value = Math.max((value * 2) , 250);
+        }
+        if (value > 7000) {                              // prevents inflation from ABU cards etc
+            value = 7000;
+        }
+        return value;
     }
 
     public static int getRewardPrice(Reward reward) {

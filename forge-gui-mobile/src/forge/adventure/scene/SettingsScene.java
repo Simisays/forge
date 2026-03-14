@@ -260,6 +260,14 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+
+        addSettingField(Forge.getLocalizer().getMessage("lblusepricelist"), Config.instance().getSettingData().usePriceListPrices, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().usePriceListPrices = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
         addSettingField(Forge.getLocalizer().getMessage("lblBindEquipmentLoadoutsToDecks"), Config.instance().getSettingData().bindEquipmentLoadoutsToDecks, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

@@ -1,0 +1,50 @@
+Mox Emerald = 15000
+Mox Jet = 15000
+Mox Pearl = 15000
+Mox Ruby = 15000
+Mox Sapphire = 15000
+Black Lotus = 100000
+Mana Crypt = 12000
+Time Vault =80000
+Time Walk =320000
+Timetwister=5000
+Sol Ring = 25000
+
+
+
+Adarkar Wastes=600
+Battlefield Forge=600
+Brushland =600
+Caves of Koilos|10E=153
+
+Savannah = 3000
+Bayou = 3000
+Scrubland = 3000
+Underground Sea|2ED=108575
+Taiga|2ED=44535
+Tundra|2ED=87500
+Tropical Island|2ED=90000
+
+
+Crucible of Worlds =1000
+Diabolic Tutor = 500
+Doubling Cube = 2229
+Elvish Champion = 1210
+Goblin King = 1326
+Grave Pact = 2305
+Plague Wind = 1200
+Platinum Angel = 884
+Seedborn Muse =1000
+Whispersilk Cloak = 306
+Windborn Muse = 500
+Wrath of God = 800
+Yavimaya Coast= 600
+Yavimaya Enchantress = 250
+Ancestral Recall = 25000
+Animate Dead =2000
+Armageddon =2000
+Berserk = 4000
+Counterspell = 500
+Dark Ritual = 1000
+Basalt Monolith =2000
+Stasis|2ED=5150

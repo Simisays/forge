@@ -6,8 +6,8 @@
  <properties>
   <property name="dungeonEffect">{&quot;startBattleWithCard&quot;: [&quot;Urza's Tower|ATQ&quot;, &quot;Urza's Mine|ATQ&quot;, &quot;Urza's Power Plant|ATQ&quot;, &quot;Urza's Blueprints|ULG&quot;, &quot;Urza's Engine|ALL&quot;, &quot;Ornithopter|ATQ&quot;, &quot;Chill|TMP&quot;, &quot;Insight|TMP&quot;]}</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
@@ -32,14 +32,14 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="194.663" y="282.618" width="32" height="32">
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="194.663" y="282.618" width="32" height="32">
    <properties>
     <property name="enemy" value="Urza Planeswalker"/>
     <property name="threatRange" type="int" value="50"/>
    <property name="effect">{"startBattleWithCard": ["Soldevi Excavations|ALL", "Urza's Armor|USG", "Mind Over Matter|EXO", "Urza's Avenger|ATQ"]}</property>
     </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
+  <object id="51" template="../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>
     <property name="teleport" value=""/>
    </properties>
