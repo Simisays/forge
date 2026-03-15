@@ -261,13 +261,16 @@ public class SettingsScene extends UIScene {
             }
         });
 
-        addSettingField(Forge.getLocalizer().getMessage("lblusepricelist"), Config.instance().getSettingData().usePriceListPrices, new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Config.instance().getSettingData().usePriceListPrices = ((CheckBox) actor).isChecked();
-                Config.instance().saveSettings();
-            }
-        });
+        if (forge.adventure.util.CardUtil.getPriceMode() != forge.adventure.util.AdventureReadPriceList.PriceMode.FORCED) {
+            addSettingField(Forge.getLocalizer().getMessage("lblusepricelist"), Config.instance().getSettingData().usePriceListPrices, new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Config.instance().getSettingData().usePriceListPrices = ((CheckBox) actor).isChecked();
+                    Config.instance().saveSettings();
+                }
+            });
+        }
+
         addSettingField(Forge.getLocalizer().getMessage("lblBindEquipmentLoadoutsToDecks"), Config.instance().getSettingData().bindEquipmentLoadoutsToDecks, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

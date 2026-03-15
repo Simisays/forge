@@ -29,6 +29,7 @@ public class Paths {
     public static final String EFFECT_TELEPORT = "particle_effects/teleport.p";
     public static final String EFFECT_BLOOD = "particle_effects/blood.p";
     public static final String EFFECT_SPARKS = "particle_effects/sparks.p";
+    public static final String CARD_PRICES = "world/cardprices.txt";
     public static final String CUSTOM_CARDS = "custom_cards";
     public static final String CUSTOM_CARDS_PICS = "custom_card_pics";
 }

@@ -17,6 +17,7 @@
  */
 package forge.adventure.util;
 
+import com.badlogic.gdx.files.FileHandle;
 import forge.card.MagicColor;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
@@ -27,103 +28,140 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>
- * ReadPriceList class from quest adapted for Adventure mode 
- * </p>
+ * Reads card price lists for Adventure mode.
+ * Prices are loaded per-adventure using Config.getFile() fallback
+ * (adventure-specific file first, then common).
  *
- * @author Forge
- * @version $Id$
+ * Supported directives (comment lines at the top of the file):
+ *   // mode: optional  - Player controls via settings toggle (default)
+ *   // mode: forced    - Custom prices always active, settings toggle hidden
+ *   // fluctuation: true - Enable random price variation
  */
 public class AdventureReadPriceList {
 
-    /** Constant <code>comment="//"</code>. */
     private static final String COMMENT = "//";
+    private static final String FLUCTUATION_DIRECTIVE = "// fluctuation:";
+    private static final String MODE_DIRECTIVE = "// mode:";
 
-    private Map<String, Integer> AdventurepriceMap;
+    public enum PriceMode { FORCED, OPTIONAL }
 
-    /**
-     * <p>
-     * Constructor for ReadPriceList.
-     * </p>
-     */
-    public AdventureReadPriceList() {
-        this.setup();
+    public static class PriceData {
+        public final Map<String, Integer> prices;
+        public final PriceMode mode;
+
+        PriceData(Map<String, Integer> prices, PriceMode mode) {
+            this.prices = prices;
+            this.mode = mode;
+        }
     }
 
     /**
-     * <p>
-     * setup.
-     * </p>
-     */
-    private void setup() {
-    	this.AdventurepriceMap = this.readFile(ForgeConstants.ADVENTURE_CARD_PRICE_FILE);
-        this.AdventurepriceMap.putAll(this.readFile(ForgeConstants.ADVENTURE_BOOSTER_PRICE_FILE));
-    } // setup()
-
-    /**
-     * <p>
-     * readFile.
-     * </p>
+     * Load card prices from the current adventure's cardprices.txt.
+     * Uses Config.getFile() so each plane can override common prices.
      *
-     * @param file
-     *            a {@link java.io.File} object.
-     * @return a {@link java.util.HashMap} object.
+     * @return PriceData with prices and mode, or empty prices if no file exists
      */
-    private Map<String, Integer> readFile(final String file) {
+    public static PriceData loadPrices() {
+        FileHandle handle = Config.instance().getFile(Paths.CARD_PRICES);
+        if (handle == null || !handle.exists()) {
+            return new PriceData(new HashMap<>(), PriceMode.OPTIONAL);
+        }
+        PriceData data = readFile(handle.path());
+        // Also load booster prices from the common list (Simisays's booster pricing)
+        data.prices.putAll(readPriceEntries(ForgeConstants.ADVENTURE_BOOSTER_PRICE_FILE));
+        return data;
+    }
+
+    private static PriceData readFile(final String file) {
         final Map<String, Integer> map = new HashMap<>();
 
         final List<String> lines = FileUtil.readFile(file);
+
+        // Parse directives from comment lines at the top
+        boolean fluctuate = false;
+        PriceMode mode = PriceMode.OPTIONAL;
+        for (final String line : lines) {
+            String trimmed = line.trim().toLowerCase();
+            if (trimmed.startsWith(FLUCTUATION_DIRECTIVE)) {
+                fluctuate = trimmed.substring(FLUCTUATION_DIRECTIVE.length()).trim().equals("true");
+            } else if (trimmed.startsWith(MODE_DIRECTIVE)) {
+                String modeStr = trimmed.substring(MODE_DIRECTIVE.length()).trim();
+                if (modeStr.equals("optional")) {
+                    mode = PriceMode.OPTIONAL;
+                }
+            } else if (!trimmed.isEmpty() && !trimmed.startsWith(COMMENT)) {
+                // Stop scanning after first non-comment, non-empty line
+                break;
+            }
+        }
+
         for (final String line : lines) {
             if (line.trim().isEmpty()) {
                 continue;
             }
-
-            if (line.startsWith(AdventureReadPriceList.COMMENT)) {
+            if (line.startsWith(COMMENT)) {
                 continue;
             }
 
             final String[] s = line.split("=");
-            if (s.length < 2) { continue; } //skip line if not in correct format
+            if (s.length < 2) {
+                continue;
+            }
 
             final String name = s[0].trim();
             final String price = s[1].trim();
 
             try {
-                int val = Integer.parseInt(price.trim());
+                int val = Integer.parseInt(price);
 
-                if (!(MagicColor.Constant.BASIC_LANDS.contains(name) || MagicColor.Constant.SNOW_LANDS.contains(name)) && !ForgeConstants.ADVENTURE_BOOSTER_PRICE_FILE.equals(file)) {
-                    float ff;
+                if (fluctuate
+                        && !MagicColor.Constant.BASIC_LANDS.contains(name)
+                        && !MagicColor.Constant.SNOW_LANDS.contains(name)) {
+                    float fluctuation;
                     if (MyRandom.getRandom().nextInt(100) < 90) {
-                        ff = MyRandom.getRandom().nextInt(10) * (float) .01;
+                        // 90% of the time: +/- 10%
+                        fluctuation = MyRandom.getRandom().nextInt(10) * 0.01f;
                     } else {
-                        // +/- 50%
-                        ff = MyRandom.getRandom().nextInt(50) * (float) .01;
+                        // 10% of the time: +/- 50%
+                        fluctuation = MyRandom.getRandom().nextInt(50) * 0.01f;
                     }
 
                     if (MyRandom.getRandom().nextInt(100) < 50) {
-                        val = (int) (val * (1 - ff));
+                        val = (int) (val * (1 - fluctuation));
                     } else {
-                        // +ff%
-                        val = (int) (val * (1 + ff));
+                        val = (int) (val * (1 + fluctuation));
                     }
                 }
 
                 map.put(name, val);
             } catch (final NumberFormatException nfe) {
-                System.err.println("NumberFormatException: " + nfe.getMessage());
+                System.err.println("AdventureReadPriceList: invalid price for '" + name + "': " + nfe.getMessage());
+            }
+        }
+        return new PriceData(map, mode);
+    }
+
+    /**
+     * Read plain name=price entries from a file, no directives or fluctuation.
+     * Used for booster price lists.
+     */
+    private static Map<String, Integer> readPriceEntries(final String file) {
+        final Map<String, Integer> map = new HashMap<>();
+        final List<String> lines = FileUtil.readFile(file);
+        for (final String line : lines) {
+            if (line.trim().isEmpty() || line.startsWith(COMMENT)) {
+                continue;
+            }
+            final String[] s = line.split("=");
+            if (s.length < 2) {
+                continue;
+            }
+            try {
+                map.put(s[0].trim(), Integer.parseInt(s[1].trim()));
+            } catch (final NumberFormatException nfe) {
+                System.err.println("AdventureReadPriceList: invalid price for '" + s[0].trim() + "': " + nfe.getMessage());
             }
         }
         return map;
-    } // readFile()
-
-    /**
-     * <p>
-     * getPriceList.
-     * </p>
-     *
-     * @return a {@link java.util.Map} object.
-     */
-    public final Map<String, Integer> getAdventurePriceList() {
-        return this.AdventurepriceMap;
     }
 }

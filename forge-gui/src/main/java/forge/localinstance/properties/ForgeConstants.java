@@ -73,9 +73,7 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
-    public static final String ADVENTURE_CARD_PRICE_FILE    		 = ADVENTURE_COMMON_LIST_DIR + "adventure-card-price.txt";
     public static final String ADVENTURE_BOOSTER_PRICE_FILE 		 = ADVENTURE_COMMON_LIST_DIR + "adventure-booster-price.txt";
-
 
     public static final String CHANGES_FILE                 = ASSETS_DIR + "README.txt";
     public static final String CHANGES_FILE_NO_RELEASE      = ASSETS_DIR + "CHANGES.txt";

@@ -331,29 +331,56 @@ public class CardUtil {
         }
         return result;
     }
-    private static Map<String, Integer> mapPrices;
+    private static AdventureReadPriceList.PriceData priceData;
+
+    /**
+     * Clear the cached price data. Call this when switching adventures/planes
+     * so prices are reloaded from the new adventure's cardprices.txt.
+     */
+    public static void clearPriceCache() {
+        priceData = null;
+    }
+
+    private static AdventureReadPriceList.PriceData getPriceData() {
+        if (priceData == null) {
+            priceData = AdventureReadPriceList.loadPrices();
+        }
+        return priceData;
+    }
+
+    /**
+     * Returns the price mode for the current adventure's price list.
+     * FORCED means custom prices are always active (toggle disabled).
+     * OPTIONAL means the player controls it via the settings toggle.
+     */
+    public static AdventureReadPriceList.PriceMode getPriceMode() {
+        return getPriceData().mode;
+    }
+
     public static int getCardPrice(PaperCard card) {
-         int value = 0;
-         String ns = card.getName();
-         
-        if (mapPrices == null ) {           
-        	mapPrices = new AdventureReadPriceList().getAdventurePriceList();
-        }
-        if (mapPrices.containsKey(ns) && (Config.instance().getSettingData().usePriceListPrices)) {	  // If enabled, Gets the price of the card from the list
-            value = mapPrices.get(ns);
-        }
-        else if ( value == 0) {           // Fallback if no price could be found in the pricelist or if pricelist is disabled
-            switch (card.getRarity()) {
-                case BasicLand -> value = 5;
-                case Common -> value = 50;
-                case Uncommon -> value = 150;
-                case Rare -> value = 300;
-                case MythicRare -> value = 500;
-                default -> value = 600;
+        if (card == null)
+            return 0;
+
+        AdventureReadPriceList.PriceData data = getPriceData();
+        boolean useCustomPrices = data.mode == AdventureReadPriceList.PriceMode.FORCED
+                || Config.instance().getSettingData().usePriceListPrices;
+
+        if (useCustomPrices) {
+            Integer price = data.prices.get(card.getName());
+            if (price != null) {
+                return price;
             }
         }
-        return value;
-    
+
+        // Fallback to rarity-based pricing
+        return switch (card.getRarity()) {
+            case BasicLand -> 5;
+            case Common -> 50;
+            case Uncommon -> 150;
+            case Rare -> 300;
+            case MythicRare -> 500;
+            default -> 600;
+        };
     }
     public static int getRewardPrice(Reward reward) {
         PaperCard card = reward.getCard();
