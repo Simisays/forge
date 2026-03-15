@@ -333,20 +333,14 @@ public class CardUtil {
     }
     private static Map<String, Integer> mapPrices;
     public static int getCardPrice(PaperCard card) {
-         PaperCard pc = card;
          int value = 0;
-         int artIndex = pc.getArtIndex();
-         String ns = card.getName() + "|" + pc.getEdition();
-         String nsArt = card.getName() + " (" + artIndex + ")|" + pc.getEdition();
+         String ns = card.getName();
          
         if (mapPrices == null ) {           
         	mapPrices = new AdventureReadPriceList().getAdventurePriceList();
         }
         if (mapPrices.containsKey(ns) && (Config.instance().getSettingData().usePriceListPrices)) {	  // If enabled, Gets the price of the card from the list
             value = mapPrices.get(ns);
-        }
-        if (mapPrices.containsKey(nsArt) && (Config.instance().getSettingData().usePriceListPrices)) {	  //  Gets the price while looking for edition, this is disabled if you unchecked the option to use pricelist values
-            value = mapPrices.get(nsArt);
         }
         else if ( value == 0) {           // Fallback if no price could be found in the pricelist or if pricelist is disabled
             switch (card.getRarity()) {
@@ -356,26 +350,11 @@ public class CardUtil {
                 case Rare -> value = 300;
                 case MythicRare -> value = 500;
                 default -> value = 600;
-            };
             }
-        if ((card.getRarity()== CardRarity.Common) && (value < 50)) {   // Doubles the price of commons if the price is below 20 and set minimum at 30
-            value = Math.max((value * 2) , 35);
-        }
-        if ((card.getRarity()== CardRarity.Uncommon) && (value < 150)) {   // Doubles the price of uncommons if the price is below 20 and set minimum at 75
-            value = Math.max((value * 2) , 75);
-        }
-        if ((card.getRarity()== CardRarity.Rare) && (value < 150)) {   // Doubles the price of rares if the price is below 150 and set minimum at 150
-            value = Math.max((value * 2) , 150);
-        }
-        if ((card.getRarity()== CardRarity.MythicRare) && (value < 250)) {   // Doubles the price of Mythics if the price is below 250 and set minimum at 250
-            value = Math.max((value * 2) , 250);
-        }
-        if (value > 7000) {                              // prevents inflation from ABU cards etc
-            value = 7000;
         }
         return value;
+    
     }
-
     public static int getRewardPrice(Reward reward) {
         PaperCard card = reward.getCard();
         if (card != null)
