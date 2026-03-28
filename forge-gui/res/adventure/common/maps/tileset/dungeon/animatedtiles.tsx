@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.1" name="Animated Tiles" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
+<tileset version="1.10" tiledversion="1.11.2" name="Animated Tiles" tilewidth="16" tileheight="16" tilecount="16384" columns="128">
  <image source="animatedtiles.png" width="2048" height="2048"/>
  <tile id="0">
   <animation>
@@ -1366,6 +1366,14 @@
    <frame tileid="3192" duration="200"/>
   </animation>
  </tile>
+ <tile id="3217">
+  <animation>
+   <frame tileid="3217" duration="140"/>
+   <frame tileid="3218" duration="140"/>
+   <frame tileid="3219" duration="140"/>
+   <frame tileid="3220" duration="140"/>
+  </animation>
+ </tile>
  <tile id="3265">
   <animation>
    <frame tileid="3265" duration="400"/>
@@ -1412,6 +1420,14 @@
    <frame tileid="3469" duration="100"/>
    <frame tileid="3470" duration="100"/>
    <frame tileid="3471" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="3473">
+  <animation>
+   <frame tileid="3473" duration="140"/>
+   <frame tileid="3474" duration="140"/>
+   <frame tileid="3475" duration="140"/>
+   <frame tileid="3476" duration="140"/>
   </animation>
  </tile>
  <tile id="3521">
