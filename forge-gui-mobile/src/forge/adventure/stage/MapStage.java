@@ -536,6 +536,11 @@ public class MapStage extends GameStage {
                             if (prop.containsKey("hidden"))
                             {
                                 hidden = Boolean.parseBoolean(prop.get("hidden").toString());
+                            }  
+                            if (prop.containsKey("friendly"))
+                                {
+                                mob.friendly = Boolean.parseBoolean(prop.get("friendly").toString());
+                                if (mob.friendly) mob.clearCollisionHeight();
                             }
                             if (prop.containsKey("inactive"))
                             {
@@ -1040,7 +1045,11 @@ public class MapStage extends GameStage {
                     resetPosition();
                     if (mob.dialog != null && mob.dialog.canShow()) { //This enemy has something to say. Display a dialog like if it was a DialogActor but only if dialogue is possible.
                         mob.dialog.activate();
-                    } else { //Duel the enemy.
+                    }
+                     if (mob.friendly = true ) { //this is used for "background" npc that won't start 
+                    	 continue;
+                     }
+                    else { //Duel the enemy.
                         beginDuel(mob);
                     }
                     break;

@@ -84,6 +84,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public float fleeRange = 0.0f; //If range < fleeRange, attempt to move away to fleeRange
     public float speedModifier = 0.0f; // Increase or decrease default speed
     public boolean aggro = false;
+    public boolean friendly = false;
     public boolean ignoreDungeonEffect = false;
     public String questStageID;
     private ProgressableGraphPath<NavigationVertex> navPath;

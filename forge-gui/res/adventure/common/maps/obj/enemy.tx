@@ -11,6 +11,7 @@
    <property name="pursueRange" type="int" value="0"/>
    <property name="spawn.Easy" type="bool" value="true"/>
    <property name="spawn.Hard" type="bool" value="true"/>
+   <property name="friendly" type="bool" value="false"/>
    <property name="spawn.Normal" type="bool" value="true"/>
    <property name="spawn.Insane" type="bool" value="true"/>
    <property name="speedModifier" type="float" value="0"/>

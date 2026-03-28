@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="86">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -269,6 +269,14 @@
     <property name="portalState" value="active"/>
     <property name="sprite" value="sprites/portal3.atlas"/>
     <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="85" template="../../obj/enemy.tx" x="235.934" y="149.364">
+   <properties>
+    <property name="displayNameOverride" value="Cave Horror"/>
+    <property name="enemy" value="Horror of Tibalt"/>
+    <property name="friendly" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
  </objectgroup>
