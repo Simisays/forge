@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.1" name="main" tilewidth="16" tileheight="16" tilecount="10112" columns="158">
+<tileset version="1.10" tiledversion="1.11.2" name="main" tilewidth="16" tileheight="16" tilecount="10112" columns="158">
  <image source="main.png" width="2528" height="1024"/>
  <tile id="78">
   <objectgroup draworder="index" id="2">
@@ -16808,6 +16808,7 @@
    <wangcolor name="Tree" color="#fd7ab4" tile="3306" probability="1"/>
    <wangcolor name="Mountain" color="#c913a3" tile="118" probability="1"/>
    <wangcolor name="Mountain" color="#33f502" tile="592" probability="1"/>
+   <wangcolor name="" color="#4fe5a3" tile="-1" probability="1"/>
    <wangtile tileid="106" wangid="0,0,0,9,0,0,0,0"/>
    <wangtile tileid="107" wangid="0,0,0,9,0,9,0,0"/>
    <wangtile tileid="108" wangid="0,0,0,0,0,9,0,0"/>
