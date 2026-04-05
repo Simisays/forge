@@ -1916,6 +1916,18 @@
    <frame tileid="4812" duration="400"/>
   </animation>
  </tile>
+ <tile id="4872">
+  <animation>
+   <frame tileid="4872" duration="90"/>
+   <frame tileid="4873" duration="90"/>
+   <frame tileid="4874" duration="90"/>
+   <frame tileid="4875" duration="90"/>
+   <frame tileid="4876" duration="90"/>
+   <frame tileid="4877" duration="90"/>
+   <frame tileid="4878" duration="90"/>
+   <frame tileid="4879" duration="90"/>
+  </animation>
+ </tile>
  <tile id="4905">
   <animation>
    <frame tileid="4904" duration="140"/>
@@ -1939,6 +1951,18 @@
    <frame tileid="4938" duration="400"/>
    <frame tileid="4939" duration="400"/>
    <frame tileid="4940" duration="400"/>
+  </animation>
+ </tile>
+ <tile id="5000">
+  <animation>
+   <frame tileid="5000" duration="90"/>
+   <frame tileid="5001" duration="90"/>
+   <frame tileid="5002" duration="90"/>
+   <frame tileid="5003" duration="90"/>
+   <frame tileid="5004" duration="90"/>
+   <frame tileid="5005" duration="90"/>
+   <frame tileid="5006" duration="90"/>
+   <frame tileid="5007" duration="90"/>
   </animation>
  </tile>
  <tile id="5033">
@@ -1966,6 +1990,18 @@
    <frame tileid="5068" duration="400"/>
   </animation>
  </tile>
+ <tile id="5128">
+  <animation>
+   <frame tileid="5128" duration="90"/>
+   <frame tileid="5129" duration="90"/>
+   <frame tileid="5130" duration="90"/>
+   <frame tileid="5131" duration="90"/>
+   <frame tileid="5132" duration="90"/>
+   <frame tileid="5133" duration="90"/>
+   <frame tileid="5134" duration="90"/>
+   <frame tileid="5135" duration="90"/>
+  </animation>
+ </tile>
  <tile id="5189">
   <animation>
    <frame tileid="5189" duration="400"/>
@@ -1976,6 +2012,18 @@
    <frame tileid="5194" duration="400"/>
    <frame tileid="5195" duration="400"/>
    <frame tileid="5196" duration="400"/>
+  </animation>
+ </tile>
+ <tile id="5256">
+  <animation>
+   <frame tileid="5256" duration="90"/>
+   <frame tileid="5257" duration="90"/>
+   <frame tileid="5258" duration="90"/>
+   <frame tileid="5259" duration="90"/>
+   <frame tileid="5260" duration="90"/>
+   <frame tileid="5261" duration="90"/>
+   <frame tileid="5262" duration="90"/>
+   <frame tileid="5263" duration="90"/>
   </animation>
  </tile>
  <tile id="5317">
