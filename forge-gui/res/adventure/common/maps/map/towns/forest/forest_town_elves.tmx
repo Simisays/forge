@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="51">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../Innistrad/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1r/EmpjByT0kqqqqvrqAAJMe3U=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJylVm1OGzEQ3Qpo/FEKt4JWuUWFSCIFUE7Uv4XSa4S0lZpCr1AaOEVnZD/57cS7SRRLI4PXGT+/mXnjB9c0g9A0C5kPZP4p87Vv9hq/xMdS7FT8fZf5UOYfLvm+6fH9x6X9R7J/LPsmvn//NjgYg/qdu3TXC/H7Xv4/CQnrb9f+7Uy+j8S+yPe7kPbvw4v6w93mmXMn9jbPV/l7jSPFcCv2GptmJfYSE6Z9sFz6xPFBjs2hmY9C4Yj5+StnP4t9k/Vzmb/K/C+2/SvvJ2Hdlm6d66lPHDzkuIwzrjnlJePk/Jzl3w47cMC/8oq7sakvvl+Uv59cykNgUkN8dG2Q1xE/xAq/VX5qOPiuA/LN92NMyhcwvcum/tns+vEOORHNb/XOI1/415x7icX2ybddB3gCBs37c7LVDnigRUu3eW9tcFyR89Y+dMSbz9d4shZZbKgPrhWrSTwUz33YXIs8ZlQLqPF5h1azISf78DCu554awJiSBqHeXUWrUWu2R22LRwfzzByD59NQ6hJ1/WjqgfXnyhdNvs39YVs8NgbwB+1/dKUP4tuNb+uR1UTon+YBamMTHvTGkS89Edzq2kU+d5r7IL7pGnTD6uSC9G9ItQr96MIDjdaYT/JdgQdreu6Mvtl+zHoGXIjnmanXj7H+rgAnl5mTT77kIvJgks/V86CZk9wna4P1WwfXLeqkhoXfC+CB6wEc4Lc2TtvqCA/FeEy6i9y2tWrfDXgrXBMWjiFqmvstzrgLpZZsr9H1V6OznAOsHawTti8jHxaujQv4oe2rSq+Bttsc0nX2jZ4O7eAejb6M/MJbgnsu7uBCvddA2z+/qecQ7vrk1rWpK89Zc8Ar6x/eFNB0PfM+48Abhf3U8ngY23XXhQN1jtoCd/yusfvHWaegn/xurb3Vz2J3n7Tvc86h2uD9XBPcu8BlF5a+Nyt0FbFQDv4DP/E1+w==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="35" height="25">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJytl31S4kAQxfk/uQUkkgpkjxlXUOKRgCzqBu/k9Fb/iuc4CVhrV3UNDkP36683Y5nPZmXQfdCHbDabh7UPuvS9k39uXEtfN+HsY9BOVlOzgT3bv5f9ym2fXd+CLsTWQuwbjr9BTQY/B8baz7HOxeY5wlv5b2tX9s0W2NGDnCMO+/274zBp/dzc8aNnwah5OUVxks9SYsVnKRjx3Usc4Ng7liLKk8rgmHr3v3T/nWOw/T9B1+KvTmAif1qjXwl/x7D3EvQp+/pdLK+SE/L1GOW1F+yaW87Yd4Xjsh6L/a79u9834AETfU/c74k4FT8z8pxdZoc99fs6sm/STmA8etx3IzhiTJxtfKUH4v7gLP3AjB5u9HWLWG1W3k+pflEZpN7UnP78X9l6XCuv6+qH4vuO/076u/I5qUf64afEenInvNzJfMGP8GkjeFLzu/+69U923rtb76E4lqP0vc7tWfbxr5wzj/rzWo6o8UbunzGOUi7kfuJOUa18tXlQvtL+0bycfC2ER5U7x2JgFpX3NReNx1JGvgeZj9Zjec7StkvHcBB7/C6ud+G4l4JD76W92EvFdJSYYzzwETWoBcsgPLX1eKwulv8iyo0q2MZ6d5jAo3nqEzxJPujbl/zyRuD+psas7I/xKDW5xomx7ITHTNbii7ys8sudSB9O3WPY+Q4P7eQth13qE88uc8V67T4mN7dwdCvvGK2bzh8YeE++RbUzP+1EX5DLqTdN6z5SmLn3yQvvPt48jexvovqO2YITeTMp9sFjTN2b2+htDheUssLHzBS+nvwuIQ+8gav8wovX+gwMndSE9+0i/8x5/I39peAEI71URFhPI/GnBJ/6/4zOt62D5P0++5y3sdzBFyk+SQnnF+JXbYPxA9xwBnw=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="35" height="25">
+  <data encoding="base64" compression="zlib">
+   eJzNl8lKA0EQhguUZJIcFFyeYlQy8ezrxO05PI4ePQbyGJ4URALRqw/gxbuCy8n+aYspx65exiHmgyZDMun6p5a/E6Ll5ua/BSwRkxX7eqt8ruXqbq95LI2DVaLLfaKyQ7Tb/f35dEB0NbLXebe656mBFsSKZebQAl6GRK9mjTOiQ7POFd0uOH+Po3gdAHFcMdYKovUi7l4J6s75u06TEh2D0fLIoKYXHXuNWoOzQXhfvhevLj1zR3+wlvse0UOvio8aYh1n9j30f2yv86y8mZ54H/6MwzwrWlCHkz7Rad/q4Ph1Unod+dgwPbFZuLUA+cxYR1l1vePR0YTye0/UR2pBjX3PLLU38R3fnugX+cxY80Cfzv7gO0zdC7XZGAfyH5qpGOCF0odi9nTVQX4vp2ouUykTagFcdWgjLwz7YtM9te+FzkMN5D7Wd6Wn+2Ys5TyUIPfwLt/55/LwNuvjAr3nm50P48+fike3rQOzIM+EOlvGn7c9Ht028kzw4dOStyfHC8/IIvISgmdEatF+Ny8CzHa9x1P/23wBmKFh3Q==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../obj/entry_up.tx" x="303.25" y="400.75"/>
+  <object id="41" template="../../../obj/shop.tx" x="50" y="239.25">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
+   </properties>
+  </object>
+  <object id="44" template="../../../obj/shop.tx" x="447.25" y="94.5">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf"/>
+   </properties>
+  </object>
+  <object id="45" template="../../../obj/shop.tx" x="48.25" y="78">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="47" template="../../../obj/inn.tx" x="290.333" y="157"/>
+  <object id="49" template="../../../obj/quest.tx" x="131" y="171.667" width="34" height="16">
+   <properties>
+    <property name="questtype" value="forest_town_tribal"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../obj/shardtrader.tx" x="389.667" y="224.333"/>
+ </objectgroup>
+</map>

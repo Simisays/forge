@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="30081" source="../../../../../Innistrad/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="31873" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="48257" source="../../../../../Innistrad/maps/tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="60545" source="../../../tileset/dungeon.tsx"/>
+ <tileset firstgid="65025" source="../../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="69121" source="../../../../../Innistrad/maps/tileset/inn_main.tsx"/>
+ <tileset firstgid="79233" source="../../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="89345" source="../../../tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="20" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxbIcXAsGIUj+JRDMeLRAfeDbTAmSID7wZycBKF7gYBappHbfeN4sGN+QQQeLCbBwA9ZnM+
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="20" height="25">
+  <data encoding="base64" compression="zlib">
+   eJztlFEOgjAMhiccQbZ4F0LEq3gtUQNcwhMYOQO+eBJdExpKWbchLz5I8mfZwr7+7bop9f9+9dtopRKmdzZfk5TqKe9q5/ftVAczX6O67UbVEbzasUb1MqNcPJ7nPuCPx5b8ubyCeI0hbmPHp417EXgPq1LwxfOHPZ0dj9l3/jgPzgtYEg/zODv6obXKzXQN9vh4GPcU8Af7YazsvB9iSPXz9R3lgWL9SX1XDF4aPXoCVif0S0L+8/UaeioD5xF7L5BZDfF7T//F3Fvkra0fzxfi+voZ65eTuqfazVriT7oTlEXrh2/HWh73tITHWSFeYdzvONSyFd54nuMHQHrQew==
+  </data>
+ </layer>
+ <layer id="7" name="Tilelaag 3" width="20" height="25">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CBwV2MemZ5AM1aKUq6vjlk6IGBRnHi1K3CYcciUexsegJi/DAfj9sIhd9ioPxcCvwWJsjAEA7EEYLkmzGYAa7wQ88blOYVcvIGPQCxeQgXIDX/UmofCDAC7WQSheRZJgrTNwjgy1+DwTxrAmkPAHEKEP8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects" visible="0"/>
+</map>

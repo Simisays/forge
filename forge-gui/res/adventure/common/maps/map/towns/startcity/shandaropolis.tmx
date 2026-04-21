@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="75" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/buildings-nocollide.tsx"/>
+ <tileset firstgid="13697" source="../../../tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="30081" source="../../../../../Innistrad/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="31873" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="48257" source="../../../../../Innistrad/maps/tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="60545" source="../../../tileset/dungeon.tsx"/>
+ <tileset firstgid="65025" source="../../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="69121" source="../../../../../Innistrad/maps/tileset/inn_main.tsx"/>
+ <tileset firstgid="79233" source="../../../tileset/main-nocollide.tsx"/>
+ <tileset firstgid="89345" source="../../../tileset/buildingsbosses.tsx"/>
+ <layer id="6" name="Subbackground" width="75" height="66">
+  <data encoding="base64" compression="zlib">
+   eJztms9qFEEQxhNUZN2LEEQ0evDgIwg+im+QN5AIIVdP2WMwCXgWHyFnXW++gI/gIXj15DZrkdpKVXVVd9d0b0jDx+5Mz7/+8VVN9cxcPd7ZubrTnTL68eKmel/TiAI2B69u8oJ1va9xFGEWnL96eu1w3p8PCPuG8xXns97XnPhNzdDKhMbnCD6akhcdN8eJrpsqd10+bcu1RqlZ8hEs477R8nyUv+CYMHZoEi9ufQmr32/aj+V0Fs8rl7tzsdmS1efZpmqYRfLK8bP01bBq5bXTQsZeb2k+a8kK2GA+x7N24zxteCyNl0cQgwd75bwwq0g/1Ory9a7KDJY1nl5Of+5d/383XzMCSf6gSn3QYNvl3qaiOdHcavJW4+uy8MJ8pvQT3G/wvSc1C7doTpgV1xfNivqJu09D01hFM7IqgtfyiI87yo2ySlwor958SvTt6Ka8nHAeoDUg5lNTH44gKyvKiTbOW/C/RS39YbapCBbfG8RijlPKz1iJB+TsFpyA1fsARi34SEpxRptUw+CYrK2Bo1hxgnlg7VyQY2Vpy8u1pmTliVXMp+V8GXuExh+NQbr9iKwiGMG46dg5Xi1ZQT73PkfI3QeiGEm+KmHL6cvLPKcWz1xorEU/M7ay8nCSWKWxAKekmvze411Njpc0T9U4WVnVeqpkv7+P1vp5fy3rflB35hj8emI7HjAamVULX2m+SaySsG8oD61PYlUbg9HPhy3MNN9ITPCyxAqrNseP9G5eE8fMw4nj5fXYaKzoPFriRX3lUam/cqy4eX6PZyOtOFFekb7S2EXx0/J6zouaolmBPs3XgprBWztwftGkeaxUU7Fq6RcPJ8lnJZoqt7eqM6y8LLXUiKxa1mO9WVFxc+PSeXLrurUnK45d4vH141rcNtAn9VNW2nvYbWVFvWNhkWPEMZvaVxGeonwkVs9PbKy05VaClpjgFs2J43O24nK+0sXJdZ+VVQ0fT9xSJsAqkhPH6tlixWal/YWPVa2XanNcD1ZnK0bnK10s4s9tkfbtE5679IjBnkrfhYEkXhI34NV7DFN4RpJ1n6m8JSnac3ic3NgtXsLb9WYVyYtjgJetfkt8MC/ssQcPb5+vJF5U3BxNq0sTq55+i/aV5dvo4/+cuO0TH1Dpte2+7cukJJdLOpz799kG5XJ2yXin/GZgNF+VHPe2spLYlR5zGzhZfBHlo21jxTGx8szVmzXcerOw+ovry+2b48rth+tMD6ue9RX1RSkrzAaPV3uX5fHVaDWoFFPe/fC4vc+HOVajcdL8ViKJTS6P0/XRnEqf/dPco51DmnNw5wB/Wd7Hwa90ja3ZwbG0+xac03s/876HyXHCfqIxK527l6+wKEcrB/ofr4PrsdZPGgsvJ+/4a/l5czP2CPDzsJG2p+f8Bync3gc=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="75" height="66">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="75" height="66">
+  <data encoding="base64" compression="zlib">
+   eJy9nGuMVVcVx/elMI97pwIO0zsFOzOl0fDSQMtjymtwKBQbU2Nag6V8QK1pnCg+PgCDdIr4wUwTH0kpmlLo4COhUFvwQaQ8TIxSNa3Wira8SguNJvSDr9AHWOv+z95/zjr77n3OvvdCV/LPuffcc8/d+3fWWnvtfc7MtS1KXat1vKjUCS2fHSuaY0Kfu8f6jsP+4/Y8eb+3ruTf948xfuGzNe/Jb5s8d+hclM9OFY2u0e0vt1T2D/0ar3WyGP6cfYdw7HpPX9tazG9QLxVNuymXkY+Xr4/8fh4rtlWep6OsVKeVbM/mlsrv+/bxvOz3yQyO/Jysyd091mdkJ3mF+LBvvmuP77x4teYwOq4v/C443dWu1LJeo+X6de+ShF1X2RwHRpTP1pbCjGRfY7nMHhH+TDKDtYv4RFvZ1xNFPyu0M+RTvJ7rSklc0BcPlA2jXmip0a8WK/X0+8x3sSWzLFZtGYxqMbBC+7Y3Zx+HY9psfLbb/LjW+hvfH/NwC7Hi9cT51pcSTuAAn3L5uIb9UCguL5d1az5/tjoqXkvdHPC3tcIPNpTSfoHP+kuGWR4rGq89OVFvO2OL/OzpGUr9doZ5DdZXilW35cNc5hN+/3nLy81T7Bs4MEbp52S1thTPCkbe6PshzeCw1lb7uylGVmf1569q7b/JvI9lNb+YrZEituAHs0ckfiDHGmjvUDrWJC8ZozJXsdZgju633yercTqvt1l9r5DNCXZMMziew+odffyni8n7LFZot9SA1n793bdKiQ4Uzf6NHlbIDxxrfqL5/HTIbDHeZPGS4yHzDf3QzdGyZqD+qs/z3ULCbL32uevKpr+npyv18nTD4VNa/7NbVzi2uyXNMZbVgNVK3ZZCd6I3La+NzYlPSFYHdRtn7FDqRq2bxJa8niqHeUn/cmNR5qpfb0iE83LsksxWtBteFzWn/05P/CnLXJ+LYTWQwepcT8IL52bdSlZso+S1dyjxM/6Gy0vWv6xLZO3AsXHexjSrEDPwOmh9a9M001YywHsykWwkz3pYwbBtvs0/vh21rPB98Lo7oK/p/LJJ6OujE14H3l9I9f/1DqXecPRmh/nsiJWPGXjh2oHVwmLiM27cydxUC6sBD6vXZml/WqBUn/apvvm6Dfbau/ntN61JXHLfVid/d+oY6hK6foyJ4ZkeVps7lXrI0ZbOSj6qlLyeoM+x8gOFFCvkqu1ODNKnjixJXt8s8tXtmvmmayoZfUaf67PFSlbI5RcsK/QFjA5pvaH3fb+5kpVPbztMweqw0C8vAyuX0y/mFNSd3YVLrKBSi3/soyTDEKfh2NJtvapUmdNlbfmC1gp7bfA5WA39M/ElbBeNKagfjC6oD9ttr96SEe2QmM8ftq8vByuXE8djxqA0yY1+Rd3bajgt1bX9kd5sVl3FhNVs4Uv0J9o8UWeRx4axhtF9djswthDle/WyCnHaEphfgd994NFmWIEPhPk4/WnpLZX1MuJvYUuYFXzp5SZTZ0kbsO2IjcVaWN3YpcdRRzO74jgN922cn9UpXUO8NN0yuVXzuqXSn5YuSbMip1NaO0qVOZ2sXE7SriSrPGVxuhhusnpLc7owPfGtYV69ltEyc4ys+VxOp5vCrEKG71wJVr68Vw2nLJM1Awy8ZOzRyOoey2mEzVOwTWLsg13wsMLnHcLHJhRN3pI5i7m+Hla+vOfjtKVgxpxYTiG73fNdshqyOiny1KOese+oZUVfQyxyfgOfekXrsH6/LYKHZChfc20OrFbo/t8doZXI24JTPetu5DT36uzj5PhHVr6xj5zga5zfcAxYXopj5Uqu86LfvD536HjyzQtcSX9iTbJrolK7I/X4RMNJrkvHshpyctSrnvz1SSvy4v5qWPkYveBZ9+os54ucyGrZDUp9JFK33ZBec82zLFb0G+q83vd6ycQceN1VSvZvy4ixPEZcc6l3fKiFFddcffeg3LgkqxEixshKcvIxQ2wut37m5neXEdcQMGaRET6jL3FtCXrYM8eNEeaE1bJirnTX9WkyLsmKnLgOvMZeJ+Zyud7H2GOuAqvzghdMrm2SEfIQxnYZa7iunNeSLebac/X+eTZfx/rV1hpYyfsY7S2V9zmfLFeyWik4YYzb6OTyC4FcNWCPhR+C7zYxroEP+uAyAh/s7xHz/7m2fnE1r+XKsHpiYnr8c++FkNPH2ytZTbDrPVijk/GGWMNYyC1zFWMUPK8rmvfzbO2A+Gd96PqQzGd5nKplFstKcqK59z2xdvuzcvqYR0umZj8s1sYkK9fOl9J1BN6jxkJNinHzfstqprhP4etXHqchRzEcY1g94dQJISOr6Y3p/fidECsfN3c/6vhOW29JVlwj9Y2JXH/09b2hQak/jEyrsSGbVyyrj95gaqtyOdGeclKjIx6xfdJyWt1k2om447ou6uDh8U+s9SIe3RorxEuKrHgduI1h5eMUw6uaGEROl/axdsOLzCQn+CA4rcyYP01ZnNxj8PmXjxF8CvPo7zSYttOvoEdKaVa87+T2OcSJCrHCuR6pkRV50c8kJ7DL4jTMqifN62yT8TGfuaw4D8a9z8ax5hhc8+dH6/pTq9nu8+WqWlnxN6phtUC3dSHGYxEvLqe8eU+K160Jrwk584D7LS/JarMqqNJY048v6Xz65TFmH+xFD6sfZsTgjwIxeKyK3C5ZnUAtrHWq2TB6sKGSUyyrS7wWm5wfYy4r+FWTZcXX0mJ5hTiNEH3Bb/xNc/h7jmj9+tqv1/qq1rN2vNt5nclbJ4vJPe8YW/GgzvFafYtM7sEazHnnu684cemy8s7bxDmwHu7jhfU1qRCnY2IthuPF9mZVtT0ragP4FZ/VORkxp4Yd15xOCFasoc4IPh3OuVxWJetLaD/9alspmb/R8mrRPE6wreLaVGtkBU6cL6MfoTm1NPoUjKy+OdJIGnI+6vbTlp8vX5HVczqv/0k8s0g/gG/Vw2mVHVO7xfwx1mSe2ufkmaz1B2n0KVhfd8KKJp+vdYW54D49x+kXMQGt1nn9i2OSvsiYqcWPXKs2BmWtCfOx6o9gJQ1+1e7hwbUDnzAXxO80W59qFjkddbzsWyhnxTKi8Xxrc/onfUmay2pDDawwFrqG8QG+M2nQvJ88GNYsrZlaU6ymDqb7BkOtxXsluK+EOSAYhu6F+ozna8th+7tG/353Ph2br/KMvrPT9nvXN+K1e9D4GnM8NF/41VWCUy2s8mLQx8p3f+JyPGuMmJy6wIynZDVJM5isNUVrqtY0weaxACua9Cmop6W2ddHtNbJi7eka1ytrNY6PqE/hn2CF/u8UTHZrPZ7hV3sFK1/s7bDt/mNHpZ7rSLcn9KxJlklW+8v++lz+zUOt5tZcZEV9KCIGZwxWxh7vfdM+36n9X48BF9+r1F/G6bqs1WxXd6bbE3rWpB5WklOtMeirucDKF39ZMbl7MDlnQeQon8WuH1fMDayNakzLZQXjWszl4gRL1VyClS/+fPt+jHHxAc3ugWxWbo0gGTTPVmpwVoTmVLY/xGqfYCX/HqFe69Nt2LVUqXOLDKtJD5j+Sz0+6I89+BNq+AZRa5HVgkA+x/Ocq8YJVh4GtKmCQfPcSm7T9Off1nXV55rMFsJaG2yPra3qGfv4TO0lVotMm/m3Mj4LxSVYrXJYMF+5MRiKrSxWobrJx01aazk9D6TlPd8gjc9oS+OaFlihbmBe7NPtObfQjI+huAQr1O/FsWZOPfwbnhjMykMhVrhnR1ZufqI/9TX5uXFNVN77r8bk8+zUlEUJL3A5N9tutR6zn+261R+XzFN5fpWXs8HqWw1JDH2wMXktY0vqmRh/8+S6PG4+RlJ5BlYxYxS3rl/l5fDmeUr9q0upf2v9p8uspdyht3cG9Amtr4wy53b9zV3/ZH53GdbCKYYVbMrS8PVa4cRakNWchElI1bByawfoqSpjzWe1MoLJuv41e02295vtYHfCapUTgxwHMe5Vy4rmYxZiFWvHIuv2ahjRWINxnV4aWcl4xH1vzmtCOXyaXUPx6QtN6ffdIyvV2pCca7/wpaxxTj7/VK+hzupDbnd4jlqn66d15jVyl7RgLg3kJRrGt6x7t9XY/oi4c//+vV47N8eMg303p/dfrzlNtKxQiyEOXT3cn/7OPTnteTdZXa45js/kHFHasN/NV+rn/YbPO0V/XR6qRaX9vtFfC+TJZ77njWlXkhPs0rpDj6P5htHkmeY49+8cBwI1Q1Z9FHo+wGdyP+474R4KfApjn+/5UJdTR411aZbRfxhfMBlvIUNfuHblrsfIY6BQDGadm5/L+3OMvw2l9P2D4x5O9Twr7zNyijVZW/k4hXjExOAZ5z7D2abkfhyN8ef+3xbq3eCU5T+0g8X034jJ2Mvj8EyOX51pqmRVi/k4tdYYg6wThmXjTv7NQJbecGIsa43vrOg3mNzbVMmJx8Qy8uV01lfMTZITPuP6Q4wNs+mxbHrSeYmcwGBNuRCUzx9k/MXe+6vHmNNd8zGikVNM3Q5OWM/z1Ufy73jJpJoYyFs3Dtnr4/VvjjevsX1zvHmuxfcclWt7PKzcZ2dh0p84NuYZ7suHxjP37wTAyW0z3vvk86nQsa42T1DqIaEtE8x++RxVlvE5R8nKN89h3PE5mf8D736KrA==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="75" height="66">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="75" height="66">
+  <data encoding="base64" compression="zlib">
+   eJztm8lPE1EYwL+C0MFayyBo9eSWAAmQKMREr24n8KBXNR7VGNEEC/Vg/APUm4kiJi6JIm4X18QlaqAocEBNxKNs4kUToxcV/Z4zE9rhvc7M6+u8Kbxf8qXTzpvtx/e2mQFgNiWU30bLAHo0gJsY28soBSSwKcq/3afK7GWc1rtha1lwXLFwe53Jxfk9D5Jf4wF3ZYfmjnhaGmNvU2lbZ9/HNaxf3ZrzsUspv5Ftr7vcPhfc1Dt7GZqr9rSc6m1m78vuzILUrwmMSTNY133V9p14+ozlb2j8OUfzLwKaN3tObduOvrY47yu9HSf1a8yMHg/XPUopfzbkblsLu3+vuG3nWXWP+JKBV08icNOvObVRhcbXcvdlabnEal/mmqd8QBxVxbx5qglIPx9ukH0G/jAs+fiDx7CO9gF86zOWs3EpAXA54c950WjEaGKsq7Xl7XCR8/42YJlTe0NwGuPMXucOYQr9HE4BtKaM5Ww8QU9PJboSzTt01Y2ObmD0uHB1KJEZfvGBc97pBzxt60gbwMc28ecSZE/pnMPcOe8yf36gp585urLPdYLsaV0twPrame/30NN9H+vathb/jpULJ+oBmtFTS61z2XwwViXnuDQ6I97KN3Lmk70/ttCx36ww+87vydnrT5q/9e7A/NrBd2yLXMeyXl252if6vGBzSnO1GXO2Hj01OIwz7Ii4N+qFNzi3GIjlx9UD9PRQ4hiqRBe7v/04Fz5Qnh9XMogK9LNvIT14IPWp32O9EUG2uhcRnEthffZ3kleLdO9/l3EJrnjgbc81PXNZ0+XWwSvYpl0V1K6VCc4rGjJdPUNPzwW50jy6GqwGGKr2tg1xtSvsbZu5wBR6+uLRFWuMKIKzDvvuwpy6KCmveEivgyL7XcKIwxz3EXp6XED3ss7PkfGVH/C27bfaAW5j3MG42863j6Ea+nJQSBRnfud11Y9+XmO8wRjgdPWlhr4cNKwx2jTn2H0c/UxgTGJ85nQ1V3C69xjqACjCKMZY0OHPOQUV8pz4OOU9qI0ungPNR2i+yDMz5SsTa6zFyq+6EMDRYiPqXLxT8iJmFHoZk/ACimBY/SGZkx7L8Z3EfvSTMh2JHu96IYx9kCagH2K5igpwlc4riXm1Bj2tzdHVXxw3XMwyzuJ1peN5VZjnZuWTzLxyg9P8mOQUuQbaPSByv5HVZrH4Ezdypx49NZiuXpv5lAp4e+U0Nqett+cB8bXB7P+abP3gIK4bxngbM5Y7l4dgN86J9yQMb8uSAPFk5v6CCo8rJ8g1k5wj958PlgO0YhwpN5aJqw70lEwYy43oqcl01R/wvOqKsJ9NkPg/z8nSD3rld3zGx3Q82G544MktbQnA+0rj81cFwDLzk+RSRPfn/psM7LnHwmpvIivZsXFFyJdnBSIowb6nNMdxRJTjOVghsgo9rRYwPp0PrkShXCnyQZDzyss8QgYy3O2MGzG80Pi0YP3PimKG5viMPyvmOy3KgSuUJ0U+CPK7/kFD9XEKhUKhUCgUikLhH6FF5q0=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects" visible="0">
+  <object id="38" template="../../../obj/entry_up.tx" x="332" y="768" width="56" height="16"/>
+  <object id="41" template="../../../obj/shop.tx" x="384" y="608">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="55" template="../../../obj/shop.tx" x="400" y="544">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../obj/shop.tx" x="448" y="544">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../obj/shop.tx" x="432" y="608">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="51" template="../../../obj/shop.tx" x="480" y="608">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="52" template="../../../obj/shop.tx" x="480" y="672">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="53" template="../../../obj/shop.tx" x="432" y="672">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,     Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="54" template="../../../obj/shop.tx" x="384" y="672">
+   <properties>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga,AttractionShop,ContraptionShop"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../obj/inn.tx" x="278" y="673"/>
+  <object id="48" template="../../../obj/shop.tx" x="232" y="672">
+   <properties>
+    <property name="commonShopList" value="Equipment"/>
+    <property name="noRestock" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../obj/shop.tx" x="225" y="609">
+   <properties>
+    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop,Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
+    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black"/>
+    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature"/>
+   </properties>
+  </object>
+  <object id="62" template="../../../obj/shardtrader.tx" x="528" y="688"/>
+  <object id="63" template="../../../obj/quest.tx" x="287" y="609" width="34" height="16">
+   <properties>
+    <property name="questtype" value="waste_town_generic"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

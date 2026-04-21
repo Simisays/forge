@@ -71,6 +71,30 @@
    <object id="2" x="5.27273" y="13" width="6.54545" height="3.09091"/>
   </objectgroup>
  </tile>
+ <tile id="2926">
+  <animation>
+   <frame tileid="2926" duration="900"/>
+   <frame tileid="2928" duration="900"/>
+   <frame tileid="2930" duration="900"/>
+   <frame tileid="2932" duration="900"/>
+   <frame tileid="2934" duration="900"/>
+   <frame tileid="2936" duration="900"/>
+   <frame tileid="2938" duration="900"/>
+   <frame tileid="2940" duration="900"/>
+  </animation>
+ </tile>
+ <tile id="2927">
+  <animation>
+   <frame tileid="2927" duration="900"/>
+   <frame tileid="2929" duration="900"/>
+   <frame tileid="2931" duration="900"/>
+   <frame tileid="2933" duration="900"/>
+   <frame tileid="2935" duration="900"/>
+   <frame tileid="2937" duration="900"/>
+   <frame tileid="2939" duration="900"/>
+   <frame tileid="2941" duration="900"/>
+  </animation>
+ </tile>
  <tile id="2986">
   <objectgroup draworder="index" id="2">
    <object id="1" x="1" y="0" width="15" height="16"/>
@@ -102,6 +126,30 @@
   <objectgroup draworder="index" id="2">
    <object id="2" x="0" y="0" width="16" height="16"/>
   </objectgroup>
+ </tile>
+ <tile id="3054">
+  <animation>
+   <frame tileid="3054" duration="900"/>
+   <frame tileid="3056" duration="900"/>
+   <frame tileid="3058" duration="900"/>
+   <frame tileid="3060" duration="900"/>
+   <frame tileid="3062" duration="900"/>
+   <frame tileid="3064" duration="900"/>
+   <frame tileid="3066" duration="900"/>
+   <frame tileid="3068" duration="900"/>
+  </animation>
+ </tile>
+ <tile id="3055">
+  <animation>
+   <frame tileid="3055" duration="900"/>
+   <frame tileid="3057" duration="900"/>
+   <frame tileid="3059" duration="900"/>
+   <frame tileid="3061" duration="900"/>
+   <frame tileid="3063" duration="900"/>
+   <frame tileid="3065" duration="900"/>
+   <frame tileid="3067" duration="900"/>
+   <frame tileid="3069" duration="900"/>
+  </animation>
  </tile>
  <tile id="3098">
   <animation>
