@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -198,17 +197,13 @@ public class PlayerView extends GameEntityView {
     public boolean getIsExtraTurn() {
         return get(TrackableProperty.IsExtraTurn);
     }
-
     public void setIsExtraTurn(final boolean val) {
         set(TrackableProperty.IsExtraTurn, val);
     }
 
     public boolean getHasLost() {
-        if (get(TrackableProperty.HasLost) == null)
-            return false;
         return get(TrackableProperty.HasLost);
     }
-
     public void setHasLost(final boolean val) {
         set(TrackableProperty.HasLost, val);
     }
@@ -217,8 +212,6 @@ public class PlayerView extends GameEntityView {
         return (int)get(TrackableProperty.AvatarLifeDifference);
     }
     public boolean wasAvatarLifeChanged() {
-        if ((int)get(TrackableProperty.AvatarLifeDifference) == 0)
-            return false;
         return (int)get(TrackableProperty.AvatarLifeDifference) != 0;
     }
     public void setAvatarLifeDifference(final int val) {
@@ -228,7 +221,6 @@ public class PlayerView extends GameEntityView {
     public int getExtraTurnCount() {
         return get(TrackableProperty.ExtraTurnCount);
     }
-
     public void setExtraTurnCount(final int val) {
         set(TrackableProperty.ExtraTurnCount, val);
     }
@@ -332,22 +324,14 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.AdditionalVillainousChoices, p.getAdditionalVotesAmount());
     }
 
-    public ImmutableMultiset<String> getKeywords() {
+    public List<String> getKeywords() {
         return get(TrackableProperty.Keywords);
-    }
-    public List<String> getDisplayableKeywords() {
-        final List<String> allKws;
-        final ImmutableMultiset<String> kws = getKeywords();
-        synchronized (kws) {
-            allKws = Lists.newArrayList(kws.elementSet());
-        }
-        return allKws;
     }
     public boolean hasKeyword(String keyword) {
         return getKeywords().contains(keyword);
     }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, ImmutableMultiset.copyOf(p.getKeywords().asStringList()));
+        set(TrackableProperty.Keywords, p.getKeywords().asStringList());
     }
 
     public List<CardView> getCommanders() {
@@ -506,19 +490,8 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Flashback, CardView.getCollection(p.getCardsIn(ZoneType.Flashback)));
     }
 
-    public int getMana(final int manaAtom) {
-        return getMana((byte) manaAtom);
-    }
     public int getMana(final byte color) {
-        Integer count = null;
-        try {
-            count = getMana().get(color);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            count = null;
-        }
-        return count != null ? count : 0;
+        return getMana().getOrDefault(color, 0);
     }
     private Map<Byte, Integer> getMana() {
         return get(TrackableProperty.Mana);
@@ -567,7 +540,7 @@ public class PlayerView extends GameEntityView {
         }
         details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", getExtraTurnCount()));
 
-        final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
+        final String keywords = Lang.joinHomogenous(getKeywords());
         if (!keywords.isEmpty()) {
             details.add(keywords);
         }
