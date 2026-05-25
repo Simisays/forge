@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="89">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -30,16 +30,16 @@
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
-  <data encoding="base64" compression="zlib">
-   eJztmE1uAjEMhXMBukPqQYADoA5XguN0AS034Dot2y6rCpYQaSKiyI7f5G+mwpHeZhLZn5xJ8pLFizELlUqlUqlUqora3PUNyjZ0bNeI/63nKt3WI/P/zf43P9p+RuY/3ut8APTRz8ceHP85a7+WkXlqVddn4Uf3z3PP/wWO1/1T+ZW/3rrsGvEj+wO11iku3xOsG/Hb+JIXoeZK4uL40fOVO5+l+Cj/sY/J8bjzPYyf+t9ycTh/4rNxXsPGlHi4vP5/2wVjwr6UOsTYXHx7Zkrn5ZnJ6/PYb+/zh8I+ih/J68aE6zdnTXL8p9eHEP6UnMo/Df6hd5Ja/LXvOlTOkvw5HoI6t22TvMPQ/wHh3wT5kXtCLD+SsyQ/1XdZGnNd8nPkfAflPabAv10Zs1vF+XNyhnsA9/7A+RC0FrX4uXhD8uXwx/xbrGbcuS/d30Mf4rNR+7lji+2dkn+r5f2l2kpsqH+jalaySblr+LcxGuJ/ct+TY+238Fs16n9S7oep98ux33qn+v6p/GV1Axn+YjE=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="48" height="48">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+   eJztmE1OAzEMhXOB0hUSB2l7gIrplWAFHIUFP70B14FuWSJUlkykiRpFdvwmv63kSG8ziexPziR5yerKmJVKpVKpVCpVRe1GfYGyDR07NOK/nbhKt21n/t/FZfOj7bsz/36s8yugt2k+XsDx74v2axmZp1Z1La2HpTGPo56W/Vl8ofvnYar/Jzhe90/lV/5663JoxI/sD9Rap7h8T7BtxG/jS16EmiuJi+NHz1fufJbio/z7KSbH4873MH7qf8vF4fyJz8Z5DRtT4uHy+v/tEIwJ+1LqEGNz8e2ZKZ2XByavz2O/PV+fFPZR/EheNyZcvzlrkuP/uDkJ4U/JqfznwT/3TlKLv/Zdh8pZkj/HQ1Dntm2Sd5j7PyD8uyA/ck+I5UdyluSn+o5rY/7W/Bw530F5j3Pgv9sYc7+J8+fkDPcA7v2B8yFoLWrxc/Hm5Mvhj/m3WM24c1+6v4c+xGej9nPHFts7Jf9Wy/tLtZXYUP9G1axkk3LX8G89GuJ/ct+TY+2n8Fs16n9S7oep98veb72X/n6r/Jj+AbZWYzk=
+  </data>
+ </layer>
+ <layer id="7" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1MENACAMA7Fs0I2B0WGLgrCl++eVBAAAAAAAAOBuo5J5WtW9BPiN/+EFG2tWA1U=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

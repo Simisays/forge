@@ -13621,7 +13621,8 @@
         "addMaxCount": 2,
         "rarity": [
           "common",
-          "uncommon"
+          "uncommon",
+          "rare"
         ]
       },
       {
@@ -17068,7 +17069,9 @@
         "count": 2,
         "addMaxCount": 4,
         "rarity": [
-          "common"
+          "common",
+          "uncommon",
+          "rare"
         ]
       },
       {

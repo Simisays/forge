@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="87">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -32,12 +32,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEsOgkAMhklYuMK1B2FBhGt4OR9cw4OYKMfRiRAnzXTaeUNsk3/F2H4ZmfYf2n1VtSKRSCQSiUQJNXz0YkoFd22fif84c8WObkP8db1tflPk4h+bqrowdG2+XGfm+luT/yxz/qdc+/ov/Nz+Oc38T+b6Uv3ztAs7t8vvpf8If0l+6lz2mfg5/cF01imuLhM/zM/1Gr783PmKzWcqv41F1zjnxHiW+Q7z+763WB7Mn+hsmNdQOSkerK7+3vZgDXzmsw82tiW/mpnUvJyQujpPB9bAZyZ+Tt1lDTy/IWcS478ffuLw+9QU/nXwu95JUvCrPp/6rmPas5j7H+IhTHNbBeUdXN8HDv8A6nPuCbb6nJox+TksW+GH/icVP+wB2PcHzIdQdVLzY/lc6oXw2/ybbc+wuU/d3x8O/6Xu32y9k/Jv6rnJj8cKqnaof4PeLXZQtVP4txIR0/+UCF//43M/9L1flv7Wu9bvn8IfV2/bT0Pq
+   eJztmE2OwjAMhSuxYNWuOQiLivYaczkGeg0OggSI00A0jcayYsfNLxW29CTUhvhTWjsv3XdNs1epVCqVSqXKqPGtO6Mn+G0CX6M0FOI/zFypo18R/2azbn5XlOKf2qb5FejU/nEdhePPbflaljynUuv6LfzS/vmY+W+drIfW6p8/27i6tf/X/qP8NflddQlrbijEPzpyS2rdx9UX4sfzS71GKL90f6X2Z9/8HAvUNM9J8dj9Hc8f+t5S81D+BLJRXsPM6eOh8o7gnR3QGHwvZB04NlszZs+0+yWlB5EX8vRoDL7n4pfktWNw/cbUJMV/2f1Lwh+SU/k/g3/pmSQHv+nzuc86rjVLuf4xHoLzD5x3WPo+SPhtvzUhPSdw+SU5U/JLWNbCj/1PLn7cA6jvD5QP8eXJzU/NtyRfDD/n37g1g/v+s+PP79DTXxc8S+jfuN7p82/mvsuPpwpf7lj/hr1b6vDlzuHfakRK/1MjQv1PyPkw9HxZ+1vvp37/VP60egGlAUT5
   </data>
  </layer>
- <layer id="5" name="AboveSprites" width="48" height="48">
+ <layer id="7" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt18EJgDAMBdBMYDdW53QadQCLChpC34Neeuoh/9NEAADk2qZ7dwBfmVvEcpy1Zb/kmauu1KHwr8zMyTvV9GbWPAMj8X+Adyru72fmevu7TEINFfuH8ewqjhGv
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
