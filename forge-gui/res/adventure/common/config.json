@@ -79,14 +79,12 @@
     "PCEL",
     "HHO",
     "CMB1",
-    "UST",
     "UGL",
     "UNH", 
     "PPC1",
     "UND",
     "PUST",
-    "DA1",
-    "UNF"
+    "DA1"
   ],
   "restrictedEvents": [
     "LEA",

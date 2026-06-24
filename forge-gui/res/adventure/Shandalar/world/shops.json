@@ -5604,22 +5604,20 @@
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"FunnyShop",
   "rewards": [
-    {
-      "count":4,
-      "sourceDeck":"decks/shop/funny/funny_cards.dck",
-	  "subTypes": ["Attraction"]
-    },
-    {
-      "count":4,
-      "sourceDeck":"decks/shop/funny/funny_cards.dck",
-      "cardText": "Attraction"
-    },
-    {
-      "count":1,
-      "probability": 0.5,
-      "sourceDeck":"decks/shop/funny/funny_cards_promo.dck",
-      "cardText": "Attraction"
-    }
+ {
+	"count":8,
+	"type":"Union",
+	"cardUnion":[
+	{
+		"count":4,
+	    "subTypes": ["Attraction"]
+	},
+	{
+		"count":4,
+		"cardText": "Attraction"
+	}
+	]
+	}
 	]
 },
 {
@@ -5628,16 +5626,20 @@
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"FunnyShop",
   "rewards": [
-    {
-      "count":4,
-      "sourceDeck":"decks/shop/funny/funny_cards.dck",
-	  "subTypes": ["Contraption"]
-    },
-    {
-      "count":4,
-      "sourceDeck":"decks/shop/funny/funny_cards.dck",
-      "cardText": "Contraption"
-    }
+   {
+	"count":8,
+	"type":"Union",
+	"cardUnion":[
+	{
+		"count":4,
+	    "subTypes": ["Contraption"]
+	},
+	{
+		"count":4,
+		"cardText": "Contraption|crank|assembles"
+	}
+	]
+	}
 	]
 },
 {
